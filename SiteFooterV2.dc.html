@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+</helmet>
+<footer style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:#27265F;color:#FFFFFF;">
+  <div style="max-width:1320px;margin:0 auto;padding:64px clamp(20px,3vw,44px) 0;">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:44px 32px;">
+      <div style="min-width:0;">
+        <img src="assets/logo.svg" alt="GMP Manufacturing" style="height:32px;width:auto;display:block;filter:brightness(0) invert(1);margin-bottom:20px;">
+        <p style="margin:0 0 24px;font-size:14px;line-height:1.7;color:rgba(255,255,255,0.65);max-width:300px;">An ISO-certified CDMO in Hull, UK &mdash; complete solutions from molecule to market.</p>
+        <div style="display:flex;gap:10px;">
+          <a href="#" aria-label="LinkedIn" style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);color:#FFFFFF;text-decoration:none;font-size:13px;font-weight:700;transition:background .2s;" style-hover="background:#B22126;">in</a>
+          <a href="#" aria-label="X" style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);color:#FFFFFF;text-decoration:none;font-size:14px;font-weight:600;transition:background .2s;" style-hover="background:#B22126;">X</a>
+          <a href="#" aria-label="YouTube" style="display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);color:#FFFFFF;text-decoration:none;font-size:11px;font-weight:700;transition:background .2s;" style-hover="background:#B22126;">YT</a>
+        </div>
+      </div>
+
+      <div style="min-width:0;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px;">Services</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <sc-for list="{{ services }}" as="item" hint-placeholder-count="7">
+            <a href="{{ item.href }}" style="font-size:14px;color:rgba(255,255,255,0.72);text-decoration:none;line-height:1.4;" style-hover="color:#FFFFFF;">{{ item.label }}</a>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="min-width:0;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px;">Sectors</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <sc-for list="{{ sectors }}" as="item" hint-placeholder-count="7">
+            <a href="{{ item.href }}" style="font-size:14px;color:rgba(255,255,255,0.72);text-decoration:none;line-height:1.4;" style-hover="color:#FFFFFF;">{{ item.label }}</a>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="min-width:0;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:18px;">Company</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:26px;">
+          <a href="AboutUs.dc.html" style="font-size:14px;color:rgba(255,255,255,0.72);text-decoration:none;" style-hover="color:#FFFFFF;">About Us</a>
+          <a href="News.dc.html" style="font-size:14px;color:rgba(255,255,255,0.72);text-decoration:none;" style-hover="color:#FFFFFF;">News &amp; Blogs</a>
+          <a href="Careers.dc.html" style="font-size:14px;color:rgba(255,255,255,0.72);text-decoration:none;" style-hover="color:#FFFFFF;">Careers</a>
+          <a href="GetInTouch.dc.html" style="font-size:14px;color:rgba(255,255,255,0.72);text-decoration:none;" style-hover="color:#FFFFFF;">Get in Touch</a>
+        </div>
+        <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.85);margin-bottom:12px;">Stay in the loop</div>
+        <div style="display:flex;align-items:center;gap:6px;max-width:280px;background:rgba(255,255,255,0.1);border-radius:999px;padding:5px 5px 5px 18px;">
+          <input type="email" placeholder="Your email" style="flex:1;min-width:0;padding:8px 0;font-family:inherit;font-size:14px;color:#FFFFFF;background:transparent;border:none;outline:none;">
+          <button style="flex-shrink:0;padding:11px 20px;font-family:inherit;font-size:14px;font-weight:600;color:#27265F;background:#FFFFFF;border:none;border-radius:999px;cursor:pointer;transition:background .2s;" style-hover="background:#F4F2FA;">Join</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:60px;">
+      <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:20px;">From our LinkedIn</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;">
+        <sc-for list="{{ posts }}" as="post" hint-placeholder-count="4">
+          <a href="#" style="display:block;background:#FFFFFF;border-radius:18px;overflow:hidden;text-decoration:none;transition:transform .2s;" style-hover="transform:translateY(-3px);">
+            <image-slot id="{{ post.slot }}" style="display:block;width:100%;height:120px;" shape="rect" placeholder="Post image"></image-slot>
+            <div style="padding:16px 18px 18px;">
+              <div style="font-size:13px;line-height:1.5;color:#1C1B3A;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ post.text }}</div>
+              <div style="margin-top:10px;font-size:12px;color:#9D99B3;">{{ post.date }}</div>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;padding:24px 0 30px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(to bottom,rgba(255,255,255,0.12),rgba(255,255,255,0.12)) top/100% 1px no-repeat;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);">&copy; 2026 GMP Manufacturing Ltd. All rights reserved.</div>
+      <div style="display:flex;align-items:center;gap:24px;">
+        <a href="#" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;" style-hover="color:#FFFFFF;">Privacy Policy</a>
+        <a href="#" style="font-size:13px;color:rgba(255,255,255,0.6);text-decoration:none;" style-hover="color:#FFFFFF;">Terms</a>
+        <span style="font-size:13px;color:rgba(255,255,255,0.5);">Designed by <span style="font-weight:600;color:rgba(255,255,255,0.8);">Phitany</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:620}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      services: [
+        { label: 'Manufacturing, Filling & Packing', href: 'Services.dc.html' },
+        { label: 'QC, Micro & Stability', href: 'Services.dc.html' },
+        { label: 'Technology Transfer', href: 'Services.dc.html' },
+        { label: 'Product Development & Remediation', href: 'Services.dc.html' },
+        { label: 'QP, RP, RP-I & Regulatory Support', href: 'Services.dc.html' },
+        { label: 'Co-Packing & Contract Manufacturing', href: 'Services.dc.html' },
+        { label: 'Research & Development', href: 'Services.dc.html' }
+      ],
+      sectors: [
+        { label: 'Pharmaceutical', href: 'Sectors.dc.html' },
+        { label: 'Veterinary', href: 'Sectors.dc.html' },
+        { label: 'Medical Device', href: 'Sectors.dc.html' },
+        { label: 'Cosmetic', href: 'Sectors.dc.html' },
+        { label: 'Supplements', href: 'Sectors.dc.html' },
+        { label: 'Biocide', href: 'Sectors.dc.html' },
+        { label: 'Other', href: 'Sectors.dc.html' }
+      ],
+      posts: [
+        { slot: 'liv2-1', text: 'Now ISO 13485 certified \u2014 expanding our medical device manufacturing capability.', date: 'Jun 2026' },
+        { slot: 'liv2-2', text: 'Inside our new high-containment filling suite in Hull.', date: 'May 2026' },
+        { slot: 'liv2-3', text: 'How tech transfer de-risks your scale-up. A short read.', date: 'Apr 2026' },
+        { slot: 'liv2-4', text: 'We\u2019re hiring \u2014 QC analysts and process engineers.', date: 'Apr 2026' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

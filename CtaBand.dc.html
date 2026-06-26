@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+</helmet>
+<section style="font-family:'DM Sans',system-ui,sans-serif;padding:0 16px;">
+  <div style="position:relative;max-width:1320px;margin:0 auto;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#B22126 0%,#702341 38%,#482551 65%,#27265F 100%);padding:clamp(48px,7vw,72px) 24px;text-align:center;">
+    <div style="position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,0.16) 1.6px, transparent 1.7px);background-size:18px 18px;background-position:0 0;mask-image:linear-gradient(105deg,#000 0%,transparent 60%);-webkit-mask-image:linear-gradient(105deg,#000 0%,transparent 60%);"></div>
+    <div style="position:relative;">
+    <h2 style="margin:0 auto;max-width:680px;font-size:clamp(24px,4.2vw,32px);font-weight:600;line-height:1.2;color:#FFFFFF;text-wrap:balance;">{{ headline }}</h2>
+    <sc-if value="{{ subline }}">
+      <p style="margin:16px auto 0;max-width:560px;font-size:clamp(15px,2.2vw,16px);line-height:1.6;color:rgba(255,255,255,0.85);">{{ subline }}</p>
+    </sc-if>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px;">
+      <a href="{{ btn1Href }}" style="padding:14px 28px;font-size:15px;font-weight:500;color:#FFFFFF;background:transparent;border:1.5px solid rgba(255,255,255,0.85);border-radius:8px;text-decoration:none;" style-hover="background:rgba(255,255,255,0.14);">{{ btn1Label }}</a>
+      <sc-if value="{{ btn2Label }}">
+        <a href="{{ btn2Href }}" style="padding:14px 28px;font-size:15px;font-weight:500;color:#FFFFFF;background:transparent;border:1.5px solid rgba(255,255,255,0.85);border-radius:8px;text-decoration:none;" style-hover="background:rgba(255,255,255,0.14);">{{ btn2Label }}</a>
+      </sc-if>
+    </div>
+    </div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:300},&quot;headline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Let\u2019s build your next product together.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;subline&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Talk to our team about your development, manufacturing or packaging needs.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;btn1Label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Get a quote&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;btn1Href&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;GetInTouch.dc.html&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;btn2Label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Contact us&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;btn2Href&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;GetInTouch.dc.html&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    return {
+      headline: p.headline || 'Let\u2019s build your next product together.',
+      subline: p.subline || '',
+      btn1Label: p.btn1Label || 'Get a quote',
+      btn1Href: p.btn1Href || 'GetInTouch.dc.html',
+      btn2Label: p.btn2Label || '',
+      btn2Href: p.btn2Href || 'GetInTouch.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

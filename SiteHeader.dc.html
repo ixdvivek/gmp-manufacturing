@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&amp;display=swap" rel="stylesheet">
+</helmet>
+<header style="position:sticky;top:0;z-index:2000;background:#F7F6FB;border-bottom:1px solid #E8E4F2;font-family:'DM Sans',system-ui,sans-serif;">
+  <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px);height:88px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+    <a href="Home.dc.html" style="display:flex;align-items:center;flex-shrink:0;text-decoration:none;">
+      <img src="./1000155523-mqt3la74.svg" alt="GMP Manufacturing" style="height:60px;width:auto;display:block;">
+    </a>
+
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:2px;">
+        <a href="Home.dc.html" style="position:relative;padding:33px 13px;font-size:14px;font-weight:{{ wHome }};color:{{ cHome }};text-decoration:none;" style-hover="color:#B22126;">Home<sc-if value="{{ isHome }}"><span style="position:absolute;left:13px;right:13px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:#30265B;"></span></sc-if></a>
+        <a href="AboutUs.dc.html" style="position:relative;padding:33px 13px;font-size:14px;font-weight:{{ wAbout }};color:{{ cAbout }};text-decoration:none;" style-hover="color:#B22126;">About Us<sc-if value="{{ isAbout }}"><span style="position:absolute;left:13px;right:13px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:#30265B;"></span></sc-if></a>
+
+        <div style="position:relative;" onMouseEnter="{{ openServices }}" onMouseLeave="{{ closeMenu }}">
+          <a href="Services.dc.html" style="position:relative;display:inline-flex;align-items:center;gap:5px;padding:33px 13px;font-size:14px;font-weight:{{ wServices }};color:{{ cServices }};text-decoration:none;" style-hover="color:#B22126;">Services<span style="font-size:9px;opacity:0.6;">▼</span><sc-if value="{{ isServices }}"><span style="position:absolute;left:13px;right:24px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:#30265B;"></span></sc-if></a>
+          <sc-if value="{{ servicesOpen }}">
+            <div style="position:absolute;top:100%;left:0;padding-top:6px;z-index:50;">
+              <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:12px;box-shadow:0 8px 24px rgba(39,38,95,0.10);padding:8px;min-width:300px;display:flex;flex-direction:column;gap:1px;">
+                <sc-for list="{{ services }}" as="item" hint-placeholder-count="7">
+                  <a href="{{ item.href }}" style="padding:10px 14px;font-size:14px;font-weight:400;color:#1C1B3A;text-decoration:none;border-radius:8px;line-height:1.3;" style-hover="background:#F7F6FB;color:#B22126;">{{ item.label }}</a>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="position:relative;" onMouseEnter="{{ openInnovation }}" onMouseLeave="{{ closeMenu }}">
+          <a href="Innovation.dc.html" style="position:relative;display:inline-flex;align-items:center;gap:5px;padding:33px 13px;font-size:14px;font-weight:{{ wInnovation }};color:{{ cInnovation }};text-decoration:none;" style-hover="color:#B22126;">Innovation<span style="font-size:9px;opacity:0.6;">▼</span><sc-if value="{{ isInnovation }}"><span style="position:absolute;left:13px;right:24px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:#30265B;"></span></sc-if></a>
+          <sc-if value="{{ innovationOpen }}">
+            <div style="position:absolute;top:100%;left:0;padding-top:6px;z-index:50;">
+              <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:12px;box-shadow:0 8px 24px rgba(39,38,95,0.10);padding:8px;min-width:200px;display:flex;flex-direction:column;gap:1px;">
+                <sc-for list="{{ innovation }}" as="item" hint-placeholder-count="2">
+                  <a href="{{ item.href }}" style="padding:10px 14px;font-size:14px;font-weight:400;color:#1C1B3A;text-decoration:none;border-radius:8px;" style-hover="background:#F7F6FB;color:#B22126;">{{ item.label }}</a>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="position:relative;" onMouseEnter="{{ openSectors }}" onMouseLeave="{{ closeMenu }}">
+          <a href="Sectors.dc.html" style="position:relative;display:inline-flex;align-items:center;gap:5px;padding:33px 13px;font-size:14px;font-weight:{{ wSectors }};color:{{ cSectors }};text-decoration:none;" style-hover="color:#B22126;">Sectors<span style="font-size:9px;opacity:0.6;">▼</span><sc-if value="{{ isSectors }}"><span style="position:absolute;left:13px;right:24px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:#30265B;"></span></sc-if></a>
+          <sc-if value="{{ sectorsOpen }}">
+            <div style="position:absolute;top:100%;left:0;padding-top:6px;z-index:50;">
+              <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:12px;box-shadow:0 8px 24px rgba(39,38,95,0.10);padding:8px;min-width:220px;display:flex;flex-direction:column;gap:1px;">
+                <sc-for list="{{ sectors }}" as="item" hint-placeholder-count="7">
+                  <a href="{{ item.href }}" style="padding:10px 14px;font-size:14px;font-weight:400;color:#1C1B3A;text-decoration:none;border-radius:8px;" style-hover="background:#F7F6FB;color:#B22126;">{{ item.label }}</a>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <a href="GetInTouch.dc.html" style="margin-left:10px;padding:11px 22px;font-size:14px;font-weight:500;color:#FFFFFF;background:#30265B;border-radius:8px;text-decoration:none;white-space:nowrap;" style-hover="background:#27265F;">Get in Touch</a>
+      </nav>
+    </sc-if>
+
+    <sc-if value="{{ isMobile }}">
+      <button onClick="{{ toggleMobile }}" aria-label="Menu" style="display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 9px;background:transparent;border:none;cursor:pointer;align-items:flex-end;">
+        <span style="display:block;width:24px;height:2px;border-radius:2px;background:#30265B;"></span>
+        <span style="display:block;width:24px;height:2px;border-radius:2px;background:#30265B;"></span>
+        <span style="display:block;width:18px;height:2px;border-radius:2px;background:#30265B;"></span>
+      </button>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ mobileOpen }}">
+    <div style="border-top:1px solid #E8E4F2;background:#FFFFFF;max-height:calc(100vh - 88px);overflow-y:auto;padding:8px 16px 24px;">
+      <a href="Home.dc.html" style="display:block;padding:14px 8px;font-size:16px;font-weight:500;color:#1C1B3A;text-decoration:none;border-bottom:1px solid #F0EDF7;">Home</a>
+      <a href="AboutUs.dc.html" style="display:block;padding:14px 8px;font-size:16px;font-weight:500;color:#1C1B3A;text-decoration:none;border-bottom:1px solid #F0EDF7;">About Us</a>
+
+      <button onClick="{{ tServices }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 8px;font-family:inherit;font-size:16px;font-weight:500;color:#1C1B3A;background:transparent;border:none;border-bottom:1px solid #F0EDF7;cursor:pointer;text-align:left;">Services<span style="font-size:11px;color:#9D99B3;">{{ mServicesCaret }}</span></button>
+      <sc-if value="{{ mServicesOpen }}">
+        <div style="display:flex;flex-direction:column;padding:4px 0 10px 8px;">
+          <sc-for list="{{ services }}" as="item" hint-placeholder-count="7">
+            <a href="{{ item.href }}" style="padding:11px 12px;font-size:15px;color:#6A6486;text-decoration:none;border-radius:8px;" style-hover="background:#F7F6FB;">{{ item.label }}</a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <button onClick="{{ tInnovation }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 8px;font-family:inherit;font-size:16px;font-weight:500;color:#1C1B3A;background:transparent;border:none;border-bottom:1px solid #F0EDF7;cursor:pointer;text-align:left;">Innovation<span style="font-size:11px;color:#9D99B3;">{{ mInnovationCaret }}</span></button>
+      <sc-if value="{{ mInnovationOpen }}">
+        <div style="display:flex;flex-direction:column;padding:4px 0 10px 8px;">
+          <sc-for list="{{ innovation }}" as="item" hint-placeholder-count="2">
+            <a href="{{ item.href }}" style="padding:11px 12px;font-size:15px;color:#6A6486;text-decoration:none;border-radius:8px;" style-hover="background:#F7F6FB;">{{ item.label }}</a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <button onClick="{{ tSectors }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:14px 8px;font-family:inherit;font-size:16px;font-weight:500;color:#1C1B3A;background:transparent;border:none;border-bottom:1px solid #F0EDF7;cursor:pointer;text-align:left;">Sectors<span style="font-size:11px;color:#9D99B3;">{{ mSectorsCaret }}</span></button>
+      <sc-if value="{{ mSectorsOpen }}">
+        <div style="display:flex;flex-direction:column;padding:4px 0 10px 8px;">
+          <sc-for list="{{ sectors }}" as="item" hint-placeholder-count="7">
+            <a href="{{ item.href }}" style="padding:11px 12px;font-size:15px;color:#6A6486;text-decoration:none;border-radius:8px;" style-hover="background:#F7F6FB;">{{ item.label }}</a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <a href="GetInTouch.dc.html" style="display:block;margin-top:18px;padding:15px;font-size:16px;font-weight:500;color:#FFFFFF;background:#30265B;border-radius:8px;text-decoration:none;text-align:center;">Get in Touch</a>
+    </div>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:420},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;services&quot;,&quot;innovation&quot;,&quot;sectors&quot;,&quot;&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { isDesktop: true, openMenu: null, mobileOpen: false, mobileSection: null };
+
+  componentDidMount() {
+    this.mq = window.matchMedia('(min-width:768px)');
+    this.apply = () => this.setState({ isDesktop: this.mq.matches, openMenu: null, mobileOpen: false, mobileSection: null });
+    this.apply();
+    if (this.mq.addEventListener) this.mq.addEventListener('change', this.apply);
+    else this.mq.addListener(this.apply);
+  }
+  componentWillUnmount() {
+    if (!this.mq) return;
+    if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.apply);
+    else this.mq.removeListener(this.apply);
+  }
+
+  renderVals() {
+    const active = this.props.active || '';
+    const services = [
+      { label: 'Manufacturing, Filling & Packing', href: 'Services.dc.html' },
+      { label: 'QC, Micro & Stability', href: 'Services.dc.html' },
+      { label: 'Technology Transfer', href: 'Services.dc.html' },
+      { label: 'Product Development & Remediation', href: 'Services.dc.html' },
+      { label: 'QP, RP, RP-I & Regulatory Support', href: 'Services.dc.html' },
+      { label: 'Co-Packing & Contract Manufacturing', href: 'Services.dc.html' },
+      { label: 'Research & Development', href: 'Services.dc.html' }
+    ];
+    const innovation = [
+      { label: '3D Printing', href: '3DPrinting.dc.html' },
+      { label: 'Space Age', href: 'SpaceAge.dc.html' }
+    ];
+    const sectors = [
+      { label: 'Pharmaceutical', href: 'Sectors.dc.html' },
+      { label: 'Veterinary', href: 'Sectors.dc.html' },
+      { label: 'Medical Device', href: 'Sectors.dc.html' },
+      { label: 'Cosmetic', href: 'Sectors.dc.html' },
+      { label: 'Supplements', href: 'Sectors.dc.html' },
+      { label: 'Biocide', href: 'Sectors.dc.html' },
+      { label: 'Other', href: 'Sectors.dc.html' }
+    ];
+    const open = this.state.openMenu;
+    const sec = this.state.mobileSection;
+    return {
+      isDesktop: this.state.isDesktop,
+      isMobile: !this.state.isDesktop,
+      mobileOpen: this.state.mobileOpen,
+      services, innovation, sectors,
+      servicesOpen: open === 'services',
+      innovationOpen: open === 'innovation',
+      sectorsOpen: open === 'sectors',
+      isHome: active === 'home',
+      isAbout: active === 'about',
+      isServices: active === 'services',
+      isInnovation: active === 'innovation',
+      isSectors: active === 'sectors',
+      wHome: active === 'home' ? 700 : 500,
+      wAbout: active === 'about' ? 700 : 500,
+      wServices: active === 'services' ? 700 : 500,
+      wInnovation: active === 'innovation' ? 700 : 500,
+      wSectors: active === 'sectors' ? 700 : 500,
+      cHome: active === 'home' ? '#30265B' : '#1C1B3A',
+      cAbout: active === 'about' ? '#30265B' : '#1C1B3A',
+      cServices: active === 'services' ? '#30265B' : '#1C1B3A',
+      cInnovation: active === 'innovation' ? '#30265B' : '#1C1B3A',
+      cSectors: active === 'sectors' ? '#30265B' : '#1C1B3A',
+      mServicesOpen: sec === 'services',
+      mInnovationOpen: sec === 'innovation',
+      mSectorsOpen: sec === 'sectors',
+      mServicesCaret: sec === 'services' ? '\u2212' : '+',
+      mInnovationCaret: sec === 'innovation' ? '\u2212' : '+',
+      mSectorsCaret: sec === 'sectors' ? '\u2212' : '+',
+      openServices: () => this.setState({ openMenu: 'services' }),
+      openInnovation: () => this.setState({ openMenu: 'innovation' }),
+      openSectors: () => this.setState({ openMenu: 'sectors' }),
+      closeMenu: () => this.setState({ openMenu: null }),
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen, mobileSection: null })),
+      tServices: () => this.setState(s => ({ mobileSection: s.mobileSection === 'services' ? null : 'services' })),
+      tInnovation: () => this.setState(s => ({ mobileSection: s.mobileSection === 'innovation' ? null : 'innovation' })),
+      tSectors: () => this.setState(s => ({ mobileSection: s.mobileSection === 'sectors' ? null : 'sectors' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

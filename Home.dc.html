@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    html,body{margin:0;padding:0;background:#FFFFFF;-webkit-font-smoothing:antialiased;}
+    *{box-sizing:border-box;}
+    .sc-host[data-sc-name="SiteHeader"]{display:contents !important;}
+  </style>
+</helmet>
+<div style="font-family:'DM Sans',system-ui,sans-serif;background:#FFFFFF;color:#1C1B3A;">
+
+  <dc-import name="SiteHeader" active="home" hint-size="100%,88px" style="display:contents"></dc-import>
+
+  <dc-import name="PageHero"
+    slot-id="home-hero"
+    bg-image="assets/hero-molecule.jpg"
+    label="ISO Certified CDMO · Hull, UK"
+    headline="Complete CDMO solutions, from molecule to market."
+    subhead="Development, manufacturing and packaging under one ISO-certified roof in Hull, UK."
+    primary-label="Get a quote"
+    primary-href="GetInTouch.dc.html"
+    secondary-label="Explore services"
+    secondary-href="Services.dc.html"
+    hint-size="100%,640px"></dc-import>
+
+  <!-- WHAT WE DO -->
+  <section style="background:#FFFFFF;padding:clamp(76px,12vw,116px) 0;">
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px);">
+      <div style="text-align:center;max-width:620px;margin:0 auto 44px;">
+        <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#B22126;margin-bottom:12px;">What we do</div>
+        <h2 style="margin:0;font-size:clamp(24px,4vw,30px);font-weight:500;color:#30265B;line-height:1.2;">Three capabilities, one partner</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;">
+
+        <a href="Services.dc.html" style="display:flex;flex-direction:column;background:#F7F6FB;border:1px solid #E8E4F2;border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s;" style-hover="box-shadow:0 12px 30px rgba(39,38,95,0.10);transform:translateY(-3px);border-color:#D9D2EC;">
+          <img src="assets/card-development.jpg" alt="3D-printed molecular model in a development lab" style="display:block;width:100%;height:170px;object-fit:cover;border-radius:12px 12px 0 0;">
+          <div style="padding:30px;display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#30265B" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"></circle><circle cx="12" cy="12" r="8.5"></circle></svg>
+            </div>
+            <h3 style="margin:4px 0 0;font-size:19px;font-weight:500;color:#1C1B3A;">Development</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:#6A6486;">Formulation, product development and remediation to ready your product for scale.</p>
+            <span style="margin-top:6px;font-size:14px;font-weight:500;color:#B22126;">Learn more &rarr;</span>
+          </div>
+        </a>
+
+        <a href="Services.dc.html" style="display:flex;flex-direction:column;background:#F7F6FB;border:1px solid #E8E4F2;border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s;" style-hover="box-shadow:0 12px 30px rgba(39,38,95,0.10);transform:translateY(-3px);border-color:#D9D2EC;">
+          <img src="assets/card-manufacturing.jpg" alt="Molecule on a manufacturing press" style="display:block;width:100%;height:170px;object-fit:cover;border-radius:12px 12px 0 0;">
+          <div style="padding:30px;display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#30265B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+            </div>
+            <h3 style="margin:4px 0 0;font-size:19px;font-weight:500;color:#1C1B3A;">Manufacturing</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:#6A6486;">UK in-house manufacturing, filling and packing across multiple dosage forms.</p>
+            <span style="margin-top:6px;font-size:14px;font-weight:500;color:#B22126;">Learn more &rarr;</span>
+          </div>
+        </a>
+
+        <a href="Services.dc.html" style="display:flex;flex-direction:column;background:#F7F6FB;border:1px solid #E8E4F2;border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s;" style-hover="box-shadow:0 12px 30px rgba(39,38,95,0.10);transform:translateY(-3px);border-color:#D9D2EC;">
+          <img src="assets/card-packaging.jpg" alt="Glass bottle on a filling line" style="display:block;width:100%;height:170px;object-fit:cover;border-radius:12px 12px 0 0;">
+          <div style="padding:30px;display:flex;flex-direction:column;gap:10px;flex:1;">
+            <div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#30265B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5"></polygon><line x1="12" y1="12" x2="12" y2="21"></line></svg>
+            </div>
+            <h3 style="margin:4px 0 0;font-size:19px;font-weight:500;color:#1C1B3A;">Packaging</h3>
+            <p style="margin:0;font-size:15px;line-height:1.6;color:#6A6486;">Co-packing and contract packing with full QP release and regulatory support.</p>
+            <span style="margin-top:6px;font-size:14px;font-weight:500;color:#B22126;">Learn more &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY GMP -->
+  <section style="background:#F7F6FB;padding:clamp(76px,12vw,116px) 0;">
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px);">
+      <div style="text-align:center;max-width:620px;margin:0 auto 44px;">
+        <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#B22126;margin-bottom:12px;">Why GMP</div>
+        <h2 style="margin:0;font-size:clamp(24px,4vw,30px);font-weight:500;color:#30265B;line-height:1.2;">A genuine turnkey partner</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ whyCols }};gap:24px;">
+        <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;padding:30px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;height:46px;"><img src="assets/icons/icon-turnkey.svg" alt="" style="display:block;width:46px;height:46px;object-fit:contain;"></div>
+          <div style="font-size:16px;font-weight:600;color:#1C1B3A;line-height:1.3;">Full Turnkey Solution</div>
+          <div style="font-size:14px;line-height:1.6;color:#6A6486;">One partner from development through to finished, released product.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;padding:30px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;height:46px;"><img src="assets/icons/icon-manufacturing.svg" alt="" style="display:block;width:46px;height:46px;object-fit:contain;"></div>
+          <div style="font-size:16px;font-weight:600;color:#1C1B3A;line-height:1.3;">UK In-house Manufacturing</div>
+          <div style="font-size:14px;line-height:1.6;color:#6A6486;">Owned facilities in Hull &mdash; full control, no outsourcing surprises.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;padding:30px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;height:46px;"><img src="assets/icons/icon-warehouse.svg" alt="" style="display:block;width:46px;height:46px;object-fit:contain;"></div>
+          <div style="font-size:16px;font-weight:600;color:#1C1B3A;line-height:1.3;">Tech Transfer &amp; Warehousing</div>
+          <div style="font-size:14px;line-height:1.6;color:#6A6486;">Smooth, de-risked scale-up with integrated storage.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;padding:30px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;height:46px;"><img src="assets/icons/icon-supplychain.svg" alt="" style="display:block;width:46px;height:46px;object-fit:contain;"></div>
+          <div style="font-size:16px;font-weight:600;color:#1C1B3A;line-height:1.3;">Global Supply Chain</div>
+          <div style="font-size:14px;line-height:1.6;color:#6A6486;">Reliable sourcing and distribution across markets.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;padding:30px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;height:46px;"><img src="assets/icons/icon-development.svg" alt="" style="display:block;width:46px;height:46px;object-fit:contain;"></div>
+          <div style="font-size:16px;font-weight:600;color:#1C1B3A;line-height:1.3;">Development &amp; Remediation</div>
+          <div style="font-size:14px;line-height:1.6;color:#6A6486;">Fix, reformulate and rescue stalled products.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E8E4F2;border-radius:10px;padding:30px;display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:center;height:46px;"><img src="assets/icons/icon-optimisation.svg" alt="" style="display:block;width:46px;height:46px;object-fit:contain;"></div>
+          <div style="font-size:16px;font-weight:600;color:#1C1B3A;line-height:1.3;">Cost Optimisation</div>
+          <div style="font-size:14px;line-height:1.6;color:#6A6486;">Efficient processes that protect your margins.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCREDITATIONS -->
+  <section style="background:#FFFFFF;padding:clamp(76px,12vw,116px) 0;">
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px);">
+      <div style="text-align:center;max-width:620px;margin:0 auto 40px;">
+        <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#B22126;margin-bottom:12px;">Accreditations</div>
+        <h2 style="margin:0;font-size:clamp(24px,4vw,30px);font-weight:500;color:#30265B;line-height:1.2;">Certified, audited and inspection-ready</h2>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;">
+        <sc-for list="{{ accreds }}" as="cert" hint-placeholder-count="4">
+          <image-slot id="{{ cert.slot }}" style="display:block;width:150px;height:64px;" shape="rounded" radius="8" placeholder="{{ cert.label }}"></image-slot>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT RESULTS -->
+  <section style="background:#F7F6FB;padding:clamp(76px,12vw,116px) 0 clamp(28px,5vw,44px);">
+    <div style="max-width:920px;margin:0 auto;padding:0 clamp(20px,3vw,44px);">
+      <div style="text-align:center;margin:0 auto 8px;">
+        <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#B22126;margin-bottom:12px;">Client results</div>
+        <h2 style="margin:0;font-size:clamp(24px,4vw,30px);font-weight:500;color:#30265B;line-height:1.2;">Trusted by the brands we make for</h2>
+      </div>
+
+      <div style="position:relative;text-align:center;padding:clamp(40px,6vw,56px) 0 0;">
+        <div aria-hidden="true" style="font-family:Georgia,'Times New Roman',serif;font-size:clamp(80px,14vw,128px);line-height:0.7;font-weight:700;background:linear-gradient(135deg,#B22126,#702341 55%,#30265B);-webkit-background-clip:text;background-clip:text;color:transparent;height:clamp(44px,7vw,66px);">&ldquo;</div>
+
+        <p style="margin:0 auto;max-width:760px;font-size:clamp(20px,3.4vw,28px);font-weight:500;line-height:1.45;letter-spacing:-0.01em;color:#1C1B3A;text-wrap:balance;">{{ quote }}</p>
+
+        <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:36px;">
+          <image-slot id="{{ avatarSlot }}" style="display:block;width:52px;height:52px;flex-shrink:0;" shape="circle" placeholder="Photo"></image-slot>
+          <div style="text-align:left;">
+            <div style="font-size:15px;font-weight:600;color:#1C1B3A;">{{ name }}</div>
+            <div style="font-size:13px;color:#6A6486;">{{ role }}</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:36px;">
+          <button onClick="{{ prev }}" aria-label="Previous testimonial" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1.5px solid #D9D2EC;background:#FFFFFF;color:#30265B;cursor:pointer;transition:border-color .2s,background .2s;" style-hover="border-color:#30265B;background:#F2EFFA;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <div style="font-size:13px;font-weight:500;letter-spacing:0.08em;color:#9D99B3;min-width:60px;">{{ counter }}</div>
+          <button onClick="{{ next }}" aria-label="Next testimonial" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1.5px solid #D9D2EC;background:#FFFFFF;color:#30265B;cursor:pointer;transition:border-color .2s,background .2s;" style-hover="border-color:#30265B;background:#F2EFFA;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="CtaBand"
+    headline="Let’s build your next product together."
+    subline="Talk to our team about your development, manufacturing or packaging needs."
+    btn1-label="Get a quote"
+    btn1-href="GetInTouch.dc.html"
+    btn2-label="Contact us"
+    btn2-href="GetInTouch.dc.html"
+    hint-size="100%,300px"
+    style="display:block;margin:clamp(96px,14vw,150px) 0 clamp(76px,12vw,116px);"></dc-import>
+
+  <!-- NEWS & BLOGS -->
+  <section style="background:#FFFFFF;padding:clamp(56px,8vw,88px) 0 clamp(76px,12vw,116px);">
+    <div style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,3vw,44px);">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px;">
+        <div>
+          <div style="font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#B22126;margin-bottom:12px;">News &amp; Blogs</div>
+          <h2 style="margin:0;font-size:clamp(24px,4vw,30px);font-weight:500;color:#30265B;line-height:1.2;">Latest from GMP</h2>
+        </div>
+        <a href="News.dc.html" style="font-size:14px;font-weight:500;color:#B22126;text-decoration:none;white-space:nowrap;flex-shrink:0;">View all &rarr;</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;">
+        <a href="News.dc.html" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E8E4F2;border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s;" style-hover="box-shadow:0 12px 30px rgba(39,38,95,0.10);transform:translateY(-3px);border-color:#D9D2EC;">
+          <div style="position:relative;">
+            <img src="assets/news-iso.jpg" alt="GMP achieves ISO 13485 certification" style="display:block;width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;">
+            <span style="position:absolute;top:14px;left:14px;padding:5px 12px;font-size:12px;font-weight:500;color:#FFFFFF;background:#B22126;border-radius:24px;">News</span>
+          </div>
+          <div style="padding:30px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="margin:0;font-size:17px;font-weight:500;color:#1C1B3A;line-height:1.35;">GMP achieves ISO 13485 certification</h3>
+            <div style="font-size:13px;color:#9D99B3;">June 2026</div>
+            <p style="margin:2px 0 0;font-size:14px;line-height:1.6;color:#6A6486;">Expanding our capability to manufacture medical devices to the highest standard.</p>
+            <span style="margin-top:6px;font-size:14px;font-weight:500;color:#B22126;">Read more &rarr;</span>
+          </div>
+        </a>
+        <a href="News.dc.html" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E8E4F2;border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s;" style-hover="box-shadow:0 12px 30px rgba(39,38,95,0.10);transform:translateY(-3px);border-color:#D9D2EC;">
+          <div style="position:relative;">
+            <img src="assets/news-techtransfer.jpg" alt="What tech transfer really involves" style="display:block;width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;">
+            <span style="position:absolute;top:14px;left:14px;padding:5px 12px;font-size:12px;font-weight:500;color:#FFFFFF;background:#B22126;border-radius:24px;">Blog</span>
+          </div>
+          <div style="padding:30px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="margin:0;font-size:17px;font-weight:500;color:#1C1B3A;line-height:1.35;">What tech transfer really involves</h3>
+            <div style="font-size:13px;color:#9D99B3;">May 2026</div>
+            <p style="margin:2px 0 0;font-size:14px;line-height:1.6;color:#6A6486;">A practical look at how we move a product into routine manufacture.</p>
+            <span style="margin-top:6px;font-size:14px;font-weight:500;color:#B22126;">Read more &rarr;</span>
+          </div>
+        </a>
+        <a href="News.dc.html" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #E8E4F2;border-radius:12px;overflow:hidden;text-decoration:none;transition:box-shadow .2s,transform .2s,border-color .2s;" style-hover="box-shadow:0 12px 30px rgba(39,38,95,0.10);transform:translateY(-3px);border-color:#D9D2EC;">
+          <div style="position:relative;">
+            <img src="assets/news-cphi.jpg" alt="Meet us at CPHI 2026" style="display:block;width:100%;height:180px;object-fit:cover;border-radius:12px 12px 0 0;">
+            <span style="position:absolute;top:14px;left:14px;padding:5px 12px;font-size:12px;font-weight:500;color:#FFFFFF;background:#B22126;border-radius:24px;">Events</span>
+          </div>
+          <div style="padding:30px;display:flex;flex-direction:column;gap:8px;flex:1;">
+            <h3 style="margin:0;font-size:17px;font-weight:500;color:#1C1B3A;line-height:1.35;">Meet us at CPHI 2026</h3>
+            <div style="font-size:13px;color:#9D99B3;">April 2026</div>
+            <p style="margin:2px 0 0;font-size:14px;line-height:1.6;color:#6A6486;">Book a slot with our development team at this year&rsquo;s show.</p>
+            <span style="margin-top:6px;font-size:14px;font-weight:500;color:#B22126;">Read more &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,620px"></dc-import>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { t: 0, isWide: true };
+
+  componentDidMount() {
+    this._fixSticky(0);
+    this.mq = window.matchMedia('(min-width:768px)');
+    this.applyMq = () => this.setState({ isWide: this.mq.matches });
+    this.applyMq();
+    if (this.mq.addEventListener) this.mq.addEventListener('change', this.applyMq);
+    else this.mq.addListener(this.applyMq);
+  }
+  componentWillUnmount() {
+    if (!this.mq) return;
+    if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.applyMq);
+    else this.mq.removeListener(this.applyMq);
+  }
+  _fixSticky(n) {
+    const host = document.querySelector('.sc-host[data-sc-name="SiteHeader"]');
+    if (host) { host.style.display = 'contents'; }
+    else if (n < 40) { setTimeout(() => this._fixSticky(n + 1), 50); }
+  }
+
+  renderVals() {
+    const whyTiles = [
+      { label: 'Full Turnkey Solution', desc: 'One partner from development through to finished, released product.', icon: 'assets/icons/icon-turnkey.svg' },
+      { label: 'UK In-house Manufacturing', desc: 'Owned facilities in Hull \u2014 full control, no outsourcing surprises.', icon: 'assets/icons/icon-manufacturing.svg' },
+      { label: 'Tech Transfer & Warehousing', desc: 'Smooth, de-risked scale-up with integrated storage.', icon: 'assets/icons/icon-warehouse.svg' },
+      { label: 'Global Supply Chain', desc: 'Reliable sourcing and distribution across markets.', icon: 'assets/icons/icon-supplychain.svg' },
+      { label: 'Development & Remediation', desc: 'Fix, reformulate and rescue stalled products.', icon: 'assets/icons/icon-development.svg' },
+      { label: 'Cost Optimisation', desc: 'Efficient processes that protect your margins.', icon: 'assets/icons/icon-optimisation.svg' }
+    ];
+    const accreds = [
+      { slot: 'home-cert-1', label: 'ISO 9001' },
+      { slot: 'home-cert-2', label: 'ISO 13485' },
+      { slot: 'home-cert-3', label: 'MHRA' },
+      { slot: 'home-cert-4', label: 'GMP' }
+    ];
+    const testimonials = [
+      { quote: 'GMP took our formulation from lab bench to released product in months, not years. The single point of accountability changed everything.', name: 'Sarah Whitfield', role: 'Head of Operations, Nordia Health', avatar: 'home-tm-1' },
+      { quote: 'Their tech-transfer team de-risked our scale-up completely. Every batch since has been right first time.', name: 'Daniel Osei', role: 'VP Manufacturing, Verda Bio', avatar: 'home-tm-2' },
+      { quote: 'Honest timelines, in-house control and genuine regulatory expertise. A rare combination in a CDMO.', name: 'Marie Laurent', role: 'Founder, Lumen Cosmetics', avatar: 'home-tm-3' }
+    ];
+    const news = [
+      { slot: 'home-news-1', img: 'assets/news-iso.jpg', cat: 'News', title: 'GMP achieves ISO 13485 certification', date: 'June 2026', excerpt: 'Expanding our capability to manufacture medical devices to the highest standard.' },
+      { slot: 'home-news-2', img: 'assets/news-techtransfer.jpg', cat: 'Blog', title: 'What tech transfer really involves', date: 'May 2026', excerpt: 'A practical look at how we move a product into routine manufacture.' },
+      { slot: 'home-news-3', img: 'assets/news-cphi.jpg', cat: 'Events', title: 'Meet us at CPHI 2026', date: 'April 2026', excerpt: 'Book a slot with our development team at this year\u2019s show.' }
+    ];
+
+    const i = this.state.t;
+    const n = testimonials.length;
+    const pad = (x) => String(x + 1).padStart(2, '0');
+
+    return {
+      whyTiles, accreds, news,
+      whyCols: this.state.isWide ? 'repeat(3,minmax(0,1fr))' : '1fr',
+      quote: testimonials[i].quote,
+      name: testimonials[i].name,
+      role: testimonials[i].role,
+      avatarSlot: testimonials[i].avatar,
+      counter: pad(i) + ' / ' + pad(n - 1),
+      prev: () => this.setState(s => ({ t: (s.t - 1 + n) % n })),
+      next: () => this.setState(s => ({ t: (s.t + 1) % n }))
+    };
+  }
+}
+</script>
+</body>
+</html>
