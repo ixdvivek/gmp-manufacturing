@@ -35,6 +35,14 @@
  *   placeholder  Empty-state caption.                      (default 'Drop an image')
  *   src          Optional initial/fallback image URL. A user drop overrides
  *                it; clearing the drop reveals src again.
+ *   credit       Optional attribution text (e.g. 'Photo by Jane Doe on
+ *                Unsplash') shown as a small overlay at the bottom-left of
+ *                the filled slot. It belongs to the src image, so it only
+ *                shows while src is what's displayed — a user-dropped
+ *                image hides it.
+ *   credit-href  Optional link for the credit overlay (e.g. the
+ *                photographer's profile). http(s) URLs only — anything
+ *                else renders the credit as plain text.
  *
  * Size and layout come from ordinary CSS on the element — width/height
  * inline or from a parent grid — so it composes with any layout.
@@ -216,7 +224,13 @@
     '  backdrop-filter:blur(6px)}' +
     '.ctl button:hover{background:rgba(0,0,0,.8)}' +
     '.err{position:absolute;left:8px;bottom:8px;right:8px;color:#b3261e;font-size:11px;' +
-    '  background:rgba(255,255,255,.85);padding:4px 6px;border-radius:5px;pointer-events:none}';
+    '  background:rgba(255,255,255,.85);padding:4px 6px;border-radius:5px;pointer-events:none}' +
+    '.credit{position:absolute;left:6px;bottom:6px;max-width:calc(100% - 12px);display:none;' +
+    '  padding:3px 7px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff;' +
+    '  font:10px/1.2 system-ui,-apple-system,sans-serif;text-decoration:none;' +
+    '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;backdrop-filter:blur(6px)}' +
+    '.credit[href]:hover{background:rgba(0,0,0,.8);text-decoration:underline}' +
+    ':host([data-filled][data-credit]) .credit{display:block}';
 
   const icon =
     '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
@@ -226,7 +240,7 @@
 
   class ImageSlot extends HTMLElement {
     static get observedAttributes() {
-      return ['shape', 'radius', 'mask', 'fit', 'position', 'placeholder', 'src', 'id'];
+      return ['shape', 'radius', 'mask', 'fit', 'position', 'placeholder', 'src', 'id', 'credit', 'credit-href'];
     }
 
     constructor() {
@@ -243,6 +257,9 @@
         '    <div class="sub">or <u>browse files</u></div></div>' +
         '  <div class="ring" part="ring"></div>' +
         '</div>' +
+        // Outside .frame, like .spill/.ctl — the frame's overflow:hidden +
+        // border-radius/clip-path would cut the credit off on circle/pill/mask.
+        '<a class="credit" part="credit" target="_blank" rel="noopener noreferrer"></a>' +
         '<div class="spill">' +
         '  <img class="ghost" alt="" draggable="false">' +
         '  <div class="handle" data-c="nw"></div><div class="handle" data-c="ne"></div>' +
@@ -258,6 +275,10 @@
       this._cap = root.querySelector('.cap');
       this._sub = root.querySelector('.sub');
       this._spill = root.querySelector('.spill');
+      this._credit = root.querySelector('.credit');
+      // Credit clicks open the link, not browse/reframe.
+      this._credit.addEventListener('click', (e) => e.stopPropagation());
+      this._credit.addEventListener('dblclick', (e) => e.stopPropagation());
       this._ghost = root.querySelector('.ghost');
       this._err = null;
       this._input = root.querySelector('input');
@@ -634,6 +655,28 @@
         this._empty.style.display = 'flex';
         this.removeAttribute('data-filled');
       }
+
+      // Credit belongs to the author src, so a user drop hides it.
+      // textContent + http(s)-only href keep external strings inert.
+      const credit = this.getAttribute('credit');
+      const showCredit = !!(url && credit && !this._userUrl);
+      if (showCredit) {
+        this._credit.textContent = credit;
+        let href = '';
+        const rawHref = this.getAttribute('credit-href') || '';
+        if (rawHref) {
+          try {
+            const u = new URL(rawHref, document.baseURI);
+            if (u.protocol === 'http:' || u.protocol === 'https:') href = u.href;
+          } catch {}
+        }
+        if (href) this._credit.setAttribute('href', href);
+        else this._credit.removeAttribute('href');
+      } else {
+        this._credit.textContent = '';
+        this._credit.removeAttribute('href');
+      }
+      this.toggleAttribute('data-credit', showCredit);
     }
   }
 

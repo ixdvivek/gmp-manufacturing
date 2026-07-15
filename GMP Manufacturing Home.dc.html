@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <title>GMP Manufacturing Ltd — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; }
+    @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</helmet>
+
+<div data-screen-label="GMP Mfd Home — Responsive" style="{{ s.root }}">
+
+  <!-- ============ HERO ============ -->
+  <div data-screen-label="Hero" style="{{ s.heroWrap }}">
+    <video ref="{{ heroVideoRef }}" src="assets2/hero-bg.mp4" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" style="{{ s.heroBg }}"></video>
+    <div style="{{ s.heroOverlay }}"></div>
+    <div style="{{ s.mobileNavOverlay }}">
+      <div style="{{ s.mobileNavCloseRow }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" style="{{ s.mobileNavLogo }}">
+        <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+          <div style="{{ s.hamburgerBarX1 }}"></div>
+          <div style="{{ s.hamburgerBarX2 }}"></div>
+        </div>
+      </div>
+      <div style="{{ s.mobileNavLinks }}">
+        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Home</span>
+        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">About Us</span>
+        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Services</span>
+        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Innovations</span>
+        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Sectors</span>
+      </div>
+      <div style="{{ s.heroCtaCtl.style }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
+        <span style="{{ s.heroCtaText }}">Get A Quote</span>
+        <div style="{{ s.heroCtaIconStyle }}"></div>
+      </div>
+    </div>
+    <div style="{{ s.heroContent }}">
+      <div style="{{ s.heroTopbar }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
+        <div style="{{ s.heroNav }}">
+          <span style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</span>
+          <span style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</span>
+          <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+            <span style="{{ s.navServicesStyle }}">Services</span>
+            <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="rgb(255,255,255)"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+          </div>
+          <span style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</span>
+          <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+            <span style="{{ s.navSectorsStyle }}">Sectors</span>
+            <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="rgb(255,255,255)"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+          </div>
+        </div>
+        <div style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+          <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+          <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ s.heroCtaIconStyle }}"></div>
+          </sc-if>
+        </div>
+        <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+          <div style="{{ s.hamburgerBar1 }}"></div>
+          <div style="{{ s.hamburgerBar2 }}"></div>
+          <div style="{{ s.hamburgerBar3 }}"></div>
+        </div>
+      </div>
+
+      <div style="{{ s.heroHeadlineWrap }}">
+        <div style="{{ s.heroHeadingGroup }}">
+          <span style="{{ s.heroHeadline }}">From molecule
+to market</span>
+          <span style="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
+          <div style="{{ s.heroInlineCtaCtl.style }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
+            <span style="{{ s.heroInlineCtaText }}">View our Services</span>
+            
+          </div>
+        </div>
+        <div style="{{ s.heroDivider }}"></div>
+        <div style="{{ s.heroStats }}">
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+            <span style="{{ s.heroStatLabel }}">Making in</span>
+            <span style="{{ s.heroStatLabel }}">United Kingdom</span>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+            <span style="{{ s.heroStatLabel }}">Facilities</span>
+            <span style="{{ s.heroStatLabel }}">04</span>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+            <span style="{{ s.heroStatLabel }}">Marketing in</span>
+            <span style="{{ s.heroStatLabel }}">30+ countries</span>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+            <span style="{{ s.heroStatLabel }}">since</span>
+            <span style="{{ s.heroStatLabel }}">2012</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ s.sectionGap }}"></div>
+
+  <!-- ============ ABOUT US ============ -->
+  <div data-screen-label="About Us" style="{{ s.aboutSectionPad }}">
+    <div style="{{ s.aboutWrap }}" ref="{{ aboutRevealRef }}">
+      <div style="{{ s.aboutImageCol }}">
+        <image-slot id="about-photo" shape="rect" src="assets2/about-real.jpg" placeholder="Drop about photo" style="{{ s.aboutImage }}"></image-slot>
+      </div>
+      <div style="{{ s.aboutContent }}">
+        <span style="{{ s.eyebrow }}">Who We Are</span>
+        <span style="{{ s.h2 }}">About Us</span>
+        <div style="{{ s.aboutTextCol }}">
+          <span style="{{ s.aboutBody }}">Precept designs and builds robotics in the U.S. for manufacturing and energy — complete systems engineered in-house, from the parts up to the finished machine.</span>
+          <span style="{{ s.aboutBody }}">From formulation through to UK in-house manufacturing, we own every stage of the process — giving partners one accountable team and full traceability from molecule to market.</span>
+        </div>
+        <div style="{{ s.aboutBtnRow }}">
+          <div style="{{ s.pillLearnMore.style }}" onMouseEnter="{{ s.pillLearnMore.enter }}" onMouseLeave="{{ s.pillLearnMore.leave }}">
+            <span style="{{ s.pillDarkText }}">Learn More</span>
+          </div>
+          <div style="{{ s.pillContactAbout.style }}" onMouseEnter="{{ s.pillContactAbout.enter }}" onMouseLeave="{{ s.pillContactAbout.leave }}">
+            <span style="{{ s.pillContactAboutText }}">Contact Us</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ s.sectionGap }}"></div>
+
+  <!-- ============ WHY GMP ============ -->
+  <div style="{{ s.sectionPad }}">
+    <div style="{{ s.whyWrap }}" ref="{{ whyRevealRef }}">
+      <div style="{{ s.whyHeadingCol }}">
+        <span style="{{ s.eyebrow }}">Why GMP</span>
+        <span style="{{ s.h2 }}">A complete pathway, under one roof</span>
+        <div style="{{ s.pillOurServices.style }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
+          <span style="{{ s.pillDarkText }}">Our Services</span>
+        </div>
+      </div>
+      <div style="{{ s.pathwayGrid }}">
+        <sc-for list="{{pathwayItems}}" as="item" hint-placeholder-count="6">
+          <div style="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
+            <div style="{{ item.sweepStyle }}"></div>
+            <span style="{{ item.numStyle }}">{{ item.n }}</span>
+            <span style="{{ item.headStyle }}">{{ item.h }}</span>
+            <span style="{{ item.descStyle }}">{{ item.d }}</span>
+            <svg style="{{ item.arrowStyle }}" width="48" height="16" viewBox="0 0 48 16" fill="none" stroke="{{ item.arrowColor }}" stroke-width="1.5">
+              <path d="M0 8h44M36 2l8 6-8 6"></path>
+            </svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ s.sectionGap }}"></div>
+
+  <!-- ============ ACCOUNTABLE TEAM (hover panel row) ============ -->
+  <div data-screen-label="One accountable team" style="{{ s.sectionPad }}">
+    <div style="{{ s.teamWrap }}" ref="{{ teamRevealRef }}">
+      <div style="{{ s.teamHeadingCol }}">
+        <span style="{{ s.eyebrow }}">Our Strength</span>
+        <span style="{{ s.h2 }}">One accountable team</span>
+      </div>
+      <div style="{{ s.teamPanelRow }}" onMouseLeave="{{ onTeamRowLeave }}" data-comment-anchor="f4ff2b9192-div">
+        <sc-for list="{{teamItems}}" as="item" hint-placeholder-count="4">
+          <div style="{{ item.panelStyle }}" onMouseEnter="{{ item.onEnter }}">
+            <div style="{{ item.colorLayerStyle }}"></div>
+            <image-slot id="{{ item.bgId }}" shape="rect" src="{{ item.bgSrc }}" placeholder="Drop facility photo" style="{{ item.imageLayerStyle }}"></image-slot>
+            <div style="{{ item.overlayStyle }}"></div>
+            <div style="{{ item.textColStyle }}">
+              <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
+                <span style="{{ s.teamNum }}">{{ item.n }}</span>
+              </sc-if>
+              <span style="{{ item.headStyle }}">{{ item.h }}</span>
+              <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
+                <span style="{{ item.bodyStyle }}">{{ item.d }}</span>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ s.sectionGap }}"></div>
+
+  <!-- ============ INDUSTRIES / SECTORS (static, click to switch) ============ -->
+  <div data-screen-label="Industries" style="{{ s.sectionPad }}">
+    <div style="{{ s.industriesWrap }}" ref="{{ industriesRevealRef }}">
+      <div style="{{ s.industriesLeft }}" ref="{{ industriesLeftRef }}">
+        <div style="{{ s.industriesHeadingGroup }}">
+          <span style="{{ s.eyebrow }}">Industries</span>
+          <span style="{{ s.industriesHeading }}">Regulated&nbsp; sectors we manufacture for</span>
+        </div>
+        <div style="{{ s.industriesList }}">
+          <sc-for list="{{sectorListItems}}" as="li" hint-placeholder-count="6">
+            <span style="{{ li.style }}" onClick="{{ li.onClick }}">{{ li.name }}</span>
+          </sc-for>
+        </div>
+        <sc-if value="{{ showSectorsPill }}" hint-placeholder-val="{{ true }}">
+          <div style="{{ s.pillSectors.style }}" onMouseEnter="{{ s.pillSectors.enter }}" onMouseLeave="{{ s.pillSectors.leave }}">
+            <span style="{{ s.pillDarkText }}">Sectors We Serve</span>
+          </div>
+        </sc-if>
+      </div>
+      <div style="{{ s.industriesRight }}">
+        <div style="{{ s.industriesImgWrap }}">
+          <sc-for list="{{sectorImages}}" as="img" hint-placeholder-count="6">
+            <image-slot id="{{ img.id }}" shape="rect" src="{{ img.src }}" placeholder="Drop sector photo" style="{{ img.style }}"></image-slot>
+          </sc-for>
+          <sc-for list="{{blindStrips}}" as="strip" hint-placeholder-count="9">
+            <div style="{{ strip.style }}">
+              <img src="{{ strip.imgSrc }}" style="{{ strip.imgStyle }}">
+            </div>
+          </sc-for>
+        </div>
+        <div style="{{ s.industriesCaption }}" onMouseEnter="{{ onCaptionEnter }}" onMouseLeave="{{ onCaptionLeave }}" onClick="{{ onCaptionClick }}">
+          <div style="{{ s.industriesCaptionSweep }}"></div>
+          <span style="{{ s.industriesCaptionTitle }}">{{ activeSector.name }}</span>
+          <span style="{{ s.industriesCaptionBody }}">{{ activeSector.sub }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="{{ s.sectionGap }}"></div>
+
+  <!-- ============ SUPPORT / TESTIMONIAL ============ -->
+  <div style="{{ s.sectionPad }}">
+    <div style="{{ s.supportWrap }}" ref="{{ supportRevealRef }}">
+      <div style="{{ s.supportVideoCol }}">
+        <div style="{{ s.supportVideoBox }}">
+          <image-slot id="support-bg" shape="rect" src="assets2/support-real.webp" placeholder="Drop video still" style="{{ s.supportBg }}"></image-slot>
+          <div style="{{ s.supportVideoTint }}"></div>
+          <div style="{{ s.supportOverlayTop }}">
+            <span style="{{ s.supportOverlayTitle }}">Support</span>
+            <span style="{{ s.supportOverlaySub }}">Unmatched</span>
+          </div>
+          <div style="{{ s.playBtn }}">
+            <svg width="100%" height="100%" viewBox="0 0 66.667 66.667" fill="rgb(255,255,255)"><path d="M 33.333 66.667 C 14.924 66.667 0 51.743 0 33.333 C 0 14.924 14.924 0 33.333 0 C 51.743 0 66.667 14.924 66.667 33.333 C 66.667 51.743 51.743 66.667 33.333 66.667 Z M 28.74 21.382 C 28.521 21.236 28.263 21.158 28 21.158 C 27.264 21.158 26.667 21.755 26.667 22.491 L 26.667 44.175 C 26.667 44.439 26.745 44.696 26.891 44.915 C 27.299 45.528 28.127 45.693 28.74 45.285 L 45.003 34.443 C 45.149 34.345 45.275 34.219 45.372 34.073 C 45.781 33.46 45.615 32.632 45.003 32.224 L 28.74 21.382 Z"></path></svg>
+          </div>
+          <div style="{{ s.supportOverlayAuthorRow }}">
+            <image-slot id="support-avatar" shape="circle" src="assets2/support-avatar-real.webp" placeholder="Photo" style="width: 48px; height: 48px; flex-shrink: 0;"></image-slot>
+            <div style="display: flex; flex-direction: column; flex-grow: 1;">
+              <span style="{{ s.authorName }}">Ronald Richards</span>
+              <span style="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="{{ s.testimonialCard }}">
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="{{ s.testimonialStat }}">100%</span>
+          <span style="{{ s.testimonialSub }}">Reliable Services.</span>
+          <div style="width: 24px; height: 24px;">
+            <div style="width: 17px; height: 12px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/format_quote.svg') center / contain no-repeat; mask: url('assets2/format_quote.svg') center / contain no-repeat;"></div>
+          </div>
+          <span style="{{ s.testimonialBody }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis, ante nec pellentesque consequat, metus odio cursus eros, ut vestibulum sapien diam at mi. Maecenas blandit mattis accumsan. 
+
+Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. Aliquam aliquet</span>
+        </div>
+        <div style="{{ s.supportAuthorRow }}">
+          <image-slot id="testimonial-avatar" shape="circle" src="assets2/testimonial-avatar-real.webp" placeholder="Photo" style="width: 48px; height: 48px; flex-shrink: 0;"></image-slot>
+          <div style="display: flex; flex-direction: column; flex-grow: 1;">
+            <span style="{{ s.authorName }}">Ronald Richards</span>
+            <span style="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ LOGO MARQUEE ============ -->
+    <div style="{{ s.marqueeOuter }}">
+      <div ref="{{marqueeRef}}" style="{{ s.marqueeInner }}">
+        <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
+          <div style="{{ s.marqueeItem }}">
+            <img src="{{ logo }}" alt="Accreditation logo" style="{{ s.marqueeImg }}">
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="{{ s.sectionGapHalf }}"></div>
+
+    <div style="{{ s.newsCollabOuter }}">
+    <img src="assets2/brand-watermark.svg" alt="" style="{{ s.newsCollabWatermark }}">
+    <!-- ============ NEWS ROOM ============ -->
+    <div style="{{ s.newsHeadRow }}" ref="{{ newsRevealRef }}">
+      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+        <span style="{{ s.eyebrow }}">News &amp; Insights</span>
+        <span style="{{ s.h2 }}">News Room</span>
+      </div>
+      <div style="{{ s.pillMoreNews.style }}" onMouseEnter="{{ s.pillMoreNews.enter }}" onMouseLeave="{{ s.pillMoreNews.leave }}">
+        <span style="{{ s.pillDarkText }}">More News</span>
+      </div>
+    </div>
+
+    <div style="{{ s.newsGrid }}">
+      <sc-for list="{{newsItems}}" as="item" hint-placeholder-count="3">
+        <div style="{{ item.cardStyle }}" onMouseEnter="{{ item.enter }}" onMouseLeave="{{ item.leave }}">
+          <image-slot id="{{ item.id }}" shape="rect" src="{{ item.src }}" placeholder="Drop news photo" style="{{ item.imgStyle }}"></image-slot>
+          <div style="{{ item.overlayStyle }}"></div>
+          <div style="{{ s.newsCardInner }}">
+            <span style="{{ s.newsCardTitle }}">{{ item.title }}</span>
+            <span style="{{ s.newsCardTag }}">{{ item.tag }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="{{ s.newsCarouselRow }}">
+      <div style="{{ s.arrowPrev.style }}" onMouseEnter="{{ s.arrowPrev.enter }}" onMouseLeave="{{ s.arrowPrev.leave }}">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="{{ s.arrowPrev.strokeColor }}" stroke-width="1.5"><path d="M7 1L1 7l6 6"></path></svg>
+      </div>
+      <div style="{{ s.carouselDots }}">
+        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: rgb(17,17,17);"></div>
+        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: rgba(17,17,17,0.25);"></div>
+        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: rgba(17,17,17,0.25);"></div>
+      </div>
+      <div style="{{ s.arrowNext.style }}" onMouseEnter="{{ s.arrowNext.enter }}" onMouseLeave="{{ s.arrowNext.leave }}">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="{{ s.arrowNext.strokeColor }}" stroke-width="1.5"><path d="M1 1l6 6-6 6"></path></svg>
+      </div>
+    </div>
+
+    <div style="{{ s.sectionGapHalf }}"></div>
+
+    <!-- ============ COLLABORATE ============ -->
+    <div style="{{ s.collabOuter }}">
+      <image-slot id="collab-bg" shape="rect" src="assets2/collab-real.jpg" placeholder="Drop CTA background photo" style="{{ s.collabBg }}"></image-slot>
+      <div style="{{ s.collabOverlay }}"></div>
+      <div style="{{ s.collabWrap }}">
+        <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
+        <span style="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
+        <div style="{{ s.collabBtnRow }}">
+          <div style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+            <span style="{{ s.collabGetQuoteText }}">Get a Quote</span>
+            <div style="{{ s.collabGetQuoteIcon }}"></div>
+          </div>
+          <div style="{{ s.pillContactUs.style }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+            <span style="{{ s.collabContactUsText }}">Contact us</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div style="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
+    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" style="position: absolute; right: -20px; top: 0; pointer-events: none;">
+      <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+    </svg>
+
+    <div style="{{ s.footerTopRow }}">
+      <div style="{{ s.newsletterBox }}">
+<img src="assets2/newsletter-icon.png" alt="" style="width: 72px; height: 72px; object-fit: contain; flex-shrink: 0;">
+        <span style="{{ s.newsletterHeading }}">Subscribe to our newsletter</span>
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start; align-self: stretch;">
+          <div style="display: flex; flex-direction: row; padding: 0 4px 0 0; justify-content: space-between; align-items: center; align-self: stretch; box-sizing: border-box;">
+            <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); white-space: nowrap;">name@example.com</span>
+            <div style="width: 12px; height: 10px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/send-underline.svg') center / contain no-repeat; mask: url('assets2/send-underline.svg') center / contain no-repeat; flex-shrink: 0;"></div>
+          </div>
+          <div style="height: 1px; background-color: rgba(255,255,255,0.3); align-self: stretch;"></div>
+        </div>
+      </div>
+
+      <div style="{{ s.footerRight }}">
+        <div style="{{ s.breadcrumbRow }}">
+          <span style="{{ s.breadcrumbText }}">Pharmaceutical</span>
+          <span style="{{ s.breadcrumbText }}">/</span>
+          <span style="{{ s.breadcrumbText }}">Veterinary</span>
+          <span style="{{ s.breadcrumbText }}">/</span>
+          <span style="{{ s.breadcrumbText }}">Medical Device</span>
+          <span style="{{ s.breadcrumbText }}">/</span>
+          <span style="{{ s.breadcrumbText }}">Cosmetic</span>
+          <span style="{{ s.breadcrumbText }}">/</span>
+          <span style="{{ s.breadcrumbText }}">Supplements</span>
+          <span style="{{ s.breadcrumbText }}">/</span>
+          <span style="{{ s.breadcrumbText }}">Biocide</span>
+        </div>
+        <div style="{{ s.footerDivider }}"></div>
+
+        <div style="{{ s.footerColsGrid }}">
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+            <span style="{{ s.footerColLabel }}">Services</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+              <span style="{{ s.footerLink }}">Development &amp; Formulation</span>
+              <span style="{{ s.footerLink }}">UK In-house Manufacturing</span>
+              <span style="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</span>
+              <span style="{{ s.footerLink }}">Global Supply Chain</span>
+              <span style="{{ s.footerLink }}">Development &amp; Remediation</span>
+              <span style="{{ s.footerLink }}">Cost Optimisation</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+            <span style="{{ s.footerColLabel }}">About</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+              <span style="{{ s.footerLink }}">About Us</span>
+              <span style="{{ s.footerLink }}">Careers</span>
+              <span style="{{ s.footerLink }}">Media &amp; News</span>
+              <span style="{{ s.footerLink }}">Our Team</span>
+              <span style="{{ s.footerLink }}">Contact Us</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+            <span style="{{ s.footerColLabel }}">Contact</span>
+            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4);">Email</span>
+              <span style="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
+              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); margin-top: 8px;">Call us</span>
+              <span style="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
+              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); margin-top: 8px;">Address</span>
+              <span style="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="{{ s.socialsCluster }}">
+        <div style="{{ s.socialLg.style }}" onMouseEnter="{{ s.socialLg.enter }}" onMouseLeave="{{ s.socialLg.leave }}">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4 9l6-6 6 6"></path></svg>
+        </div>
+        <div style="{{ s.socialsSmallCol }}">
+          <div style="{{ s.socialA.style }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
+            <div style="width: 13px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/linkedin.svg') center / contain no-repeat; mask: url('assets2/linkedin.svg') center / contain no-repeat;"></div>
+          </div>
+          <div style="{{ s.socialC.style }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
+            <div style="width: 11px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/facebook.svg') center / contain no-repeat; mask: url('assets2/facebook.svg') center / contain no-repeat;"></div>
+          </div>
+          <div style="{{ s.socialB.style }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="rgb(255,255,255)"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
+          </div>
+          <div style="{{ s.socialD.style }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div style="width: 14px; height: 14px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/instagram.svg') center / contain no-repeat; mask: url('assets2/instagram.svg') center / contain no-repeat;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="{{ s.footerBottomRow }}">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); white-space: pre-line;">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+        <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4);">Made by Phitany</span>
+      </div>
+      <div style="{{ s.footerWordmark }}">
+        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.footerWordmarkImg }}">
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;marqueeScroll&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Logo strip&quot; }
+}">
+class Component extends DCLogic {
+  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, pathwayOrigin: {}, mobileMenuOpen: false, revealed: {} };
+
+  componentDidMount() {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      this.setState((st) => ({ revealed: { ...st.revealed, hero: true } }));
+    }));
+    if (this._heroVideoEl) { this._heroVideoEl.muted = true; this._heroVideoEl.play().catch(() => {}); }
+    this._applyMarquee();
+    this._onResize = () => { this._updateBp(); this._measureIndustriesLeft(); };
+    window.addEventListener("resize", this._onResize);
+    this._updateBp();
+    requestAnimationFrame(() => this._measureIndustriesLeft());
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
+    if (this._industriesLeftRO) this._industriesLeftRO.disconnect();
+    if (this._blindsTimer1) clearTimeout(this._blindsTimer1);
+    if (this._blindsTimer2) clearTimeout(this._blindsTimer2);
+  }
+  _observeReveal(key, el) {
+    if (!el) return;
+    this._revealObservers = this._revealObservers || {};
+    if (this._revealObservers[key]) return;
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState((st) => ({ revealed: { ...st.revealed, [key]: true } }));
+        obs.disconnect();
+      }
+    }, { threshold: 0.12, rootMargin: "0px 0px -80px 0px" });
+    obs.observe(el);
+    this._revealObservers[key] = obs;
+  }
+  _goToIndustry(i) {
+    if (i === this.state.industryActiveIndex || this.state.blindsPhase === "active") return;
+    if (this._blindsTimer1) clearTimeout(this._blindsTimer1);
+    if (this._blindsTimer2) clearTimeout(this._blindsTimer2);
+    if (this._blindsTimer3) clearTimeout(this._blindsTimer3);
+    this.setState({ blindsPhase: "active", pendingIndex: i });
+    this._blindsTimer1 = setTimeout(() => {
+      this.setState({ industryActiveIndex: i, blindsPhase: "reset" });
+      this._blindsTimer2 = setTimeout(() => {
+        this.setState({ blindsPhase: "idle", pendingIndex: null });
+      }, 30);
+    }, 780);
+  }
+  _measureIndustriesLeft() {
+    if (!this._industriesLeftEl) return;
+    const h = Math.round(this._industriesLeftEl.getBoundingClientRect().height);
+    if (h > 0 && Math.abs(h - (this.state.industriesLeftH || 0)) > 1) this.setState({ industriesLeftH: h });
+  }
+  _industriesLeftRefCb(el) {
+    this._industriesLeftEl = el;
+    if (el && !this._industriesLeftRO && typeof ResizeObserver !== "undefined") {
+      this._industriesLeftRO = new ResizeObserver(() => this._measureIndustriesLeft());
+      this._industriesLeftRO.observe(el);
+    }
+    if (el) this._measureIndustriesLeft();
+  }
+  componentDidUpdate() {
+    this._applyMarquee();
+  }
+  _updateBp() {
+    const w = window.innerWidth;
+    const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
+    if (bp !== this.state.bp) this.setState({ bp });
+  }
+  _applyMarquee() {
+    if (this._marqueeEl) {
+      this._marqueeEl.style.animationPlayState = (this.props.marqueeScroll ?? true) ? "running" : "paused";
+    }
+  }
+
+  renderVals() {
+    const bp = this.state.bp;
+    const isMobile = bp === "mobile";
+    const isTablet = bp === "tablet";
+    const isDesktop = bp === "desktop";
+    const pick = (m, t, d) => (isMobile ? m : isTablet ? t : d);
+
+    const red = "rgb(178,33,38)";
+    const dark = "rgb(51,51,51)";
+    const near = "rgb(17,17,17)";
+    const gradient = "linear-gradient(139.949deg, rgb(37,117,187) 3.69%, rgb(41,37,96) 58.52%, rgb(178,33,38) 137.90%)";
+    const footerGradient = "linear-gradient(111.131deg, rgb(37,117,187) -0.79%, rgb(41,37,96) 62.70%, rgb(178,33,38) 154.63%)";
+
+    const gutter = pick(20, 40, 64);
+    const s = {};
+
+    // ---------- LOAD-IN REVEAL ----------
+    const revealed = this.state.revealed || {};
+    const reveal = (key, opts = {}) => {
+      const { distance = 18, duration = 800 } = opts;
+      const shown = !!revealed[key];
+      return {
+        opacity: shown ? 1 : 0,
+        transform: shown ? "translateY(0)" : "translateY(" + distance + "px)",
+        transition: "opacity " + duration + "ms cubic-bezier(0.16,1,0.3,1), transform " + duration + "ms cubic-bezier(0.16,1,0.3,1)",
+      };
+    };
+    const revealRef = (key) => (el) => this._observeReveal(key, el);
+
+    s.root = {
+      position: "relative",
+      width: "100%",
+      background: "#fff",
+      fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      display: "flex",
+      flexDirection: "column",
+      overflowX: "hidden",
+    };
+
+    s.sectionPad = { padding: pick("0 20px", "0 40px", "0 64px"), boxSizing: "border-box", position: "relative", zIndex: 1 };
+    s.aboutSectionPad = { padding: pick("0 20px 0 0", "0 40px 0 0", "0 64px 0 0"), boxSizing: "border-box", position: "relative", zIndex: 1 };
+    s.sectionGap = { width: "100%", height: pick(64, 110, 160), flexShrink: 0 };
+    s.sectionGapHalf = { width: "100%", height: pick(32, 55, 80), flexShrink: 0 };
+
+    s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
+    s.h2 = { fontWeight: 500, fontSize: pick(30, 38, 48), lineHeight: pick("36px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };
+
+    s.pillDark = {
+      borderRadius: 32,
+      background: near,
+      display: "inline-flex",
+      flexDirection: "row",
+      gap: 6,
+      padding: pick("12px 18px", "14px 20px", "16px 24px"),
+      justifyContent: "center",
+      alignItems: "center",
+      boxSizing: "border-box",
+      cursor: "pointer",
+      alignSelf: "flex-start",
+      flexShrink: 0,
+    };
+    s.pillDarkText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: "#fff", whiteSpace: "nowrap" };
+
+    // ---------- GENERIC HOVER HELPERS ----------
+    const hoverShadow = "0 16px 32px -12px rgba(178,33,38,0.45)";
+    const softShadow = "0 16px 32px -14px rgba(0,0,0,0.3)";
+    const makePill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        style: {
+          ...s.pillDark,
+          background: hovered ? red : near,
+          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
+          transform: hovered ? "translateY(-2px)" : "translateY(0)",
+          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+        },
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeHeroCta = (key, base) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        style: {
+          ...base,
+          background: hovered ? red : "#fff",
+          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
+          transform: hovered ? "translateY(-2px)" : "translateY(0)",
+          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+        },
+        textColor: hovered ? "#fff" : near,
+        iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeCircle = (key, base) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        style: {
+          ...base,
+          background: hovered ? red : "transparent",
+          boxShadow: hovered ? hoverShadow : "inset 0 0 0 1px rgba(255,255,255,0.3)",
+          transform: hovered ? "translateY(-2px)" : "translateY(0)",
+          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+        },
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeArrow = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        style: {
+          ...s.carouselArrowBase,
+          background: hovered ? red : "rgba(0,0,0,0.05)",
+          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
+          transition: "background 0.2s ease, box-shadow 0.2s ease",
+        },
+        strokeColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+
+    // ---------- HERO ----------
+    s.heroWrap = { position: "relative", width: "100%", minHeight: "100vh", display: "flex", flexDirection: "column", boxSizing: "border-box", overflow: "hidden" };
+    s.heroBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: revealed.hero ? "scale(1)" : "scale(1.05)", transition: "transform 1800ms cubic-bezier(0.16,1,0.3,1)" };
+    s.heroOverlay = { position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", pointerEvents: "none" };
+    s.heroContent = {
+      position: "relative",
+      zIndex: 1,
+      display: "flex",
+      flexDirection: "column",
+      flexGrow: 1,
+      padding: pick("20px 20px 32px", "32px 40px 48px", "40px 64px 64px"),
+      boxSizing: "border-box",
+      gap: pick(40, 56, 72),
+    };
+    s.heroTopbar = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 10 : 16, flexWrap: isMobile ? "nowrap" : "wrap" };
+    s.heroLogo = { width: pick(170, 230, 320), height: "auto" };
+    s.heroNav = { display: isDesktop ? "flex" : "none", flexDirection: "row", gap: 32, alignItems: "center" };
+    const menuOpen = this.state.mobileMenuOpen;
+    s.hamburgerBtn = { display: isDesktop ? "none" : "flex", flexDirection: "column", gap: 6, alignItems: "center", justifyContent: "center", width: 32, height: 32, cursor: "pointer", flexShrink: 0, zIndex: 20 };
+    const barBase = { width: 24, height: 2, background: "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease" };
+    s.hamburgerBar1 = { ...barBase };
+    s.hamburgerBar2 = { ...barBase };
+    s.hamburgerBar3 = { ...barBase };
+    s.hamburgerBarX1 = { ...barBase, background: "#fff", transform: "rotate(45deg) translate(5px, 5px)" };
+    s.hamburgerBarX2 = { ...barBase, background: "#fff", transform: "rotate(-45deg) translate(5px, -5px)" };
+    s.mobileNavOverlay = {
+      position: "fixed",
+      inset: 0,
+      background: "rgb(41,37,96)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 40,
+      padding: pick("20px 20px 40px", "24px 40px 48px", "24px 40px 48px"),
+      boxSizing: "border-box",
+      zIndex: 100,
+      opacity: menuOpen ? 1 : 0,
+      pointerEvents: menuOpen ? "auto" : "none",
+      transform: menuOpen ? "translateY(0)" : "translateY(-16px)",
+      transition: "opacity 0.3s ease, transform 0.3s ease",
+    };
+    s.mobileNavCloseRow = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" };
+    s.mobileNavLogo = { width: pick(150, 190, 190), height: "auto" };
+    s.mobileNavLinks = { display: "flex", flexDirection: "column", gap: pick(24, 28, 28), alignItems: "flex-start", marginTop: 16 };
+    s.mobileNavLink = { fontWeight: 500, fontSize: pick(28, 32, 32), lineHeight: "1.3", letterSpacing: "-0.7px", color: "#fff", cursor: "pointer" };
+    const navLinkStyle = (i) => ({
+      fontWeight: 500,
+      fontSize: 14,
+      lineHeight: "20px",
+      color: "#fff",
+      whiteSpace: "nowrap",
+      cursor: "pointer",
+      opacity: this.state.hoveredNav === i ? 1 : 0.85,
+      borderBottomWidth: 1,
+      borderBottomStyle: "solid",
+      borderBottomColor: this.state.hoveredNav === i ? "rgba(255,255,255,0.8)" : "transparent",
+      paddingBottom: 2,
+      transition: "opacity 0.2s ease, border-color 0.2s ease",
+    });
+    s.navHomeStyle = navLinkStyle(0);
+    s.navAboutStyle = navLinkStyle(1);
+    s.navServicesStyle = navLinkStyle(2);
+    s.navInnovationsStyle = navLinkStyle(3);
+    s.navSectorsStyle = navLinkStyle(4);
+    const navEnter = (i) => () => this.setState({ hoveredNav: i });
+    s.navLeave = () => this.setState({ hoveredNav: -1 });
+    s.navEnterHome = navEnter(0);
+    s.navEnterAbout = navEnter(1);
+    s.navEnterServices = navEnter(2);
+    s.navEnterInnovations = navEnter(3);
+    s.navEnterSectors = navEnter(4);
+    const heroCtaBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
+    s.heroCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
+    const heroCtaTopbarBase = { borderRadius: 32, display: "flex", flexDirection: "row", padding: "9px 16px", justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.heroCtaTopbarCtl = isMobile ? makeHeroCta("heroCtaTopbar", heroCtaTopbarBase) : s.heroCtaCtl;
+    s.heroCtaTopbarText = { fontWeight: 600, fontSize: isMobile ? 13 : pick(15, 16, 17), lineHeight: isMobile ? "16px" : "20px", color: s.heroCtaTopbarCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
+    s.heroCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
+
+    s.heroHeadlineWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), flexGrow: 1, justifyContent: "flex-end", ...reveal("hero", { distance: 26, duration: 1000 }) };
+    s.heroHeadingGroup = { display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "flex-end", gap: pick(16, 20, 24) };
+    s.heroHeadline = {
+      fontWeight: 500,
+      fontSize: pick(48, 88, 104),
+      textAlign: isMobile ? "left" : "right",
+      lineHeight: pick("50px", "92px", "104px"),
+      letterSpacing: pick("-1.5px", "-3.5px", "-5px"),
+      color: "#fff",
+      whiteSpace: "pre-line",
+    };
+    s.heroSubtext = { fontWeight: 400, fontSize: pick(16, 17, 18), lineHeight: "26px", color: "rgba(255,255,255,0.85)", textAlign: isMobile ? "left" : "right", maxWidth: 480 };
+    const heroInlineCtaBase = { borderRadius: 32, display: "inline-flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.heroInlineCtaCtl = makeHeroCta("heroInlineCta", heroInlineCtaBase);
+    s.heroInlineCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroInlineCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
+    s.heroInlineCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroInlineCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
+    s.heroDivider = { height: 1, background: "#fff", opacity: 0.9 };
+    s.heroStats = { display: "grid", gridTemplateColumns: pick("1fr 1fr", "1fr 1fr", "repeat(4, 1fr)"), rowGap: pick(16, 20, 0), columnGap: pick(16, 32, 32) };
+    s.heroStatLabel = { fontWeight: 500, fontSize: pick(15, 16, 17), lineHeight: "22px", color: "#fff" };
+
+    // ---------- ABOUT ----------
+    s.aboutWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
+    s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "100%", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden" };
+    s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.aboutHeading = { fontWeight: 500, fontSize: pick(26, 28, 32), lineHeight: "40px", color: dark, flexShrink: 0 };
+    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
+    s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
+    s.aboutLabel = { fontWeight: 600, fontSize: 18, lineHeight: "24px", letterSpacing: "-0.7px", color: dark };
+    s.aboutBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
+    s.pillLearnMore = makePill("learnMore");
+    const makeSecondaryPill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        style: {
+          borderRadius: 32,
+          background: "#fff",
+          border: "1px solid " + (hovered ? red : "rgba(0,0,0,0.2)"),
+          display: "inline-flex",
+          flexDirection: "row",
+          gap: 6,
+          padding: pick("12px 18px", "14px 20px", "16px 24px"),
+          justifyContent: "center",
+          alignItems: "center",
+          boxSizing: "border-box",
+          cursor: "pointer",
+          alignSelf: "flex-start",
+          flexShrink: 0,
+          transition: "border-color 0.2s ease, color 0.2s ease",
+        },
+        textColor: hovered ? red : dark,
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    s.aboutBtnRow = { display: "flex", flexDirection: "row", gap: 12, flexWrap: "wrap", alignItems: "center" };
+    s.pillContactAbout = makeSecondaryPill("contactAbout");
+    s.pillContactAboutText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillContactAbout.textColor, whiteSpace: "nowrap" };
+
+    // ---------- WHY GMP / PATHWAY ----------
+    s.whyWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), alignItems: "flex-start", maxWidth: 1600, margin: "0 auto", ...reveal("why") };
+    s.whyHeadingCol = { display: "flex", flexDirection: "column", gap: 24, alignItems: "flex-start", width: isDesktop ? 380 : "100%", flexShrink: 0 };
+    s.pathwayGrid = { flexGrow: 1, width: "100%", display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gridAutoRows: pick("auto", "minmax(240px, auto)", "minmax(260px, auto)"), gap: pick(20, 24, 28) };
+    s.pillOurServices = makePill("ourServices");
+
+    // ---------- TEAM BAND (hover panel row) ----------
+    s.teamWrap = { display: "flex", flexDirection: "column", gap: pick(28, 36, 44), maxWidth: 1600, margin: "0 auto", width: "100%", ...reveal("team") };
+    s.teamHeadingCol = { display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" };
+    s.teamPanelRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(12, 14, 16), width: "100%", height: isMobile ? "auto" : pick(336, 416, 496) };
+    s.teamBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    const teamColors = ["rgb(41,37,96)", "rgb(28,80,150)", "rgb(110,50,95)", "rgb(178,33,38)"];
+    s.teamNum = { fontWeight: 200, fontSize: pick(24, 28, 32), lineHeight: "1", letterSpacing: "-1px", color: "rgba(255,255,255,0.6)" };
+    s.teamHeadingBase = { fontWeight: 500, color: "#fff" };
+    s.teamBodyBase = { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)" };
+    // ---------- INDUSTRIES (single block, rotates on scroll) ----------
+    s.industriesWrap = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(16, 48, 80), maxWidth: 1600, margin: "0 auto", alignItems: "flex-start", width: "100%", height: isMobile ? "100%" : "auto", minHeight: 0, boxSizing: "border-box", ...reveal("industries") };
+    s.industriesLeft = { display: "flex", flexDirection: "column", gap: pick(10, 40, 40), alignItems: "flex-start", width: isMobile ? "100%" : pick(0, 280, 380), flexShrink: 0 };
+    s.industriesHeadingGroup = { display: "flex", flexDirection: "column", gap: pick(4, 8, 8), alignItems: "flex-start" };
+    s.industriesHeading = { fontWeight: 500, fontSize: pick(20, 38, 48), lineHeight: pick("26px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };
+    s.industriesList = { display: "flex", flexDirection: "column", gap: pick(5, 25, 31), alignItems: "flex-start" };
+    s.industryItemDim = { opacity: 0.3, fontWeight: 500, fontSize: pick(15, 18, 18), lineHeight: pick("20px", "24px", "24px"), letterSpacing: "-0.7px", color: dark, cursor: "pointer", transition: "opacity 0.3s ease, color 0.3s ease" };
+    s.industryItemActive = { fontWeight: 700, fontSize: pick(15, 18, 18), lineHeight: pick("20px", "24px", "24px"), letterSpacing: "-0.7px", color: red, cursor: "pointer", transition: "opacity 0.3s ease, color 0.3s ease" };
+    s.industriesRight = { position: "relative", flexGrow: 1, width: "100%", height: isMobile ? "100%" : "auto", minHeight: 0, display: "flex", flexDirection: "column", alignItems: "center" };
+    const industriesFitHeight = this.state.industriesLeftH || pick(220, 300, 360);
+    s.industriesImgWrap = { position: "relative", zIndex: 0, isolation: "isolate", width: "100%", aspectRatio: isMobile ? "4 / 3" : undefined, height: isMobile ? undefined : industriesFitHeight, flexGrow: isMobile ? 1 : undefined, minHeight: isMobile ? 150 : undefined, overflow: "hidden" };
+    s.industriesCaption = { background: "rgb(245,245,245)", display: "flex", flexDirection: "column", padding: pick("10px 14px", "28px", "32px"), gap: pick(2, 4, 4), alignItems: "flex-start", boxSizing: "border-box", marginTop: isMobile ? 0 : -60, position: "relative", zIndex: 1, width: isMobile ? "100%" : "92%", maxWidth: 1300, flexShrink: 0, overflow: "hidden", cursor: "pointer" };
+    s.industriesCaptionSweep = { position: "absolute", inset: 0, background: gradient, transformOrigin: "left center", transform: this.state.hoveredCaption ? "scaleX(1)" : "scaleX(0)", transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)", zIndex: 0 };
+    s.industriesCaptionTitle = { position: "relative", zIndex: 1, fontWeight: 500, fontSize: pick(16, 28, 32), lineHeight: pick("20px", "40px", "40px"), color: this.state.hoveredCaption ? "#fff" : dark, transition: "color 0.3s ease" };
+    s.industriesCaptionBody = { position: "relative", zIndex: 1, fontWeight: 400, fontSize: pick(13, 16, 16), lineHeight: pick("18px", "24px", "24px"), color: this.state.hoveredCaption ? "rgba(255,255,255,0.9)" : dark, transition: "color 0.3s ease" };
+    s.pillSectors = makePill("sectors");
+
+    // ---------- SUPPORT / TESTIMONIAL ----------
+    const supportBoxHeight = pick(360, 460, 580);
+    s.supportWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 40, 32), maxWidth: 1600, margin: "0 auto", alignItems: "stretch", ...reveal("support") };
+    s.supportVideoCol = { display: "flex", flexDirection: "column", flexGrow: 1, width: "100%" };
+    s.supportVideoBox = { position: "relative", width: "100%", height: supportBoxHeight, overflow: "hidden" };
+    s.supportBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.supportVideoTint = { position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", pointerEvents: "none" };
+    s.playBtn = { position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: pick(56, 68, 80), height: pick(56, 68, 80), cursor: "pointer", zIndex: 2 };
+    s.supportOverlayTop = { position: "absolute", left: pick(20, 28, 40), top: pick(20, 28, 40), zIndex: 2, display: "flex", flexDirection: "column", gap: 4 };
+    s.supportOverlayTitle = { fontWeight: 600, fontSize: pick(28, 36, 44), lineHeight: "1.1", color: "#fff" };
+    s.supportOverlaySub = { fontWeight: 600, fontSize: pick(16, 18, 20), lineHeight: "1.3", color: "#fff" };
+    s.supportOverlayAuthorRow = { position: "absolute", left: pick(20, 28, 40), bottom: pick(20, 28, 40), zIndex: 2, display: "flex", flexDirection: "row", gap: 12, alignItems: "center" };
+    s.supportAuthorRow = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center" };
+    s.authorName = { fontWeight: 600, fontSize: pick(16, 18, 20), lineHeight: "1.2", color: "#fff" };
+    s.authorRole = { fontWeight: 400, fontSize: pick(13, 14, 15), lineHeight: "1.3", color: "rgba(255,255,255,0.85)" };
+
+    s.testimonialCard = { background: gradient, height: isDesktop ? supportBoxHeight : "auto", display: "flex", flexDirection: "column", padding: pick("32px", "40px", "48px"), justifyContent: "space-between", gap: 32, alignItems: "flex-start", boxSizing: "border-box", width: isDesktop ? 480 : "100%", flexShrink: 0 };
+    s.testimonialStat = { fontWeight: 600, fontSize: 40, lineHeight: "44px", color: "#fff" };
+    s.testimonialSub = { fontWeight: 600, fontSize: 22, lineHeight: "28px", color: "#fff" };
+    s.testimonialBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff", whiteSpace: "pre-line" };
+
+    // ---------- MARQUEE ----------
+    const supportGap = pick(32, 40, 32);
+    s.marqueeOuter = { width: "100%", maxWidth: 1600, overflow: "hidden", borderRadius: 8, background: "rgb(245,245,245)", display: "flex", alignItems: "center", padding: pick("28px 16px", "36px 20px", "48px 24px"), boxSizing: "border-box", margin: supportGap + "px auto" };
+    s.marqueeInner = { display: "flex", flexDirection: "row", gap: 24, alignItems: "center", width: "max-content", animation: "gmp-marquee 30s linear infinite" };
+    s.marqueeItem = { width: pick(120, 150, 170), height: pick(44, 56, 64), display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 };
+    s.marqueeImg = { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" };
+
+    // ---------- NEWS ----------
+    s.newsHeadRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: 24, alignItems: isMobile ? "flex-start" : "flex-end", justifyContent: "space-between", width: "100%", ...reveal("news") };
+    s.newsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(20, 24, 32), width: "100%", margin: pick("32px 0 0", "40px 0 0", "48px 0 0") };
+    s.newsCarouselRow = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center", justifyContent: "center", marginTop: pick(28, 32, 40) };
+    s.carouselArrow = { width: 48, height: 48, borderRadius: 100, background: "rgba(0,0,0,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    s.carouselDots = { display: "flex", flexDirection: "row", gap: 8, alignItems: "center", padding: "0 8px" };
+    s.newsCard = { position: "relative", width: "100%", minHeight: pick(280, 340, 400), overflow: "hidden" };
+    s.newsCardInner = { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", padding: pick("24px", "32px", "40px"), display: "flex", flexDirection: "column", justifyContent: "space-between", boxSizing: "border-box", pointerEvents: "none" };
+    s.newsCardTitle = { fontWeight: 500, fontSize: pick(18, 19, 20), lineHeight: "1.35", letterSpacing: "-0.4px", color: "#fff" };
+    s.newsCardTag = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
+    s.pillMoreNews = makePill("moreNews");
+    s.pillMoreNews.style.alignSelf = isMobile ? "flex-start" : "flex-end";
+    s.carouselArrowBase = { width: 48, height: 48, borderRadius: 100, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    s.arrowPrev = makeArrow("arrowPrev");
+    s.arrowNext = makeArrow("arrowNext");
+    const newsShown = !!revealed.news;
+    const newsCardCtl = (i) => {
+      const hovered = this.state.hoveredNews === i;
+      return {
+        cardStyle: {
+          position: "relative", width: "100%", minHeight: pick(280, 340, 400), overflow: "hidden",
+          opacity: newsShown ? 1 : 0,
+          transform: newsShown ? "translateY(0)" : "translateY(16px)",
+          boxShadow: hovered ? softShadow : "0 0 0 rgba(0,0,0,0)",
+          transition: "opacity 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 80) + "ms, transform 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 80) + "ms, box-shadow 0.3s ease",
+        },
+        imgStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", transform: hovered ? "scale(1.06)" : "scale(1)", transition: "transform 0.4s ease" },
+        overlayStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", background: hovered ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.5)", pointerEvents: "none", transition: "background 0.3s ease" },
+        enter: () => this.setState({ hoveredNews: i }),
+        leave: () => this.setState({ hoveredNews: -1 }),
+      };
+    };
+
+    // ---------- NEWS/COLLABORATE OUTER (watermark) ----------
+    s.newsCollabOuter = { position: "relative", width: "100%", overflow: "visible" };
+    s.newsCollabWatermark = { position: "absolute", top: 0, left: pick("-45%", "-18%", "-5.5%"), height: pick("42vh", "85vh", "119vh"), width: "auto", pointerEvents: "none", zIndex: -1, opacity: 1 };
+
+    // ---------- COLLABORATE ----------
+    s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
+    s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.collabOverlay = { position: "absolute", inset: 0, background: "rgba(17,17,17,0.55)", pointerEvents: "none" };
+    s.collabWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 24, alignItems: "center", maxWidth: 640, margin: "0 auto", textAlign: "center", ...reveal("collab") };
+    s.collabHeading = { fontWeight: 500, fontSize: pick(32, 40, 48), lineHeight: pick("38px", "46px", "56px"), letterSpacing: "-1.5px", color: "#fff", textAlign: "center" };
+    s.collabBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "rgba(255,255,255,0.85)", textAlign: "center" };
+    s.collabBtnRow = { display: "flex", flexDirection: "row", gap: 8, flexWrap: "wrap", justifyContent: "center" };
+    const collabPillBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 6, padding: pick("12px 18px", "14px 20px", "16px 24px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
+    s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
+    s.collabGetQuoteText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillGetQuote.textColor, whiteSpace: "nowrap" };
+    s.collabContactUsText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillContactUs.textColor, whiteSpace: "nowrap" };
+    s.collabGetQuoteIcon = { width: 14, height: 14, backgroundColor: s.pillGetQuote.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
+
+    // ---------- FOOTER ----------
+    s.footerWrap = { position: "relative", zIndex: 2, width: "100%", background: footerGradient, overflow: "hidden", padding: pick("40px 20px 32px", "56px 40px 40px", "64px 64px 48px"), boxSizing: "border-box", display: "flex", flexDirection: "column", gap: pick(40, 48, 56), ...reveal("footer", { distance: 14, duration: 900 }) };
+    s.footerTopRow = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 40, 56) };
+    s.newsletterBox = { width: isDesktop ? 320 : "100%", background: "rgba(255,255,255,0.1)", display: "flex", flexDirection: "column", gap: 20, padding: 24, boxSizing: "border-box", flexShrink: 0 };
+    s.newsletterHeading = { fontWeight: 500, fontSize: 26, lineHeight: "30px", letterSpacing: "-1px", color: "#fff" };
+    s.footerRight = { flexGrow: 1, display: "flex", flexDirection: "column", gap: pick(28, 32, 36) };
+    s.breadcrumbRow = { display: "flex", flexDirection: "row", flexWrap: "wrap", gap: pick(12, 18, 24) };
+    s.breadcrumbText = { fontWeight: 400, fontSize: pick(14, 15, 16), lineHeight: "24px", color: "#fff", whiteSpace: "nowrap" };
+    s.footerDivider = { height: 1, background: "rgba(255,255,255,0.2)" };
+    s.footerColsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(28, 32, 24) };
+    s.footerColLabel = { fontWeight: 400, fontSize: 18, lineHeight: "24px", color: "rgba(255,255,255,0.4)" };
+    s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
+    s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
+    s.socialsSmallCol = { display: "flex", flexDirection: "column", gap: 12, alignItems: "center" };
+    const makeBrandCircle = (key, base, brandColor) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        style: {
+          ...base,
+          background: hovered ? brandColor : "transparent",
+          boxShadow: hovered ? ("0 16px 32px -12px " + brandColor.replace("rgb", "rgba").replace(")", ",0.45)")) : "inset 0 0 0 1px rgba(255,255,255,0.3)",
+          transform: hovered ? "translateY(-2px)" : "translateY(0)",
+          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+        },
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    s.socialLg = makeCircle("socialLg", { width: 56, height: 56, borderRadius: 56, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 });
+    const socialSmallBase = { width: 40, height: 40, borderRadius: 40, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
+    s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
+    s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
+    s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
+    s.footerBottomRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: 16, justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.15)" };
+    s.footerWordmark = { display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "flex-end", gap: 4 };
+    s.footerWordmarkImg = { width: pick(180, 220, 260), height: "auto" };
+
+    // ---------- DATA ----------
+    const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
+
+    const pathwayData = [
+      { n: "01", h: "Development & \nFormulation", d: "Formulation, analytical development and remediation that ready your product for reliable scale-up." },
+      { n: "02", h: "UK In-house \nManufacturing", d: "Owned facilities in Hull — full control, no outsourcing surprises." },
+      { n: "03", h: "Tech Transfer & \nWarehousing", d: "Smooth, de-risked scale-up with integrated storage." },
+      { n: "04", h: "Global \nSupply Chain", d: "Reliable sourcing and distribution across markets." },
+      { n: "05", h: "Development & \nRemediation", d: "Fix, reformulate and rescue stalled products." },
+      { n: "06", h: "Cost \nOptimisation", d: "Efficient processes that protect your margins." },
+    ];
+    const whyShown = !!revealed.why;
+    const pathwayItems = pathwayData.map((item, i) => {
+      const hovered = this.state.hoveredPathway === i;
+      return {
+        n: item.n,
+        h: item.h,
+        d: item.d,
+        containerStyle: {
+          position: "relative",
+          overflow: "hidden",
+          borderLeft: isMobile ? "none" : "1px solid rgba(0,0,0,0.2)",
+          borderTop: isMobile ? "1px solid rgba(0,0,0,0.2)" : "none",
+          minHeight: isMobile ? "auto" : undefined,
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+          alignItems: "flex-start",
+          justifyContent: "center",
+          textAlign: "left",
+          padding: pick("24px 8px", "28px 24px", "0 32px"),
+          boxSizing: "border-box",
+          cursor: "pointer",
+          opacity: whyShown ? 1 : 0,
+          transform: whyShown ? "translateY(0)" : "translateY(16px)",
+          boxShadow: hovered ? "0 24px 48px -16px rgba(0,0,0,0.35)" : "0 0 0 rgba(0,0,0,0)",
+          transition: "opacity 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 70) + "ms, transform 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 70) + "ms, box-shadow 0.25s ease",
+        },
+        sweepStyle: {
+          position: "absolute",
+          inset: 0,
+          background: gradient,
+          transformOrigin: (this.state.pathwayOrigin[i] || "left") + " center",
+          transform: hovered ? "scaleX(1)" : "scaleX(0)",
+          transition: "transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
+          zIndex: 0,
+          pointerEvents: "none",
+        },
+        numStyle: { position: "relative", zIndex: 1, fontWeight: 600, fontSize: pick(16, 17, 18), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
+        headStyle: { position: "relative", zIndex: 1, fontWeight: 500, fontSize: pick(19, 21, 24), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : red, whiteSpace: "pre-line", transition: "color 0.25s ease" },
+        descStyle: { position: "relative", zIndex: 1, fontWeight: 400, fontSize: pick(14, 15, 16), lineHeight: "1.5", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
+        arrowStyle: { position: "absolute", zIndex: 1, top: 24, right: 24, opacity: (hovered || !isDesktop) ? 1 : 0, transform: (hovered || !isDesktop) ? "translateX(0)" : "translateX(-8px)", transition: "opacity 0.25s ease, transform 0.25s ease", pointerEvents: "none" },
+        arrowColor: hovered ? "rgb(255,255,255)" : dark,
+        onEnter: () => this.setState((st) => ({ hoveredPathway: i, pathwayOrigin: { ...st.pathwayOrigin, [i]: "left" } })),
+        onLeave: () => this.setState((st) => ({ hoveredPathway: -1, pathwayOrigin: { ...st.pathwayOrigin, [i]: "right" } })),
+      };
+    });
+
+    const teamData = [
+      { n: "01", h: "One accountable team", d: "A single point of contact owns your product from intake to release — no hand-offs, no surprises." },
+      { n: "02", h: "In-house QP release", d: "Our own Qualified Persons certify every batch, keeping control and traceability under our roof." },
+      { n: "03", h: "UK-owned facilities", d: "Manufacturing, filling and packing suites we own and operate — never outsourced." },
+      { n: "04", h: "Multi-form flexibility", d: "Tablets, capsules, liquids, suspensions and semi-solids from a single accredited site." },
+    ];
+    const hoveredTeam = this.state.hoveredTeam;
+    const teamDesktopActive = hoveredTeam === -1 ? 0 : hoveredTeam;
+    const teamFlexEase = "flex 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+    const teamItems = teamData.map((item, i) => {
+      const isActive = isMobile ? true : i === teamDesktopActive;
+      return {
+        n: item.n,
+        h: item.h,
+        d: item.d,
+        isActive,
+        bgId: i === 0 ? "accountable-bg" : "accountable-bg-" + i,
+        bgSrc: i === 0 ? "assets2/team-1-real.webp" : i === 3 ? "assets2/team-4-real.webp" : "assets2/placeholder-team-" + (i + 1) + ".jpg",
+        colorLayerStyle: { position: "absolute", inset: 0, background: teamColors[i], zIndex: 0 },
+        imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", opacity: isActive ? 0.55 : 0, transition: "opacity 0.5s ease" },
+        panelStyle: {
+          position: "relative", overflow: "hidden", borderRadius: 6, boxSizing: "border-box",
+          flex: isMobile ? "none" : (isActive ? "3 1 0%" : "1 1 0%"),
+          width: isMobile ? "100%" : "auto",
+          height: isMobile ? pick(320, 360, 400) : "100%",
+          cursor: isMobile ? "default" : "pointer",
+          transition: teamFlexEase,
+          flexShrink: 0,
+        },
+        overlayStyle: { position: "absolute", inset: 0, background: "rgba(41,37,96,0.6)", opacity: isActive ? 0.75 : 1, transition: "opacity 0.5s ease", pointerEvents: "none", zIndex: 1 },
+        textColStyle: {
+          position: "absolute", inset: 0, zIndex: 2, boxSizing: "border-box",
+          display: "flex", flexDirection: "column", gap: 12,
+          padding: isActive ? pick("24px", "32px", "40px") : "24px",
+          justifyContent: isActive ? "space-between" : "center",
+          alignItems: isActive ? "flex-start" : "center",
+          textAlign: isActive ? "left" : "center",
+        },
+        headStyle: {
+          fontWeight: 500, color: "#fff",
+          fontSize: isActive ? pick(24, 28, 34) : pick(17, 18, 19),
+          lineHeight: 1.25,
+          transition: "font-size 0.5s ease",
+        },
+        bodyStyle: { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)", width: pick("100%", 240, 300) },
+        onEnter: isMobile ? undefined : (() => this.setState({ hoveredTeam: i })),
+      };
+    });
+
+    const newsItemsData = [
+      { id: "news-1", src: "assets2/news-1-real.webp", title: "2025 Healthcare Exhibition is near. See the BTS of our preparations.", tag: "Event" },
+      { id: "news-2", src: "assets2/news-2-real.webp", title: "Various areas to enhance to meet the ideal packaging setup.", tag: "News" },
+      { id: "news-3", src: "assets2/news-3-real.webp", title: "Healthcare and Beauty care: Doctors perspectives in 2025", tag: "Article" },
+    ];
+    const newsItems = newsItemsData.map((item, i) => ({ ...item, ...newsCardCtl(i) }));
+
+    // ---------- INDUSTRIES / SECTORS ----------
+    const sectorData = [
+      { name: "Pharmaceutical", sub: "Tablets, capsules & oral solutions →", img: "assets2/placeholder-sector-pharma.jpg" },
+      { name: "Veterinary", sub: "Animal health tablets & pastes →", img: "assets2/placeholder-sector-vet.jpg" },
+      { name: "Medical Device", sub: "Diagnostic & surgical devices →", img: "assets2/placeholder-sector-meddevice.jpg" },
+      { name: "Cosmetic", sub: "Creams, gels & lotions →", img: "assets2/sector-cosmetic-real.webp" },
+      { name: "Supplements", sub: "Vitamins, gummies & powders →", img: "assets2/placeholder-sector-supplements.jpg" },
+      { name: "Biocide", sub: "Disinfectants & sanitising agents →", img: "assets2/placeholder-sector-biocide.jpg" },
+    ];
+    const industryActive = this.state.industryActiveIndex;
+    const sectorListItems = sectorData.map((sec, j) => ({
+      name: sec.name,
+      style: j === industryActive ? s.industryItemActive : s.industryItemDim,
+      onClick: () => this._goToIndustry(j),
+    }));
+    const sectorImages = sectorData.map((sec, j) => ({
+      id: j === 3 ? "industries-img" : "industries-img-" + j,
+      src: sec.img,
+      style: {
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        opacity: j === industryActive ? 1 : 0,
+      },
+    }));
+    const activeSector = sectorData[industryActive];
+    const blindsPhase = this.state.blindsPhase || "idle";
+    const numStrips = 9;
+    const stripTargetIndex = this.state.pendingIndex != null ? this.state.pendingIndex : industryActive;
+    const stripTargetSrc = sectorData[stripTargetIndex].img;
+    const growing = blindsPhase === "active";
+    const stripFitHeight = industriesFitHeight;
+    const blindStrips = Array.from({ length: numStrips }, (_, k) => {
+      const delay = growing ? k * 22 : 0;
+      return {
+        imgSrc: stripTargetSrc,
+        imgStyle: { position: "absolute", bottom: 0, left: -(k * 100) + "%", width: (numStrips * 100) + "%", height: stripFitHeight, objectFit: "cover" },
+        style: {
+          position: "absolute",
+          left: (k * 100) / numStrips + "%",
+          top: 0,
+          width: 100 / numStrips + "%",
+          height: "100%",
+          overflow: "hidden",
+          clipPath: growing ? "inset(0% 0 0 0)" : "inset(100% 0 0 0)",
+          transition: blindsPhase === "reset" ? "none" : "clip-path 0.42s cubic-bezier(0.76,0,0.24,1) " + delay + "ms",
+          zIndex: 2,
+          pointerEvents: "none",
+        },
+      };
+    });
+
+    return {
+      s,
+      logos: [...names, ...names],
+      marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
+      onTeamRowLeave: () => this.setState({ hoveredTeam: -1 }),
+      heroVideoRef: (el) => { this._heroVideoEl = el; if (el) { el.muted = true; el.play().catch(() => {}); } },
+      industriesRevealRef: revealRef("industries"),
+      industriesLeftRef: this._industriesLeftRefCbBound || (this._industriesLeftRefCbBound = this._industriesLeftRefCb.bind(this)),
+      onCaptionEnter: () => this.setState({ hoveredCaption: true }),
+      onCaptionLeave: () => this.setState({ hoveredCaption: false }),
+      onCaptionClick: () => { const c = sectorData.length; this._goToIndustry((this.state.industryActiveIndex + 1) % c); },
+      aboutRevealRef: revealRef("about"),
+      teamRevealRef: revealRef("team"),
+      whyRevealRef: revealRef("why"),
+      supportRevealRef: revealRef("support"),
+      newsRevealRef: revealRef("news"),
+      collabRevealRef: revealRef("collab"),
+      footerRevealRef: revealRef("footer"),
+      toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
+      showSectorsPill: !isMobile,
+      showHeroCtaIcon: !isMobile,
+      pathwayItems,
+      teamItems,
+      sectorListItems,
+      sectorImages,
+      activeSector,
+      blindStrips,
+      newsItems,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
