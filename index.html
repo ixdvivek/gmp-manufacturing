@@ -13,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
-  <script src="image-slot.js"></script>
   <style>
     html, body { margin: 0; padding: 0; background: #fff; }
     @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -24,6 +23,35 @@
 </helmet>
 
 <div data-screen-label="GMP Mfd Home — Responsive" style="{{ s.root }}">
+
+  <!-- ============ TOPBAR (fixed, outside hero's stacking context) ============ -->
+  <div style="{{ s.heroTopbar }}">
+    <img src="assets2/logo-color.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
+    <div style="{{ s.heroNav }}">
+      <span style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</span>
+      <span style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</span>
+      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+        <span style="{{ s.navServicesStyle }}">Services</span>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="rgb(51,51,51)"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+      </div>
+      <span style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</span>
+      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+        <span style="{{ s.navSectorsStyle }}">Sectors</span>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="rgb(51,51,51)"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+      </div>
+    </div>
+    <div style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+      <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+      <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
+        <div style="{{ s.heroCtaTopbarIconStyle }}"></div>
+      </sc-if>
+    </div>
+    <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+      <div style="{{ s.hamburgerBar1 }}"></div>
+      <div style="{{ s.hamburgerBar2 }}"></div>
+      <div style="{{ s.hamburgerBar3 }}"></div>
+    </div>
+  </div>
 
   <!-- ============ HERO ============ -->
   <div data-screen-label="Hero" style="{{ s.heroWrap }}">
@@ -50,34 +78,6 @@
       </div>
     </div>
     <div style="{{ s.heroContent }}">
-      <div style="{{ s.heroTopbar }}">
-        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
-        <div style="{{ s.heroNav }}">
-          <span style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</span>
-          <span style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</span>
-          <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
-            <span style="{{ s.navServicesStyle }}">Services</span>
-            <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="rgb(255,255,255)"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
-          </div>
-          <span style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</span>
-          <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
-            <span style="{{ s.navSectorsStyle }}">Sectors</span>
-            <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="rgb(255,255,255)"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
-          </div>
-        </div>
-        <div style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
-          <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
-          <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
-            <div style="{{ s.heroCtaIconStyle }}"></div>
-          </sc-if>
-        </div>
-        <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-          <div style="{{ s.hamburgerBar1 }}"></div>
-          <div style="{{ s.hamburgerBar2 }}"></div>
-          <div style="{{ s.hamburgerBar3 }}"></div>
-        </div>
-      </div>
-
       <div style="{{ s.heroHeadlineWrap }}">
         <div style="{{ s.heroHeadingGroup }}">
           <span style="{{ s.heroHeadline }}">From molecule
@@ -117,7 +117,7 @@ to market</span>
   <div data-screen-label="About Us" style="{{ s.aboutSectionPad }}">
     <div style="{{ s.aboutWrap }}" ref="{{ aboutRevealRef }}">
       <div style="{{ s.aboutImageCol }}">
-        <image-slot id="about-photo" shape="rect" src="assets2/about-real.jpg" placeholder="Drop about photo" style="{{ s.aboutImage }}"></image-slot>
+        <img src="assets2/about-real.jpg" alt="GMP Manufacturing formulation specialist at work" loading="lazy" style="{{ s.aboutImage }}">
       </div>
       <div style="{{ s.aboutContent }}">
         <span style="{{ s.eyebrow }}">Who We Are</span>
@@ -179,7 +179,7 @@ to market</span>
         <sc-for list="{{teamItems}}" as="item" hint-placeholder-count="4">
           <div style="{{ item.panelStyle }}" onMouseEnter="{{ item.onEnter }}">
             <div style="{{ item.colorLayerStyle }}"></div>
-            <image-slot id="{{ item.bgId }}" shape="rect" src="{{ item.bgSrc }}" placeholder="Drop facility photo" style="{{ item.imageLayerStyle }}"></image-slot>
+            <img src="{{ item.bgSrc }}" alt="" loading="lazy" style="{{ item.imageLayerStyle }}">
             <div style="{{ item.overlayStyle }}"></div>
             <div style="{{ item.textColStyle }}">
               <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
@@ -220,7 +220,7 @@ to market</span>
       <div style="{{ s.industriesRight }}">
         <div style="{{ s.industriesImgWrap }}">
           <sc-for list="{{sectorImages}}" as="img" hint-placeholder-count="6">
-            <image-slot id="{{ img.id }}" shape="rect" src="{{ img.src }}" placeholder="Drop sector photo" style="{{ img.style }}"></image-slot>
+            <img src="{{ img.src }}" alt="{{ img.name }} manufacturing" loading="lazy" style="{{ img.style }}">
           </sc-for>
           <sc-for list="{{blindStrips}}" as="strip" hint-placeholder-count="9">
             <div style="{{ strip.style }}">
@@ -244,7 +244,7 @@ to market</span>
     <div style="{{ s.supportWrap }}" ref="{{ supportRevealRef }}">
       <div style="{{ s.supportVideoCol }}">
         <div style="{{ s.supportVideoBox }}">
-          <image-slot id="support-bg" shape="rect" src="assets2/support-real.webp" placeholder="Drop video still" style="{{ s.supportBg }}"></image-slot>
+          <img src="assets2/support-real.webp" alt="" loading="lazy" style="{{ s.supportBg }}">
           <div style="{{ s.supportVideoTint }}"></div>
           <div style="{{ s.supportOverlayTop }}">
             <span style="{{ s.supportOverlayTitle }}">Support</span>
@@ -254,7 +254,7 @@ to market</span>
             <svg width="100%" height="100%" viewBox="0 0 66.667 66.667" fill="rgb(255,255,255)"><path d="M 33.333 66.667 C 14.924 66.667 0 51.743 0 33.333 C 0 14.924 14.924 0 33.333 0 C 51.743 0 66.667 14.924 66.667 33.333 C 66.667 51.743 51.743 66.667 33.333 66.667 Z M 28.74 21.382 C 28.521 21.236 28.263 21.158 28 21.158 C 27.264 21.158 26.667 21.755 26.667 22.491 L 26.667 44.175 C 26.667 44.439 26.745 44.696 26.891 44.915 C 27.299 45.528 28.127 45.693 28.74 45.285 L 45.003 34.443 C 45.149 34.345 45.275 34.219 45.372 34.073 C 45.781 33.46 45.615 32.632 45.003 32.224 L 28.74 21.382 Z"></path></svg>
           </div>
           <div style="{{ s.supportOverlayAuthorRow }}">
-            <image-slot id="support-avatar" shape="circle" src="assets2/support-avatar-real.webp" placeholder="Photo" style="width: 48px; height: 48px; flex-shrink: 0;"></image-slot>
+            <img src="assets2/support-avatar-real.webp" alt="Ronald Richards" loading="lazy" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; object-fit: cover;">
             <div style="display: flex; flex-direction: column; flex-grow: 1;">
               <span style="{{ s.authorName }}">Ronald Richards</span>
               <span style="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
@@ -275,7 +275,7 @@ to market</span>
 Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. Aliquam aliquet</span>
         </div>
         <div style="{{ s.supportAuthorRow }}">
-          <image-slot id="testimonial-avatar" shape="circle" src="assets2/testimonial-avatar-real.webp" placeholder="Photo" style="width: 48px; height: 48px; flex-shrink: 0;"></image-slot>
+          <img src="assets2/testimonial-avatar-real.webp" alt="Ronald Richards" loading="lazy" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; object-fit: cover;">
           <div style="display: flex; flex-direction: column; flex-grow: 1;">
             <span style="{{ s.authorName }}">Ronald Richards</span>
             <span style="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
@@ -313,7 +313,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
     <div style="{{ s.newsGrid }}">
       <sc-for list="{{newsItems}}" as="item" hint-placeholder-count="3">
         <div style="{{ item.cardStyle }}" onMouseEnter="{{ item.enter }}" onMouseLeave="{{ item.leave }}">
-          <image-slot id="{{ item.id }}" shape="rect" src="{{ item.src }}" placeholder="Drop news photo" style="{{ item.imgStyle }}"></image-slot>
+          <img src="{{ item.src }}" alt="{{ item.title }}" loading="lazy" style="{{ item.imgStyle }}">
           <div style="{{ item.overlayStyle }}"></div>
           <div style="{{ s.newsCardInner }}">
             <span style="{{ s.newsCardTitle }}">{{ item.title }}</span>
@@ -341,7 +341,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
 
     <!-- ============ COLLABORATE ============ -->
     <div style="{{ s.collabOuter }}">
-      <image-slot id="collab-bg" shape="rect" src="assets2/collab-real.jpg" placeholder="Drop CTA background photo" style="{{ s.collabBg }}"></image-slot>
+      <img src="assets2/collab-real.jpg" alt="" loading="lazy" style="{{ s.collabBg }}">
       <div style="{{ s.collabOverlay }}"></div>
       <div style="{{ s.collabWrap }}">
         <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
@@ -682,17 +682,34 @@ class Component extends DCLogic {
       boxSizing: "border-box",
       gap: pick(40, 56, 72),
     };
-    s.heroTopbar = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 10 : 16, flexWrap: isMobile ? "nowrap" : "wrap" };
-    s.heroLogo = { width: pick(170, 230, 320), height: "auto" };
+    s.heroTopbar = {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 40,
+      background: "#fff",
+      boxShadow: "0 1px 0 rgba(17,17,17,0.08)",
+      padding: pick("10px 20px", "12px 40px", "12px 64px"),
+      boxSizing: "border-box",
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: isMobile ? 10 : 16,
+      flexWrap: "nowrap",
+    };
+    s.heroLogo = { width: pick(120, 150, 170), height: "auto" };
     s.heroNav = { display: isDesktop ? "flex" : "none", flexDirection: "row", gap: 32, alignItems: "center" };
     const menuOpen = this.state.mobileMenuOpen;
-    s.hamburgerBtn = { display: isDesktop ? "none" : "flex", flexDirection: "column", gap: 6, alignItems: "center", justifyContent: "center", width: 32, height: 32, cursor: "pointer", flexShrink: 0, zIndex: 20 };
-    const barBase = { width: 24, height: 2, background: "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease" };
+    s.hamburgerBtn = { display: isDesktop ? "none" : "flex", flexDirection: "column", gap: 5, alignItems: "center", justifyContent: "center", width: 28, height: 28, cursor: "pointer", flexShrink: 0, zIndex: 20 };
+    const barBase = { width: 20, height: 2, background: near, borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease" };
+    const barBaseOnDark = { width: 20, height: 2, background: "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease" };
     s.hamburgerBar1 = { ...barBase };
     s.hamburgerBar2 = { ...barBase };
     s.hamburgerBar3 = { ...barBase };
-    s.hamburgerBarX1 = { ...barBase, background: "#fff", transform: "rotate(45deg) translate(5px, 5px)" };
-    s.hamburgerBarX2 = { ...barBase, background: "#fff", transform: "rotate(-45deg) translate(5px, -5px)" };
+    s.hamburgerBarX1 = { ...barBaseOnDark, transform: "rotate(45deg) translate(5px, 5px)" };
+    s.hamburgerBarX2 = { ...barBaseOnDark, transform: "rotate(-45deg) translate(5px, -5px)" };
     s.mobileNavOverlay = {
       position: "fixed",
       inset: 0,
@@ -716,15 +733,15 @@ class Component extends DCLogic {
       fontWeight: 500,
       fontSize: 14,
       lineHeight: "20px",
-      color: "#fff",
+      color: this.state.hoveredNav === i ? red : dark,
       whiteSpace: "nowrap",
       cursor: "pointer",
-      opacity: this.state.hoveredNav === i ? 1 : 0.85,
+      opacity: 1,
       borderBottomWidth: 1,
       borderBottomStyle: "solid",
-      borderBottomColor: this.state.hoveredNav === i ? "rgba(255,255,255,0.8)" : "transparent",
+      borderBottomColor: this.state.hoveredNav === i ? red : "transparent",
       paddingBottom: 2,
-      transition: "opacity 0.2s ease, border-color 0.2s ease",
+      transition: "color 0.2s ease, border-color 0.2s ease",
     });
     s.navHomeStyle = navLinkStyle(0);
     s.navAboutStyle = navLinkStyle(1);
@@ -741,9 +758,23 @@ class Component extends DCLogic {
     const heroCtaBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
     s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
     s.heroCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
-    const heroCtaTopbarBase = { borderRadius: 32, display: "flex", flexDirection: "row", padding: "9px 16px", justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
-    s.heroCtaTopbarCtl = isMobile ? makeHeroCta("heroCtaTopbar", heroCtaTopbarBase) : s.heroCtaCtl;
-    s.heroCtaTopbarText = { fontWeight: 600, fontSize: isMobile ? 13 : pick(15, 16, 17), lineHeight: isMobile ? "16px" : "20px", color: s.heroCtaTopbarCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
+    const heroCtaTopbarBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 6, padding: isMobile ? "8px 14px" : "9px 16px", justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    const topbarCtaHovered = this.state.hoveredKey === "heroCtaTopbar";
+    s.heroCtaTopbarCtl = {
+      style: {
+        ...heroCtaTopbarBase,
+        background: topbarCtaHovered ? red : near,
+        boxShadow: topbarCtaHovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
+        transform: topbarCtaHovered ? "translateY(-2px)" : "translateY(0)",
+        transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+      },
+      textColor: "#fff",
+      iconColor: "rgb(255,255,255)",
+      enter: () => this.setState({ hoveredKey: "heroCtaTopbar" }),
+      leave: () => this.setState({ hoveredKey: null }),
+    };
+    s.heroCtaTopbarText = { fontWeight: 600, fontSize: isMobile ? 13 : 14, lineHeight: isMobile ? "16px" : "18px", color: s.heroCtaTopbarCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
+    s.heroCtaTopbarIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaTopbarCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
     s.heroCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
 
     s.heroHeadlineWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), flexGrow: 1, justifyContent: "flex-end", ...reveal("hero", { distance: 26, duration: 1000 }) };
@@ -769,7 +800,7 @@ class Component extends DCLogic {
     // ---------- ABOUT ----------
     s.aboutWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
     s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "100%", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden" };
-    s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
     s.aboutHeading = { fontWeight: 500, fontSize: pick(26, 28, 32), lineHeight: "40px", color: dark, flexShrink: 0 };
     s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
     s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
@@ -841,7 +872,7 @@ class Component extends DCLogic {
     s.supportWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 40, 32), maxWidth: 1600, margin: "0 auto", alignItems: "stretch", ...reveal("support") };
     s.supportVideoCol = { display: "flex", flexDirection: "column", flexGrow: 1, width: "100%" };
     s.supportVideoBox = { position: "relative", width: "100%", height: supportBoxHeight, overflow: "hidden" };
-    s.supportBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.supportBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
     s.supportVideoTint = { position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", pointerEvents: "none" };
     s.playBtn = { position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: pick(56, 68, 80), height: pick(56, 68, 80), cursor: "pointer", zIndex: 2 };
     s.supportOverlayTop = { position: "absolute", left: pick(20, 28, 40), top: pick(20, 28, 40), zIndex: 2, display: "flex", flexDirection: "column", gap: 4 };
@@ -890,7 +921,7 @@ class Component extends DCLogic {
           boxShadow: hovered ? softShadow : "0 0 0 rgba(0,0,0,0)",
           transition: "opacity 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 80) + "ms, transform 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 80) + "ms, box-shadow 0.3s ease",
         },
-        imgStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", transform: hovered ? "scale(1.06)" : "scale(1)", transition: "transform 0.4s ease" },
+        imgStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", objectFit: "cover", transform: hovered ? "scale(1.06)" : "scale(1)", transition: "transform 0.4s ease" },
         overlayStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", background: hovered ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.5)", pointerEvents: "none", transition: "background 0.3s ease" },
         enter: () => this.setState({ hoveredNews: i }),
         leave: () => this.setState({ hoveredNews: -1 }),
@@ -903,7 +934,7 @@ class Component extends DCLogic {
 
     // ---------- COLLABORATE ----------
     s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
-    s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
     s.collabOverlay = { position: "absolute", inset: 0, background: "rgba(17,17,17,0.55)", pointerEvents: "none" };
     s.collabWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 24, alignItems: "center", maxWidth: 640, margin: "0 auto", textAlign: "center", ...reveal("collab") };
     s.collabHeading = { fontWeight: 500, fontSize: pick(32, 40, 48), lineHeight: pick("38px", "46px", "56px"), letterSpacing: "-1.5px", color: "#fff", textAlign: "center" };
@@ -929,7 +960,7 @@ class Component extends DCLogic {
     s.footerColLabel = { fontWeight: 400, fontSize: 18, lineHeight: "24px", color: "rgba(255,255,255,0.4)" };
     s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
     s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
-    s.socialsSmallCol = { display: "flex", flexDirection: "column", gap: 12, alignItems: "center" };
+    s.socialsSmallCol = { display: "flex", flexDirection: "row", gap: 12, alignItems: "center", flexWrap: "wrap" };
     const makeBrandCircle = (key, base, brandColor) => {
       const hovered = this.state.hoveredKey === key;
       return {
@@ -1031,7 +1062,7 @@ class Component extends DCLogic {
         bgId: i === 0 ? "accountable-bg" : "accountable-bg-" + i,
         bgSrc: i === 0 ? "assets2/team-1-real.webp" : i === 3 ? "assets2/team-4-real.webp" : "assets2/placeholder-team-" + (i + 1) + ".jpg",
         colorLayerStyle: { position: "absolute", inset: 0, background: teamColors[i], zIndex: 0 },
-        imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", opacity: isActive ? 0.55 : 0, transition: "opacity 0.5s ease" },
+        imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isActive ? 0.55 : 0, transition: "opacity 0.5s ease" },
         panelStyle: {
           position: "relative", overflow: "hidden", borderRadius: 6, boxSizing: "border-box",
           flex: isMobile ? "none" : (isActive ? "3 1 0%" : "1 1 0%"),
@@ -1086,11 +1117,13 @@ class Component extends DCLogic {
     const sectorImages = sectorData.map((sec, j) => ({
       id: j === 3 ? "industries-img" : "industries-img-" + j,
       src: sec.img,
+      name: sec.name,
       style: {
         position: "absolute",
         inset: 0,
         width: "100%",
         height: "100%",
+        objectFit: "cover",
         opacity: j === industryActive ? 1 : 0,
       },
     }));
