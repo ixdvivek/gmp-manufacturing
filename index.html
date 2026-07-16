@@ -61,7 +61,7 @@
 
   <!-- ============ HERO ============ -->
   <div data-screen-label="Hero" style="{{ s.heroWrap }}">
-    <video ref="{{ heroVideoRef }}" src="assets2/hero-bg.mp4" autoplay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsinline="{{ true }}" style="{{ s.heroBg }}"></video>
+    <img src="assets2/hero-bg.webp" alt="Molecule under a laboratory microscope" style="{{ s.heroBg }}">
     <div style="{{ s.heroOverlay }}"></div>
     <div style="{{ s.mobileNavOverlay }}">
       <div style="{{ s.mobileNavCloseRow }}">
@@ -482,7 +482,6 @@ class Component extends DCLogic {
     requestAnimationFrame(() => requestAnimationFrame(() => {
       this.setState((st) => ({ revealed: { ...st.revealed, hero: true } }));
     }));
-    if (this._heroVideoEl) { this._heroVideoEl.muted = true; this._heroVideoEl.play().catch(() => {}); }
     this._applyMarquee();
     this._onResize = () => { this._updateBp(); this._measureIndustriesLeft(); };
     window.addEventListener("resize", this._onResize);
@@ -1170,7 +1169,6 @@ class Component extends DCLogic {
       logos: [...names, ...names],
       marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
       onTeamRowLeave: () => this.setState({ hoveredTeam: -1 }),
-      heroVideoRef: (el) => { this._heroVideoEl = el; if (el) { el.muted = true; el.play().catch(() => {}); } },
       industriesRevealRef: revealRef("industries"),
       industriesLeftRef: this._industriesLeftRefCbBound || (this._industriesLeftRefCbBound = this._industriesLeftRefCb.bind(this)),
       onCaptionEnter: () => this.setState({ hoveredCaption: true }),
