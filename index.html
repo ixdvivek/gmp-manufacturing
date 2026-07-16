@@ -830,7 +830,7 @@ class Component extends DCLogic {
     s.aboutWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
     s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "100%", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden", marginRight: isDesktop ? 0 : -gutter };
     s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "flex-start", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
+    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
     s.aboutWatermark = { position: "absolute", top: pick(-40, -60, -90), right: pick("-28%", "-10%", "-4%"), height: pick("34vh", "52vh", "68vh"), width: "auto", pointerEvents: "none", zIndex: 0, opacity: 1 };
     s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
     s.aboutLabel = { fontWeight: 600, fontSize: 18, lineHeight: "24px", letterSpacing: "-0.7px", color: dark };
@@ -874,7 +874,7 @@ class Component extends DCLogic {
     s.teamWrap = { display: "flex", flexDirection: "column", gap: pick(28, 36, 44), maxWidth: 1600, margin: "0 auto", width: "100%", ...reveal("team") };
     s.teamPanelRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(12, 14, 16), width: "100%", height: isMobile ? "auto" : pick(336, 416, 496) };
     s.teamBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
-    const teamColors = ["rgb(41,37,96)", "rgb(37,117,187)", "rgb(41,37,96)", "rgb(178,33,38)"];
+    const teamColors = ["#2D265D", "#423362", "#842339", "#B22126"];
     s.teamNum = { fontWeight: 200, fontSize: pick(24, 28, 32), lineHeight: "1", letterSpacing: "-1px", color: "rgba(255,255,255,0.6)" };
     s.teamHeadingBase = { fontWeight: 500, color: "#fff" };
     s.teamBodyBase = { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)" };
@@ -1044,9 +1044,9 @@ class Component extends DCLogic {
           flexDirection: "column",
           gap: 12,
           alignItems: "flex-start",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           textAlign: "left",
-          padding: pick("24px 8px", "28px 24px", "0 32px"),
+          padding: pick("24px 8px", "28px 24px", "32px 32px"),
           boxSizing: "border-box",
           cursor: "pointer",
           opacity: whyShown ? 1 : 0,
@@ -1095,7 +1095,7 @@ class Component extends DCLogic {
         colorLayerStyle: { position: "absolute", inset: 0, background: teamColors[i], zIndex: 0 },
         imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isActive ? 0.55 : 0, transition: "opacity 0.9s ease" },
         panelStyle: {
-          position: "relative", overflow: "hidden", borderRadius: 6, boxSizing: "border-box",
+          position: "relative", overflow: "hidden", borderRadius: 0, boxSizing: "border-box",
           flex: isMobile ? "none" : (isActive ? "3 1 0%" : "1 1 0%"),
           width: isMobile ? "100%" : "auto",
           height: isMobile ? pick(320, 360, 400) : "100%",
@@ -1103,7 +1103,7 @@ class Component extends DCLogic {
           transition: teamFlexEase,
           flexShrink: 0,
         },
-        overlayStyle: { position: "absolute", inset: 0, background: "rgba(41,37,96,0.6)", opacity: isActive ? 0.75 : 1, transition: "opacity 0.9s ease", pointerEvents: "none", zIndex: 1 },
+        overlayStyle: { position: "absolute", inset: 0, background: "rgba(41,37,96,0.6)", opacity: isActive ? 0.75 : 0, transition: "opacity 0.9s ease", pointerEvents: "none", zIndex: 1 },
         textColStyle: {
           position: "absolute", inset: 0, zIndex: 2, boxSizing: "border-box",
           display: "flex", flexDirection: "column", gap: 12,
