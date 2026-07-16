@@ -46,16 +46,18 @@
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
     </div>
-    <div style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
-      <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
-      <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
-        <div style="{{ s.heroCtaTopbarIconStyle }}"></div>
-      </sc-if>
-    </div>
-    <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-      <div style="{{ s.hamburgerBar1 }}"></div>
-      <div style="{{ s.hamburgerBar2 }}"></div>
-      <div style="{{ s.hamburgerBar3 }}"></div>
+    <div style="{{ s.heroTopbarRightGroup }}">
+      <div style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+        <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+        <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
+          <div style="{{ s.heroCtaTopbarIconStyle }}"></div>
+        </sc-if>
+      </div>
+      <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div style="{{ s.hamburgerBar1 }}"></div>
+        <div style="{{ s.hamburgerBar2 }}"></div>
+        <div style="{{ s.hamburgerBar3 }}"></div>
+      </div>
     </div>
   </div>
 
@@ -126,8 +128,10 @@ to market</span>
         <img src="assets2/about-real.jpg" alt="GMP Manufacturing formulation specialist at work" loading="lazy" style="{{ s.aboutImage }}">
       </div>
       <div style="{{ s.aboutContent }}">
-        <span style="{{ s.eyebrow }}">Who We Are</span>
-        <span style="{{ s.h2 }}">About Us</span>
+        <div style="{{ s.sectionHeadingGroup }}">
+          <span style="{{ s.eyebrow }}">Who We Are</span>
+          <span style="{{ s.h2 }}">About Us</span>
+        </div>
         <div style="{{ s.aboutTextCol }}">
           <span style="{{ s.aboutBody }}">Precept designs and builds robotics in the U.S. for manufacturing and energy — complete systems engineered in-house, from the parts up to the finished machine.</span>
           <span style="{{ s.aboutBody }}">From formulation through to UK in-house manufacturing, we own every stage of the process — giving partners one accountable team and full traceability from molecule to market.</span>
@@ -150,8 +154,10 @@ to market</span>
   <div style="{{ s.sectionPad }}">
     <div style="{{ s.whyWrap }}" ref="{{ whyRevealRef }}">
       <div style="{{ s.whyHeadingCol }}">
-        <span style="{{ s.eyebrow }}">Why GMP</span>
-        <span style="{{ s.h2 }}">A complete pathway, under one roof</span>
+        <div style="{{ s.sectionHeadingGroup }}">
+          <span style="{{ s.eyebrow }}">Why GMP</span>
+          <span style="{{ s.h2 }}">A complete pathway, under one roof</span>
+        </div>
         <div style="{{ s.pillOurServices.style }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
           <span style="{{ s.pillDarkText }}">Our Services</span>
         </div>
@@ -177,7 +183,7 @@ to market</span>
   <!-- ============ ACCOUNTABLE TEAM (hover panel row) ============ -->
   <div data-screen-label="One accountable team" style="{{ s.sectionPad }}">
     <div style="{{ s.teamWrap }}" ref="{{ teamRevealRef }}">
-      <div style="{{ s.teamHeadingCol }}">
+      <div style="{{ s.sectionHeadingGroup }}">
         <span style="{{ s.eyebrow }}">Our Strength</span>
         <span style="{{ s.h2 }}">One accountable team</span>
       </div>
@@ -208,9 +214,9 @@ to market</span>
   <div data-screen-label="Industries" style="{{ s.sectionPad }}">
     <div style="{{ s.industriesWrap }}" ref="{{ industriesRevealRef }}">
       <div style="{{ s.industriesLeft }}" ref="{{ industriesLeftRef }}">
-        <div style="{{ s.industriesHeadingGroup }}">
+        <div style="{{ s.sectionHeadingGroup }}">
           <span style="{{ s.eyebrow }}">Industries</span>
-          <span style="{{ s.industriesHeading }}">Regulated&nbsp; sectors we manufacture for</span>
+          <span style="{{ s.h2 }}">Regulated&nbsp; sectors we manufacture for</span>
         </div>
         <div style="{{ s.industriesList }}">
           <sc-for list="{{sectorListItems}}" as="li" hint-placeholder-count="6">
@@ -307,7 +313,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
     <img src="assets2/brand-watermark.svg" alt="" style="{{ s.newsCollabWatermark }}">
     <!-- ============ NEWS ROOM ============ -->
     <div style="{{ s.newsHeadRow }}" ref="{{ newsRevealRef }}">
-      <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+      <div style="{{ s.sectionHeadingGroup }}">
         <span style="{{ s.eyebrow }}">News &amp; Insights</span>
         <span style="{{ s.h2 }}">News Room</span>
       </div>
@@ -602,6 +608,7 @@ class Component extends DCLogic {
 
     s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
     s.h2 = { fontWeight: 500, fontSize: pick(30, 38, 48), lineHeight: pick("36px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };
+    s.sectionHeadingGroup = { display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" };
 
     s.pillDark = {
       borderRadius: 32,
@@ -717,6 +724,7 @@ class Component extends DCLogic {
     s.heroLogo = { width: pick(120, 150, 170), height: "auto" };
     s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
     s.heroNav = { display: isDesktop ? "flex" : "none", flexDirection: "row", gap: 32, alignItems: "center" };
+    s.heroTopbarRightGroup = { display: "flex", flexDirection: "row", alignItems: "center", gap: isMobile ? 10 : 16, flexShrink: 0 };
     const menuOpen = this.state.mobileMenuOpen;
     s.hamburgerBtn = { display: isDesktop ? "none" : "flex", flexDirection: "column", gap: 5, alignItems: "center", justifyContent: "center", width: 28, height: 28, cursor: "pointer", flexShrink: 0, zIndex: 20 };
     const barBase = { width: 20, height: 2, background: navScrolled ? near : "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease, background 0.3s ease" };
@@ -819,9 +827,8 @@ class Component extends DCLogic {
 
     // ---------- ABOUT ----------
     s.aboutWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
-    s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "100%", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden" };
+    s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "100%", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden", marginRight: isDesktop ? 0 : -gutter };
     s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.aboutHeading = { fontWeight: 500, fontSize: pick(26, 28, 32), lineHeight: "40px", color: dark, flexShrink: 0 };
     s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
     s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
     s.aboutLabel = { fontWeight: 600, fontSize: 18, lineHeight: "24px", letterSpacing: "-0.7px", color: dark };
@@ -863,7 +870,6 @@ class Component extends DCLogic {
 
     // ---------- TEAM BAND (hover panel row) ----------
     s.teamWrap = { display: "flex", flexDirection: "column", gap: pick(28, 36, 44), maxWidth: 1600, margin: "0 auto", width: "100%", ...reveal("team") };
-    s.teamHeadingCol = { display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" };
     s.teamPanelRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(12, 14, 16), width: "100%", height: isMobile ? "auto" : pick(336, 416, 496) };
     s.teamBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
     const teamColors = ["rgb(41,37,96)", "rgb(28,80,150)", "rgb(110,50,95)", "rgb(178,33,38)"];
@@ -873,8 +879,6 @@ class Component extends DCLogic {
     // ---------- INDUSTRIES (single block, rotates on scroll) ----------
     s.industriesWrap = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(16, 48, 80), maxWidth: 1600, margin: "0 auto", alignItems: "flex-start", width: "100%", height: isMobile ? "100%" : "auto", minHeight: 0, boxSizing: "border-box", ...reveal("industries") };
     s.industriesLeft = { display: "flex", flexDirection: "column", gap: pick(10, 40, 40), alignItems: "flex-start", width: isMobile ? "100%" : pick(0, 280, 380), flexShrink: 0 };
-    s.industriesHeadingGroup = { display: "flex", flexDirection: "column", gap: pick(4, 8, 8), alignItems: "flex-start" };
-    s.industriesHeading = { fontWeight: 500, fontSize: pick(20, 38, 48), lineHeight: pick("26px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };
     s.industriesList = { display: "flex", flexDirection: "column", gap: pick(5, 25, 31), alignItems: "flex-start" };
     s.industryItemDim = { opacity: 0.3, fontWeight: 500, fontSize: pick(15, 18, 18), lineHeight: pick("20px", "24px", "24px"), letterSpacing: "-0.7px", color: dark, cursor: "pointer", transition: "opacity 0.3s ease, color 0.3s ease" };
     s.industryItemActive = { fontWeight: 700, fontSize: pick(15, 18, 18), lineHeight: pick("20px", "24px", "24px"), letterSpacing: "-0.7px", color: red, cursor: "pointer", transition: "opacity 0.3s ease, color 0.3s ease" };
