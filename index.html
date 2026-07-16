@@ -88,8 +88,8 @@
     <div style="{{ s.heroContent }}">
       <div style="{{ s.heroHeadlineWrap }}">
         <div style="{{ s.heroHeadingGroup }}">
-          <span style="{{ s.heroHeadline }}">From molecule
-to market</span>
+          <span style="{{ s.heroHeadline }}">From Molecule
+to Market</span>
           <span style="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
           <div style="{{ s.heroInlineCtaCtl.style }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
             <span style="{{ s.heroInlineCtaText }}">View our Services</span>
@@ -123,6 +123,7 @@ to market</span>
 
   <!-- ============ ABOUT US ============ -->
   <div data-screen-label="About Us" style="{{ s.aboutSectionPad }}">
+    <img src="assets2/brand-watermark.svg" alt="" style="{{ s.aboutWatermark }}">
     <div style="{{ s.aboutWrap }}" ref="{{ aboutRevealRef }}">
       <div style="{{ s.aboutImageCol }}">
         <img src="assets2/about-real.jpg" alt="GMP Manufacturing formulation specialist at work" loading="lazy" style="{{ s.aboutImage }}">
@@ -452,14 +453,14 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
           <div style="{{ s.socialA.style }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
             <div style="width: 13px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/linkedin.svg') center / contain no-repeat; mask: url('assets2/linkedin.svg') center / contain no-repeat;"></div>
           </div>
+          <div style="{{ s.socialD.style }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div style="width: 14px; height: 14px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/instagram.svg') center / contain no-repeat; mask: url('assets2/instagram.svg') center / contain no-repeat;"></div>
+          </div>
           <div style="{{ s.socialC.style }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
             <div style="width: 11px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/facebook.svg') center / contain no-repeat; mask: url('assets2/facebook.svg') center / contain no-repeat;"></div>
           </div>
           <div style="{{ s.socialB.style }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
             <svg width="18" height="12" viewBox="0 0 18 12" fill="rgb(255,255,255)"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
-          </div>
-          <div style="{{ s.socialD.style }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
-            <div style="width: 14px; height: 14px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/instagram.svg') center / contain no-repeat; mask: url('assets2/instagram.svg') center / contain no-repeat;"></div>
           </div>
         </div>
       </div>
@@ -533,7 +534,7 @@ class Component extends DCLogic {
       this._blindsTimer2 = setTimeout(() => {
         this.setState({ blindsPhase: "idle", pendingIndex: null });
       }, 30);
-    }, 780);
+    }, 2200);
   }
   _measureIndustriesLeft() {
     if (!this._industriesLeftEl) return;
@@ -806,17 +807,17 @@ class Component extends DCLogic {
     s.heroCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
 
     s.heroHeadlineWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), flexGrow: 1, justifyContent: "flex-end", ...reveal("hero", { distance: 26, duration: 1000 }) };
-    s.heroHeadingGroup = { display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "flex-end", gap: pick(16, 20, 24) };
+    s.heroHeadingGroup = { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: pick(16, 20, 24) };
     s.heroHeadline = {
       fontWeight: 500,
       fontSize: pick(48, 88, 104),
-      textAlign: isMobile ? "left" : "right",
+      textAlign: "left",
       lineHeight: pick("50px", "92px", "104px"),
       letterSpacing: pick("-1.5px", "-3.5px", "-5px"),
       color: "#fff",
       whiteSpace: "pre-line",
     };
-    s.heroSubtext = { fontWeight: 400, fontSize: pick(16, 17, 18), lineHeight: "26px", color: "rgba(255,255,255,0.85)", textAlign: isMobile ? "left" : "right", maxWidth: 480 };
+    s.heroSubtext = { fontWeight: 400, fontSize: pick(16, 17, 18), lineHeight: "26px", color: "rgba(255,255,255,0.85)", textAlign: "left", maxWidth: 480 };
     const heroInlineCtaBase = { borderRadius: 32, display: "inline-flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
     s.heroInlineCtaCtl = makeHeroCta("heroInlineCta", heroInlineCtaBase);
     s.heroInlineCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroInlineCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
@@ -826,10 +827,11 @@ class Component extends DCLogic {
     s.heroStatLabel = { fontWeight: 500, fontSize: pick(15, 16, 17), lineHeight: "22px", color: "#fff" };
 
     // ---------- ABOUT ----------
-    s.aboutWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
+    s.aboutWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
     s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "100%", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden", marginRight: isDesktop ? 0 : -gutter };
     s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
+    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "flex-start", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
+    s.aboutWatermark = { position: "absolute", top: pick(-40, -60, -90), right: pick("-28%", "-10%", "-4%"), height: pick("34vh", "52vh", "68vh"), width: "auto", pointerEvents: "none", zIndex: 0, opacity: 1 };
     s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
     s.aboutLabel = { fontWeight: 600, fontSize: 18, lineHeight: "24px", letterSpacing: "-0.7px", color: dark };
     s.aboutBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
@@ -872,7 +874,7 @@ class Component extends DCLogic {
     s.teamWrap = { display: "flex", flexDirection: "column", gap: pick(28, 36, 44), maxWidth: 1600, margin: "0 auto", width: "100%", ...reveal("team") };
     s.teamPanelRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(12, 14, 16), width: "100%", height: isMobile ? "auto" : pick(336, 416, 496) };
     s.teamBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
-    const teamColors = ["rgb(41,37,96)", "rgb(28,80,150)", "rgb(110,50,95)", "rgb(178,33,38)"];
+    const teamColors = ["rgb(41,37,96)", "rgb(37,117,187)", "rgb(41,37,96)", "rgb(178,33,38)"];
     s.teamNum = { fontWeight: 200, fontSize: pick(24, 28, 32), lineHeight: "1", letterSpacing: "-1px", color: "rgba(255,255,255,0.6)" };
     s.teamHeadingBase = { fontWeight: 500, color: "#fff" };
     s.teamBodyBase = { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)" };
@@ -1062,9 +1064,9 @@ class Component extends DCLogic {
           zIndex: 0,
           pointerEvents: "none",
         },
-        numStyle: { position: "relative", zIndex: 1, fontWeight: 600, fontSize: pick(16, 17, 18), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
-        headStyle: { position: "relative", zIndex: 1, fontWeight: 500, fontSize: pick(19, 21, 24), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : red, whiteSpace: "pre-line", transition: "color 0.25s ease" },
-        descStyle: { position: "relative", zIndex: 1, fontWeight: 400, fontSize: pick(14, 15, 16), lineHeight: "1.5", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
+        numStyle: { position: "relative", zIndex: 1, fontWeight: 600, fontSize: pick(17, 18, 19), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
+        headStyle: { position: "relative", zIndex: 1, fontWeight: 500, fontSize: pick(20, 22, 25), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : red, whiteSpace: "pre-line", transition: "color 0.25s ease" },
+        descStyle: { position: "relative", zIndex: 1, fontWeight: 400, fontSize: pick(15, 16, 17), lineHeight: "1.5", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
         arrowStyle: { position: "absolute", zIndex: 1, top: 24, right: 24, opacity: (hovered || !isDesktop) ? 1 : 0, transform: (hovered || !isDesktop) ? "translateX(0)" : "translateX(-8px)", transition: "opacity 0.25s ease, transform 0.25s ease", pointerEvents: "none" },
         arrowColor: hovered ? "rgb(255,255,255)" : dark,
         onEnter: () => this.setState((st) => ({ hoveredPathway: i, pathwayOrigin: { ...st.pathwayOrigin, [i]: "left" } })),
@@ -1080,7 +1082,7 @@ class Component extends DCLogic {
     ];
     const hoveredTeam = this.state.hoveredTeam;
     const teamDesktopActive = hoveredTeam === -1 ? 0 : hoveredTeam;
-    const teamFlexEase = "flex 0.6s cubic-bezier(0.22, 1, 0.36, 1)";
+    const teamFlexEase = "flex 1.1s cubic-bezier(0.22, 1, 0.36, 1)";
     const teamItems = teamData.map((item, i) => {
       const isActive = isMobile ? true : i === teamDesktopActive;
       return {
@@ -1091,7 +1093,7 @@ class Component extends DCLogic {
         bgId: i === 0 ? "accountable-bg" : "accountable-bg-" + i,
         bgSrc: i === 0 ? "assets2/team-1-real.webp" : i === 3 ? "assets2/team-4-real.webp" : "assets2/placeholder-team-" + (i + 1) + ".jpg",
         colorLayerStyle: { position: "absolute", inset: 0, background: teamColors[i], zIndex: 0 },
-        imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isActive ? 0.55 : 0, transition: "opacity 0.5s ease" },
+        imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isActive ? 0.55 : 0, transition: "opacity 0.9s ease" },
         panelStyle: {
           position: "relative", overflow: "hidden", borderRadius: 6, boxSizing: "border-box",
           flex: isMobile ? "none" : (isActive ? "3 1 0%" : "1 1 0%"),
@@ -1101,7 +1103,7 @@ class Component extends DCLogic {
           transition: teamFlexEase,
           flexShrink: 0,
         },
-        overlayStyle: { position: "absolute", inset: 0, background: "rgba(41,37,96,0.6)", opacity: isActive ? 0.75 : 1, transition: "opacity 0.5s ease", pointerEvents: "none", zIndex: 1 },
+        overlayStyle: { position: "absolute", inset: 0, background: "rgba(41,37,96,0.6)", opacity: isActive ? 0.75 : 1, transition: "opacity 0.9s ease", pointerEvents: "none", zIndex: 1 },
         textColStyle: {
           position: "absolute", inset: 0, zIndex: 2, boxSizing: "border-box",
           display: "flex", flexDirection: "column", gap: 12,
@@ -1114,7 +1116,7 @@ class Component extends DCLogic {
           fontWeight: 500, color: "#fff",
           fontSize: isActive ? pick(24, 28, 34) : pick(17, 18, 19),
           lineHeight: 1.25,
-          transition: "font-size 0.5s ease",
+          transition: "font-size 0.9s ease",
         },
         bodyStyle: { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)", width: pick("100%", 240, 300) },
         onEnter: isMobile ? undefined : (() => this.setState({ hoveredTeam: i })),
@@ -1164,7 +1166,7 @@ class Component extends DCLogic {
     const growing = blindsPhase === "active";
     const stripFitHeight = industriesFitHeight;
     const blindStrips = Array.from({ length: numStrips }, (_, k) => {
-      const delay = growing ? k * 22 : 0;
+      const delay = growing ? k * 70 : 0;
       return {
         imgSrc: stripTargetSrc,
         imgStyle: { position: "absolute", bottom: 0, left: -(k * 100) + "%", width: (numStrips * 100) + "%", height: stripFitHeight, objectFit: "cover" },
@@ -1176,7 +1178,7 @@ class Component extends DCLogic {
           height: "100%",
           overflow: "hidden",
           clipPath: growing ? "inset(0% 0 0 0)" : "inset(100% 0 0 0)",
-          transition: blindsPhase === "reset" ? "none" : "clip-path 0.42s cubic-bezier(0.76,0,0.24,1) " + delay + "ms",
+          transition: blindsPhase === "reset" ? "none" : "clip-path 1.6s cubic-bezier(0.76,0,0.24,1) " + delay + "ms",
           zIndex: 2,
           pointerEvents: "none",
         },
