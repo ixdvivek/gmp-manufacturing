@@ -354,7 +354,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
 
     <!-- ============ COLLABORATE ============ -->
     <div style="{{ s.collabOuter }}">
-      <img src="assets2/collab-real.jpg" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" style="{{ s.collabBg }}">
+      <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" style="{{ s.collabBg }}">
       <canvas ref="{{ collabCanvasRef }}" style="{{ s.collabCanvas }}"></canvas>
       <div style="{{ s.collabOverlay }}"></div>
       <div style="{{ s.collabWrap }}">
@@ -575,7 +575,7 @@ class Component extends DCLogic {
     if (!gl) return;
     this._gl = gl;
 
-    const RIPPLE_AMPLITUDE = 0.035;
+    const RIPPLE_AMPLITUDE = 0.075;
     const RIPPLE_FREQUENCY = 28.0;
     const CHROMATIC_ABERRATION = true;
 
