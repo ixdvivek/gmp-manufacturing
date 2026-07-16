@@ -963,8 +963,10 @@ class Component extends DCLogic {
     s.footerColsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(28, 32, 24) };
     s.footerColLabel = { fontWeight: 400, fontSize: 18, lineHeight: "24px", color: "rgba(255,255,255,0.4)" };
     s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
-    s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
-    s.socialsSmallCol = { display: "flex", flexDirection: "row", gap: 12, alignItems: "center", flexWrap: "wrap" };
+    s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: isDesktop ? "stretch" : "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
+    s.socialsSmallCol = isDesktop
+      ? { display: "grid", gridTemplateColumns: "repeat(2, 40px)", gridAutoRows: "40px", gap: 12, order: 0 }
+      : { display: "flex", flexDirection: "row", gap: 12, alignItems: "center", flexWrap: "wrap" };
     const makeBrandCircle = (key, base, brandColor) => {
       const hovered = this.state.hoveredKey === key;
       return {
@@ -979,7 +981,10 @@ class Component extends DCLogic {
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
-    s.socialLg = makeCircle("socialLg", { width: 56, height: 56, borderRadius: 56, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 });
+    const socialLgBase = isDesktop
+      ? { width: 56, borderRadius: 999, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0, order: 1 }
+      : { width: 56, height: 56, borderRadius: 56, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    s.socialLg = makeCircle("socialLg", socialLgBase);
     const socialSmallBase = { width: 40, height: 40, borderRadius: 40, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
     s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
     s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
