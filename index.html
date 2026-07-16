@@ -354,7 +354,8 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
 
     <!-- ============ COLLABORATE ============ -->
     <div style="{{ s.collabOuter }}">
-      <img src="assets2/collab-real.jpg" alt="" loading="lazy" style="{{ s.collabBg }}">
+      <img src="assets2/collab-real.jpg" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" style="{{ s.collabBg }}">
+      <canvas ref="{{ collabCanvasRef }}" style="{{ s.collabCanvas }}"></canvas>
       <div style="{{ s.collabOverlay }}"></div>
       <div style="{{ s.collabWrap }}">
         <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
@@ -509,6 +510,7 @@ class Component extends DCLogic {
     if (this._industriesLeftRO) this._industriesLeftRO.disconnect();
     if (this._blindsTimer1) clearTimeout(this._blindsTimer1);
     if (this._blindsTimer2) clearTimeout(this._blindsTimer2);
+    this._teardownRipple();
   }
   _observeReveal(key, el) {
     if (!el) return;
@@ -551,6 +553,214 @@ class Component extends DCLogic {
   }
   componentDidUpdate() {
     this._applyMarquee();
+  }
+  _maybeInitRipple() {
+    if (this._rippleInited || !this._collabCanvasEl || !this._collabImgEl) return;
+    this._rippleInited = true;
+    if (typeof IntersectionObserver !== "undefined") {
+      this._rippleVisible = false;
+      this._rippleVisibilityObserver = new IntersectionObserver((entries) => {
+        this._rippleVisible = entries[0].isIntersecting;
+        if (this._rippleVisible) this._startRippleLoop();
+      }, { threshold: 0.01 });
+      this._rippleVisibilityObserver.observe(this._collabCanvasEl);
+    } else {
+      this._rippleVisible = true;
+    }
+    this._initRipple();
+  }
+  _initRipple() {
+    const canvas = this._collabCanvasEl;
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!gl) return;
+    this._gl = gl;
+
+    const RIPPLE_AMPLITUDE = 0.035;
+    const RIPPLE_FREQUENCY = 28.0;
+    const CHROMATIC_ABERRATION = true;
+
+    const vertexSrc = "attribute vec2 a_position;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  v_uv = a_position * 0.5 + 0.5;\n" +
+      "  gl_Position = vec4(a_position, 0.0, 1.0);\n" +
+      "}";
+    const fragmentSrc = "precision mediump float;\n" +
+      "uniform sampler2D u_texture;\n" +
+      "uniform vec2 u_resolution;\n" +
+      "uniform vec2 u_imageResolution;\n" +
+      "uniform vec2 u_mouse;\n" +
+      "uniform float u_time;\n" +
+      "uniform float u_lastActive;\n" +
+      "uniform float u_velocity;\n" +
+      "uniform float u_amplitude;\n" +
+      "uniform float u_frequency;\n" +
+      "uniform float u_chromatic;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  vec2 uv = v_uv;\n" +
+      "  float sAspect = u_resolution.x / u_resolution.y;\n" +
+      "  float iAspect = u_imageResolution.x / u_imageResolution.y;\n" +
+      "  if (sAspect > iAspect) {\n" +
+      "    uv.y = (uv.y - 0.5) * (iAspect / sAspect) + 0.5;\n" +
+      "  } else {\n" +
+      "    uv.x = (uv.x - 0.5) * (sAspect / iAspect) + 0.5;\n" +
+      "  }\n" +
+      "  float dt = max(u_time - u_lastActive, 0.0);\n" +
+      "  float decay = clamp(1.0 - dt / 0.6, 0.0, 1.0);\n" +
+      "  decay = decay * decay;\n" +
+      "  float dist = distance(uv, u_mouse);\n" +
+      "  float strength = u_amplitude * decay * u_velocity;\n" +
+      "  float ripple = sin(dist * u_frequency - u_time * 6.0) * strength * exp(-dist * 6.0);\n" +
+      "  vec2 dir = (dist > 0.0001) ? normalize(uv - u_mouse) : vec2(0.0);\n" +
+      "  vec2 dUv = uv + dir * ripple;\n" +
+      "  vec3 color;\n" +
+      "  if (u_chromatic > 0.5) {\n" +
+      "    float aberration = abs(ripple) * 6.0;\n" +
+      "    float r = texture2D(u_texture, dUv + dir * aberration).r;\n" +
+      "    float g = texture2D(u_texture, dUv).g;\n" +
+      "    float b = texture2D(u_texture, dUv - dir * aberration).b;\n" +
+      "    color = vec3(r, g, b);\n" +
+      "  } else {\n" +
+      "    color = texture2D(u_texture, dUv).rgb;\n" +
+      "  }\n" +
+      "  gl_FragColor = vec4(color, 1.0);\n" +
+      "}";
+
+    const compile = (type, src) => {
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      return sh;
+    };
+    const program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, vertexSrc));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragmentSrc));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    gl.useProgram(program);
+    this._rippleProgram = program;
+
+    const posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const u = {};
+    ["u_resolution", "u_imageResolution", "u_mouse", "u_time", "u_lastActive", "u_velocity", "u_amplitude", "u_frequency", "u_chromatic", "u_texture"].forEach((name) => {
+      u[name] = gl.getUniformLocation(program, name);
+    });
+    this._rippleUniforms = u;
+
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([20, 20, 20, 255]));
+    this._rippleTexture = texture;
+    this._rippleImageRes = [1, 1];
+
+    const uploadImage = () => {
+      const img = this._collabImgEl;
+      if (!img || !img.naturalWidth) return;
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      try {
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        this._rippleImageRes = [img.naturalWidth, img.naturalHeight];
+        this._startRippleLoop();
+      } catch (e) {}
+    };
+    if (this._collabImgEl.complete && this._collabImgEl.naturalWidth) {
+      uploadImage();
+    } else {
+      this._collabImgEl.addEventListener("load", uploadImage, { once: true });
+    }
+
+    this._mouseTarget = [0.5, 0.5];
+    this._mouseSmooth = [0.5, 0.5];
+    this._velocitySmooth = 0;
+    this._rippleStart = performance.now();
+    this._lastActiveTime = -10;
+
+    this._onCollabMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      this._mouseTarget = [x, 1.0 - y];
+      this._lastActiveTime = (performance.now() - this._rippleStart) / 1000;
+      this._startRippleLoop();
+    };
+    const collabOuterEl = canvas.parentElement;
+    collabOuterEl.addEventListener("mousemove", this._onCollabMouseMove);
+    this._collabOuterEl = collabOuterEl;
+
+    this._resizeRippleCanvas = () => {
+      const rect = collabOuterEl.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    };
+    this._resizeRippleCanvas();
+    window.addEventListener("resize", this._resizeRippleCanvas);
+    if (typeof ResizeObserver !== "undefined") {
+      this._rippleResizeObserver = new ResizeObserver(() => this._resizeRippleCanvas());
+      this._rippleResizeObserver.observe(collabOuterEl);
+    }
+
+    this._renderRipple = () => {
+      this._rippleRAF = null;
+      const now = (performance.now() - this._rippleStart) / 1000;
+      const lerpFactor = 0.15;
+      const prevX = this._mouseSmooth[0], prevY = this._mouseSmooth[1];
+      this._mouseSmooth[0] += (this._mouseTarget[0] - this._mouseSmooth[0]) * lerpFactor;
+      this._mouseSmooth[1] += (this._mouseTarget[1] - this._mouseSmooth[1]) * lerpFactor;
+      const dx = this._mouseSmooth[0] - prevX;
+      const dy = this._mouseSmooth[1] - prevY;
+      const instVelocity = Math.min(Math.sqrt(dx * dx + dy * dy) * 60, 1.0);
+      this._velocitySmooth += (instVelocity - this._velocitySmooth) * 0.2;
+
+      gl.useProgram(this._rippleProgram);
+      gl.uniform2f(u.u_resolution, canvas.width, canvas.height);
+      gl.uniform2f(u.u_imageResolution, this._rippleImageRes[0], this._rippleImageRes[1]);
+      gl.uniform2f(u.u_mouse, this._mouseSmooth[0], this._mouseSmooth[1]);
+      gl.uniform1f(u.u_time, now);
+      gl.uniform1f(u.u_lastActive, this._lastActiveTime);
+      gl.uniform1f(u.u_velocity, this._velocitySmooth);
+      gl.uniform1f(u.u_amplitude, RIPPLE_AMPLITUDE);
+      gl.uniform1f(u.u_frequency, RIPPLE_FREQUENCY);
+      gl.uniform1f(u.u_chromatic, CHROMATIC_ABERRATION ? 1.0 : 0.0);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, this._rippleTexture);
+      gl.uniform1i(u.u_texture, 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      const stillDecaying = (now - this._lastActiveTime) < 0.6 || this._velocitySmooth > 0.001;
+      if (this._rippleVisible && stillDecaying) this._rippleRAF = requestAnimationFrame(this._renderRipple);
+    };
+    this._startRippleLoop();
+  }
+  _startRippleLoop() {
+    if (this._rippleRAF || !this._renderRipple || !this._rippleVisible) return;
+    this._rippleRAF = requestAnimationFrame(this._renderRipple);
+  }
+  _teardownRipple() {
+    if (this._rippleRAF) cancelAnimationFrame(this._rippleRAF);
+    this._rippleRAF = null;
+    if (this._collabOuterEl && this._onCollabMouseMove) this._collabOuterEl.removeEventListener("mousemove", this._onCollabMouseMove);
+    if (this._resizeRippleCanvas) window.removeEventListener("resize", this._resizeRippleCanvas);
+    if (this._rippleResizeObserver) this._rippleResizeObserver.disconnect();
+    if (this._rippleVisibilityObserver) this._rippleVisibilityObserver.disconnect();
   }
   _updateBp() {
     const w = window.innerWidth;
@@ -961,6 +1171,7 @@ class Component extends DCLogic {
     // ---------- COLLABORATE ----------
     s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
     s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
+    s.collabCanvas = { position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" };
     s.collabOverlay = { position: "absolute", inset: 0, background: "rgba(17,17,17,0.55)", pointerEvents: "none" };
     s.collabWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 24, alignItems: "center", maxWidth: 640, margin: "0 auto", textAlign: "center", ...reveal("collab") };
     s.collabHeading = { fontWeight: 500, fontSize: pick(32, 40, 48), lineHeight: pick("38px", "46px", "56px"), letterSpacing: "-1.5px", color: "#fff", textAlign: "center" };
@@ -1201,6 +1412,8 @@ class Component extends DCLogic {
       supportRevealRef: revealRef("support"),
       newsRevealRef: revealRef("news"),
       collabRevealRef: revealRef("collab"),
+      collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
+      collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
       footerRevealRef: revealRef("footer"),
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
       showSectorsPill: !isMobile,
