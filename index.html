@@ -87,32 +87,34 @@
     </div>
     <div style="{{ s.heroContent }}">
       <div style="{{ s.heroHeadlineWrap }}">
-        <div style="{{ s.heroHeadingGroup }}">
-          <span style="{{ s.heroHeadline }}">From Molecule
+        <div style="{{ s.heroTextBlock }}" ref="{{ heroTextBlockRef }}">
+          <div style="{{ s.heroHeadingGroup }}">
+            <span style="{{ s.heroHeadline }}" ref="{{ heroHeadlineRef }}">From Molecule
 to Market</span>
-          <span style="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
-          <div style="{{ s.heroInlineCtaCtl.style }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
-            <span style="{{ s.heroInlineCtaText }}">View our Services</span>
-            
+            <span style="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
+            <div style="{{ s.heroInlineCtaCtl.style }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
+              <span style="{{ s.heroInlineCtaText }}">View our Services</span>
+
+            </div>
           </div>
-        </div>
-        <div style="{{ s.heroDivider }}"></div>
-        <div style="{{ s.heroStats }}">
-          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-            <span style="{{ s.heroStatLabel }}">Making in</span>
-            <span style="{{ s.heroStatLabel }}">United Kingdom</span>
-          </div>
-          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-            <span style="{{ s.heroStatLabel }}">Facilities</span>
-            <span style="{{ s.heroStatLabel }}">04</span>
-          </div>
-          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-            <span style="{{ s.heroStatLabel }}">Marketing in</span>
-            <span style="{{ s.heroStatLabel }}">30+ countries</span>
-          </div>
-          <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-            <span style="{{ s.heroStatLabel }}">since</span>
-            <span style="{{ s.heroStatLabel }}">2012</span>
+          <div style="{{ s.heroDivider }}"></div>
+          <div style="{{ s.heroStats }}">
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+              <span style="{{ s.heroStatLabel }}">Making in</span>
+              <span style="{{ s.heroStatLabel }}">United Kingdom</span>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+              <span style="{{ s.heroStatLabel }}">Facilities</span>
+              <span style="{{ s.heroStatLabel }}">04</span>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+              <span style="{{ s.heroStatLabel }}">Marketing in</span>
+              <span style="{{ s.heroStatLabel }}">30+ countries</span>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
+              <span style="{{ s.heroStatLabel }}">since</span>
+              <span style="{{ s.heroStatLabel }}">2012</span>
+            </div>
           </div>
         </div>
       </div>
@@ -484,17 +486,18 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
   &quot;marqueeScroll&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Logo strip&quot; }
 }">
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false };
+  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1 };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
       this.setState((st) => ({ revealed: { ...st.revealed, hero: true } }));
     }));
     this._applyMarquee();
-    this._onResize = () => { this._updateBp(); this._measureIndustriesLeft(); };
+    this._onResize = () => { this._updateBp(); this._measureIndustriesLeft(); this._measureHeroFit(); };
     window.addEventListener("resize", this._onResize);
     this._updateBp();
     requestAnimationFrame(() => this._measureIndustriesLeft());
+    requestAnimationFrame(() => this._measureHeroFit());
     const NAV_SCROLL_THRESHOLD = 120;
     this._onScroll = () => {
       const scrolled = window.scrollY > NAV_SCROLL_THRESHOLD;
@@ -767,6 +770,20 @@ class Component extends DCLogic {
     const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
     if (bp !== this.state.bp) this.setState({ bp });
   }
+  _measureHeroFit() {
+    if (this.state.bp === "mobile") return;
+    if (!this._heroTextBlockEl || !this._heroHeadlineEl) return;
+    const maxH = window.innerHeight * 0.7;
+    const scale = this.state.heroFontScale || 1;
+    const totalH = this._heroTextBlockEl.getBoundingClientRect().height;
+    const headlineH = this._heroHeadlineEl.getBoundingClientRect().height;
+    if (totalH <= 0 || headlineH <= 0) return;
+    const fixedH = totalH - headlineH;
+    const headlineBaseH = headlineH / scale;
+    let nextScale = (maxH - fixedH) / headlineBaseH;
+    nextScale = Math.min(1, Math.max(0.55, nextScale));
+    if (Math.abs(nextScale - scale) > 0.01) this.setState({ heroFontScale: nextScale });
+  }
   _applyMarquee() {
     if (this._marqueeEl) {
       this._marqueeEl.style.animationPlayState = (this.props.marqueeScroll ?? true) ? "running" : "paused";
@@ -901,7 +918,7 @@ class Component extends DCLogic {
     };
 
     // ---------- HERO ----------
-    s.heroWrap = { position: "relative", width: "100%", minHeight: "100vh", display: "flex", flexDirection: "column", boxSizing: "border-box", overflow: "hidden" };
+    s.heroWrap = { position: "relative", width: "100%", height: isMobile ? "auto" : "100vh", minHeight: "100vh", display: "flex", flexDirection: "column", boxSizing: "border-box", overflow: "hidden" };
     s.heroBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: revealed.hero ? "scale(1)" : "scale(1.05)", transition: "transform 1800ms cubic-bezier(0.16,1,0.3,1)" };
     s.heroOverlay = { position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", pointerEvents: "none" };
     s.heroContent = {
@@ -1017,11 +1034,17 @@ class Component extends DCLogic {
     s.heroCtaTopbarIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaTopbarCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
     s.heroCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
 
-    s.heroHeadlineWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), flexGrow: 1, justifyContent: "flex-end", ...reveal("hero", { distance: 26, duration: 1000 }) };
+    s.heroHeadlineWrap = { display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", ...reveal("hero", { distance: 26, duration: 1000 }) };
+    s.heroTextBlock = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40) };
     s.heroHeadingGroup = { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: pick(16, 20, 24) };
+    const heroScale = isMobile ? 1 : (this.state.heroFontScale || 1);
     s.heroHeadline = {
       fontWeight: 500,
-      fontSize: pick("48px", "clamp(44px, min(9vw, 12vh), 88px)", "clamp(56px, min(7.2vw, 11vh), 104px)"),
+      fontSize: pick(
+        "48px",
+        "calc(clamp(44px, min(9vw, 12vh), 88px) * " + heroScale + ")",
+        "calc(clamp(56px, min(7.2vw, 11vh), 104px) * " + heroScale + ")"
+      ),
       textAlign: "left",
       lineHeight: pick("50px", "1.05", "1.05"),
       letterSpacing: pick("-1.5px", "-0.04em", "-0.048em"),
@@ -1034,7 +1057,7 @@ class Component extends DCLogic {
     s.heroInlineCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroInlineCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
     s.heroInlineCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroInlineCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
     s.heroDivider = { height: 1, background: "#fff", opacity: 0.9 };
-    s.heroStats = { display: "grid", gridTemplateColumns: pick("1fr 1fr", "1fr 1fr", "repeat(4, 1fr)"), rowGap: pick(16, 20, 0), columnGap: pick(16, 32, 32) };
+    s.heroStats = { display: "grid", gridTemplateColumns: pick("1fr 1fr", "repeat(4, 1fr)", "repeat(4, 1fr)"), rowGap: pick(16, 0, 0), columnGap: pick(16, 20, 32) };
     s.heroStatLabel = { fontWeight: 500, fontSize: pick(15, 16, 17), lineHeight: "22px", color: "#fff" };
 
     // ---------- ABOUT ----------
@@ -1420,6 +1443,8 @@ class Component extends DCLogic {
       collabRevealRef: revealRef("collab"),
       collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
       collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
+      heroTextBlockRef: (el) => { this._heroTextBlockEl = el; this._measureHeroFit(); },
+      heroHeadlineRef: (el) => { this._heroHeadlineEl = el; this._measureHeroFit(); },
       footerRevealRef: revealRef("footer"),
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
       showSectorsPill: !isMobile,
