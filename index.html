@@ -1021,10 +1021,10 @@ class Component extends DCLogic {
     s.heroHeadingGroup = { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: pick(16, 20, 24) };
     s.heroHeadline = {
       fontWeight: 500,
-      fontSize: pick(48, 88, 104),
+      fontSize: pick("48px", "clamp(44px, min(9vw, 12vh), 88px)", "clamp(56px, min(7.2vw, 11vh), 104px)"),
       textAlign: "left",
-      lineHeight: pick("50px", "92px", "104px"),
-      letterSpacing: pick("-1.5px", "-3.5px", "-5px"),
+      lineHeight: pick("50px", "1.05", "1.05"),
+      letterSpacing: pick("-1.5px", "-0.04em", "-0.048em"),
       color: "#fff",
       whiteSpace: "pre-line",
     };
