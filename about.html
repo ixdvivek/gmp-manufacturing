@@ -100,9 +100,12 @@
 
   <!-- ============ OUR STORY ============ -->
   <div data-screen-label="Our Story" style="{{ s.aboutSectionPad }}">
+    <img src="assets2/brand-watermark.svg" alt="" style="{{ s.aboutWatermark }}">
     <div style="{{ s.aboutWrap }}" ref="{{ storyRevealRef }}">
       <div style="{{ s.aboutImageCol }}">
-        <img src="assets2/about-real.jpg" alt="GMP Manufacturing team member at work" loading="lazy" style="{{ s.aboutImage }}">
+        <div style="{{ s.imgPlaceholder }}">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+        </div>
       </div>
       <div style="{{ s.aboutContent }}">
         <div style="{{ s.sectionHeadingGroup }}">
@@ -128,14 +131,23 @@
       </div>
       <div style="{{ s.mvvGrid }}">
         <div style="{{ s.mvvCard }}">
+          <div style="{{ s.mvvIconPlaceholder }}">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+          </div>
           <span style="{{ s.mvvCardLabel }}">Mission</span>
           <span style="{{ s.mvvCardBody }}">To be the most trusted manufacturing partner for regulated products — delivering quality, compliance and reliability our partners can build their business on.</span>
         </div>
         <div style="{{ s.mvvCard }}">
+          <div style="{{ s.mvvIconPlaceholder }}">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+          </div>
           <span style="{{ s.mvvCardLabel }}">Vision</span>
           <span style="{{ s.mvvCardBody }}">A single UK-owned home for every stage of your product's journey, from early formulation through to market-ready manufacturing.</span>
         </div>
         <div style="{{ s.mvvCard }}">
+          <div style="{{ s.mvvIconPlaceholder }}">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+          </div>
           <span style="{{ s.mvvCardLabel }}">Values</span>
           <span style="{{ s.mvvCardBody }}">Accountability, transparency and technical excellence — in every batch, every audit, and every partnership.</span>
         </div>
@@ -175,14 +187,24 @@
       </div>
       <div style="{{ s.groupGrid }}">
         <div style="{{ s.groupCard }}">
-          <span style="{{ s.groupCardLabel }}">GDP Compliance Ltd</span>
-          <span style="{{ s.groupCardBody }}">Our dedicated Good Distribution Practice arm, ensuring compliant storage, handling and distribution across the supply chain.</span>
-          <a href="#" style="{{ s.groupCardLink }}">Learn more →</a>
+          <div style="{{ s.groupLogoPlaceholder }}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+          </div>
+          <div style="{{ s.groupCardText }}">
+            <span style="{{ s.groupCardLabel }}">GDP Compliance Ltd</span>
+            <span style="{{ s.groupCardBody }}">Our dedicated Good Distribution Practice arm, ensuring compliant storage, handling and distribution across the supply chain.</span>
+            <a href="#" style="{{ s.groupCardLink }}">Learn more →</a>
+          </div>
         </div>
         <div style="{{ s.groupCard }}">
-          <span style="{{ s.groupCardLabel }}">GMP Healthcare</span>
-          <span style="{{ s.groupCardBody }}">Our healthcare-focused division, extending our manufacturing capability into wider healthcare and wellness products.</span>
-          <a href="#" style="{{ s.groupCardLink }}">Learn more →</a>
+          <div style="{{ s.groupLogoPlaceholder }}">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+          </div>
+          <div style="{{ s.groupCardText }}">
+            <span style="{{ s.groupCardLabel }}">GMP Healthcare</span>
+            <span style="{{ s.groupCardBody }}">Our healthcare-focused division, extending our manufacturing capability into wider healthcare and wellness products.</span>
+            <a href="#" style="{{ s.groupCardLink }}">Learn more →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -198,32 +220,24 @@
         <span style="{{ s.h2 }}">Leadership Team</span>
       </div>
       <div style="{{ s.leadershipGrid }}">
-        <sc-for list="{{leadershipItems}}" as="item" hint-placeholder-count="4">
+        <sc-for list="{{leadershipItems}}" as="item" hint-placeholder-count="6">
           <div style="{{ s.leadershipCard }}">
-            <img src="{{ item.img }}" alt="{{ item.role }}" style="{{ s.leadershipImg }}">
-            <span style="{{ s.leadershipRole }}">{{ item.role }}</span>
+            <div style="{{ s.leadershipImgPlaceholder }}">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path></svg>
+            </div>
+            <div style="{{ s.leadershipInfoRow }}">
+              <div style="{{ s.leadershipTextCol }}">
+                <span style="{{ s.leadershipName }}">{{ item.name }}</span>
+                <span style="{{ s.leadershipRole }}">{{ item.role }}</span>
+              </div>
+              <a href="#" style="{{ s.leadershipLinkedin }}">
+                <div style="{{ s.leadershipLinkedinIcon }}"></div>
+              </a>
+            </div>
           </div>
         </sc-for>
       </div>
       <span style="{{ s.leadershipNote }}">Full leadership bios coming soon.</span>
-    </div>
-  </div>
-
-  <div style="{{ s.sectionGap }}"></div>
-
-  <!-- ============ CTA BAND: CAREERS / GET IN TOUCH ============ -->
-  <div data-screen-label="About CTA Band" style="{{ s.sectionPad }}">
-    <div style="{{ s.ctaBand }}" ref="{{ ctaBandRevealRef }}">
-      <span style="{{ s.ctaBandHeading }}">Want to be part of our story?</span>
-      <span style="{{ s.ctaBandBody }}">Whether you're looking to join our team or explore a partnership, we'd love to hear from you.</span>
-      <div style="{{ s.ctaBandBtnRow }}">
-        <a href="careers.html" style="{{ s.pillCareers.style }}" onMouseEnter="{{ s.pillCareers.enter }}" onMouseLeave="{{ s.pillCareers.leave }}">
-          <span style="{{ s.pillDarkText }}">View Careers</span>
-        </a>
-        <a href="contact.html" style="{{ s.pillGetInTouch.style }}" onMouseEnter="{{ s.pillGetInTouch.enter }}" onMouseLeave="{{ s.pillGetInTouch.leave }}">
-          <span style="{{ s.pillDarkText }}">Get in Touch</span>
-        </a>
-      </div>
     </div>
   </div>
 
@@ -235,12 +249,11 @@
     <canvas ref="{{ collabCanvasRef }}" style="{{ s.collabCanvas }}"></canvas>
     <div style="{{ s.collabOverlay }}"></div>
     <div style="{{ s.collabWrap }}">
-      <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
-      <span style="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
+      <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Want to be part of our story?</span>
+      <span style="{{ s.collabBody }}">Whether you're looking to join our team or explore a partnership, we'd love to hear from you.</span>
       <div style="{{ s.collabBtnRow }}">
-        <a href="contact.html" style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-          <span style="{{ s.collabGetQuoteText }}">Get a Quote</span>
-          <div style="{{ s.collabGetQuoteIcon }}"></div>
+        <a href="careers.html" style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+          <span style="{{ s.collabGetQuoteText }}">View Careers</span>
         </a>
         <a href="contact.html" style="{{ s.pillContactUs.style }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
           <span style="{{ s.collabContactUsText }}">Contact us</span>
@@ -653,13 +666,14 @@ class Component extends DCLogic {
       fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
       display: "flex",
       flexDirection: "column",
-      overflowX: "hidden",
+      overflowX: "clip",
+      overflowY: "clip",
     };
 
     s.sectionPad = { padding: pick("0 20px", "0 40px", "0 64px"), boxSizing: "border-box", position: "relative", zIndex: 1 };
     s.aboutSectionPad = { padding: pick("0 20px 0 0", "0 40px 0 0", "0 64px 0 0"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.sectionGap = { width: "100%", height: pick(64, 110, 160), flexShrink: 0 };
-    s.sectionGapHalf = { width: "100%", height: pick(32, 55, 80), flexShrink: 0 };
+    s.sectionGap = { width: "100%", height: pick(38, 66, 96), flexShrink: 0 };
+    s.sectionGapHalf = { width: "100%", height: pick(19, 33, 48), flexShrink: 0 };
 
     s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
     s.eyebrowOnDark = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
@@ -684,20 +698,6 @@ class Component extends DCLogic {
     s.pillDarkText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: "#fff", whiteSpace: "nowrap" };
 
     const hoverShadow = "0 16px 32px -12px rgba(178,33,38,0.45)";
-    const makePill = (key) => {
-      const hovered = this.state.hoveredKey === key;
-      return {
-        style: {
-          ...s.pillDark,
-          background: hovered ? red : purple,
-          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
-        enter: () => this.setState({ hoveredKey: key }),
-        leave: () => this.setState({ hoveredKey: null }),
-      };
-    };
     const makeHeroCta = (key, base) => {
       const hovered = this.state.hoveredKey === key;
       return {
@@ -848,9 +848,11 @@ class Component extends DCLogic {
     s.bannerSubtext = { fontWeight: 400, fontSize: pick(15, 16, 17), lineHeight: "24px", color: "rgba(255,255,255,0.85)", maxWidth: 620, marginTop: 4 };
 
     // ---------- OUR STORY (reused About layout) ----------
+    s.aboutWatermark = { position: "absolute", top: pick(-40, -60, -90), right: pick("-28%", "-10%", "-4%"), height: pick("34vh", "52vh", "68vh"), width: "auto", pointerEvents: "none", zIndex: 0, opacity: 1 };
     s.aboutWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("story") };
     s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "calc(100% + " + gutter + "px)", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden" };
     s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
+    s.imgPlaceholder = { position: "absolute", inset: 0, width: "100%", height: "100%", background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" };
     s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
     s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
     s.aboutBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
@@ -858,7 +860,8 @@ class Component extends DCLogic {
     // ---------- MISSION / VISION / VALUES ----------
     s.mvvWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), maxWidth: 1600, margin: "0 auto", ...reveal("mvv") };
     s.mvvGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(16, 20, 24) };
-    s.mvvCard = { display: "flex", flexDirection: "column", gap: 12, padding: pick("24px", "28px", "32px"), boxSizing: "border-box", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 4 };
+    s.mvvCard = { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 12, padding: pick("24px", "28px", "32px"), boxSizing: "border-box", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 4 };
+    s.mvvIconPlaceholder = { width: 80, height: 80, flexShrink: 0, background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 4 };
     s.mvvCardLabel = { fontWeight: 600, fontSize: 20, lineHeight: "26px", color: red };
     s.mvvCardBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
 
@@ -872,28 +875,27 @@ class Component extends DCLogic {
     // ---------- GROUP OF COMPANIES ----------
     s.groupWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), maxWidth: 1600, margin: "0 auto", ...reveal("group") };
     s.groupGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "1fr 1fr"), gap: pick(16, 24, 24) };
-    s.groupCard = { display: "flex", flexDirection: "column", gap: 12, padding: pick("24px", "32px", "40px"), boxSizing: "border-box", background: "rgb(245,245,245)", borderRadius: 4, alignItems: "flex-start" };
+    s.groupCard = { display: "flex", flexDirection: "row", gap: 20, padding: pick("24px", "32px", "40px"), boxSizing: "border-box", background: "rgb(245,245,245)", borderRadius: 4, alignItems: "flex-start" };
+    s.groupLogoPlaceholder = { width: pick(56, 64, 72), height: pick(56, 64, 72), flexShrink: 0, background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center" };
+    s.groupCardText = { display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" };
     s.groupCardLabel = { fontWeight: 500, fontSize: 22, lineHeight: "28px", color: dark };
     s.groupCardBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
     s.groupCardLink = { fontWeight: 500, fontSize: 15, lineHeight: "20px", color: purple, textDecoration: "none", marginTop: 4 };
 
     // ---------- LEADERSHIP ----------
     s.leadershipWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), maxWidth: 1600, margin: "0 auto", ...reveal("leadership") };
-    s.leadershipGrid = { display: "grid", gridTemplateColumns: pick("1fr 1fr", "repeat(4, 1fr)", "repeat(4, 1fr)"), gap: pick(12, 20, 24) };
+    s.leadershipGrid = { display: "grid", gridTemplateColumns: pick("1fr 1fr", "repeat(3, 1fr)", "repeat(6, 1fr)"), gap: pick(16, 20, 20) };
     s.leadershipCard = { display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" };
-    s.leadershipImg = { width: "100%", aspectRatio: "1 / 1", objectFit: "cover", borderRadius: 4 };
-    s.leadershipRole = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: dark };
+    s.leadershipImgPlaceholder = { width: "100%", aspectRatio: "1 / 1", borderRadius: "50%", background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" };
+    s.leadershipInfoRow = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "100%", gap: 8 };
+    s.leadershipTextCol = { display: "flex", flexDirection: "column", gap: 2, minWidth: 0 };
+    s.leadershipName = { fontWeight: 600, fontSize: pick(14, 15, 15), lineHeight: "20px", color: dark, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" };
+    s.leadershipRole = { fontWeight: 400, fontSize: pick(12, 13, 13), lineHeight: "18px", color: "rgba(51,51,51,0.65)" };
+    s.leadershipLinkedin = { width: 28, height: 28, borderRadius: 28, background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, cursor: "pointer" };
+    s.leadershipLinkedinIcon = { width: 12, height: 12, backgroundColor: "rgb(51,51,51)", WebkitMask: "url('assets2/linkedin.svg') center / contain no-repeat", mask: "url('assets2/linkedin.svg') center / contain no-repeat" };
     s.leadershipNote = { fontWeight: 400, fontSize: 14, lineHeight: "20px", color: "rgba(51,51,51,0.5)", fontStyle: "italic" };
 
-    // ---------- CTA BAND ----------
-    s.ctaBand = { display: "flex", flexDirection: "column", gap: 16, alignItems: pick("flex-start", "center", "center"), textAlign: pick("left", "center", "center"), maxWidth: 1600, margin: "0 auto", background: purple, borderRadius: 8, padding: pick("32px 24px", "48px 40px", "56px 64px"), boxSizing: "border-box", ...reveal("ctaBand") };
-    s.ctaBandHeading = { fontWeight: 500, fontSize: pick(24, 30, 34), lineHeight: pick("30px", "36px", "40px"), letterSpacing: "-1px", color: "#fff" };
-    s.ctaBandBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "rgba(255,255,255,0.85)", maxWidth: 560 };
-    s.ctaBandBtnRow = { display: "flex", flexDirection: "row", gap: 8, flexWrap: "wrap", justifyContent: pick("flex-start", "center", "center"), marginTop: 8 };
-    s.pillCareers = makePill("careers");
-    s.pillGetInTouch = makePill("getInTouch");
-
-    // ---------- COLLABORATE (inherited) ----------
+    // ---------- COLLABORATE (inherited, content customized per page) ----------
     s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
     s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
     s.collabCanvas = { position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" };
@@ -907,7 +909,6 @@ class Component extends DCLogic {
     s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
     s.collabGetQuoteText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillGetQuote.textColor, whiteSpace: "nowrap" };
     s.collabContactUsText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillContactUs.textColor, whiteSpace: "nowrap" };
-    s.collabGetQuoteIcon = { width: 14, height: 14, backgroundColor: s.pillGetQuote.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
 
     // ---------- FOOTER (inherited) ----------
     s.footerWrap = { position: "relative", zIndex: 2, width: "100%", background: footerGradient, overflow: "hidden", padding: pick("40px 20px 32px", "56px 40px 40px", "64px 64px 48px"), boxSizing: "border-box", display: "flex", flexDirection: "column", gap: pick(40, 48, 56), ...reveal("footer", { distance: 14, duration: 900 }) };
@@ -955,12 +956,14 @@ class Component extends DCLogic {
     // ---------- DATA ----------
     const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
     const leadershipData = [
-      { role: "Managing Director", img: "assets2/team-1-real.webp" },
-      { role: "Head of Quality Assurance", img: "assets2/placeholder-team-2.jpg" },
-      { role: "Director of Operations", img: "assets2/placeholder-team-3.jpg" },
-      { role: "Head of Research & Development", img: "assets2/team-4-real.webp" },
+      { role: "Managing Director" },
+      { role: "Head of Quality Assurance" },
+      { role: "Director of Operations" },
+      { role: "Head of Research & Development" },
+      { role: "Head of Regulatory Affairs" },
+      { role: "Head of Supply Chain" },
     ];
-    const leadershipItems = leadershipData.map((item) => ({ role: item.role, img: item.img }));
+    const leadershipItems = leadershipData.map((item) => ({ role: item.role, name: "Full Name" }));
 
     return {
       s,
@@ -971,7 +974,6 @@ class Component extends DCLogic {
       accredRevealRef: revealRef("accred"),
       groupRevealRef: revealRef("group"),
       leadershipRevealRef: revealRef("leadership"),
-      ctaBandRevealRef: revealRef("ctaBand"),
       collabRevealRef: revealRef("collab"),
       collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
       collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },

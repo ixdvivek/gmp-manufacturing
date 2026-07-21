@@ -829,13 +829,14 @@ class Component extends DCLogic {
       fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
       display: "flex",
       flexDirection: "column",
-      overflowX: "hidden",
+      overflowX: "clip",
+      overflowY: "clip",
     };
 
     s.sectionPad = { padding: pick("0 20px", "0 40px", "0 64px"), boxSizing: "border-box", position: "relative", zIndex: 1 };
     s.aboutSectionPad = { padding: pick("0 20px 0 0", "0 40px 0 0", "0 64px 0 0"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.sectionGap = { width: "100%", height: pick(64, 110, 160), flexShrink: 0 };
-    s.sectionGapHalf = { width: "100%", height: pick(32, 55, 80), flexShrink: 0 };
+    s.sectionGap = { width: "100%", height: pick(38, 66, 96), flexShrink: 0 };
+    s.sectionGapHalf = { width: "100%", height: pick(19, 33, 48), flexShrink: 0 };
 
     s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
     s.h2 = { fontWeight: 500, fontSize: pick(30, 38, 48), lineHeight: pick("36px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };

@@ -102,7 +102,7 @@
     <div style="{{ s.introWrap }}" ref="{{ introRevealRef }}">
       <div style="{{ s.sectionHeadingGroup }}">
         <span style="{{ s.eyebrow }}">Our Capabilities</span>
-        <span style="{{ s.h2 }}">Seven services, one accountable team</span>
+        <span style="{{ s.h2 }}">Six services, one accountable team</span>
       </div>
       <span style="{{ s.introBody }}">From early-stage formulation to full-scale UK manufacturing, our services cover every stage of your product's journey — so you get one accountable team instead of a chain of vendors. Select a service below to learn more.</span>
     </div>
@@ -113,7 +113,7 @@
   <!-- ============ SERVICE CARDS ============ -->
   <div data-screen-label="Service Cards" style="{{ s.sectionPad }}">
     <div style="{{ s.serviceGrid }}">
-      <sc-for list="{{serviceItems}}" as="item" hint-placeholder-count="7">
+      <sc-for list="{{serviceItems}}" as="item" hint-placeholder-count="6">
         <a href="{{ item.href }}" style="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
           <div style="{{ item.sweepStyle }}"></div>
           <span style="{{ item.numStyle }}">{{ item.n }}</span>
@@ -127,21 +127,6 @@
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
-
-  <!-- ============ CTA BAND ============ -->
-  <div data-screen-label="Services CTA Band" style="{{ s.sectionPad }}">
-    <div style="{{ s.ctaBand }}" ref="{{ ctaBandRevealRef }}">
-      <span style="{{ s.ctaBandHeading }}">Not sure which service you need?</span>
-      <span style="{{ s.ctaBandBody }}">Tell us about your product and we'll point you to the right team — no obligation, no sales pressure.</span>
-      <div style="{{ s.ctaBandBtnRow }}">
-        <a href="contact.html" style="{{ s.pillGetInTouch.style }}" onMouseEnter="{{ s.pillGetInTouch.enter }}" onMouseLeave="{{ s.pillGetInTouch.leave }}">
-          <span style="{{ s.pillDarkText }}">Get in Touch</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <div style="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ COLLABORATE ============ -->
@@ -150,8 +135,8 @@
     <canvas ref="{{ collabCanvasRef }}" style="{{ s.collabCanvas }}"></canvas>
     <div style="{{ s.collabOverlay }}"></div>
     <div style="{{ s.collabWrap }}">
-      <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
-      <span style="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
+      <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Not sure which service you need?</span>
+      <span style="{{ s.collabBody }}">Tell us about your product and we'll point you to the right team — no obligation, no sales pressure.</span>
       <div style="{{ s.collabBtnRow }}">
         <a href="contact.html" style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
           <span style="{{ s.collabGetQuoteText }}">Get a Quote</span>
@@ -558,12 +543,13 @@ class Component extends DCLogic {
       fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
       display: "flex",
       flexDirection: "column",
-      overflowX: "hidden",
+      overflowX: "clip",
+      overflowY: "clip",
     };
 
     s.sectionPad = { padding: pick("0 20px", "0 40px", "0 64px"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.sectionGap = { width: "100%", height: pick(64, 110, 160), flexShrink: 0 };
-    s.sectionGapHalf = { width: "100%", height: pick(32, 55, 80), flexShrink: 0 };
+    s.sectionGap = { width: "100%", height: pick(38, 66, 96), flexShrink: 0 };
+    s.sectionGapHalf = { width: "100%", height: pick(19, 33, 48), flexShrink: 0 };
 
     s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
     s.eyebrowOnDark = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
@@ -588,20 +574,6 @@ class Component extends DCLogic {
     s.pillDarkText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: "#fff", whiteSpace: "nowrap" };
 
     const hoverShadow = "0 16px 32px -12px rgba(178,33,38,0.45)";
-    const makePill = (key) => {
-      const hovered = this.state.hoveredKey === key;
-      return {
-        style: {
-          ...s.pillDark,
-          background: hovered ? red : purple,
-          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
-        enter: () => this.setState({ hoveredKey: key }),
-        leave: () => this.setState({ hoveredKey: null }),
-      };
-    };
     const makeHeroCta = (key, base) => {
       const hovered = this.state.hoveredKey === key;
       return {
@@ -758,14 +730,7 @@ class Component extends DCLogic {
     // ---------- SERVICE CARDS (reused pathway-card treatment) ----------
     s.serviceGrid = { maxWidth: 1600, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gridAutoRows: pick("auto", "minmax(240px, auto)", "minmax(260px, auto)"), gap: pick(20, 24, 28) };
 
-    // ---------- CTA BAND ----------
-    s.ctaBand = { display: "flex", flexDirection: "column", gap: 16, alignItems: pick("flex-start", "center", "center"), textAlign: pick("left", "center", "center"), maxWidth: 1600, margin: "0 auto", background: purple, borderRadius: 8, padding: pick("32px 24px", "48px 40px", "56px 64px"), boxSizing: "border-box", ...reveal("ctaBand") };
-    s.ctaBandHeading = { fontWeight: 500, fontSize: pick(24, 30, 34), lineHeight: pick("30px", "36px", "40px"), letterSpacing: "-1px", color: "#fff" };
-    s.ctaBandBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "rgba(255,255,255,0.85)", maxWidth: 560 };
-    s.ctaBandBtnRow = { display: "flex", flexDirection: "row", gap: 8, flexWrap: "wrap", justifyContent: pick("flex-start", "center", "center"), marginTop: 8 };
-    s.pillGetInTouch = makePill("getInTouch");
-
-    // ---------- COLLABORATE (inherited) ----------
+    // ---------- COLLABORATE (inherited, content customized per page) ----------
     s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
     s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
     s.collabCanvas = { position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" };
@@ -826,13 +791,12 @@ class Component extends DCLogic {
 
     // ---------- DATA: 7 SERVICES ----------
     const serviceData = [
-      { n: "01", h: "Manufacturing, Filling \n& Packing", d: "Full-scale production, filling and packing across tablets, capsules, liquids and semi-solids.", href: "services-manufacturing-filling-packing.html" },
-      { n: "02", h: "QC, Micro \n& Stability", d: "In-house quality control, microbiology and stability testing to keep every batch compliant.", href: "services-qc-micro-stability.html" },
-      { n: "03", h: "Technology \nTransfer", d: "Smooth, de-risked transfer of your product and process into our facilities.", href: "services-technology-transfer.html" },
-      { n: "04", h: "Product Development \n& Remediation", d: "Formulation, analytical development and remediation for stalled or underperforming products.", href: "services-product-development-remediation.html" },
-      { n: "05", h: "QP, RP, RP-I and \nRegulatory Support", d: "In-house Qualified Persons and Responsible Persons providing release, compliance and regulatory support.", href: "services-qp-rp-regulatory-support.html" },
-      { n: "06", h: "Co-Packing / Contract \nManufacturing", d: "Flexible contract manufacturing and co-packing capacity for partners at any scale.", href: "services-co-packing-contract-manufacturing.html" },
-      { n: "07", h: "Research \n& Development", d: "Dedicated R&D support to bring new formulations from concept to market-ready.", href: "services-research-development.html" },
+      { n: "01", h: "Development & \nFormulation", d: "Formulation, analytical development and remediation that ready your product for reliable scale-up.", href: "services-development-formulation.html" },
+      { n: "02", h: "UK In-house \nManufacturing", d: "Owned facilities in Hull — full control, no outsourcing surprises.", href: "services-uk-inhouse-manufacturing.html" },
+      { n: "03", h: "Tech Transfer & \nWarehousing", d: "Smooth, de-risked scale-up with integrated storage.", href: "services-tech-transfer-warehousing.html" },
+      { n: "04", h: "Global \nSupply Chain", d: "Reliable sourcing and distribution across markets.", href: "services-global-supply-chain.html" },
+      { n: "05", h: "Development & \nRemediation", d: "Fix, reformulate and rescue stalled products.", href: "services-development-remediation.html" },
+      { n: "06", h: "Cost \nOptimisation", d: "Efficient processes that protect your margins.", href: "services-cost-optimisation.html" },
     ];
     const serviceCols = isDesktop ? 3 : isTablet ? 2 : 1;
     const serviceShown = !!revealed.services || true;
@@ -888,7 +852,6 @@ class Component extends DCLogic {
     return {
       s,
       introRevealRef: revealRef("intro"),
-      ctaBandRevealRef: revealRef("ctaBand"),
       collabRevealRef: revealRef("collab"),
       collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
       collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
