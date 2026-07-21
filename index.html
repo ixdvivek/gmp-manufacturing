@@ -32,27 +32,29 @@
 
   <!-- ============ TOPBAR (fixed, outside hero's stacking context) ============ -->
   <div style="{{ s.heroTopbar }}">
-    <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
+    <a href="index.html" style="{{ s.logoLink }}">
+      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
+    </a>
     <div style="{{ s.heroNav }}">
-      <span style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</span>
-      <span style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</span>
+      <a href="index.html" style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
+      <a href="about.html" style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
       <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
-        <span style="{{ s.navServicesStyle }}">Services</span>
+        <a href="services.html" style="{{ s.navServicesStyle }}">Services</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
-      <span style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</span>
+      <a href="innovations.html" style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
       <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
-        <span style="{{ s.navSectorsStyle }}">Sectors</span>
+        <a href="sectors.html" style="{{ s.navSectorsStyle }}">Sectors</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
     </div>
     <div style="{{ s.heroTopbarRightGroup }}">
-      <div style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+      <a href="contact.html" style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
         <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
         <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
           <div style="{{ s.heroCtaTopbarIconStyle }}"></div>
         </sc-if>
-      </div>
+      </a>
       <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
         <div style="{{ s.hamburgerBar1 }}"></div>
         <div style="{{ s.hamburgerBar2 }}"></div>
@@ -74,16 +76,16 @@
         </div>
       </div>
       <div style="{{ s.mobileNavLinks }}">
-        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Home</span>
-        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">About Us</span>
-        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Services</span>
-        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Innovations</span>
-        <span style="{{ s.mobileNavLink }}" onClick="{{ toggleMobileMenu }}">Sectors</span>
+        <a href="index.html" style="{{ s.mobileNavLink }}">Home</a>
+        <a href="about.html" style="{{ s.mobileNavLink }}">About Us</a>
+        <a href="services.html" style="{{ s.mobileNavLink }}">Services</a>
+        <a href="innovations.html" style="{{ s.mobileNavLink }}">Innovations</a>
+        <a href="sectors.html" style="{{ s.mobileNavLink }}">Sectors</a>
       </div>
-      <div style="{{ s.heroCtaCtl.style }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
+      <a href="contact.html" style="{{ s.heroCtaCtl.style }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
         <span style="{{ s.heroCtaText }}">Get A Quote</span>
         <div style="{{ s.heroCtaIconStyle }}"></div>
-      </div>
+      </a>
     </div>
     <div style="{{ s.heroContent }}">
       <div style="{{ s.heroHeadlineWrap }}">
@@ -140,12 +142,12 @@ to Market</span>
           <span style="{{ s.aboutBody }}">From formulation through to UK in-house manufacturing, we own every stage of the process — giving partners one accountable team and full traceability from molecule to market.</span>
         </div>
         <div style="{{ s.aboutBtnRow }}">
-          <div style="{{ s.pillLearnMore.style }}" onMouseEnter="{{ s.pillLearnMore.enter }}" onMouseLeave="{{ s.pillLearnMore.leave }}">
+          <a href="about.html" style="{{ s.pillLearnMore.style }}" onMouseEnter="{{ s.pillLearnMore.enter }}" onMouseLeave="{{ s.pillLearnMore.leave }}">
             <span style="{{ s.pillDarkText }}">Learn More</span>
-          </div>
-          <div style="{{ s.pillContactAbout.style }}" onMouseEnter="{{ s.pillContactAbout.enter }}" onMouseLeave="{{ s.pillContactAbout.leave }}">
+          </a>
+          <a href="contact.html" style="{{ s.pillContactAbout.style }}" onMouseEnter="{{ s.pillContactAbout.enter }}" onMouseLeave="{{ s.pillContactAbout.leave }}">
             <span style="{{ s.pillContactAboutText }}">Contact Us</span>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -161,9 +163,9 @@ to Market</span>
           <span style="{{ s.eyebrow }}">Why GMP</span>
           <span style="{{ s.h2 }}">A complete pathway, under one roof</span>
         </div>
-        <div style="{{ s.pillOurServices.style }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
+        <a href="services.html" style="{{ s.pillOurServices.style }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
           <span style="{{ s.pillDarkText }}">Our Services</span>
-        </div>
+        </a>
       </div>
       <div style="{{ s.pathwayGrid }}">
         <sc-for list="{{pathwayItems}}" as="item" hint-placeholder-count="6">
@@ -227,9 +229,9 @@ to Market</span>
           </sc-for>
         </div>
         <sc-if value="{{ showSectorsPill }}" hint-placeholder-val="{{ true }}">
-          <div style="{{ s.pillSectors.style }}" onMouseEnter="{{ s.pillSectors.enter }}" onMouseLeave="{{ s.pillSectors.leave }}">
+          <a href="sectors.html" style="{{ s.pillSectors.style }}" onMouseEnter="{{ s.pillSectors.enter }}" onMouseLeave="{{ s.pillSectors.leave }}">
             <span style="{{ s.pillDarkText }}">Sectors We Serve</span>
-          </div>
+          </a>
         </sc-if>
       </div>
       <div style="{{ s.industriesRight }}">
@@ -320,9 +322,9 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
         <span style="{{ s.eyebrow }}">News &amp; Insights</span>
         <span style="{{ s.h2 }}">News Room</span>
       </div>
-      <div style="{{ s.pillMoreNews.style }}" onMouseEnter="{{ s.pillMoreNews.enter }}" onMouseLeave="{{ s.pillMoreNews.leave }}">
+      <a href="news.html" style="{{ s.pillMoreNews.style }}" onMouseEnter="{{ s.pillMoreNews.enter }}" onMouseLeave="{{ s.pillMoreNews.leave }}">
         <span style="{{ s.pillDarkText }}">More News</span>
-      </div>
+      </a>
     </div>
 
     <div style="{{ s.newsGrid }}">
@@ -363,13 +365,13 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
         <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
         <span style="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
         <div style="{{ s.collabBtnRow }}">
-          <div style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+          <a href="contact.html" style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
             <span style="{{ s.collabGetQuoteText }}">Get a Quote</span>
             <div style="{{ s.collabGetQuoteIcon }}"></div>
-          </div>
-          <div style="{{ s.pillContactUs.style }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+          </a>
+          <a href="contact.html" style="{{ s.pillContactUs.style }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
             <span style="{{ s.collabContactUsText }}">Contact us</span>
-          </div>
+          </a>
         </div>
       </div>
     </div>
@@ -415,22 +417,22 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
           <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
             <span style="{{ s.footerColLabel }}">Services</span>
             <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <span style="{{ s.footerLink }}">Development &amp; Formulation</span>
-              <span style="{{ s.footerLink }}">UK In-house Manufacturing</span>
-              <span style="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</span>
-              <span style="{{ s.footerLink }}">Global Supply Chain</span>
-              <span style="{{ s.footerLink }}">Development &amp; Remediation</span>
-              <span style="{{ s.footerLink }}">Cost Optimisation</span>
+              <a href="services.html" style="{{ s.footerLink }}">Development &amp; Formulation</a>
+              <a href="services.html" style="{{ s.footerLink }}">UK In-house Manufacturing</a>
+              <a href="services.html" style="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</a>
+              <a href="services.html" style="{{ s.footerLink }}">Global Supply Chain</a>
+              <a href="services.html" style="{{ s.footerLink }}">Development &amp; Remediation</a>
+              <a href="services.html" style="{{ s.footerLink }}">Cost Optimisation</a>
             </div>
           </div>
           <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
             <span style="{{ s.footerColLabel }}">About</span>
             <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <span style="{{ s.footerLink }}">About Us</span>
-              <span style="{{ s.footerLink }}">Careers</span>
-              <span style="{{ s.footerLink }}">Media &amp; News</span>
-              <span style="{{ s.footerLink }}">Our Team</span>
-              <span style="{{ s.footerLink }}">Contact Us</span>
+              <a href="about.html" style="{{ s.footerLink }}">About Us</a>
+              <a href="careers.html" style="{{ s.footerLink }}">Careers</a>
+              <a href="news.html" style="{{ s.footerLink }}">Media &amp; News</a>
+              <a href="about.html#leadership" style="{{ s.footerLink }}">Our Team</a>
+              <a href="contact.html" style="{{ s.footerLink }}">Contact Us</a>
             </div>
           </div>
           <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
@@ -852,6 +854,7 @@ class Component extends DCLogic {
       cursor: "pointer",
       alignSelf: "flex-start",
       flexShrink: 0,
+      textDecoration: "none",
     };
     s.pillDarkText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: "#fff", whiteSpace: "nowrap" };
 
@@ -881,6 +884,7 @@ class Component extends DCLogic {
           boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
           transform: hovered ? "translateY(-2px)" : "translateY(0)",
           transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
+          textDecoration: "none",
         },
         textColor: hovered ? "#fff" : near,
         iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
@@ -950,6 +954,7 @@ class Component extends DCLogic {
       flexWrap: "nowrap",
       transition: "background 0.3s ease, box-shadow 0.3s ease",
     };
+    s.logoLink = { display: "flex", flexShrink: 0 };
     s.heroLogo = { width: pick(180, 220, 260), height: "auto" };
     s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
     s.heroNav = { display: isDesktop ? "flex" : "none", flexDirection: "row", gap: 32, alignItems: "center" };
@@ -981,30 +986,33 @@ class Component extends DCLogic {
     s.mobileNavCloseRow = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" };
     s.mobileNavLogo = { width: pick(150, 190, 190), height: "auto" };
     s.mobileNavLinks = { display: "flex", flexDirection: "column", gap: pick(24, 28, 28), alignItems: "flex-start", marginTop: 16 };
-    s.mobileNavLink = { fontWeight: 500, fontSize: pick(28, 32, 32), lineHeight: "1.3", letterSpacing: "-0.7px", color: "#fff", cursor: "pointer" };
-    const navLinkStyle = (i) => {
+    s.mobileNavLink = { fontWeight: 500, fontSize: pick(28, 32, 32), lineHeight: "1.3", letterSpacing: "-0.7px", color: "#fff", cursor: "pointer", textDecoration: "none" };
+    const CURRENT_PAGE = "home";
+    const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
+      const active = key === CURRENT_PAGE;
       return {
         fontWeight: 500,
         fontSize: 14,
         lineHeight: "20px",
-        color: navScrolled ? (hovered ? red : dark) : "#fff",
+        color: navScrolled ? ((hovered || active) ? red : dark) : "#fff",
         whiteSpace: "nowrap",
         cursor: "pointer",
-        opacity: navScrolled ? 1 : (hovered ? 1 : 0.85),
+        opacity: navScrolled ? 1 : ((hovered || active) ? 1 : 0.85),
         borderBottomWidth: 1,
         borderBottomStyle: "solid",
-        borderBottomColor: navScrolled ? (hovered ? red : "transparent") : (hovered ? "rgba(255,255,255,0.8)" : "transparent"),
+        borderBottomColor: navScrolled ? ((hovered || active) ? red : "transparent") : ((hovered || active) ? "rgba(255,255,255,0.8)" : "transparent"),
         paddingBottom: 2,
         transition: "color 0.2s ease, opacity 0.2s ease, border-color 0.2s ease",
+        textDecoration: "none",
       };
     };
     s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
-    s.navHomeStyle = navLinkStyle(0);
-    s.navAboutStyle = navLinkStyle(1);
-    s.navServicesStyle = navLinkStyle(2);
-    s.navInnovationsStyle = navLinkStyle(3);
-    s.navSectorsStyle = navLinkStyle(4);
+    s.navHomeStyle = navLinkStyle(0, "home");
+    s.navAboutStyle = navLinkStyle(1, "about");
+    s.navServicesStyle = navLinkStyle(2, "services");
+    s.navInnovationsStyle = navLinkStyle(3, "innovations");
+    s.navSectorsStyle = navLinkStyle(4, "sectors");
     const navEnter = (i) => () => this.setState({ hoveredNav: i });
     s.navLeave = () => this.setState({ hoveredNav: -1 });
     s.navEnterHome = navEnter(0);
@@ -1024,6 +1032,7 @@ class Component extends DCLogic {
         boxShadow: topbarCtaHovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
         transform: topbarCtaHovered ? "translateY(-2px)" : "translateY(0)",
         transition: "background 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease",
+        textDecoration: "none",
       },
       textColor: topbarCtaHovered || navScrolled ? "#fff" : near,
       iconColor: topbarCtaHovered || navScrolled ? "rgb(255,255,255)" : "rgb(17,17,17)",
@@ -1088,6 +1097,7 @@ class Component extends DCLogic {
           alignSelf: "flex-start",
           flexShrink: 0,
           transition: "border-color 0.2s ease, color 0.2s ease",
+          textDecoration: "none",
         },
         textColor: hovered ? red : purple,
         enter: () => this.setState({ hoveredKey: key }),
@@ -1219,7 +1229,7 @@ class Component extends DCLogic {
     s.footerDivider = { height: 1, background: "rgba(255,255,255,0.2)" };
     s.footerColsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(28, 32, 24) };
     s.footerColLabel = { fontWeight: 400, fontSize: 18, lineHeight: "24px", color: "rgba(255,255,255,0.4)" };
-    s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
+    s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff", textDecoration: "none" };
     s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: isDesktop ? "stretch" : "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
     s.socialsSmallCol = isDesktop
       ? { display: "grid", gridTemplateColumns: "repeat(2, 40px)", gridAutoRows: "40px", gap: 12, order: 0 }
