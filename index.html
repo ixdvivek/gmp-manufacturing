@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <x-dc>
@@ -19,6 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
   <style>
     html, body { margin: 0; padding: 0; background: #fff; }
+    .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -28,94 +30,94 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Home — Responsive" style="{{ s.root }}">
+<div data-screen-label="GMP Mfd Home — Responsive" className="{{ s.root }}">
 
   <!-- ============ TOPBAR (fixed, outside hero's stacking context) ============ -->
-  <div style="{{ s.heroTopbar }}">
-    <a href="index.html" style="{{ s.logoLink }}">
-      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
+  <div className="{{ s.heroTopbar }}">
+    <a href="index.html" className="{{ s.logoLink }}">
+      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.heroLogo }}">
     </a>
-    <div style="{{ s.heroNav }}">
-      <a href="index.html" style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
-      <a href="about.html" style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
-      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
-        <a href="services.html" style="{{ s.navServicesStyle }}">Services</a>
+    <div className="{{ s.heroNav }}">
+      <a href="index.html" className="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
+      <a href="about.html" className="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
+      <div className="flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="services.html" className="{{ s.navServicesStyle }}">Services</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
-      <a href="innovations.html" style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
-      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
-        <a href="sectors.html" style="{{ s.navSectorsStyle }}">Sectors</a>
+      <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
+      <div className="flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
     </div>
-    <div style="{{ s.heroTopbarRightGroup }}">
-      <a href="contact.html" style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
-        <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+    <div className="{{ s.heroTopbarRightGroup }}">
+      <a href="contact.html" className="{{ s.heroCtaTopbarCtl.className }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+        <span className="{{ s.heroCtaTopbarText }}">Get A Quote</span>
         <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
-          <div style="{{ s.heroCtaTopbarIconStyle }}"></div>
+          <div className="{{ s.heroCtaTopbarIconStyle }}"></div>
         </sc-if>
       </a>
-      <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-        <div style="{{ s.hamburgerBar1 }}"></div>
-        <div style="{{ s.hamburgerBar2 }}"></div>
-        <div style="{{ s.hamburgerBar3 }}"></div>
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBar1 }}"></div>
+        <div className="{{ s.hamburgerBar2 }}"></div>
+        <div className="{{ s.hamburgerBar3 }}"></div>
       </div>
     </div>
   </div>
 
   <!-- ============ HERO ============ -->
-  <div data-screen-label="Hero" style="{{ s.heroWrap }}">
-    <img src="assets2/hero-bg.webp" alt="Molecule under a laboratory microscope" style="{{ s.heroBg }}">
-    <div style="{{ s.heroOverlay }}"></div>
-    <div style="{{ s.mobileNavOverlay }}">
-      <div style="{{ s.mobileNavCloseRow }}">
-        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" style="{{ s.mobileNavLogo }}">
-        <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-          <div style="{{ s.hamburgerBarX1 }}"></div>
-          <div style="{{ s.hamburgerBarX2 }}"></div>
+  <div data-screen-label="Hero" className="{{ s.heroWrap }}">
+    <img src="assets2/hero-bg.webp" alt="Molecule under a laboratory microscope" className="{{ s.heroBg }}">
+    <div className="{{ s.heroOverlay }}"></div>
+    <div className="{{ s.mobileNavOverlay }}">
+      <div className="{{ s.mobileNavCloseRow }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
+        <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+          <div className="{{ s.hamburgerBarX1 }}"></div>
+          <div className="{{ s.hamburgerBarX2 }}"></div>
         </div>
       </div>
-      <div style="{{ s.mobileNavLinks }}">
-        <a href="index.html" style="{{ s.mobileNavLink }}">Home</a>
-        <a href="about.html" style="{{ s.mobileNavLink }}">About Us</a>
-        <a href="services.html" style="{{ s.mobileNavLink }}">Services</a>
-        <a href="innovations.html" style="{{ s.mobileNavLink }}">Innovations</a>
-        <a href="sectors.html" style="{{ s.mobileNavLink }}">Sectors</a>
+      <div className="{{ s.mobileNavLinks }}">
+        <a href="index.html" className="{{ s.mobileNavLink }}">Home</a>
+        <a href="about.html" className="{{ s.mobileNavLink }}">About Us</a>
+        <a href="services.html" className="{{ s.mobileNavLink }}">Services</a>
+        <a href="innovations.html" className="{{ s.mobileNavLink }}">Innovations</a>
+        <a href="sectors.html" className="{{ s.mobileNavLink }}">Sectors</a>
       </div>
-      <a href="contact.html" style="{{ s.heroCtaCtl.style }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
-        <span style="{{ s.heroCtaText }}">Get A Quote</span>
-        <div style="{{ s.heroCtaIconStyle }}"></div>
+      <a href="contact.html" className="{{ s.heroCtaCtl.className }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
+        <span className="{{ s.heroCtaText }}">Get A Quote</span>
+        <div className="{{ s.heroCtaIconStyle }}"></div>
       </a>
     </div>
-    <div style="{{ s.heroContent }}">
-      <div style="{{ s.heroHeadlineWrap }}">
-        <div style="{{ s.heroTextBlock }}" ref="{{ heroTextBlockRef }}">
-          <div style="{{ s.heroHeadingGroup }}">
-            <span style="{{ s.heroHeadline }}" ref="{{ heroHeadlineRef }}">From Molecule
+    <div className="{{ s.heroContent }}">
+      <div className="{{ s.heroHeadlineWrap }}">
+        <div className="{{ s.heroTextBlock }}" ref="{{ heroTextBlockRef }}">
+          <div className="{{ s.heroHeadingGroup }}">
+            <span className="{{ s.heroHeadline }}" ref="{{ heroHeadlineRef }}">From Molecule
 to Market</span>
-            <span style="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
-            <div style="{{ s.heroInlineCtaCtl.style }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
-              <span style="{{ s.heroInlineCtaText }}">View our Services</span>
+            <span className="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
+            <div className="{{ s.heroInlineCtaCtl.className }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
+              <span className="{{ s.heroInlineCtaText }}">View our Services</span>
 
             </div>
           </div>
-          <div style="{{ s.heroDivider }}"></div>
-          <div style="{{ s.heroStats }}">
-            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-              <span style="{{ s.heroStatLabel }}">Making in</span>
-              <span style="{{ s.heroStatLabel }}">United Kingdom</span>
+          <div className="{{ s.heroDivider }}"></div>
+          <div className="{{ s.heroStats }}">
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">Making in</span>
+              <span className="{{ s.heroStatLabel }}">United Kingdom</span>
             </div>
-            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-              <span style="{{ s.heroStatLabel }}">Facilities</span>
-              <span style="{{ s.heroStatLabel }}">04</span>
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">Facilities</span>
+              <span className="{{ s.heroStatLabel }}">04</span>
             </div>
-            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-              <span style="{{ s.heroStatLabel }}">Marketing in</span>
-              <span style="{{ s.heroStatLabel }}">30+ countries</span>
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">Marketing in</span>
+              <span className="{{ s.heroStatLabel }}">30+ countries</span>
             </div>
-            <div style="display: flex; flex-direction: column; justify-content: center; gap: 2px;">
-              <span style="{{ s.heroStatLabel }}">since</span>
-              <span style="{{ s.heroStatLabel }}">2012</span>
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">since</span>
+              <span className="{{ s.heroStatLabel }}">2012</span>
             </div>
           </div>
         </div>
@@ -123,58 +125,58 @@ to Market</span>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ ABOUT US ============ -->
-  <div data-screen-label="About Us" style="{{ s.aboutSectionPad }}">
-    <img src="assets2/brand-watermark.svg" alt="" style="{{ s.aboutWatermark }}">
-    <div style="{{ s.aboutWrap }}" ref="{{ aboutRevealRef }}">
-      <div style="{{ s.aboutImageCol }}">
-        <img src="assets2/about-real.jpg" alt="GMP Manufacturing formulation specialist at work" loading="lazy" style="{{ s.aboutImage }}">
+  <div data-screen-label="About Us" className="{{ s.aboutSectionPad }}">
+    <img src="assets2/brand-watermark.svg" alt="" className="{{ s.aboutWatermark }}">
+    <div className="{{ s.aboutWrap }}" ref="{{ aboutRevealRef }}">
+      <div className="{{ s.aboutImageCol }}">
+        <img src="assets2/about-real.jpg" alt="GMP Manufacturing formulation specialist at work" loading="lazy" className="{{ s.aboutImage }}">
       </div>
-      <div style="{{ s.aboutContent }}">
-        <div style="{{ s.sectionHeadingGroup }}">
-          <span style="{{ s.eyebrow }}">Who We Are</span>
-          <span style="{{ s.h2 }}">About Us</span>
+      <div className="{{ s.aboutContent }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Who We Are</span>
+          <span className="{{ s.h2 }}">About Us</span>
         </div>
-        <div style="{{ s.aboutTextCol }}">
-          <span style="{{ s.aboutBody }}">Precept designs and builds robotics in the U.S. for manufacturing and energy — complete systems engineered in-house, from the parts up to the finished machine.</span>
-          <span style="{{ s.aboutBody }}">From formulation through to UK in-house manufacturing, we own every stage of the process — giving partners one accountable team and full traceability from molecule to market.</span>
+        <div className="{{ s.aboutTextCol }}">
+          <span className="{{ s.aboutBody }}">Precept designs and builds robotics in the U.S. for manufacturing and energy — complete systems engineered in-house, from the parts up to the finished machine.</span>
+          <span className="{{ s.aboutBody }}">From formulation through to UK in-house manufacturing, we own every stage of the process — giving partners one accountable team and full traceability from molecule to market.</span>
         </div>
-        <div style="{{ s.aboutBtnRow }}">
-          <a href="about.html" style="{{ s.pillLearnMore.style }}" onMouseEnter="{{ s.pillLearnMore.enter }}" onMouseLeave="{{ s.pillLearnMore.leave }}">
-            <span style="{{ s.pillDarkText }}">Learn More</span>
+        <div className="{{ s.aboutBtnRow }}">
+          <a href="about.html" className="{{ s.pillLearnMore.className }}" onMouseEnter="{{ s.pillLearnMore.enter }}" onMouseLeave="{{ s.pillLearnMore.leave }}">
+            <span className="{{ s.pillDarkText }}">Learn More</span>
           </a>
-          <a href="contact.html" style="{{ s.pillContactAbout.style }}" onMouseEnter="{{ s.pillContactAbout.enter }}" onMouseLeave="{{ s.pillContactAbout.leave }}">
-            <span style="{{ s.pillContactAboutText }}">Contact Us</span>
+          <a href="contact.html" className="{{ s.pillContactAbout.className }}" onMouseEnter="{{ s.pillContactAbout.enter }}" onMouseLeave="{{ s.pillContactAbout.leave }}">
+            <span className="{{ s.pillContactAboutText }}">Contact Us</span>
           </a>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ WHY GMP ============ -->
-  <div style="{{ s.sectionPad }}">
-    <div style="{{ s.whyWrap }}" ref="{{ whyRevealRef }}">
-      <div style="{{ s.whyHeadingCol }}">
-        <div style="{{ s.sectionHeadingGroup }}">
-          <span style="{{ s.eyebrow }}">Why GMP</span>
-          <span style="{{ s.h2 }}">A complete pathway, under one roof</span>
+  <div className="{{ s.sectionPad }}">
+    <div className="{{ s.whyWrap }}" ref="{{ whyRevealRef }}">
+      <div className="{{ s.whyHeadingCol }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Why GMP</span>
+          <span className="{{ s.h2 }}">A complete pathway, under one roof</span>
         </div>
-        <a href="services.html" style="{{ s.pillOurServices.style }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
-          <span style="{{ s.pillDarkText }}">Our Services</span>
+        <a href="services.html" className="{{ s.pillOurServices.className }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
+          <span className="{{ s.pillDarkText }}">Our Services</span>
         </a>
       </div>
-      <div style="{{ s.pathwayGrid }}">
+      <div className="{{ s.pathwayGrid }}">
         <sc-for list="{{pathwayItems}}" as="item" hint-placeholder-count="6">
-          <div style="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
-            <div style="{{ item.sweepStyle }}"></div>
-            <span style="{{ item.numStyle }}">{{ item.n }}</span>
-            <span style="{{ item.headStyle }}">{{ item.h }}</span>
-            <span style="{{ item.descStyle }}">{{ item.d }}</span>
-            <svg style="{{ item.arrowStyle }}" width="48" height="16" viewBox="0 0 48 16" fill="none" stroke="{{ item.arrowColor }}" stroke-width="1.5">
+          <div className="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
+            <div className="{{ item.sweepStyle }}"></div>
+            <span className="{{ item.numStyle }}">{{ item.n }}</span>
+            <span className="{{ item.headStyle }}">{{ item.h }}</span>
+            <span className="{{ item.descStyle }}">{{ item.d }}</span>
+            <svg className="{{ item.arrowStyle }}" width="48" height="16" viewBox="0 0 48 16" fill="none" stroke="{{ item.arrowColor }}" stroke-width="1.5">
               <path d="M0 8h44M36 2l8 6-8 6"></path>
             </svg>
           </div>
@@ -183,28 +185,28 @@ to Market</span>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ ACCOUNTABLE TEAM (hover panel row) ============ -->
-  <div data-screen-label="One accountable team" style="{{ s.sectionPad }}">
-    <div style="{{ s.teamWrap }}" ref="{{ teamRevealRef }}">
-      <div style="{{ s.sectionHeadingGroup }}">
-        <span style="{{ s.eyebrow }}">Our Strength</span>
-        <span style="{{ s.h2 }}">One accountable team</span>
+  <div data-screen-label="One accountable team" className="{{ s.sectionPad }}">
+    <div className="{{ s.teamWrap }}" ref="{{ teamRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Our Strength</span>
+        <span className="{{ s.h2 }}">One accountable team</span>
       </div>
-      <div style="{{ s.teamPanelRow }}" onMouseLeave="{{ onTeamRowLeave }}" data-comment-anchor="f4ff2b9192-div">
+      <div className="{{ s.teamPanelRow }}" onMouseLeave="{{ onTeamRowLeave }}" data-comment-anchor="f4ff2b9192-div">
         <sc-for list="{{teamItems}}" as="item" hint-placeholder-count="4">
-          <div style="{{ item.panelStyle }}" onMouseEnter="{{ item.onEnter }}">
-            <div style="{{ item.colorLayerStyle }}"></div>
-            <img src="{{ item.bgSrc }}" alt="" loading="lazy" style="{{ item.imageLayerStyle }}">
-            <div style="{{ item.overlayStyle }}"></div>
-            <div style="{{ item.textColStyle }}">
+          <div className="{{ item.panelStyle }}" onMouseEnter="{{ item.onEnter }}">
+            <div className="{{ item.colorLayerStyle }}"></div>
+            <img src="{{ item.bgSrc }}" alt="" loading="lazy" className="{{ item.imageLayerStyle }}">
+            <div className="{{ item.overlayStyle }}"></div>
+            <div className="{{ item.textColStyle }}">
               <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
-                <span style="{{ s.teamNum }}">{{ item.n }}</span>
+                <span className="{{ s.teamNum }}">{{ item.n }}</span>
               </sc-if>
-              <span style="{{ item.headStyle }}">{{ item.h }}</span>
+              <span className="{{ item.headStyle }}">{{ item.h }}</span>
               <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
-                <span style="{{ item.bodyStyle }}">{{ item.d }}</span>
+                <span className="{{ item.bodyStyle }}">{{ item.d }}</span>
               </sc-if>
             </div>
           </div>
@@ -213,164 +215,164 @@ to Market</span>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ INDUSTRIES / SECTORS (static, click to switch) ============ -->
-  <div data-screen-label="Industries" style="{{ s.sectionPad }}">
-    <div style="{{ s.industriesWrap }}" ref="{{ industriesRevealRef }}">
-      <div style="{{ s.industriesLeft }}" ref="{{ industriesLeftRef }}">
-        <div style="{{ s.sectionHeadingGroup }}">
-          <span style="{{ s.eyebrow }}">Industries</span>
-          <span style="{{ s.h2 }}">Regulated&nbsp; sectors we manufacture for</span>
+  <div data-screen-label="Industries" className="{{ s.sectionPad }}">
+    <div className="{{ s.industriesWrap }}" ref="{{ industriesRevealRef }}">
+      <div className="{{ s.industriesLeft }}" ref="{{ industriesLeftRef }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Industries</span>
+          <span className="{{ s.h2 }}">Regulated&nbsp; sectors we manufacture for</span>
         </div>
-        <div style="{{ s.industriesList }}">
+        <div className="{{ s.industriesList }}">
           <sc-for list="{{sectorListItems}}" as="li" hint-placeholder-count="6">
-            <span style="{{ li.style }}" onClick="{{ li.onClick }}">{{ li.name }}</span>
+            <span className="{{ li.style }}" onClick="{{ li.onClick }}">{{ li.name }}</span>
           </sc-for>
         </div>
         <sc-if value="{{ showSectorsPill }}" hint-placeholder-val="{{ true }}">
-          <a href="sectors.html" style="{{ s.pillSectors.style }}" onMouseEnter="{{ s.pillSectors.enter }}" onMouseLeave="{{ s.pillSectors.leave }}">
-            <span style="{{ s.pillDarkText }}">Sectors We Serve</span>
+          <a href="sectors.html" className="{{ s.pillSectors.className }}" onMouseEnter="{{ s.pillSectors.enter }}" onMouseLeave="{{ s.pillSectors.leave }}">
+            <span className="{{ s.pillDarkText }}">Sectors We Serve</span>
           </a>
         </sc-if>
       </div>
-      <div style="{{ s.industriesRight }}">
-        <div style="{{ s.industriesImgWrap }}">
+      <div className="{{ s.industriesRight }}">
+        <div className="{{ s.industriesImgWrap }}">
           <sc-for list="{{sectorImages}}" as="img" hint-placeholder-count="6">
-            <img src="{{ img.src }}" alt="{{ img.name }} manufacturing" loading="lazy" style="{{ img.style }}">
+            <img src="{{ img.src }}" alt="{{ img.name }} manufacturing" loading="lazy" className="{{ img.style }}">
           </sc-for>
           <sc-for list="{{blindStrips}}" as="strip" hint-placeholder-count="9">
-            <div style="{{ strip.style }}">
-              <img src="{{ strip.imgSrc }}" style="{{ strip.imgStyle }}">
+            <div className="{{ strip.style }}">
+              <img src="{{ strip.imgSrc }}" className="{{ strip.imgStyle }}">
             </div>
           </sc-for>
         </div>
-        <div style="{{ s.industriesCaption }}" onMouseEnter="{{ onCaptionEnter }}" onMouseLeave="{{ onCaptionLeave }}" onClick="{{ onCaptionClick }}">
-          <div style="{{ s.industriesCaptionSweep }}"></div>
-          <span style="{{ s.industriesCaptionTitle }}">{{ activeSector.name }}</span>
-          <span style="{{ s.industriesCaptionBody }}">{{ activeSector.sub }}</span>
+        <div className="{{ s.industriesCaption }}" onMouseEnter="{{ onCaptionEnter }}" onMouseLeave="{{ onCaptionLeave }}" onClick="{{ onCaptionClick }}">
+          <div className="{{ s.industriesCaptionSweep }}"></div>
+          <span className="{{ s.industriesCaptionTitle }}">{{ activeSector.name }}</span>
+          <span className="{{ s.industriesCaptionBody }}">{{ activeSector.sub }}</span>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ SUPPORT / TESTIMONIAL ============ -->
-  <div style="{{ s.sectionPad }}">
-    <div style="{{ s.supportWrap }}" ref="{{ supportRevealRef }}">
-      <div style="{{ s.supportVideoCol }}">
-        <div style="{{ s.supportVideoBox }}">
-          <img src="assets2/support-real.webp" alt="" loading="lazy" style="{{ s.supportBg }}">
-          <div style="{{ s.supportVideoTint }}"></div>
-          <div style="{{ s.supportOverlayTop }}">
-            <span style="{{ s.supportOverlayTitle }}">Support</span>
-            <span style="{{ s.supportOverlaySub }}">Unmatched</span>
+  <div className="{{ s.sectionPad }}">
+    <div className="{{ s.supportWrap }}" ref="{{ supportRevealRef }}">
+      <div className="{{ s.supportVideoCol }}">
+        <div className="{{ s.supportVideoBox }}">
+          <img src="assets2/support-real.webp" alt="" loading="lazy" className="{{ s.supportBg }}">
+          <div className="{{ s.supportVideoTint }}"></div>
+          <div className="{{ s.supportOverlayTop }}">
+            <span className="{{ s.supportOverlayTitle }}">Support</span>
+            <span className="{{ s.supportOverlaySub }}">Unmatched</span>
           </div>
-          <div style="{{ s.playBtn }}">
+          <div className="{{ s.playBtn }}">
             <svg width="100%" height="100%" viewBox="0 0 66.667 66.667" fill="rgb(255,255,255)"><path d="M 33.333 66.667 C 14.924 66.667 0 51.743 0 33.333 C 0 14.924 14.924 0 33.333 0 C 51.743 0 66.667 14.924 66.667 33.333 C 66.667 51.743 51.743 66.667 33.333 66.667 Z M 28.74 21.382 C 28.521 21.236 28.263 21.158 28 21.158 C 27.264 21.158 26.667 21.755 26.667 22.491 L 26.667 44.175 C 26.667 44.439 26.745 44.696 26.891 44.915 C 27.299 45.528 28.127 45.693 28.74 45.285 L 45.003 34.443 C 45.149 34.345 45.275 34.219 45.372 34.073 C 45.781 33.46 45.615 32.632 45.003 32.224 L 28.74 21.382 Z"></path></svg>
           </div>
-          <div style="{{ s.supportOverlayAuthorRow }}">
-            <img src="assets2/support-avatar-real.webp" alt="Ronald Richards" loading="lazy" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; object-fit: cover;">
-            <div style="display: flex; flex-direction: column; flex-grow: 1;">
-              <span style="{{ s.authorName }}">Ronald Richards</span>
-              <span style="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
+          <div className="{{ s.supportOverlayAuthorRow }}">
+            <img src="assets2/support-avatar-real.webp" alt="Ronald Richards" loading="lazy" className="w-[48px] h-[48px] shrink-0 rounded-full object-cover">
+            <div className="flex flex-col grow">
+              <span className="{{ s.authorName }}">Ronald Richards</span>
+              <span className="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div style="{{ s.testimonialCard }}">
-        <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-          <span style="{{ s.testimonialStat }}">100%</span>
-          <span style="{{ s.testimonialSub }}">Reliable Services.</span>
-          <div style="width: 24px; height: 24px;">
-            <div style="width: 17px; height: 12px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/format_quote.svg') center / contain no-repeat; mask: url('assets2/format_quote.svg') center / contain no-repeat;"></div>
+      <div className="{{ s.testimonialCard }}">
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.testimonialStat }}">100%</span>
+          <span className="{{ s.testimonialSub }}">Reliable Services.</span>
+          <div className="w-[24px] h-[24px]">
+            <div className="w-[17px] h-[12px] bg-[rgb(255,255,255)] [mask:url('assets2/format_quote.svg')_center/contain_no-repeat]"></div>
           </div>
-          <span style="{{ s.testimonialBody }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis, ante nec pellentesque consequat, metus odio cursus eros, ut vestibulum sapien diam at mi. Maecenas blandit mattis accumsan. 
+          <span className="{{ s.testimonialBody }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis, ante nec pellentesque consequat, metus odio cursus eros, ut vestibulum sapien diam at mi. Maecenas blandit mattis accumsan.
 
 Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. Aliquam aliquet</span>
         </div>
-        <div style="{{ s.supportAuthorRow }}">
-          <img src="assets2/testimonial-avatar-real.webp" alt="Ronald Richards" loading="lazy" style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; object-fit: cover;">
-          <div style="display: flex; flex-direction: column; flex-grow: 1;">
-            <span style="{{ s.authorName }}">Ronald Richards</span>
-            <span style="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
+        <div className="{{ s.supportAuthorRow }}">
+          <img src="assets2/testimonial-avatar-real.webp" alt="Ronald Richards" loading="lazy" className="w-[48px] h-[48px] shrink-0 rounded-full object-cover">
+          <div className="flex flex-col grow">
+            <span className="{{ s.authorName }}">Ronald Richards</span>
+            <span className="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- ============ LOGO MARQUEE ============ -->
-    <div style="{{ s.marqueeOuter }}">
-      <div ref="{{marqueeRef}}" style="{{ s.marqueeInner }}">
+    <div className="{{ s.marqueeOuter }}">
+      <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
         <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
-          <div style="{{ s.marqueeItem }}">
-            <img src="{{ logo }}" alt="Accreditation logo" style="{{ s.marqueeImg }}">
+          <div className="{{ s.marqueeItem }}">
+            <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
           </div>
         </sc-for>
       </div>
     </div>
 
-    <div style="{{ s.sectionGapHalf }}"></div>
+    <div className="{{ s.sectionGapHalf }}"></div>
 
-    <div style="{{ s.newsCollabOuter }}">
-    <img src="assets2/brand-watermark.svg" alt="" style="{{ s.newsCollabWatermark }}">
+    <div className="{{ s.newsCollabOuter }}">
+    <img src="assets2/brand-watermark.svg" alt="" className="{{ s.newsCollabWatermark }}">
     <!-- ============ NEWS ROOM ============ -->
-    <div style="{{ s.newsHeadRow }}" ref="{{ newsRevealRef }}">
-      <div style="{{ s.sectionHeadingGroup }}">
-        <span style="{{ s.eyebrow }}">News &amp; Insights</span>
-        <span style="{{ s.h2 }}">News Room</span>
+    <div className="{{ s.newsHeadRow }}" ref="{{ newsRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">News &amp; Insights</span>
+        <span className="{{ s.h2 }}">News Room</span>
       </div>
-      <a href="news.html" style="{{ s.pillMoreNews.style }}" onMouseEnter="{{ s.pillMoreNews.enter }}" onMouseLeave="{{ s.pillMoreNews.leave }}">
-        <span style="{{ s.pillDarkText }}">More News</span>
+      <a href="news.html" className="{{ s.pillMoreNews.className }}" onMouseEnter="{{ s.pillMoreNews.enter }}" onMouseLeave="{{ s.pillMoreNews.leave }}">
+        <span className="{{ s.pillDarkText }}">More News</span>
       </a>
     </div>
 
-    <div style="{{ s.newsGrid }}">
+    <div className="{{ s.newsGrid }}">
       <sc-for list="{{newsItems}}" as="item" hint-placeholder-count="3">
-        <div style="{{ item.cardStyle }}" onMouseEnter="{{ item.enter }}" onMouseLeave="{{ item.leave }}">
-          <img src="{{ item.src }}" alt="{{ item.title }}" loading="lazy" style="{{ item.imgStyle }}">
-          <div style="{{ item.overlayStyle }}"></div>
-          <div style="{{ s.newsCardInner }}">
-            <span style="{{ s.newsCardTitle }}">{{ item.title }}</span>
-            <span style="{{ s.newsCardTag }}">{{ item.tag }}</span>
+        <div className="{{ item.cardStyle }}" onMouseEnter="{{ item.enter }}" onMouseLeave="{{ item.leave }}">
+          <img src="{{ item.src }}" alt="{{ item.title }}" loading="lazy" className="{{ item.imgStyle }}">
+          <div className="{{ item.overlayStyle }}"></div>
+          <div className="{{ s.newsCardInner }}">
+            <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
+            <span className="{{ s.newsCardTag }}">{{ item.tag }}</span>
           </div>
         </div>
       </sc-for>
     </div>
 
-    <div style="{{ s.newsCarouselRow }}">
-      <div style="{{ s.arrowPrev.style }}" onMouseEnter="{{ s.arrowPrev.enter }}" onMouseLeave="{{ s.arrowPrev.leave }}">
+    <div className="{{ s.newsCarouselRow }}">
+      <div className="{{ s.arrowPrev.className }}" onMouseEnter="{{ s.arrowPrev.enter }}" onMouseLeave="{{ s.arrowPrev.leave }}">
         <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="{{ s.arrowPrev.strokeColor }}" stroke-width="1.5"><path d="M7 1L1 7l6 6"></path></svg>
       </div>
-      <div style="{{ s.carouselDots }}">
-        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: rgb(17,17,17);"></div>
-        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: rgba(17,17,17,0.25);"></div>
-        <div style="width: 8px; height: 8px; border-radius: 50%; background-color: rgba(17,17,17,0.25);"></div>
+      <div className="{{ s.carouselDots }}">
+        <div className="w-[8px] h-[8px] rounded-full bg-[rgb(17,17,17)]"></div>
+        <div className="w-[8px] h-[8px] rounded-full bg-[rgba(17,17,17,0.25)]"></div>
+        <div className="w-[8px] h-[8px] rounded-full bg-[rgba(17,17,17,0.25)]"></div>
       </div>
-      <div style="{{ s.arrowNext.style }}" onMouseEnter="{{ s.arrowNext.enter }}" onMouseLeave="{{ s.arrowNext.leave }}">
+      <div className="{{ s.arrowNext.className }}" onMouseEnter="{{ s.arrowNext.enter }}" onMouseLeave="{{ s.arrowNext.leave }}">
         <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="{{ s.arrowNext.strokeColor }}" stroke-width="1.5"><path d="M1 1l6 6-6 6"></path></svg>
       </div>
     </div>
 
-    <div style="{{ s.sectionGapHalf }}"></div>
+    <div className="{{ s.sectionGapHalf }}"></div>
 
     <!-- ============ COLLABORATE ============ -->
-    <div style="{{ s.collabOuter }}">
-      <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" style="{{ s.collabBg }}">
-      <canvas ref="{{ collabCanvasRef }}" style="{{ s.collabCanvas }}"></canvas>
-      <div style="{{ s.collabOverlay }}"></div>
-      <div style="{{ s.collabWrap }}">
-        <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
-        <span style="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
-        <div style="{{ s.collabBtnRow }}">
-          <a href="contact.html" style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-            <span style="{{ s.collabGetQuoteText }}">Get a Quote</span>
-            <div style="{{ s.collabGetQuoteIcon }}"></div>
+    <div className="{{ s.collabOuter }}">
+      <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" className="{{ s.collabBg }}">
+      <canvas ref="{{ collabCanvasRef }}" className="{{ s.collabCanvas }}"></canvas>
+      <div className="{{ s.collabOverlay }}"></div>
+      <div className="{{ s.collabWrap }}">
+        <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
+        <span className="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
+        <div className="{{ s.collabBtnRow }}">
+          <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+            <span className="{{ s.collabGetQuoteText }}">Get a Quote</span>
+            <div className="{{ s.collabGetQuoteIcon }}"></div>
           </a>
-          <a href="contact.html" style="{{ s.pillContactUs.style }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
-            <span style="{{ s.collabContactUsText }}">Contact us</span>
+          <a href="contact.html" className="{{ s.pillContactUs.className }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+            <span className="{{ s.collabContactUsText }}">Contact us</span>
           </a>
         </div>
       </div>
@@ -379,105 +381,105 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
   </div>
 
   <!-- ============ FOOTER ============ -->
-  <div style="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
-    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" style="position: absolute; right: -20px; top: 0; pointer-events: none;">
+  <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
+    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" className="absolute -right-[20px] top-0 pointer-events-none">
       <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
     </svg>
 
-    <div style="{{ s.footerTopRow }}">
-      <div style="{{ s.newsletterBox }}">
-<img src="assets2/newsletter-icon.png" alt="" style="width: 72px; height: 72px; object-fit: contain; flex-shrink: 0;">
-        <span style="{{ s.newsletterHeading }}">Subscribe to our newsletter</span>
-        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start; align-self: stretch;">
-          <div style="display: flex; flex-direction: row; padding: 0 4px 0 0; justify-content: space-between; align-items: center; align-self: stretch; box-sizing: border-box;">
-            <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); white-space: nowrap;">name@example.com</span>
-            <div style="width: 12px; height: 10px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/send-underline.svg') center / contain no-repeat; mask: url('assets2/send-underline.svg') center / contain no-repeat; flex-shrink: 0;"></div>
+    <div className="{{ s.footerTopRow }}">
+      <div className="{{ s.newsletterBox }}">
+<img src="assets2/newsletter-icon.png" alt="" className="w-[72px] h-[72px] object-contain shrink-0">
+        <span className="{{ s.newsletterHeading }}">Subscribe to our newsletter</span>
+        <div className="flex flex-col gap-[8px] items-start self-stretch">
+          <div className="flex flex-row pr-[4px] justify-between items-center self-stretch box-border">
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] whitespace-nowrap">name@example.com</span>
+            <div className="w-[12px] h-[10px] bg-[rgb(255,255,255)] [mask:url('assets2/send-underline.svg')_center/contain_no-repeat] shrink-0"></div>
           </div>
-          <div style="height: 1px; background-color: rgba(255,255,255,0.3); align-self: stretch;"></div>
+          <div className="h-[1px] bg-[rgba(255,255,255,0.3)] self-stretch"></div>
         </div>
       </div>
 
-      <div style="{{ s.footerRight }}">
-        <div style="{{ s.breadcrumbRow }}">
-          <span style="{{ s.breadcrumbText }}">Pharmaceutical</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Veterinary</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Medical Device</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Cosmetic</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Supplements</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Biocide</span>
+      <div className="{{ s.footerRight }}">
+        <div className="{{ s.breadcrumbRow }}">
+          <span className="{{ s.breadcrumbText }}">Pharmaceutical</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Veterinary</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Medical Device</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Cosmetic</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Supplements</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Biocide</span>
         </div>
-        <div style="{{ s.footerDivider }}"></div>
+        <div className="{{ s.footerDivider }}"></div>
 
-        <div style="{{ s.footerColsGrid }}">
-          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-            <span style="{{ s.footerColLabel }}">Services</span>
-            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <a href="services.html" style="{{ s.footerLink }}">Development &amp; Formulation</a>
-              <a href="services.html" style="{{ s.footerLink }}">UK In-house Manufacturing</a>
-              <a href="services.html" style="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</a>
-              <a href="services.html" style="{{ s.footerLink }}">Global Supply Chain</a>
-              <a href="services.html" style="{{ s.footerLink }}">Development &amp; Remediation</a>
-              <a href="services.html" style="{{ s.footerLink }}">Cost Optimisation</a>
+        <div className="{{ s.footerColsGrid }}">
+          <div className="flex flex-col gap-[12px] items-start">
+            <span className="{{ s.footerColLabel }}">Services</span>
+            <div className="flex flex-col gap-[8px] items-start">
+              <a href="services.html" className="{{ s.footerLink }}">Development &amp; Formulation</a>
+              <a href="services.html" className="{{ s.footerLink }}">UK In-house Manufacturing</a>
+              <a href="services.html" className="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</a>
+              <a href="services.html" className="{{ s.footerLink }}">Global Supply Chain</a>
+              <a href="services.html" className="{{ s.footerLink }}">Development &amp; Remediation</a>
+              <a href="services.html" className="{{ s.footerLink }}">Cost Optimisation</a>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-            <span style="{{ s.footerColLabel }}">About</span>
-            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <a href="about.html" style="{{ s.footerLink }}">About Us</a>
-              <a href="careers.html" style="{{ s.footerLink }}">Careers</a>
-              <a href="news.html" style="{{ s.footerLink }}">Media &amp; News</a>
-              <a href="about.html#leadership" style="{{ s.footerLink }}">Our Team</a>
-              <a href="contact.html" style="{{ s.footerLink }}">Contact Us</a>
+          <div className="flex flex-col gap-[12px] items-start">
+            <span className="{{ s.footerColLabel }}">About</span>
+            <div className="flex flex-col gap-[8px] items-start">
+              <a href="about.html" className="{{ s.footerLink }}">About Us</a>
+              <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
+              <a href="news.html" className="{{ s.footerLink }}">Media &amp; News</a>
+              <a href="about.html#leadership" className="{{ s.footerLink }}">Our Team</a>
+              <a href="contact.html" className="{{ s.footerLink }}">Contact Us</a>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-            <span style="{{ s.footerColLabel }}">Contact</span>
-            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4);">Email</span>
-              <span style="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
-              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); margin-top: 8px;">Call us</span>
-              <span style="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
-              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); margin-top: 8px;">Address</span>
-              <span style="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+          <div className="flex flex-col gap-[12px] items-start">
+            <span className="{{ s.footerColLabel }}">Contact</span>
+            <div className="flex flex-col gap-[8px] items-start">
+              <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Email</span>
+              <span className="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
+              <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Call us</span>
+              <span className="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
+              <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Address</span>
+              <span className="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <div style="{{ s.socialsCluster }}">
-        <div style="{{ s.socialLg.style }}" onMouseEnter="{{ s.socialLg.enter }}" onMouseLeave="{{ s.socialLg.leave }}">
+      <div className="{{ s.socialsCluster }}">
+        <div className="{{ s.socialLg.className }}" onMouseEnter="{{ s.socialLg.enter }}" onMouseLeave="{{ s.socialLg.leave }}">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4 9l6-6 6 6"></path></svg>
         </div>
-        <div style="{{ s.socialsSmallCol }}">
-          <div style="{{ s.socialA.style }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
-            <div style="width: 13px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/linkedin.svg') center / contain no-repeat; mask: url('assets2/linkedin.svg') center / contain no-repeat;"></div>
+        <div className="{{ s.socialsSmallCol }}">
+          <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
+            <div className="w-[13px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]"></div>
           </div>
-          <div style="{{ s.socialD.style }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
-            <div style="width: 14px; height: 14px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/instagram.svg') center / contain no-repeat; mask: url('assets2/instagram.svg') center / contain no-repeat;"></div>
+          <div className="{{ s.socialD.className }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div className="w-[14px] h-[14px] bg-[rgb(255,255,255)] [mask:url('assets2/instagram.svg')_center/contain_no-repeat]"></div>
           </div>
-          <div style="{{ s.socialC.style }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
-            <div style="width: 11px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/facebook.svg') center / contain no-repeat; mask: url('assets2/facebook.svg') center / contain no-repeat;"></div>
+          <div className="{{ s.socialC.className }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
+            <div className="w-[11px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/facebook.svg')_center/contain_no-repeat]"></div>
           </div>
-          <div style="{{ s.socialB.style }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
+          <div className="{{ s.socialB.className }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
             <svg width="18" height="12" viewBox="0 0 18 12" fill="rgb(255,255,255)"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
           </div>
         </div>
       </div>
     </div>
 
-    <div style="{{ s.footerBottomRow }}">
-      <div style="display: flex; flex-direction: column; gap: 4px;">
-        <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); white-space: pre-line;">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
-        <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4);">Made by Phitany</span>
+    <div className="{{ s.footerBottomRow }}">
+      <div className="flex flex-col gap-[4px]">
+        <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] whitespace-pre-line">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+        <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Made by Phitany</span>
       </div>
-      <div style="{{ s.footerWordmark }}">
-        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.footerWordmarkImg }}">
+      <div className="{{ s.footerWordmark }}">
+        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerWordmarkImg }}">
       </div>
     </div>
   </div>
@@ -803,8 +805,11 @@ class Component extends DCLogic {
     const purple = "rgb(45,38,93)";
     const dark = "rgb(51,51,51)";
     const near = "rgb(17,17,17)";
-    const gradient = "linear-gradient(139.949deg, rgb(37,117,187) 3.69%, rgb(41,37,96) 58.52%, rgb(178,33,38) 137.90%)";
-    const footerGradient = "linear-gradient(111.131deg, rgb(37,117,187) -0.79%, rgb(41,37,96) 62.70%, rgb(178,33,38) 154.63%)";
+    const gradient = "linear-gradient(139.949deg,rgb(37,117,187)_3.69%,rgb(41,37,96)_58.52%,rgb(178,33,38)_137.9%)";
+    const footerGradient = "linear-gradient(111.131deg,rgb(37,117,187)_-0.79%,rgb(41,37,96)_62.7%,rgb(178,33,38)_154.63%)";
+    const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
+    const softShadowTw = "shadow-[0_16px_32px_-14px_rgba(0,0,0,0.3)]";
+    const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
 
     const gutter = pick(20, 40, 64);
     const s = {};
@@ -814,95 +819,51 @@ class Component extends DCLogic {
     const reveal = (key, opts = {}) => {
       const { distance = 18, duration = 800 } = opts;
       const shown = !!revealed[key];
-      return {
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(" + distance + "px)",
-        transition: "opacity " + duration + "ms cubic-bezier(0.16,1,0.3,1), transform " + duration + "ms cubic-bezier(0.16,1,0.3,1)",
-      };
+      return (shown ? "opacity-100 translate-y-0 " : `opacity-0 translate-y-[${distance}px] `) +
+        `transition-[opacity,transform] duration-[${duration}ms] ease-[cubic-bezier(0.16,1,0.3,1)]`;
     };
     const revealRef = (key) => (el) => this._observeReveal(key, el);
 
-    s.root = {
-      position: "relative",
-      width: "100%",
-      background: "#fff",
-      fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-      display: "flex",
-      flexDirection: "column",
-      overflowX: "clip",
-      overflowY: "clip",
-    };
+    s.root = "gmp-font relative w-full bg-white flex flex-col overflow-x-clip overflow-y-clip";
 
-    s.sectionPad = { padding: pick("0 20px", "0 40px", "0 64px"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.aboutSectionPad = { padding: pick("0 20px 0 0", "0 40px 0 0", "0 64px 0 0"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.sectionGap = { width: "100%", height: pick(38, 66, 96), flexShrink: 0 };
-    s.sectionGapHalf = { width: "100%", height: pick(19, 33, 48), flexShrink: 0 };
+    s.sectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px]";
+    s.aboutSectionPad = "relative z-[1] box-border pl-0 py-0 pr-[20px] md:pr-[40px] xl:pr-[64px]";
+    s.sectionGap = "w-full h-[38px] md:h-[66px] xl:h-[96px] shrink-0";
+    s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
 
-    s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
-    s.h2 = { fontWeight: 500, fontSize: pick(30, 38, 48), lineHeight: pick("36px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };
-    s.sectionHeadingGroup = { display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" };
+    s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
+    s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
+    s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
-    s.pillDark = {
-      borderRadius: 32,
-      background: near,
-      display: "inline-flex",
-      flexDirection: "row",
-      gap: 6,
-      padding: pick("12px 18px", "14px 20px", "16px 24px"),
-      justifyContent: "center",
-      alignItems: "center",
-      boxSizing: "border-box",
-      cursor: "pointer",
-      alignSelf: "flex-start",
-      flexShrink: 0,
-      textDecoration: "none",
-    };
-    s.pillDarkText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: "#fff", whiteSpace: "nowrap" };
+    s.pillDark = "rounded-[32px] inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline";
+    s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
 
     // ---------- GENERIC HOVER HELPERS ----------
-    const hoverShadow = "0 16px 32px -12px rgba(178,33,38,0.45)";
-    const softShadow = "0 16px 32px -14px rgba(0,0,0,0.3)";
     const makePill = (key) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          ...s.pillDark,
-          background: hovered ? red : purple,
-          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
+        className: s.pillDark + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-[${purple}] ${noShadowTw} translate-y-0`),
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
-    const makeHeroCta = (key, base) => {
+    const makeHeroCta = (key, baseClass) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          ...base,
-          background: hovered ? red : "#fff",
-          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-          textDecoration: "none",
-        },
+        className: baseClass + " no-underline transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-white ${noShadowTw} translate-y-0`),
         textColor: hovered ? "#fff" : near,
         iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
-    const makeCircle = (key, base) => {
+    const makeCircle = (key, baseClass) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          ...base,
-          background: hovered ? red : "transparent",
-          boxShadow: hovered ? hoverShadow : "inset 0 0 0 1px rgba(255,255,255,0.3)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0`),
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
@@ -910,12 +871,8 @@ class Component extends DCLogic {
     const makeArrow = (key) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          ...s.carouselArrowBase,
-          background: hovered ? red : "rgba(0,0,0,0.05)",
-          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease",
-        },
+        className: s.carouselArrowBase + " transition-[background,box-shadow] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw}` : `bg-[rgba(0,0,0,0.05)] ${noShadowTw}`),
         strokeColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
@@ -923,90 +880,42 @@ class Component extends DCLogic {
     };
 
     // ---------- HERO ----------
-    s.heroWrap = { position: "relative", width: "100%", height: isMobile ? "auto" : "100vh", minHeight: "100vh", display: "flex", flexDirection: "column", boxSizing: "border-box", overflow: "hidden" };
-    s.heroBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", transform: revealed.hero ? "scale(1)" : "scale(1.05)", transition: "transform 1800ms cubic-bezier(0.16,1,0.3,1)" };
-    s.heroOverlay = { position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", pointerEvents: "none" };
-    s.heroContent = {
-      position: "relative",
-      zIndex: 1,
-      display: "flex",
-      flexDirection: "column",
-      flexGrow: 1,
-      padding: pick("20px 20px 32px", "32px 40px 48px", "40px 64px 64px"),
-      boxSizing: "border-box",
-      gap: pick(40, 56, 72),
-    };
+    s.heroWrap = "relative w-full " + (isMobile ? "h-auto" : "h-screen") + " min-h-screen flex flex-col box-border overflow-hidden";
+    s.heroBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.hero ? "scale-100" : "scale-[1.05]");
+    s.heroOverlay = "absolute inset-0 bg-[rgba(0,0,0,0.4)] pointer-events-none";
+    s.heroContent = "relative z-[1] flex flex-col grow box-border pt-[20px] px-[20px] pb-[32px] md:pt-[32px] md:px-[40px] md:pb-[48px] xl:pt-[40px] xl:px-[64px] xl:pb-[64px] gap-[40px] md:gap-[56px] xl:gap-[72px]";
     const navScrolled = this.state.navScrolled;
-    s.heroTopbar = {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 40,
-      background: navScrolled ? "#fff" : "transparent",
-      boxShadow: navScrolled ? "0 1px 0 rgba(17,17,17,0.08)" : "0 0 0 rgba(0,0,0,0)",
-      padding: pick("10px 20px", "12px 40px", "12px 64px"),
-      boxSizing: "border-box",
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: isMobile ? 10 : 16,
-      flexWrap: "nowrap",
-      transition: "background 0.3s ease, box-shadow 0.3s ease",
-    };
-    s.logoLink = { display: "flex", flexShrink: 0 };
-    s.heroLogo = { width: pick(180, 220, 260), height: "auto" };
+    s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
+      (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
+    s.logoLink = "flex shrink-0";
+    s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
     s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
-    s.heroNav = { display: isDesktop ? "flex" : "none", flexDirection: "row", gap: 32, alignItems: "center" };
-    s.heroTopbarRightGroup = { display: "flex", flexDirection: "row", alignItems: "center", gap: isMobile ? 10 : 16, flexShrink: 0 };
+    s.heroNav = "hidden xl:flex flex-row gap-[32px] items-center";
+    s.heroTopbarRightGroup = "flex flex-row items-center gap-[10px] md:gap-[16px] shrink-0";
     const menuOpen = this.state.mobileMenuOpen;
-    s.hamburgerBtn = { display: isDesktop ? "none" : "flex", flexDirection: "column", gap: 5, alignItems: "center", justifyContent: "center", width: 28, height: 28, cursor: "pointer", flexShrink: 0, zIndex: 20 };
-    const barBase = { width: 20, height: 2, background: navScrolled ? near : "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease, background 0.3s ease" };
-    const barBaseOnDark = { width: 20, height: 2, background: "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease" };
-    s.hamburgerBar1 = { ...barBase };
-    s.hamburgerBar2 = { ...barBase };
-    s.hamburgerBar3 = { ...barBase };
-    s.hamburgerBarX1 = { ...barBaseOnDark, transform: "rotate(45deg) translate(5px, 5px)" };
-    s.hamburgerBarX2 = { ...barBaseOnDark, transform: "rotate(-45deg) translate(5px, -5px)" };
-    s.mobileNavOverlay = {
-      position: "fixed",
-      inset: 0,
-      background: "rgb(41,37,96)",
-      display: "flex",
-      flexDirection: "column",
-      gap: 40,
-      padding: pick("20px 20px 40px", "24px 40px 48px", "24px 40px 48px"),
-      boxSizing: "border-box",
-      zIndex: 100,
-      opacity: menuOpen ? 1 : 0,
-      pointerEvents: menuOpen ? "auto" : "none",
-      transform: menuOpen ? "translateY(0)" : "translateY(-16px)",
-      transition: "opacity 0.3s ease, transform 0.3s ease",
-    };
-    s.mobileNavCloseRow = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" };
-    s.mobileNavLogo = { width: pick(150, 190, 190), height: "auto" };
-    s.mobileNavLinks = { display: "flex", flexDirection: "column", gap: pick(24, 28, 28), alignItems: "flex-start", marginTop: 16 };
-    s.mobileNavLink = { fontWeight: 500, fontSize: pick(28, 32, 32), lineHeight: "1.3", letterSpacing: "-0.7px", color: "#fff", cursor: "pointer", textDecoration: "none" };
+    s.hamburgerBtn = "flex xl:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
+    const barBase = "w-[20px] h-[2px] rounded-[2px] [transition:transform_0.25s_ease,opacity_0.2s_ease,background_0.3s_ease] " + (navScrolled ? `bg-[${near}]` : "bg-white");
+    const barBaseOnDark = "w-[20px] h-[2px] rounded-[2px] bg-white [transition:transform_0.25s_ease,opacity_0.2s_ease]";
+    s.hamburgerBar1 = barBase;
+    s.hamburgerBar2 = barBase;
+    s.hamburgerBar3 = barBase;
+    s.hamburgerBarX1 = barBaseOnDark + " [transform:rotate(45deg)_translate(5px,5px)]";
+    s.hamburgerBarX2 = barBaseOnDark + " [transform:rotate(-45deg)_translate(5px,-5px)]";
+    s.mobileNavOverlay = "fixed inset-0 bg-[rgb(41,37,96)] flex flex-col gap-[40px] box-border z-[100] py-[20px] px-[20px] pb-[40px] md:py-[24px] md:px-[40px] md:pb-[48px] [transition:opacity_0.3s_ease,transform_0.3s_ease] " +
+      (menuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-[16px]");
+    s.mobileNavCloseRow = "flex flex-row items-center justify-between";
+    s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
+    s.mobileNavLinks = "flex flex-col gap-[24px] md:gap-[28px] items-start mt-[16px]";
+    s.mobileNavLink = "font-medium text-[28px] md:text-[32px] leading-[1.3] tracking-[-0.7px] text-white cursor-pointer no-underline";
     const CURRENT_PAGE = "home";
     const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
       const active = key === CURRENT_PAGE;
-      return {
-        fontWeight: 500,
-        fontSize: 14,
-        lineHeight: "20px",
-        color: navScrolled ? ((hovered || active) ? red : dark) : "#fff",
-        whiteSpace: "nowrap",
-        cursor: "pointer",
-        opacity: navScrolled ? 1 : ((hovered || active) ? 1 : 0.85),
-        borderBottomWidth: 1,
-        borderBottomStyle: "solid",
-        borderBottomColor: navScrolled ? ((hovered || active) ? red : "transparent") : ((hovered || active) ? "rgba(255,255,255,0.8)" : "transparent"),
-        paddingBottom: 2,
-        transition: "color 0.2s ease, opacity 0.2s ease, border-color 0.2s ease",
-        textDecoration: "none",
-      };
+      const emph = hovered || active;
+      const color = navScrolled ? (emph ? red : dark) : "#fff";
+      const opacity = navScrolled ? 1 : (emph ? 1 : 0.85);
+      const borderColor = navScrolled ? (emph ? red : "transparent") : (emph ? "rgba(255,255,255,0.8)" : "transparent");
+      return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
     };
     s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
     s.navHomeStyle = navLinkStyle(0, "home");
@@ -1021,246 +930,217 @@ class Component extends DCLogic {
     s.navEnterServices = navEnter(2);
     s.navEnterInnovations = navEnter(3);
     s.navEnterSectors = navEnter(4);
-    const heroCtaBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    const heroCtaBase = "rounded-[32px] flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
     s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
-    s.heroCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
-    const heroCtaTopbarBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 6, padding: isMobile ? "8px 14px" : "9px 16px", justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.heroCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaCtl.textColor}]`;
+    const heroCtaTopbarBase = "rounded-[32px] flex flex-row gap-[6px] py-[8px] px-[14px] md:py-[9px] md:px-[16px] justify-center items-center box-border cursor-pointer shrink-0";
     const topbarCtaHovered = this.state.hoveredKey === "heroCtaTopbar";
     s.heroCtaTopbarCtl = {
-      style: {
-        ...heroCtaTopbarBase,
-        background: topbarCtaHovered ? red : (navScrolled ? purple : "#fff"),
-        boxShadow: topbarCtaHovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-        transform: topbarCtaHovered ? "translateY(-2px)" : "translateY(0)",
-        transition: "background 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        textDecoration: "none",
-      },
+      className: heroCtaTopbarBase + " no-underline transition-[background,box-shadow,transform] duration-300 ease-in-out " +
+        (topbarCtaHovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : (navScrolled ? `bg-[${purple}] ${noShadowTw} translate-y-0` : `bg-white ${noShadowTw} translate-y-0`)),
       textColor: topbarCtaHovered || navScrolled ? "#fff" : near,
       iconColor: topbarCtaHovered || navScrolled ? "rgb(255,255,255)" : "rgb(17,17,17)",
       enter: () => this.setState({ hoveredKey: "heroCtaTopbar" }),
       leave: () => this.setState({ hoveredKey: null }),
     };
-    s.heroCtaTopbarText = { fontWeight: 600, fontSize: isMobile ? 13 : 14, lineHeight: isMobile ? "16px" : "18px", color: s.heroCtaTopbarCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
-    s.heroCtaTopbarIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaTopbarCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
-    s.heroCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
+    s.heroCtaTopbarText = `font-semibold text-[${isMobile ? 13 : 14}px] leading-[${isMobile ? 16 : 18}px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaTopbarCtl.textColor}]`;
+    s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
-    s.heroHeadlineWrap = { display: "flex", flexDirection: "column", flexGrow: 1, justifyContent: "flex-end", ...reveal("hero", { distance: 26, duration: 1000 }) };
-    s.heroTextBlock = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40) };
-    s.heroHeadingGroup = { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: pick(16, 20, 24) };
+    s.heroHeadlineWrap = "flex flex-col grow justify-end " + reveal("hero", { distance: 26, duration: 1000 });
+    s.heroTextBlock = "flex flex-col gap-[24px] md:gap-[32px] xl:gap-[40px]";
+    s.heroHeadingGroup = "flex flex-col items-start gap-[16px] md:gap-[20px] xl:gap-[24px]";
     const heroScale = isMobile ? 1 : (this.state.heroFontScale || 1);
-    s.heroHeadline = {
-      fontWeight: 500,
-      fontSize: pick(
-        "48px",
-        "calc(clamp(44px, min(9vw, 12vh), 88px) * " + heroScale + ")",
-        "calc(clamp(56px, min(7.2vw, 11vh), 104px) * " + heroScale + ")"
-      ),
-      textAlign: "left",
-      lineHeight: pick("50px", "1.05", "1.05"),
-      letterSpacing: pick("-1.5px", "-0.04em", "-0.048em"),
-      color: "#fff",
-      whiteSpace: "pre-line",
-    };
-    s.heroSubtext = { fontWeight: 400, fontSize: pick(16, 17, 18), lineHeight: "26px", color: "rgba(255,255,255,0.85)", textAlign: "left", maxWidth: 480 };
-    const heroInlineCtaBase = { borderRadius: 32, display: "inline-flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    const heroFontSize = pick(
+      "48px",
+      "calc(clamp(44px,min(9vw,12vh),88px)*" + heroScale + ")",
+      "calc(clamp(56px,min(7.2vw,11vh),104px)*" + heroScale + ")"
+    );
+    s.heroHeadline = `font-medium text-left text-white whitespace-pre-line text-[${heroFontSize}] leading-[${pick("50px", "1.05", "1.05")}] tracking-[${pick("-1.5px", "-0.04em", "-0.048em")}]`;
+    s.heroSubtext = "font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[rgba(255,255,255,0.85)] text-left max-w-[480px]";
+    const heroInlineCtaBase = "rounded-[32px] inline-flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
     s.heroInlineCtaCtl = makeHeroCta("heroInlineCta", heroInlineCtaBase);
-    s.heroInlineCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroInlineCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
-    s.heroInlineCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroInlineCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
-    s.heroDivider = { height: 1, background: "#fff", opacity: 0.9 };
-    s.heroStats = { display: "grid", gridTemplateColumns: pick("1fr 1fr", "repeat(4, 1fr)", "repeat(4, 1fr)"), rowGap: pick(16, 0, 0), columnGap: pick(16, 20, 32) };
-    s.heroStatLabel = { fontWeight: 500, fontSize: pick(15, 16, 17), lineHeight: "22px", color: "#fff" };
+    s.heroInlineCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroInlineCtaCtl.textColor}]`;
+    s.heroInlineCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroInlineCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroDivider = "h-[1px] bg-white opacity-90";
+    s.heroStats = "grid " + pick("grid-cols-2", "grid-cols-4", "grid-cols-4") + " " + pick("gap-y-[16px]", "gap-y-0", "gap-y-0") + " gap-x-[16px] md:gap-x-[20px] xl:gap-x-[32px]";
+    s.heroStatLabel = "font-medium text-[15px] md:text-[16px] xl:text-[17px] leading-[22px] text-white";
 
     // ---------- ABOUT ----------
-    s.aboutWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("about") };
-    s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "calc(100% + " + gutter + "px)", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden" };
-    s.aboutImage = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
-    s.aboutWatermark = { position: "absolute", top: pick(-40, -60, -90), right: pick("-28%", "-10%", "-4%"), height: pick("34vh", "52vh", "68vh"), width: "auto", pointerEvents: "none", zIndex: 0, opacity: 1 };
-    s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
-    s.aboutLabel = { fontWeight: 600, fontSize: 18, lineHeight: "24px", letterSpacing: "-0.7px", color: dark };
-    s.aboutBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
+    s.aboutWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start " + (isDesktop ? "items-stretch" : "items-start") + " max-w-[1600px] ml-0 " + reveal("about");
+    s.aboutImageCol = "relative " + (isDesktop ? "w-[48%]" : `w-[calc(100%+${gutter}px)]`) + " max-w-none aspect-[4/3] shrink-0 overflow-hidden";
+    s.aboutImage = "absolute inset-0 w-full h-full object-cover";
+    s.aboutContent = "flex flex-col gap-[28px] items-start justify-center grow " + (isDesktop ? "w-auto" : "w-full") + " box-border " + (isDesktop ? "pl-0" : `pl-[${gutter}px]`);
+    s.aboutWatermark = `absolute top-[${pick(-40, -60, -90)}px] ${pick("right-[-28%]", "right-[-10%]", "right-[-4%]")} ${pick("h-[34vh]", "h-[52vh]", "h-[68vh]")} w-auto pointer-events-none z-0 opacity-100`;
+    s.aboutTextCol = "flex flex-col gap-[16px] items-start self-stretch";
+    s.aboutLabel = `font-semibold text-[18px] leading-[24px] tracking-[-0.7px] text-[${dark}]`;
+    s.aboutBody = `font-normal text-[16px] leading-[24px] text-[${dark}]`;
     s.pillLearnMore = makePill("learnMore");
     const makeSecondaryPill = (key) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          borderRadius: 32,
-          background: "#fff",
-          border: "1px solid " + (hovered ? red : purple),
-          display: "inline-flex",
-          flexDirection: "row",
-          gap: 6,
-          padding: pick("12px 18px", "14px 20px", "16px 24px"),
-          justifyContent: "center",
-          alignItems: "center",
-          boxSizing: "border-box",
-          cursor: "pointer",
-          alignSelf: "flex-start",
-          flexShrink: 0,
-          transition: "border-color 0.2s ease, color 0.2s ease",
-          textDecoration: "none",
-        },
+        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color] duration-200 ease-in-out " +
+          (hovered ? `border-[${red}]` : `border-[${purple}]`),
         textColor: hovered ? red : purple,
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
-    s.aboutBtnRow = { display: "flex", flexDirection: "row", gap: 12, flexWrap: "wrap", alignItems: "center" };
+    s.aboutBtnRow = "flex flex-row gap-[12px] flex-wrap items-center";
     s.pillContactAbout = makeSecondaryPill("contactAbout");
-    s.pillContactAboutText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillContactAbout.textColor, whiteSpace: "nowrap" };
+    s.pillContactAboutText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactAbout.textColor}]`;
 
     // ---------- WHY GMP / PATHWAY ----------
-    s.whyWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), alignItems: "flex-start", maxWidth: 1600, margin: "0 auto", ...reveal("why") };
-    s.whyHeadingCol = { display: "flex", flexDirection: "column", gap: 24, alignItems: "flex-start", width: isDesktop ? 380 : "100%", flexShrink: 0 };
-    s.pathwayGrid = { flexGrow: 1, width: "100%", display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gridAutoRows: pick("auto", "minmax(240px, auto)", "minmax(260px, auto)"), gap: pick(20, 24, 28) };
+    s.whyWrap = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-start max-w-[1600px] mx-auto " + reveal("why");
+    s.whyHeadingCol = "flex flex-col gap-[24px] items-start " + (isDesktop ? "w-[380px]" : "w-full") + " shrink-0";
+    s.pathwayGrid = "grow w-full grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " " + pick("auto-rows-auto", "auto-rows-[minmax(240px,auto)]", "auto-rows-[minmax(260px,auto)]") + " gap-[20px] md:gap-[24px] xl:gap-[28px]";
     s.pillOurServices = makePill("ourServices");
 
     // ---------- TEAM BAND (hover panel row) ----------
-    s.teamWrap = { display: "flex", flexDirection: "column", gap: pick(28, 36, 44), maxWidth: 1600, margin: "0 auto", width: "100%", ...reveal("team") };
-    s.teamPanelRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(12, 14, 16), width: "100%", height: isMobile ? "auto" : pick(336, 416, 496) };
-    s.teamBg = { position: "absolute", inset: 0, width: "100%", height: "100%" };
+    s.teamWrap = "flex flex-col gap-[28px] md:gap-[36px] xl:gap-[44px] max-w-[1600px] mx-auto w-full " + reveal("team");
+    s.teamPanelRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[12px] md:gap-[14px] xl:gap-[16px] w-full " + (isMobile ? "h-auto" : pick("h-[336px]", "h-[416px]", "h-[496px]"));
+    s.teamBg = "absolute inset-0 w-full h-full";
     const teamColors = ["#2D265D", "#423362", "#842339", "#B22126"];
-    s.teamNum = { fontWeight: 200, fontSize: pick(24, 28, 32), lineHeight: "1", letterSpacing: "-1px", color: "rgba(255,255,255,0.6)" };
-    s.teamHeadingBase = { fontWeight: 500, color: "#fff" };
-    s.teamBodyBase = { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)" };
+    s.teamNum = "font-extralight text-[24px] md:text-[28px] xl:text-[32px] leading-none tracking-[-1px] text-[rgba(255,255,255,0.6)]";
+    s.teamBodyBase = "font-normal text-[15px] leading-[22px] text-[rgba(255,255,255,0.9)]";
     // ---------- INDUSTRIES (single block, rotates on scroll) ----------
-    s.industriesWrap = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: pick(16, 48, 80), maxWidth: 1600, margin: "0 auto", alignItems: "flex-start", width: "100%", height: isMobile ? "100%" : "auto", minHeight: 0, boxSizing: "border-box", ...reveal("industries") };
-    s.industriesLeft = { display: "flex", flexDirection: "column", gap: pick(10, 40, 40), alignItems: "flex-start", width: isMobile ? "100%" : pick(0, 280, 380), flexShrink: 0 };
-    s.industriesList = { display: "flex", flexDirection: "column", gap: pick(5, 25, 31), alignItems: "flex-start" };
-    s.industryItemDim = { opacity: 0.3, fontWeight: 500, fontSize: pick(15, 18, 18), lineHeight: pick("20px", "24px", "24px"), letterSpacing: "-0.7px", color: dark, cursor: "pointer", transition: "opacity 0.3s ease, color 0.3s ease" };
-    s.industryItemActive = { fontWeight: 700, fontSize: pick(15, 18, 18), lineHeight: pick("20px", "24px", "24px"), letterSpacing: "-0.7px", color: red, cursor: "pointer", transition: "opacity 0.3s ease, color 0.3s ease" };
-    s.industriesRight = { position: "relative", flexGrow: 1, width: "100%", height: isMobile ? "100%" : "auto", minHeight: 0, display: "flex", flexDirection: "column", alignItems: "center" };
+    s.industriesWrap = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[16px] md:gap-[48px] xl:gap-[80px] max-w-[1600px] mx-auto items-start w-full " + (isMobile ? "h-full" : "h-auto") + " min-h-0 box-border " + reveal("industries");
+    s.industriesLeft = "flex flex-col gap-[10px] md:gap-[40px] items-start " + (isMobile ? "w-full" : pick("w-0", "w-[280px]", "w-[380px]")) + " shrink-0";
+    s.industriesList = "flex flex-col gap-[5px] md:gap-[25px] xl:gap-[31px] items-start";
+    s.industryItemDim = `opacity-30 font-medium text-[15px] md:text-[18px] leading-[20px] md:leading-[24px] tracking-[-0.7px] text-[${dark}] cursor-pointer transition-[opacity,color] duration-300 ease-in-out`;
+    s.industryItemActive = `font-bold text-[15px] md:text-[18px] leading-[20px] md:leading-[24px] tracking-[-0.7px] text-[${red}] cursor-pointer transition-[opacity,color] duration-300 ease-in-out`;
+    s.industriesRight = "relative grow w-full " + (isMobile ? "h-full" : "h-auto") + " min-h-0 flex flex-col items-center";
     const industriesFitHeight = this.state.industriesLeftH || pick(220, 300, 360);
-    s.industriesImgWrap = { position: "relative", zIndex: 0, isolation: "isolate", width: "100%", aspectRatio: isMobile ? "4 / 3" : undefined, height: isMobile ? undefined : industriesFitHeight, flexGrow: isMobile ? 1 : undefined, minHeight: isMobile ? 150 : undefined, overflow: "hidden" };
-    s.industriesCaption = { background: "rgb(245,245,245)", display: "flex", flexDirection: "column", padding: pick("10px 14px", "28px", "32px"), gap: pick(2, 4, 4), alignItems: "flex-start", boxSizing: "border-box", marginTop: isMobile ? 0 : -60, position: "relative", zIndex: 1, width: isMobile ? "100%" : "92%", maxWidth: 1300, flexShrink: 0, overflow: "hidden", cursor: "pointer" };
-    s.industriesCaptionSweep = { position: "absolute", inset: 0, background: gradient, transformOrigin: "left center", transform: this.state.hoveredCaption ? "scaleX(1)" : "scaleX(0)", transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)", zIndex: 0 };
-    s.industriesCaptionTitle = { position: "relative", zIndex: 1, fontWeight: 500, fontSize: pick(16, 28, 32), lineHeight: pick("20px", "40px", "40px"), color: this.state.hoveredCaption ? "#fff" : dark, transition: "color 0.3s ease" };
-    s.industriesCaptionBody = { position: "relative", zIndex: 1, fontWeight: 400, fontSize: pick(13, 16, 16), lineHeight: pick("18px", "24px", "24px"), color: this.state.hoveredCaption ? "rgba(255,255,255,0.9)" : dark, transition: "color 0.3s ease" };
+    s.industriesImgWrap = "relative z-0 [isolation:isolate] w-full overflow-hidden " +
+      (isMobile ? "aspect-[4/3] grow min-h-[150px]" : `h-[${industriesFitHeight}px]`);
+    s.industriesCaption = "bg-[rgb(245,245,245)] flex flex-col items-start box-border relative z-[1] shrink-0 overflow-hidden cursor-pointer " +
+      pick("py-[10px] px-[14px]", "p-[28px]", "p-[32px]") + " " + pick("gap-[2px]", "gap-[4px]", "gap-[4px]") + " " +
+      (isMobile ? "mt-0" : "-mt-[60px]") + " " + (isMobile ? "w-full" : "w-[92%]") + " max-w-[1300px]";
+    s.industriesCaptionSweep = `absolute inset-0 bg-[${gradient}] [transform-origin:left_center] transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-0 ` + (this.state.hoveredCaption ? "scale-x-100" : "scale-x-0");
+    s.industriesCaptionTitle = "relative z-[1] font-medium text-[16px] md:text-[28px] xl:text-[32px] leading-[20px] md:leading-[40px] transition-colors duration-300 ease-in-out " + (this.state.hoveredCaption ? "text-white" : `text-[${dark}]`);
+    s.industriesCaptionBody = "relative z-[1] font-normal text-[13px] md:text-[16px] leading-[18px] md:leading-[24px] transition-colors duration-300 ease-in-out " + (this.state.hoveredCaption ? "text-[rgba(255,255,255,0.9)]" : `text-[${dark}]`);
     s.pillSectors = makePill("sectors");
 
     // ---------- SUPPORT / TESTIMONIAL ----------
     const supportBoxHeight = pick(360, 460, 580);
-    s.supportWrap = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 40, 32), maxWidth: 1600, margin: "0 auto", alignItems: "stretch", ...reveal("support") };
-    s.supportVideoCol = { display: "flex", flexDirection: "column", flexGrow: 1, width: "100%" };
-    s.supportVideoBox = { position: "relative", width: "100%", height: supportBoxHeight, overflow: "hidden" };
-    s.supportBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.supportVideoTint = { position: "absolute", inset: 0, background: "rgba(0,0,0,0.4)", pointerEvents: "none" };
-    s.playBtn = { position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: pick(56, 68, 80), height: pick(56, 68, 80), cursor: "pointer", zIndex: 2 };
-    s.supportOverlayTop = { position: "absolute", left: pick(20, 28, 40), top: pick(20, 28, 40), zIndex: 2, display: "flex", flexDirection: "column", gap: 4 };
-    s.supportOverlayTitle = { fontWeight: 600, fontSize: pick(28, 36, 44), lineHeight: "1.1", color: "#fff" };
-    s.supportOverlaySub = { fontWeight: 600, fontSize: pick(16, 18, 20), lineHeight: "1.3", color: "#fff" };
-    s.supportOverlayAuthorRow = { position: "absolute", left: pick(20, 28, 40), bottom: pick(20, 28, 40), zIndex: 2, display: "flex", flexDirection: "row", gap: 12, alignItems: "center" };
-    s.supportAuthorRow = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center" };
-    s.authorName = { fontWeight: 600, fontSize: pick(16, 18, 20), lineHeight: "1.2", color: "#fff" };
-    s.authorRole = { fontWeight: 400, fontSize: pick(13, 14, 15), lineHeight: "1.3", color: "rgba(255,255,255,0.85)" };
+    s.supportWrap = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] xl:gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto items-stretch " + reveal("support");
+    s.supportVideoCol = "flex flex-col grow w-full";
+    s.supportVideoBox = `relative w-full h-[${supportBoxHeight}px] overflow-hidden`;
+    s.supportBg = "absolute inset-0 w-full h-full object-cover";
+    s.supportVideoTint = "absolute inset-0 bg-[rgba(0,0,0,0.4)] pointer-events-none";
+    s.playBtn = `absolute left-1/2 top-1/2 [transform:translate(-50%,-50%)] ${pick("w-[56px]", "w-[68px]", "w-[80px]")} ${pick("h-[56px]", "h-[68px]", "h-[80px]")} cursor-pointer z-[2]`;
+    s.supportOverlayTop = `absolute ${pick("left-[20px]", "left-[28px]", "left-[40px]")} ${pick("top-[20px]", "top-[28px]", "top-[40px]")} z-[2] flex flex-col gap-[4px]`;
+    s.supportOverlayTitle = "font-semibold text-[28px] md:text-[36px] xl:text-[44px] leading-[1.1] text-white";
+    s.supportOverlaySub = "font-semibold text-[16px] md:text-[18px] xl:text-[20px] leading-[1.3] text-white";
+    s.supportOverlayAuthorRow = `absolute ${pick("left-[20px]", "left-[28px]", "left-[40px]")} ${pick("bottom-[20px]", "bottom-[28px]", "bottom-[40px]")} z-[2] flex flex-row gap-[12px] items-center`;
+    s.supportAuthorRow = "flex flex-row gap-[16px] items-center";
+    s.authorName = "font-semibold text-[16px] md:text-[18px] xl:text-[20px] leading-[1.2] text-white";
+    s.authorRole = "font-normal text-[13px] md:text-[14px] xl:text-[15px] leading-[1.3] text-[rgba(255,255,255,0.85)]";
 
-    s.testimonialCard = { background: gradient, height: isDesktop ? supportBoxHeight : "auto", display: "flex", flexDirection: "column", padding: pick("32px", "40px", "48px"), justifyContent: "space-between", gap: 32, alignItems: "flex-start", boxSizing: "border-box", width: isDesktop ? 480 : "100%", flexShrink: 0 };
-    s.testimonialStat = { fontWeight: 600, fontSize: 40, lineHeight: "44px", color: "#fff" };
-    s.testimonialSub = { fontWeight: 600, fontSize: 22, lineHeight: "28px", color: "#fff" };
-    s.testimonialBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff", whiteSpace: "pre-line" };
+    s.testimonialCard = `bg-[${gradient}] ` + (isDesktop ? `h-[${supportBoxHeight}px]` : "h-auto") + " flex flex-col " +
+      pick("p-[32px]", "p-[40px]", "p-[48px]") + " justify-between gap-[32px] items-start box-border " + (isDesktop ? "w-[480px]" : "w-full") + " shrink-0";
+    s.testimonialStat = "font-semibold text-[40px] leading-[44px] text-white";
+    s.testimonialSub = "font-semibold text-[22px] leading-[28px] text-white";
+    s.testimonialBody = "font-normal text-[16px] leading-[24px] text-white whitespace-pre-line";
 
     // ---------- MARQUEE ----------
     const supportGap = pick(32, 40, 32);
-    s.marqueeOuter = { width: "100%", maxWidth: 1600, overflow: "hidden", borderRadius: 8, background: "rgb(245,245,245)", display: "flex", alignItems: "center", padding: pick("28px 16px", "36px 20px", "48px 24px"), boxSizing: "border-box", margin: supportGap + "px auto" };
-    s.marqueeInner = { display: "flex", flexDirection: "row", gap: 24, alignItems: "center", width: "max-content", animation: "gmp-marquee 30s linear infinite" };
-    s.marqueeItem = { width: pick(120, 150, 170), height: pick(44, 56, 64), display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 };
-    s.marqueeImg = { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" };
+    s.marqueeOuter = `w-full max-w-[1600px] overflow-hidden rounded-[8px] bg-[rgb(245,245,245)] flex items-center box-border mx-auto my-[${supportGap}px] ` +
+      pick("py-[28px] px-[16px]", "py-[36px] px-[20px]", "py-[48px] px-[24px]");
+    s.marqueeInner = "flex flex-row gap-[24px] items-center w-max [animation:gmp-marquee_30s_linear_infinite]";
+    s.marqueeItem = `flex items-center justify-center shrink-0 ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
+    s.marqueeImg = "max-w-full max-h-full object-contain";
 
     // ---------- NEWS ----------
-    s.newsHeadRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: 24, alignItems: isMobile ? "flex-start" : "flex-end", justifyContent: "space-between", width: "100%", ...reveal("news") };
-    s.newsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(20, 24, 32), width: "100%", margin: pick("32px 0 0", "40px 0 0", "48px 0 0") };
-    s.newsCarouselRow = { display: "flex", flexDirection: "row", gap: 16, alignItems: "center", justifyContent: "center", marginTop: pick(28, 32, 40) };
-    s.carouselArrow = { width: 48, height: 48, borderRadius: 100, background: "rgba(0,0,0,0.05)", display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
-    s.carouselDots = { display: "flex", flexDirection: "row", gap: 8, alignItems: "center", padding: "0 8px" };
-    s.newsCard = { position: "relative", width: "100%", minHeight: pick(280, 340, 400), overflow: "hidden" };
-    s.newsCardInner = { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", padding: pick("24px", "32px", "40px"), display: "flex", flexDirection: "column", justifyContent: "space-between", boxSizing: "border-box", pointerEvents: "none" };
-    s.newsCardTitle = { fontWeight: 500, fontSize: pick(18, 19, 20), lineHeight: "1.35", letterSpacing: "-0.4px", color: "#fff" };
-    s.newsCardTag = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
+    s.newsHeadRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[24px] " + (isMobile ? "items-start" : "items-end") + " justify-between w-full " + reveal("news");
+    s.newsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[20px] md:gap-[24px] xl:gap-[32px] w-full " + pick("mt-[32px]", "mt-[40px]", "mt-[48px]");
+    s.newsCarouselRow = "flex flex-row gap-[16px] items-center justify-center " + pick("mt-[28px]", "mt-[32px]", "mt-[40px]");
+    s.carouselArrow = "w-[48px] h-[48px] rounded-[100px] bg-[rgba(0,0,0,0.05)] flex justify-center items-center cursor-pointer shrink-0";
+    s.carouselDots = "flex flex-row gap-[8px] items-center px-[8px]";
+    s.newsCard = `relative w-full ${pick("min-h-[280px]", "min-h-[340px]", "min-h-[400px]")} overflow-hidden`;
+    s.newsCardInner = "absolute left-0 top-0 w-full h-full flex flex-col justify-between box-border pointer-events-none " + pick("p-[24px]", "p-[32px]", "p-[40px]");
+    s.newsCardTitle = "font-medium text-[18px] md:text-[19px] xl:text-[20px] leading-[1.35] tracking-[-0.4px] text-white";
+    s.newsCardTag = "font-normal text-[16px] leading-[24px] text-white";
     s.pillMoreNews = makePill("moreNews");
-    s.pillMoreNews.style.alignSelf = isMobile ? "flex-start" : "flex-end";
-    s.carouselArrowBase = { width: 48, height: 48, borderRadius: 100, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    s.pillMoreNews.className += " " + (isMobile ? "self-start" : "self-end");
+    s.carouselArrowBase = "w-[48px] h-[48px] rounded-[100px] flex justify-center items-center cursor-pointer shrink-0";
     s.arrowPrev = makeArrow("arrowPrev");
     s.arrowNext = makeArrow("arrowNext");
     const newsShown = !!revealed.news;
     const newsCardCtl = (i) => {
       const hovered = this.state.hoveredNews === i;
       return {
-        cardStyle: {
-          position: "relative", width: "100%", minHeight: pick(280, 340, 400), overflow: "hidden",
-          opacity: newsShown ? 1 : 0,
-          transform: newsShown ? "translateY(0)" : "translateY(16px)",
-          boxShadow: hovered ? softShadow : "0 0 0 rgba(0,0,0,0)",
-          transition: "opacity 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 80) + "ms, transform 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 80) + "ms, box-shadow 0.3s ease",
-        },
-        imgStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", objectFit: "cover", transform: hovered ? "scale(1.06)" : "scale(1)", transition: "transform 0.4s ease" },
-        overlayStyle: { position: "absolute", left: 0, top: 0, width: "100%", height: "100%", background: hovered ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.5)", pointerEvents: "none", transition: "background 0.3s ease" },
+        cardStyle: `relative w-full ${pick("min-h-[280px]", "min-h-[340px]", "min-h-[400px]")} overflow-hidden ` +
+          (newsShown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[16px]") + " " +
+          (hovered ? softShadowTw : noShadowTw) +
+          ` [transition:opacity_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 80}ms,transform_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 80}ms,box-shadow_0.3s_ease]`,
+        imgStyle: "absolute left-0 top-0 w-full h-full object-cover transition-transform duration-[400ms] ease-in-out " + (hovered ? "scale-[1.06]" : "scale-100"),
+        overlayStyle: "absolute left-0 top-0 w-full h-full pointer-events-none transition-[background] duration-300 ease-in-out " + (hovered ? "bg-[rgba(0,0,0,0.35)]" : "bg-[rgba(0,0,0,0.5)]"),
         enter: () => this.setState({ hoveredNews: i }),
         leave: () => this.setState({ hoveredNews: -1 }),
       };
     };
 
     // ---------- NEWS/COLLABORATE OUTER (watermark) ----------
-    s.newsCollabOuter = { position: "relative", width: "100%", overflow: "visible" };
-    s.newsCollabWatermark = { position: "absolute", top: 0, left: pick("-45%", "-18%", "-5.5%"), height: pick("42vh", "85vh", "119vh"), width: "auto", pointerEvents: "none", zIndex: -1, opacity: 1 };
+    s.newsCollabOuter = "relative w-full overflow-visible";
+    s.newsCollabWatermark = `absolute top-0 ${pick("left-[-45%]", "left-[-18%]", "left-[-5.5%]")} ${pick("h-[42vh]", "h-[85vh]", "h-[119vh]")} w-auto pointer-events-none -z-10 opacity-100`;
 
     // ---------- COLLABORATE ----------
-    s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
-    s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.collabCanvas = { position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" };
-    s.collabOverlay = { position: "absolute", inset: 0, background: "rgba(17,17,17,0.55)", pointerEvents: "none" };
-    s.collabWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 24, alignItems: "center", maxWidth: 640, margin: "0 auto", textAlign: "center", ...reveal("collab") };
-    s.collabHeading = { fontWeight: 500, fontSize: pick(32, 40, 48), lineHeight: pick("38px", "46px", "56px"), letterSpacing: "-1.5px", color: "#fff", textAlign: "center" };
-    s.collabBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "rgba(255,255,255,0.85)", textAlign: "center" };
-    s.collabBtnRow = { display: "flex", flexDirection: "row", gap: 8, flexWrap: "wrap", justifyContent: "center" };
-    const collabPillBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 6, padding: pick("12px 18px", "14px 20px", "16px 24px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center ` +
+      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
+    s.collabBg = "absolute inset-0 w-full h-full object-cover";
+    s.collabCanvas = "absolute inset-0 w-full h-full pointer-events-none";
+    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.55)] pointer-events-none";
+    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
+    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
+    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
+    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
+    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
     s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
     s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
-    s.collabGetQuoteText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillGetQuote.textColor, whiteSpace: "nowrap" };
-    s.collabContactUsText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillContactUs.textColor, whiteSpace: "nowrap" };
-    s.collabGetQuoteIcon = { width: 14, height: 14, backgroundColor: s.pillGetQuote.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
+    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
+    s.collabContactUsText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactUs.textColor}]`;
+    s.collabGetQuoteIcon = `w-[14px] h-[14px] bg-[${s.pillGetQuote.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
     // ---------- FOOTER ----------
-    s.footerWrap = { position: "relative", zIndex: 2, width: "100%", background: footerGradient, overflow: "hidden", padding: pick("40px 20px 32px", "56px 40px 40px", "64px 64px 48px"), boxSizing: "border-box", display: "flex", flexDirection: "column", gap: pick(40, 48, 56), ...reveal("footer", { distance: 14, duration: 900 }) };
-    s.footerTopRow = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 40, 56) };
-    s.newsletterBox = { width: isDesktop ? 320 : "100%", background: "rgba(255,255,255,0.1)", display: "flex", flexDirection: "column", gap: 20, padding: 24, boxSizing: "border-box", flexShrink: 0 };
-    s.newsletterHeading = { fontWeight: 500, fontSize: 26, lineHeight: "30px", letterSpacing: "-1px", color: "#fff" };
-    s.footerRight = { flexGrow: 1, display: "flex", flexDirection: "column", gap: pick(28, 32, 36) };
-    s.breadcrumbRow = { display: "flex", flexDirection: "row", flexWrap: "wrap", gap: pick(12, 18, 24) };
-    s.breadcrumbText = { fontWeight: 400, fontSize: pick(14, 15, 16), lineHeight: "24px", color: "#fff", whiteSpace: "nowrap" };
-    s.footerDivider = { height: 1, background: "rgba(255,255,255,0.2)" };
-    s.footerColsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(28, 32, 24) };
-    s.footerColLabel = { fontWeight: 400, fontSize: 18, lineHeight: "24px", color: "rgba(255,255,255,0.4)" };
-    s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff", textDecoration: "none" };
-    s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: isDesktop ? "stretch" : "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
+    s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
+      pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
+    s.footerTopRow = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[40px] xl:gap-[56px]";
+    s.newsletterBox = (isDesktop ? "w-[320px]" : "w-full") + " bg-[rgba(255,255,255,0.1)] flex flex-col gap-[20px] p-[24px] box-border shrink-0";
+    s.newsletterHeading = "font-medium text-[26px] leading-[30px] tracking-[-1px] text-white";
+    s.footerRight = "grow flex flex-col gap-[28px] md:gap-[32px] xl:gap-[36px]";
+    s.breadcrumbRow = "flex flex-row flex-wrap gap-[12px] md:gap-[18px] xl:gap-[24px]";
+    s.breadcrumbText = "font-normal text-[14px] md:text-[15px] xl:text-[16px] leading-[24px] text-white whitespace-nowrap";
+    s.footerDivider = "h-[1px] bg-[rgba(255,255,255,0.2)]";
+    s.footerColsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[28px] md:gap-[32px] xl:gap-[24px]";
+    s.footerColLabel = "font-normal text-[18px] leading-[24px] text-[rgba(255,255,255,0.4)]";
+    s.footerLink = "font-normal text-[16px] leading-[24px] text-white no-underline";
+    s.socialsCluster = "flex flex-row gap-[16px] " + (isDesktop ? "items-stretch" : "items-center") + " shrink-0 " + (isDesktop ? "self-center" : "self-start");
     s.socialsSmallCol = isDesktop
-      ? { display: "grid", gridTemplateColumns: "repeat(2, 40px)", gridAutoRows: "40px", gap: 12, order: 0 }
-      : { display: "flex", flexDirection: "row", gap: 12, alignItems: "center", flexWrap: "wrap" };
-    const makeBrandCircle = (key, base, brandColor) => {
+      ? "grid grid-cols-[repeat(2,40px)] auto-rows-[40px] gap-[12px] order-none"
+      : "flex flex-row gap-[12px] items-center flex-wrap";
+    const makeBrandCircle = (key, baseClass, brandColor) => {
       const hovered = this.state.hoveredKey === key;
+      const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
       return {
-        style: {
-          ...base,
-          background: hovered ? brandColor : "transparent",
-          boxShadow: hovered ? ("0 16px 32px -12px " + brandColor.replace("rgb", "rgba").replace(")", ",0.45)")) : "inset 0 0 0 1px rgba(255,255,255,0.3)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${brandColor}] ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
     const socialLgBase = isDesktop
-      ? { width: 56, borderRadius: 999, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0, order: 1 }
-      : { width: 56, height: 56, borderRadius: 56, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+      ? "w-[56px] rounded-[999px] flex justify-center items-center cursor-pointer shrink-0 order-1"
+      : "w-[56px] h-[56px] rounded-[56px] flex justify-center items-center cursor-pointer shrink-0";
     s.socialLg = makeCircle("socialLg", socialLgBase);
-    const socialSmallBase = { width: 40, height: 40, borderRadius: 40, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    const socialSmallBase = "w-[40px] h-[40px] rounded-[40px] flex justify-center items-center cursor-pointer shrink-0";
     s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
     s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
     s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
     s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
-    s.footerBottomRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: 16, justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.15)" };
-    s.footerWordmark = { display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "flex-end", gap: 4 };
-    s.footerWordmarkImg = { width: pick(180, 220, 260), height: "auto" };
+    s.footerBottomRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[16px] justify-between " + (isMobile ? "items-start" : "items-end") + " pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+    s.footerWordmark = "flex flex-col " + (isMobile ? "items-start" : "items-end") + " gap-[4px]";
+    s.footerWordmarkImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
 
     // ---------- DATA ----------
     const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
@@ -1279,46 +1159,24 @@ class Component extends DCLogic {
     const pathwayItems = pathwayData.map((item, i) => {
       const hovered = this.state.hoveredPathway === i;
       const canExpand = !isMobile && (i + 1) % pathwayCols !== 0;
+      const containerWidth = hovered && canExpand ? `w-[calc(100%+${pathwayGap}px)]` : "w-full";
       return {
         n: item.n,
         h: item.h,
         d: item.d,
-        containerStyle: {
-          position: "relative",
-          overflow: "hidden",
-          borderLeft: isMobile ? "none" : "1px solid rgba(0,0,0,0.2)",
-          borderTop: isMobile ? "1px solid rgba(0,0,0,0.2)" : "none",
-          minHeight: isMobile ? "auto" : undefined,
-          width: hovered && canExpand ? "calc(100% + " + pathwayGap + "px)" : "100%",
-          zIndex: hovered ? 2 : 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: 12,
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
-          textAlign: "left",
-          padding: pick("24px 8px", "28px 24px", "32px 32px"),
-          boxSizing: "border-box",
-          cursor: "pointer",
-          opacity: whyShown ? 1 : 0,
-          transform: whyShown ? "translateY(0)" : "translateY(16px)",
-          boxShadow: hovered ? "0 24px 48px -16px rgba(0,0,0,0.35)" : "0 0 0 rgba(0,0,0,0)",
-          transition: "opacity 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 70) + "ms, transform 700ms cubic-bezier(0.16,1,0.3,1) " + (i * 70) + "ms, box-shadow 0.25s ease, width 0.35s cubic-bezier(0.65,0,0.35,1)",
-        },
-        sweepStyle: {
-          position: "absolute",
-          inset: 0,
-          background: gradient,
-          transformOrigin: (this.state.pathwayOrigin[i] || "left") + " center",
-          transform: hovered ? "scaleX(1)" : "scaleX(0)",
-          transition: "transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
-          zIndex: 0,
-          pointerEvents: "none",
-        },
-        numStyle: { position: "relative", zIndex: 1, fontWeight: 600, fontSize: pick(17, 18, 19), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
-        headStyle: { position: "relative", zIndex: 1, fontWeight: 500, fontSize: pick(20, 22, 25), lineHeight: "1.3", letterSpacing: "-0.723px", color: hovered ? "rgb(255,255,255)" : red, whiteSpace: "pre-line", transition: "color 0.25s ease" },
-        descStyle: { position: "relative", zIndex: 1, fontWeight: 400, fontSize: pick(15, 16, 17), lineHeight: "1.5", color: hovered ? "rgb(255,255,255)" : dark, transition: "color 0.25s ease" },
-        arrowStyle: { position: "absolute", zIndex: 1, top: 24, right: 24, opacity: (hovered || !isDesktop) ? 1 : 0, transform: (hovered || !isDesktop) ? "translateX(0)" : "translateX(-8px)", transition: "opacity 0.25s ease, transform 0.25s ease", pointerEvents: "none" },
+        containerStyle: "relative overflow-hidden flex flex-col gap-[12px] items-start justify-start text-left box-border cursor-pointer " +
+          (isMobile ? "border-t border-solid border-[rgba(0,0,0,0.2)]" : "border-l border-solid border-[rgba(0,0,0,0.2)]") + " " +
+          containerWidth + " " + (hovered ? "z-[2]" : "z-[1]") + " " +
+          pick("py-[24px] px-[8px]", "py-[28px] px-[24px]", "py-[32px] px-[32px]") + " " +
+          (whyShown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[16px]") + " " +
+          (hovered ? "shadow-[0_24px_48px_-16px_rgba(0,0,0,0.35)]" : noShadowTw) +
+          ` [transition:opacity_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 70}ms,transform_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 70}ms,box-shadow_0.25s_ease,width_0.35s_cubic-bezier(0.65,0,0.35,1)]`,
+        sweepStyle: `absolute inset-0 bg-[${gradient}] [transform-origin:${this.state.pathwayOrigin[i] || "left"}_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none ` + (hovered ? "scale-x-100" : "scale-x-0"),
+        numStyle: "relative z-[1] font-semibold text-[17px] md:text-[18px] xl:text-[19px] leading-[1.3] tracking-[-0.723px] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${dark}]`),
+        headStyle: "relative z-[1] font-medium text-[20px] md:text-[22px] xl:text-[25px] leading-[1.3] tracking-[-0.723px] whitespace-pre-line transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${red}]`),
+        descStyle: "relative z-[1] font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[1.5] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${dark}]`),
+        arrowStyle: "absolute z-[1] top-[24px] right-[24px] pointer-events-none transition-[opacity,transform] duration-[250ms] ease-in-out " +
+          ((hovered || !isDesktop) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[8px]"),
         arrowColor: hovered ? "rgb(255,255,255)" : dark,
         onEnter: () => this.setState((st) => ({ hoveredPathway: i, pathwayOrigin: { ...st.pathwayOrigin, [i]: "left" } })),
         onLeave: () => this.setState((st) => ({ hoveredPathway: -1, pathwayOrigin: { ...st.pathwayOrigin, [i]: "right" } })),
@@ -1343,33 +1201,17 @@ class Component extends DCLogic {
         isActive,
         bgId: i === 0 ? "accountable-bg" : "accountable-bg-" + i,
         bgSrc: i === 0 ? "assets2/team-1-real.webp" : i === 3 ? "assets2/team-4-real.webp" : "assets2/placeholder-team-" + (i + 1) + ".jpg",
-        colorLayerStyle: { position: "absolute", inset: 0, background: teamColors[i], zIndex: 0 },
-        imageLayerStyle: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: isActive ? 0.55 : 0, transition: "opacity 0.9s ease" },
-        panelStyle: {
-          position: "relative", overflow: "hidden", borderRadius: 0, boxSizing: "border-box",
-          flex: isMobile ? "none" : (isActive ? "3 1 0%" : "1 1 0%"),
-          width: isMobile ? "100%" : "auto",
-          height: isMobile ? pick(320, 360, 400) : "100%",
-          cursor: isMobile ? "default" : "pointer",
-          transition: teamFlexEase,
-          flexShrink: 0,
-        },
-        overlayStyle: { position: "absolute", inset: 0, background: "rgba(41,37,96,0.6)", opacity: isActive ? 0.75 : 0, transition: "opacity 0.9s ease", pointerEvents: "none", zIndex: 1 },
-        textColStyle: {
-          position: "absolute", inset: 0, zIndex: 2, boxSizing: "border-box",
-          display: "flex", flexDirection: "column", gap: 12,
-          padding: isActive ? pick("24px", "32px", "40px") : "24px",
-          justifyContent: isActive ? "space-between" : "center",
-          alignItems: isActive ? "flex-start" : "center",
-          textAlign: isActive ? "left" : "center",
-        },
-        headStyle: {
-          fontWeight: 500, color: "#fff",
-          fontSize: isActive ? pick(24, 28, 34) : pick(17, 18, 19),
-          lineHeight: 1.25,
-          transition: "font-size 0.9s ease",
-        },
-        bodyStyle: { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: "rgba(255,255,255,0.9)", width: pick("100%", 240, 300) },
+        colorLayerStyle: `absolute inset-0 bg-[${teamColors[i]}] z-0`,
+        imageLayerStyle: "absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] ease-in-out " + (isActive ? "opacity-55" : "opacity-0"),
+        panelStyle: "relative overflow-hidden rounded-none box-border shrink-0 [transition:flex_1.1s_cubic-bezier(0.22,1,0.36,1)] " +
+          (isMobile ? `flex-none w-full h-[${pick(320, 360, 400)}px] cursor-default` : `[flex:${isActive ? "3_1_0%" : "1_1_0%"}] w-auto h-full cursor-pointer`),
+        overlayStyle: "absolute inset-0 bg-[rgba(41,37,96,0.6)] transition-opacity duration-[900ms] ease-in-out pointer-events-none z-[1] " + (isActive ? "opacity-75" : "opacity-0"),
+        textColStyle: "absolute inset-0 z-[2] box-border flex flex-col gap-[12px] " +
+          (isActive ? pick("p-[24px]", "p-[32px]", "p-[40px]") : "p-[24px]") + " " +
+          (isActive ? "justify-between items-start text-left" : "justify-center items-center text-center"),
+        headStyle: "font-medium text-white leading-[1.25] transition-[font-size] duration-[900ms] ease-in-out " +
+          (isActive ? pick("text-[24px]", "text-[28px]", "text-[34px]") : pick("text-[17px]", "text-[18px]", "text-[19px]")),
+        bodyStyle: `font-normal text-[15px] leading-[22px] text-[rgba(255,255,255,0.9)] ${pick("w-full", "w-[240px]", "w-[300px]")}`,
         onEnter: isMobile ? undefined : (() => this.setState({ hoveredTeam: i })),
       };
     });
@@ -1400,14 +1242,7 @@ class Component extends DCLogic {
       id: j === 3 ? "industries-img" : "industries-img-" + j,
       src: sec.img,
       name: sec.name,
-      style: {
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        opacity: j === industryActive ? 1 : 0,
-      },
+      style: "absolute inset-0 w-full h-full object-cover " + (j === industryActive ? "opacity-100" : "opacity-0"),
     }));
     const activeSector = sectorData[industryActive];
     const blindsPhase = this.state.blindsPhase || "idle";
@@ -1418,21 +1253,12 @@ class Component extends DCLogic {
     const stripFitHeight = industriesFitHeight;
     const blindStrips = Array.from({ length: numStrips }, (_, k) => {
       const delay = growing ? k * 70 : 0;
+      const transitionClass = blindsPhase === "reset" ? "[transition:none]" : `[transition:clip-path_1.6s_cubic-bezier(0.76,0,0.24,1)_${delay}ms]`;
       return {
         imgSrc: stripTargetSrc,
-        imgStyle: { position: "absolute", bottom: 0, left: -(k * 100) + "%", width: (numStrips * 100) + "%", height: stripFitHeight, objectFit: "cover" },
-        style: {
-          position: "absolute",
-          left: (k * 100) / numStrips + "%",
-          top: 0,
-          width: 100 / numStrips + "%",
-          height: "100%",
-          overflow: "hidden",
-          clipPath: growing ? "inset(0% 0 0 0)" : "inset(100% 0 0 0)",
-          transition: blindsPhase === "reset" ? "none" : "clip-path 1.6s cubic-bezier(0.76,0,0.24,1) " + delay + "ms",
-          zIndex: 2,
-          pointerEvents: "none",
-        },
+        imgStyle: `absolute bottom-0 left-[${-(k * 100)}%] w-[${numStrips * 100}%] h-[${stripFitHeight}px] object-cover`,
+        style: `absolute left-[${(k * 100) / numStrips}%] top-0 w-[${100 / numStrips}%] h-full overflow-hidden z-[2] pointer-events-none ` +
+          (growing ? "[clip-path:inset(0%_0_0_0)]" : "[clip-path:inset(100%_0_0_0)]") + " " + transitionClass,
       };
     });
 
