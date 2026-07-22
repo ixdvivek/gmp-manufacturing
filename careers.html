@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <x-dc>
@@ -19,6 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
   <style>
     html, body { margin: 0; padding: 0; background: #fff; }
+    .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -27,318 +29,318 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Careers — Responsive" style="{{ s.root }}">
+<div data-screen-label="GMP Mfd Careers — Responsive" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
-  <div style="{{ s.heroTopbar }}">
-    <a href="index.html" style="{{ s.logoLink }}">
-      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.heroLogo }}">
+  <div className="{{ s.heroTopbar }}">
+    <a href="index.html" className="{{ s.logoLink }}">
+      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.heroLogo }}">
     </a>
-    <div style="{{ s.heroNav }}">
-      <a href="index.html" style="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
-      <a href="about.html" style="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
-      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
-        <a href="services.html" style="{{ s.navServicesStyle }}">Services</a>
+    <div className="{{ s.heroNav }}">
+      <a href="index.html" className="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
+      <a href="about.html" className="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
+      <div className="flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="services.html" className="{{ s.navServicesStyle }}">Services</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
-      <a href="innovations.html" style="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
-      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center; cursor: pointer;" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
-        <a href="sectors.html" style="{{ s.navSectorsStyle }}">Sectors</a>
+      <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
+      <div className="flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
       </div>
     </div>
-    <div style="{{ s.heroTopbarRightGroup }}">
-      <a href="contact.html" style="{{ s.heroCtaTopbarCtl.style }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
-        <span style="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+    <div className="{{ s.heroTopbarRightGroup }}">
+      <a href="contact.html" className="{{ s.heroCtaTopbarCtl.className }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+        <span className="{{ s.heroCtaTopbarText }}">Get A Quote</span>
         <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
-          <div style="{{ s.heroCtaTopbarIconStyle }}"></div>
+          <div className="{{ s.heroCtaTopbarIconStyle }}"></div>
         </sc-if>
       </a>
-      <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-        <div style="{{ s.hamburgerBar1 }}"></div>
-        <div style="{{ s.hamburgerBar2 }}"></div>
-        <div style="{{ s.hamburgerBar3 }}"></div>
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBar1 }}"></div>
+        <div className="{{ s.hamburgerBar2 }}"></div>
+        <div className="{{ s.hamburgerBar3 }}"></div>
       </div>
     </div>
   </div>
 
   <!-- ============ MOBILE NAV OVERLAY ============ -->
-  <div style="{{ s.mobileNavOverlay }}">
-    <div style="{{ s.mobileNavCloseRow }}">
-      <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" style="{{ s.mobileNavLogo }}">
-      <div style="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-        <div style="{{ s.hamburgerBarX1 }}"></div>
-        <div style="{{ s.hamburgerBarX2 }}"></div>
+  <div className="{{ s.mobileNavOverlay }}">
+    <div className="{{ s.mobileNavCloseRow }}">
+      <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBarX1 }}"></div>
+        <div className="{{ s.hamburgerBarX2 }}"></div>
       </div>
     </div>
-    <div style="{{ s.mobileNavLinks }}">
-      <a href="index.html" style="{{ s.mobileNavLink }}">Home</a>
-      <a href="about.html" style="{{ s.mobileNavLink }}">About Us</a>
-      <a href="services.html" style="{{ s.mobileNavLink }}">Services</a>
-      <a href="innovations.html" style="{{ s.mobileNavLink }}">Innovations</a>
-      <a href="sectors.html" style="{{ s.mobileNavLink }}">Sectors</a>
+    <div className="{{ s.mobileNavLinks }}">
+      <a href="index.html" className="{{ s.mobileNavLink }}">Home</a>
+      <a href="about.html" className="{{ s.mobileNavLink }}">About Us</a>
+      <a href="services.html" className="{{ s.mobileNavLink }}">Services</a>
+      <a href="innovations.html" className="{{ s.mobileNavLink }}">Innovations</a>
+      <a href="sectors.html" className="{{ s.mobileNavLink }}">Sectors</a>
     </div>
-    <a href="contact.html" style="{{ s.heroCtaCtl.style }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
-      <span style="{{ s.heroCtaText }}">Get A Quote</span>
-      <div style="{{ s.heroCtaIconStyle }}"></div>
+    <a href="contact.html" className="{{ s.heroCtaCtl.className }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
+      <span className="{{ s.heroCtaText }}">Get A Quote</span>
+      <div className="{{ s.heroCtaIconStyle }}"></div>
     </a>
   </div>
 
   <!-- ============ PAGE BANNER ============ -->
-  <div data-screen-label="Banner" style="{{ s.bannerWrap }}">
-    <div style="{{ s.imgPlaceholder }}">
+  <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
+    <div className="{{ s.imgPlaceholder }}">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
     </div>
-    <div style="{{ s.bannerOverlay }}"></div>
-    <div style="{{ s.bannerContent }}">
-      <span style="{{ s.eyebrowOnDark }}">Join Our Team</span>
-      <span style="{{ s.bannerHeadline }}">Careers</span>
-      <span style="{{ s.bannerSubtext }}">Build your career with a UK-owned pharmaceutical manufacturer trusted by partners across 30+ countries.</span>
+    <div className="{{ s.bannerOverlay }}"></div>
+    <div className="{{ s.bannerContent }}">
+      <span className="{{ s.eyebrowOnDark }}">Join Our Team</span>
+      <span className="{{ s.bannerHeadline }}">Careers</span>
+      <span className="{{ s.bannerSubtext }}">Build your career with a UK-owned pharmaceutical manufacturer trusted by partners across 30+ countries.</span>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ LIFE AT GMP ============ -->
-  <div data-screen-label="Life at GMP" style="{{ s.aboutSectionPad }}">
-    <div style="{{ s.aboutWrap }}" ref="{{ lifeRevealRef }}">
-      <div style="{{ s.aboutImageCol }}">
-        <div style="{{ s.imgPlaceholderLight }}">
+  <div data-screen-label="Life at GMP" className="{{ s.aboutSectionPad }}">
+    <div className="{{ s.aboutWrap }}" ref="{{ lifeRevealRef }}">
+      <div className="{{ s.aboutImageCol }}">
+        <div className="{{ s.imgPlaceholderLight }}">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
         </div>
       </div>
-      <div style="{{ s.aboutContent }}">
-        <div style="{{ s.sectionHeadingGroup }}">
-          <span style="{{ s.eyebrow }}">Life at GMP</span>
-          <span style="{{ s.h2 }}">More than a manufacturing floor</span>
+      <div className="{{ s.aboutContent }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Life at GMP</span>
+          <span className="{{ s.h2 }}">More than a manufacturing floor</span>
         </div>
-        <div style="{{ s.aboutTextCol }}">
-          <span style="{{ s.aboutBody }}">Our people are the reason partners trust us with their products. Across formulation, manufacturing, quality and operations, everyone at GMP works from the same UK site — so ideas move fast and everyone sees the impact of their work.</span>
-          <span style="{{ s.aboutBody }}">We're a close-knit, hands-on team that takes pride in getting the details right, and we back that up with real investment in training, safety and career progression.</span>
+        <div className="{{ s.aboutTextCol }}">
+          <span className="{{ s.aboutBody }}">Our people are the reason partners trust us with their products. Across formulation, manufacturing, quality and operations, everyone at GMP works from the same UK site — so ideas move fast and everyone sees the impact of their work.</span>
+          <span className="{{ s.aboutBody }}">We're a close-knit, hands-on team that takes pride in getting the details right, and we back that up with real investment in training, safety and career progression.</span>
         </div>
       </div>
     </div>
-    <div style="{{ s.cultureStrip }}">
-      <div style="{{ s.imgPlaceholderLight }}">
+    <div className="{{ s.cultureStrip }}">
+      <div className="{{ s.imgPlaceholderLight }}">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
       </div>
-      <div style="{{ s.imgPlaceholderLight }}">
+      <div className="{{ s.imgPlaceholderLight }}">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
       </div>
-      <div style="{{ s.imgPlaceholderLight }}">
+      <div className="{{ s.imgPlaceholderLight }}">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
       </div>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ WHY WORK HERE ============ -->
-  <div data-screen-label="Why Work Here" style="{{ s.sectionPad }}">
-    <div style="{{ s.mvvWrap }}" ref="{{ whyWorkRevealRef }}">
-      <div style="{{ s.sectionHeadingGroup }}">
-        <span style="{{ s.eyebrow }}">Why Work Here</span>
-        <span style="{{ s.h2 }}">Why join GMP</span>
+  <div data-screen-label="Why Work Here" className="{{ s.sectionPad }}">
+    <div className="{{ s.mvvWrap }}" ref="{{ whyWorkRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Why Work Here</span>
+        <span className="{{ s.h2 }}">Why join GMP</span>
       </div>
-      <div style="{{ s.whyWorkGrid }}">
+      <div className="{{ s.whyWorkGrid }}">
         <sc-for list="{{whyWorkItems}}" as="item" hint-placeholder-count="4">
-          <div style="{{ s.mvvCard }}">
-            <div style="{{ s.mvvIconPlaceholder }}">
+          <div className="{{ s.mvvCard }}">
+            <div className="{{ s.mvvIconPlaceholder }}">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
             </div>
-            <span style="{{ s.mvvCardLabel }}">{{ item.h }}</span>
-            <span style="{{ s.mvvCardBody }}">{{ item.d }}</span>
+            <span className="{{ s.mvvCardLabel }}">{{ item.h }}</span>
+            <span className="{{ s.mvvCardBody }}">{{ item.d }}</span>
           </div>
         </sc-for>
       </div>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ CURRENT OPENINGS ============ -->
-  <div data-screen-label="Current Openings" style="{{ s.sectionPad }}">
-    <div style="{{ s.openingsWrap }}" ref="{{ openingsRevealRef }}">
-      <div style="{{ s.sectionHeadingGroup }}">
-        <span style="{{ s.eyebrow }}">Careers</span>
-        <span style="{{ s.h2 }}">Current Openings</span>
+  <div data-screen-label="Current Openings" className="{{ s.sectionPad }}">
+    <div className="{{ s.openingsWrap }}" ref="{{ openingsRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Careers</span>
+        <span className="{{ s.h2 }}">Current Openings</span>
       </div>
-      <div style="{{ s.openingsCard }}">
-        <span style="{{ s.openingsCardText }}">We don't have any open positions right now, but we're always keen to hear from great people. Register your interest below and we'll be in touch as soon as a suitable role opens up.</span>
-        <a href="#apply" style="{{ s.pillGetQuote.style }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-          <span style="{{ s.collabGetQuoteText }}">Register Your Interest</span>
+      <div className="{{ s.openingsCard }}">
+        <span className="{{ s.openingsCardText }}">We don't have any open positions right now, but we're always keen to hear from great people. Register your interest below and we'll be in touch as soon as a suitable role opens up.</span>
+        <a href="#apply" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+          <span className="{{ s.collabGetQuoteText }}">Register Your Interest</span>
         </a>
       </div>
     </div>
   </div>
 
-  <div style="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ APPLICATION FORM ============ -->
-  <div data-screen-label="Application Form" id="apply" style="{{ s.sectionPad }}">
-    <div style="{{ s.formWrap }}" ref="{{ formRevealRef }}">
-      <div style="{{ s.sectionHeadingGroup }}">
-        <span style="{{ s.eyebrow }}">Apply Now</span>
-        <span style="{{ s.h2 }}">Register Your Interest</span>
+  <div data-screen-label="Application Form" id="apply" className="{{ s.sectionPad }}">
+    <div className="{{ s.formWrap }}" ref="{{ formRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Apply Now</span>
+        <span className="{{ s.h2 }}">Register Your Interest</span>
       </div>
 
       <sc-if value="{{ showApplicationForm }}" hint-placeholder-val="{{ true }}">
-        <div style="{{ s.formGrid }}">
-          <div style="{{ s.formGroup }}">
-            <span style="{{ s.formLabel }}">Full Name *</span>
-            <input type="text" placeholder="Jane Doe" style="{{ s.formInput }}">
+        <div className="{{ s.formGrid }}">
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">Full Name *</span>
+            <input type="text" placeholder="Jane Doe" className="{{ s.formInput }}">
           </div>
-          <div style="{{ s.formGroup }}">
-            <span style="{{ s.formLabel }}">Email Address *</span>
-            <input type="email" placeholder="jane@example.com" style="{{ s.formInput }}">
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">Email Address *</span>
+            <input type="email" placeholder="jane@example.com" className="{{ s.formInput }}">
           </div>
-          <div style="{{ s.formGroup }}">
-            <span style="{{ s.formLabel }}">Role You're Interested In</span>
-            <input type="text" placeholder="e.g. Quality Assurance" style="{{ s.formInput }}">
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">Role You're Interested In</span>
+            <input type="text" placeholder="e.g. Quality Assurance" className="{{ s.formInput }}">
           </div>
-          <div style="{{ s.formGroup }}">
-            <span style="{{ s.formLabel }}">CV / Resume</span>
-            <input type="file" accept=".pdf,.doc,.docx" style="{{ s.formFileInput }}">
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">CV / Resume</span>
+            <input type="file" accept=".pdf,.doc,.docx" className="{{ s.formFileInput }}">
           </div>
-          <div style="{{ s.formGroupFull }}">
-            <span style="{{ s.formLabel }}">Cover Note (optional)</span>
-            <textarea placeholder="Tell us a little about yourself..." style="{{ s.formTextarea }}"></textarea>
+          <div className="{{ s.formGroupFull }}">
+            <span className="{{ s.formLabel }}">Cover Note (optional)</span>
+            <textarea placeholder="Tell us a little about yourself..." className="{{ s.formTextarea }}"></textarea>
           </div>
         </div>
-        <div style="{{ s.formSubmitRow }}" onClick="{{ onSubmitApplication }}">
-          <span style="{{ s.pillDarkText }}">Submit Application</span>
+        <div className="{{ s.formSubmitRow }}" onClick="{{ onSubmitApplication }}">
+          <span className="{{ s.pillDarkText }}">Submit Application</span>
         </div>
       </sc-if>
       <sc-if value="{{ showApplicationConfirmation }}" hint-placeholder-val="{{ false }}">
-        <div style="{{ s.confirmationBox }}">
-          <span style="{{ s.confirmationHeading }}">Thanks — we've received your details.</span>
-          <span style="{{ s.confirmationBody }}">We'll be in touch if a suitable role opens up. In the meantime, feel free to explore more about life at GMP above.</span>
+        <div className="{{ s.confirmationBox }}">
+          <span className="{{ s.confirmationHeading }}">Thanks — we've received your details.</span>
+          <span className="{{ s.confirmationBody }}">We'll be in touch if a suitable role opens up. In the meantime, feel free to explore more about life at GMP above.</span>
         </div>
       </sc-if>
     </div>
   </div>
 
-  <div style="{{ s.sectionGapHalf }}"></div>
+  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ COLLABORATE ============ -->
-  <div style="{{ s.collabOuter }}">
-    <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" style="{{ s.collabBg }}">
-    <canvas ref="{{ collabCanvasRef }}" style="{{ s.collabCanvas }}"></canvas>
-    <div style="{{ s.collabOverlay }}"></div>
-    <div style="{{ s.collabWrap }}">
-      <span style="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Have more questions?</span>
-      <span style="{{ s.collabBody }}">Reach out and our team will be happy to help — whether it's about a role, or working with GMP.</span>
-      <div style="{{ s.collabBtnRow }}">
-        <a href="#apply" style="{{ s.pillGetQuote2.style }}" onMouseEnter="{{ s.pillGetQuote2.enter }}" onMouseLeave="{{ s.pillGetQuote2.leave }}">
-          <span style="{{ s.collabGetQuoteText2 }}">Apply Now</span>
+  <div className="{{ s.collabOuter }}">
+    <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" className="{{ s.collabBg }}">
+    <canvas ref="{{ collabCanvasRef }}" className="{{ s.collabCanvas }}"></canvas>
+    <div className="{{ s.collabOverlay }}"></div>
+    <div className="{{ s.collabWrap }}">
+      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Have more questions?</span>
+      <span className="{{ s.collabBody }}">Reach out and our team will be happy to help — whether it's about a role, or working with GMP.</span>
+      <div className="{{ s.collabBtnRow }}">
+        <a href="#apply" className="{{ s.pillGetQuote2.className }}" onMouseEnter="{{ s.pillGetQuote2.enter }}" onMouseLeave="{{ s.pillGetQuote2.leave }}">
+          <span className="{{ s.collabGetQuoteText2 }}">Apply Now</span>
         </a>
-        <a href="contact.html" style="{{ s.pillContactUs.style }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
-          <span style="{{ s.collabContactUsText }}">Contact us</span>
+        <a href="contact.html" className="{{ s.pillContactUs.className }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+          <span className="{{ s.collabContactUsText }}">Contact us</span>
         </a>
       </div>
     </div>
   </div>
 
   <!-- ============ FOOTER ============ -->
-  <div style="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
-    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" style="position: absolute; right: -20px; top: 0; pointer-events: none;">
+  <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
+    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" className="absolute -right-[20px] top-0 pointer-events-none">
       <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
     </svg>
 
-    <div style="{{ s.footerTopRow }}">
-      <div style="{{ s.newsletterBox }}">
-<img src="assets2/newsletter-icon.png" alt="" style="width: 72px; height: 72px; object-fit: contain; flex-shrink: 0;">
-        <span style="{{ s.newsletterHeading }}">Subscribe to our newsletter</span>
-        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start; align-self: stretch;">
-          <div style="display: flex; flex-direction: row; padding: 0 4px 0 0; justify-content: space-between; align-items: center; align-self: stretch; box-sizing: border-box;">
-            <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); white-space: nowrap;">name@example.com</span>
-            <div style="width: 12px; height: 10px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/send-underline.svg') center / contain no-repeat; mask: url('assets2/send-underline.svg') center / contain no-repeat; flex-shrink: 0;"></div>
+    <div className="{{ s.footerTopRow }}">
+      <div className="{{ s.newsletterBox }}">
+<img src="assets2/newsletter-icon.png" alt="" className="w-[72px] h-[72px] object-contain shrink-0">
+        <span className="{{ s.newsletterHeading }}">Subscribe to our newsletter</span>
+        <div className="flex flex-col gap-[8px] items-start self-stretch">
+          <div className="flex flex-row pr-[4px] justify-between items-center self-stretch box-border">
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] whitespace-nowrap">name@example.com</span>
+            <div className="w-[12px] h-[10px] bg-[rgb(255,255,255)] [mask:url('assets2/send-underline.svg')_center/contain_no-repeat] shrink-0"></div>
           </div>
-          <div style="height: 1px; background-color: rgba(255,255,255,0.3); align-self: stretch;"></div>
+          <div className="h-[1px] bg-[rgba(255,255,255,0.3)] self-stretch"></div>
         </div>
       </div>
 
-      <div style="{{ s.footerRight }}">
-        <div style="{{ s.breadcrumbRow }}">
-          <span style="{{ s.breadcrumbText }}">Pharmaceutical</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Veterinary</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Medical Device</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Cosmetic</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Supplements</span>
-          <span style="{{ s.breadcrumbText }}">/</span>
-          <span style="{{ s.breadcrumbText }}">Biocide</span>
+      <div className="{{ s.footerRight }}">
+        <div className="{{ s.breadcrumbRow }}">
+          <span className="{{ s.breadcrumbText }}">Pharmaceutical</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Veterinary</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Medical Device</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Cosmetic</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Supplements</span>
+          <span className="{{ s.breadcrumbText }}">/</span>
+          <span className="{{ s.breadcrumbText }}">Biocide</span>
         </div>
-        <div style="{{ s.footerDivider }}"></div>
+        <div className="{{ s.footerDivider }}"></div>
 
-        <div style="{{ s.footerColsGrid }}">
-          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-            <span style="{{ s.footerColLabel }}">Services</span>
-            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <a href="services.html" style="{{ s.footerLink }}">Development &amp; Formulation</a>
-              <a href="services.html" style="{{ s.footerLink }}">UK In-house Manufacturing</a>
-              <a href="services.html" style="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</a>
-              <a href="services.html" style="{{ s.footerLink }}">Global Supply Chain</a>
-              <a href="services.html" style="{{ s.footerLink }}">Development &amp; Remediation</a>
-              <a href="services.html" style="{{ s.footerLink }}">Cost Optimisation</a>
+        <div className="{{ s.footerColsGrid }}">
+          <div className="flex flex-col gap-[12px] items-start">
+            <span className="{{ s.footerColLabel }}">Services</span>
+            <div className="flex flex-col gap-[8px] items-start">
+              <a href="services.html" className="{{ s.footerLink }}">Development &amp; Formulation</a>
+              <a href="services.html" className="{{ s.footerLink }}">UK In-house Manufacturing</a>
+              <a href="services.html" className="{{ s.footerLink }}">Tech Transfer &amp; Warehousing</a>
+              <a href="services.html" className="{{ s.footerLink }}">Global Supply Chain</a>
+              <a href="services.html" className="{{ s.footerLink }}">Development &amp; Remediation</a>
+              <a href="services.html" className="{{ s.footerLink }}">Cost Optimisation</a>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-            <span style="{{ s.footerColLabel }}">About</span>
-            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <a href="about.html" style="{{ s.footerLink }}">About Us</a>
-              <a href="careers.html" style="{{ s.footerLink }}">Careers</a>
-              <a href="news.html" style="{{ s.footerLink }}">Media &amp; News</a>
-              <a href="about.html#leadership" style="{{ s.footerLink }}">Our Team</a>
-              <a href="contact.html" style="{{ s.footerLink }}">Contact Us</a>
+          <div className="flex flex-col gap-[12px] items-start">
+            <span className="{{ s.footerColLabel }}">About</span>
+            <div className="flex flex-col gap-[8px] items-start">
+              <a href="about.html" className="{{ s.footerLink }}">About Us</a>
+              <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
+              <a href="news.html" className="{{ s.footerLink }}">Media &amp; News</a>
+              <a href="about.html#leadership" className="{{ s.footerLink }}">Our Team</a>
+              <a href="contact.html" className="{{ s.footerLink }}">Contact Us</a>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-            <span style="{{ s.footerColLabel }}">Contact</span>
-            <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4);">Email</span>
-              <span style="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
-              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); margin-top: 8px;">Call us</span>
-              <span style="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
-              <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); margin-top: 8px;">Address</span>
-              <span style="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+          <div className="flex flex-col gap-[12px] items-start">
+            <span className="{{ s.footerColLabel }}">Contact</span>
+            <div className="flex flex-col gap-[8px] items-start">
+              <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Email</span>
+              <span className="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
+              <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Call us</span>
+              <span className="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
+              <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Address</span>
+              <span className="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <div style="{{ s.socialsCluster }}">
-        <div style="{{ s.socialLg.style }}" onMouseEnter="{{ s.socialLg.enter }}" onMouseLeave="{{ s.socialLg.leave }}">
+      <div className="{{ s.socialsCluster }}">
+        <div className="{{ s.socialLg.className }}" onMouseEnter="{{ s.socialLg.enter }}" onMouseLeave="{{ s.socialLg.leave }}">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M4 9l6-6 6 6"></path></svg>
         </div>
-        <div style="{{ s.socialsSmallCol }}">
-          <div style="{{ s.socialA.style }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
-            <div style="width: 13px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/linkedin.svg') center / contain no-repeat; mask: url('assets2/linkedin.svg') center / contain no-repeat;"></div>
+        <div className="{{ s.socialsSmallCol }}">
+          <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
+            <div className="w-[13px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]"></div>
           </div>
-          <div style="{{ s.socialD.style }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
-            <div style="width: 14px; height: 14px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/instagram.svg') center / contain no-repeat; mask: url('assets2/instagram.svg') center / contain no-repeat;"></div>
+          <div className="{{ s.socialD.className }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div className="w-[14px] h-[14px] bg-[rgb(255,255,255)] [mask:url('assets2/instagram.svg')_center/contain_no-repeat]"></div>
           </div>
-          <div style="{{ s.socialC.style }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
-            <div style="width: 11px; height: 13px; background-color: rgb(255,255,255); -webkit-mask: url('assets2/facebook.svg') center / contain no-repeat; mask: url('assets2/facebook.svg') center / contain no-repeat;"></div>
+          <div className="{{ s.socialC.className }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
+            <div className="w-[11px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/facebook.svg')_center/contain_no-repeat]"></div>
           </div>
-          <div style="{{ s.socialB.style }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
+          <div className="{{ s.socialB.className }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
             <svg width="18" height="12" viewBox="0 0 18 12" fill="rgb(255,255,255)"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
           </div>
         </div>
       </div>
     </div>
 
-    <div style="{{ s.footerBottomRow }}">
-      <div style="display: flex; flex-direction: column; gap: 4px;">
-        <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4); white-space: pre-line;">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
-        <span style="font-weight: 400; font-size: 14px; line-height: 24px; color: rgba(255,255,255,0.4);">Made by Phitany</span>
+    <div className="{{ s.footerBottomRow }}">
+      <div className="flex flex-col gap-[4px]">
+        <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] whitespace-pre-line">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+        <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Made by Phitany</span>
       </div>
-      <div style="{{ s.footerWordmark }}">
-        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" style="{{ s.footerWordmarkImg }}">
+      <div className="{{ s.footerWordmark }}">
+        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerWordmarkImg }}">
       </div>
     </div>
   </div>
@@ -608,7 +610,9 @@ class Component extends DCLogic {
     const purple = "rgb(45,38,93)";
     const dark = "rgb(51,51,51)";
     const near = "rgb(17,17,17)";
-    const footerGradient = "linear-gradient(111.131deg, rgb(37,117,187) -0.79%, rgb(41,37,96) 62.70%, rgb(178,33,38) 154.63%)";
+    const footerGradient = "linear-gradient(111.131deg,rgb(37,117,187)_-0.79%,rgb(41,37,96)_62.7%,rgb(178,33,38)_154.63%)";
+    const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
+    const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
 
     const gutter = pick(20, 40, 64);
     const s = {};
@@ -617,157 +621,80 @@ class Component extends DCLogic {
     const reveal = (key, opts = {}) => {
       const { distance = 18, duration = 800 } = opts;
       const shown = !!revealed[key];
-      return {
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0)" : "translateY(" + distance + "px)",
-        transition: "opacity " + duration + "ms cubic-bezier(0.16,1,0.3,1), transform " + duration + "ms cubic-bezier(0.16,1,0.3,1)",
-      };
+      return (shown ? "opacity-100 translate-y-0 " : `opacity-0 translate-y-[${distance}px] `) +
+        `transition-[opacity,transform] duration-[${duration}ms] ease-[cubic-bezier(0.16,1,0.3,1)]`;
     };
     const revealRef = (key) => (el) => this._observeReveal(key, el);
 
-    s.root = {
-      position: "relative",
-      width: "100%",
-      background: "#fff",
-      fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
-      display: "flex",
-      flexDirection: "column",
-      overflowX: "clip",
-      overflowY: "clip",
-    };
+    s.root = "gmp-font relative w-full bg-white flex flex-col overflow-x-clip overflow-y-clip";
 
-    s.sectionPad = { padding: pick("0 20px", "0 40px", "0 64px"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.aboutSectionPad = { padding: pick("0 20px 0 0", "0 40px 0 0", "0 64px 0 0"), boxSizing: "border-box", position: "relative", zIndex: 1 };
-    s.sectionGap = { width: "100%", height: pick(38, 66, 96), flexShrink: 0 };
-    s.sectionGapHalf = { width: "100%", height: pick(19, 33, 48), flexShrink: 0 };
+    s.sectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px]";
+    s.aboutSectionPad = "relative z-[1] box-border pl-0 py-0 pr-[20px] md:pr-[40px] xl:pr-[64px]";
+    s.sectionGap = "w-full h-[38px] md:h-[66px] xl:h-[96px] shrink-0";
+    s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
 
-    s.eyebrow = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: red };
-    s.eyebrowOnDark = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff" };
-    s.h2 = { fontWeight: 500, fontSize: pick(30, 38, 48), lineHeight: pick("36px", "44px", "56px"), letterSpacing: "-1.5px", color: dark };
-    s.sectionHeadingGroup = { display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-start" };
+    s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
+    s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
+    s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
+    s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
-    s.pillDark = {
-      borderRadius: 32,
-      background: near,
-      display: "inline-flex",
-      flexDirection: "row",
-      gap: 6,
-      padding: pick("12px 18px", "14px 20px", "16px 24px"),
-      justifyContent: "center",
-      alignItems: "center",
-      boxSizing: "border-box",
-      cursor: "pointer",
-      alignSelf: "flex-start",
-      flexShrink: 0,
-      textDecoration: "none",
-    };
-    s.pillDarkText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: "#fff", whiteSpace: "nowrap" };
+    s.pillDark = "rounded-[32px] inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline";
+    s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
 
-    const hoverShadow = "0 16px 32px -12px rgba(178,33,38,0.45)";
-    const makeHeroCta = (key, base) => {
+    const makeHeroCta = (key, baseClass) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          ...base,
-          background: hovered ? red : "#fff",
-          boxShadow: hovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-          textDecoration: "none",
-        },
+        className: baseClass + " no-underline transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-white ${noShadowTw} translate-y-0`),
         textColor: hovered ? "#fff" : near,
         iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
-    const makeCircle = (key, base) => {
+    const makeCircle = (key, baseClass) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        style: {
-          ...base,
-          background: hovered ? red : "transparent",
-          boxShadow: hovered ? hoverShadow : "inset 0 0 0 1px rgba(255,255,255,0.3)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0`),
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
 
     // ---------- TOPBAR (same properties as homepage) ----------
-    s.logoLink = { display: "flex", flexShrink: 0 };
+    s.logoLink = "flex shrink-0";
     const navScrolled = this.state.navScrolled;
-    s.heroTopbar = {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      zIndex: 40,
-      background: navScrolled ? "#fff" : "transparent",
-      boxShadow: navScrolled ? "0 1px 0 rgba(17,17,17,0.08)" : "0 0 0 rgba(0,0,0,0)",
-      padding: pick("10px 20px", "12px 40px", "12px 64px"),
-      boxSizing: "border-box",
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      gap: isMobile ? 10 : 16,
-      flexWrap: "nowrap",
-      transition: "background 0.3s ease, box-shadow 0.3s ease",
-    };
-    s.heroLogo = { width: pick(180, 220, 260), height: "auto" };
+    s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
+      (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
+    s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
     s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
-    s.heroNav = { display: isDesktop ? "flex" : "none", flexDirection: "row", gap: 32, alignItems: "center" };
-    s.heroTopbarRightGroup = { display: "flex", flexDirection: "row", alignItems: "center", gap: isMobile ? 10 : 16, flexShrink: 0 };
+    s.heroNav = "hidden xl:flex flex-row gap-[32px] items-center";
+    s.heroTopbarRightGroup = "flex flex-row items-center gap-[10px] md:gap-[16px] shrink-0";
     const menuOpen = this.state.mobileMenuOpen;
-    s.hamburgerBtn = { display: isDesktop ? "none" : "flex", flexDirection: "column", gap: 5, alignItems: "center", justifyContent: "center", width: 28, height: 28, cursor: "pointer", flexShrink: 0, zIndex: 20 };
-    const barBase = { width: 20, height: 2, background: navScrolled ? near : "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease, background 0.3s ease" };
-    const barBaseOnDark = { width: 20, height: 2, background: "#fff", borderRadius: 2, transition: "transform 0.25s ease, opacity 0.2s ease" };
-    s.hamburgerBar1 = { ...barBase };
-    s.hamburgerBar2 = { ...barBase };
-    s.hamburgerBar3 = { ...barBase };
-    s.hamburgerBarX1 = { ...barBaseOnDark, transform: "rotate(45deg) translate(5px, 5px)" };
-    s.hamburgerBarX2 = { ...barBaseOnDark, transform: "rotate(-45deg) translate(5px, -5px)" };
-    s.mobileNavOverlay = {
-      position: "fixed",
-      inset: 0,
-      background: "rgb(41,37,96)",
-      display: "flex",
-      flexDirection: "column",
-      gap: 40,
-      padding: pick("20px 20px 40px", "24px 40px 48px", "24px 40px 48px"),
-      boxSizing: "border-box",
-      zIndex: 100,
-      opacity: menuOpen ? 1 : 0,
-      pointerEvents: menuOpen ? "auto" : "none",
-      transform: menuOpen ? "translateY(0)" : "translateY(-16px)",
-      transition: "opacity 0.3s ease, transform 0.3s ease",
-    };
-    s.mobileNavCloseRow = { display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" };
-    s.mobileNavLogo = { width: pick(150, 190, 190), height: "auto" };
-    s.mobileNavLinks = { display: "flex", flexDirection: "column", gap: pick(24, 28, 28), alignItems: "flex-start", marginTop: 16 };
-    s.mobileNavLink = { fontWeight: 500, fontSize: pick(28, 32, 32), lineHeight: "1.3", letterSpacing: "-0.7px", color: "#fff", cursor: "pointer", textDecoration: "none" };
+    s.hamburgerBtn = "flex xl:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
+    const barBase = "w-[20px] h-[2px] rounded-[2px] [transition:transform_0.25s_ease,opacity_0.2s_ease,background_0.3s_ease] " + (navScrolled ? `bg-[${near}]` : "bg-white");
+    const barBaseOnDark = "w-[20px] h-[2px] rounded-[2px] bg-white [transition:transform_0.25s_ease,opacity_0.2s_ease]";
+    s.hamburgerBar1 = barBase;
+    s.hamburgerBar2 = barBase;
+    s.hamburgerBar3 = barBase;
+    s.hamburgerBarX1 = barBaseOnDark + " [transform:rotate(45deg)_translate(5px,5px)]";
+    s.hamburgerBarX2 = barBaseOnDark + " [transform:rotate(-45deg)_translate(5px,-5px)]";
+    s.mobileNavOverlay = "fixed inset-0 bg-[rgb(41,37,96)] flex flex-col gap-[40px] box-border z-[100] py-[20px] px-[20px] pb-[40px] md:py-[24px] md:px-[40px] md:pb-[48px] [transition:opacity_0.3s_ease,transform_0.3s_ease] " +
+      (menuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-[16px]");
+    s.mobileNavCloseRow = "flex flex-row items-center justify-between";
+    s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
+    s.mobileNavLinks = "flex flex-col gap-[24px] md:gap-[28px] items-start mt-[16px]";
+    s.mobileNavLink = "font-medium text-[28px] md:text-[32px] leading-[1.3] tracking-[-0.7px] text-white cursor-pointer no-underline";
     const CURRENT_PAGE = "careers";
     const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
       const active = key === CURRENT_PAGE;
-      return {
-        fontWeight: 500,
-        fontSize: 14,
-        lineHeight: "20px",
-        color: navScrolled ? ((hovered || active) ? red : dark) : "#fff",
-        whiteSpace: "nowrap",
-        cursor: "pointer",
-        opacity: navScrolled ? 1 : ((hovered || active) ? 1 : 0.85),
-        borderBottomWidth: 1,
-        borderBottomStyle: "solid",
-        borderBottomColor: navScrolled ? ((hovered || active) ? red : "transparent") : ((hovered || active) ? "rgba(255,255,255,0.8)" : "transparent"),
-        paddingBottom: 2,
-        transition: "color 0.2s ease, opacity 0.2s ease, border-color 0.2s ease",
-        textDecoration: "none",
-      };
+      const emph = hovered || active;
+      const color = navScrolled ? (emph ? red : dark) : "#fff";
+      const opacity = navScrolled ? 1 : (emph ? 1 : 0.85);
+      const borderColor = navScrolled ? (emph ? red : "transparent") : (emph ? "rgba(255,255,255,0.8)" : "transparent");
+      return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
     };
     s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
     s.navHomeStyle = navLinkStyle(0, "home");
@@ -782,132 +709,124 @@ class Component extends DCLogic {
     s.navEnterServices = navEnter(2);
     s.navEnterInnovations = navEnter(3);
     s.navEnterSectors = navEnter(4);
-    const heroCtaBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 8, padding: pick("14px 22px", "16px 26px", "18px 30px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    const heroCtaBase = "rounded-[32px] flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
     s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
-    s.heroCtaText = { fontWeight: 600, fontSize: pick(15, 16, 17), lineHeight: "20px", color: s.heroCtaCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
-    const heroCtaTopbarBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 6, padding: isMobile ? "8px 14px" : "9px 16px", justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.heroCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaCtl.textColor}]`;
+    const heroCtaTopbarBase = "rounded-[32px] flex flex-row gap-[6px] py-[8px] px-[14px] md:py-[9px] md:px-[16px] justify-center items-center box-border cursor-pointer shrink-0";
     const topbarCtaHovered = this.state.hoveredKey === "heroCtaTopbar";
     s.heroCtaTopbarCtl = {
-      style: {
-        ...heroCtaTopbarBase,
-        background: topbarCtaHovered ? red : (navScrolled ? purple : "#fff"),
-        boxShadow: topbarCtaHovered ? hoverShadow : "0 0 0 rgba(0,0,0,0)",
-        transform: topbarCtaHovered ? "translateY(-2px)" : "translateY(0)",
-        transition: "background 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        textDecoration: "none",
-      },
+      className: heroCtaTopbarBase + " no-underline transition-[background,box-shadow,transform] duration-300 ease-in-out " +
+        (topbarCtaHovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : (navScrolled ? `bg-[${purple}] ${noShadowTw} translate-y-0` : `bg-white ${noShadowTw} translate-y-0`)),
       textColor: topbarCtaHovered || navScrolled ? "#fff" : near,
       iconColor: topbarCtaHovered || navScrolled ? "rgb(255,255,255)" : "rgb(17,17,17)",
       enter: () => this.setState({ hoveredKey: "heroCtaTopbar" }),
       leave: () => this.setState({ hoveredKey: null }),
     };
-    s.heroCtaTopbarText = { fontWeight: 600, fontSize: isMobile ? 13 : 14, lineHeight: isMobile ? "16px" : "18px", color: s.heroCtaTopbarCtl.textColor, whiteSpace: "nowrap", transition: "color 0.2s ease" };
-    s.heroCtaTopbarIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaTopbarCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
-    s.heroCtaIconStyle = { width: 14, height: 14, backgroundColor: s.heroCtaCtl.iconColor, WebkitMask: "url('assets2/article.svg') center / contain no-repeat", mask: "url('assets2/article.svg') center / contain no-repeat", transition: "background-color 0.2s ease" };
+    s.heroCtaTopbarText = `font-semibold text-[${isMobile ? 13 : 14}px] leading-[${isMobile ? 16 : 18}px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaTopbarCtl.textColor}]`;
+    s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
     // ---------- PAGE BANNER (260-360px, full width) ----------
-    s.bannerWrap = { position: "relative", width: "100%", height: pick(260, 300, 360), display: "flex", flexDirection: "column", justifyContent: "flex-end", boxSizing: "border-box", overflow: "hidden" };
-    s.imgPlaceholder = { position: "absolute", inset: 0, width: "100%", height: "100%", background: "rgb(60,55,90)", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" };
-    s.bannerOverlay = { position: "absolute", inset: 0, background: "rgba(17,17,17,0.35)", pointerEvents: "none" };
-    s.bannerContent = { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 8, padding: pick("20px 20px 24px", "32px 40px 36px", "40px 64px 44px"), boxSizing: "border-box" };
-    s.bannerHeadline = { fontWeight: 500, fontSize: pick(34, 44, 56), lineHeight: pick("40px", "50px", "62px"), letterSpacing: "-1.5px", color: "#fff" };
-    s.bannerSubtext = { fontWeight: 400, fontSize: pick(15, 16, 17), lineHeight: "24px", color: "rgba(255,255,255,0.85)", maxWidth: 620, marginTop: 4 };
+    s.bannerWrap = `relative w-full ${pick("h-[260px]", "h-[300px]", "h-[360px]")} flex flex-col justify-end box-border overflow-hidden`;
+    s.imgPlaceholder = "absolute inset-0 w-full h-full bg-[rgb(60,55,90)] flex items-center justify-center box-border";
+    s.bannerOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.35)] pointer-events-none";
+    s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[20px] px-[20px] pb-[24px]", "pt-[32px] px-[40px] pb-[36px]", "pt-[40px] px-[64px] pb-[44px]");
+    s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
+    s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
 
     // ---------- LIFE AT GMP (reused About layout) ----------
-    s.aboutWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 48, 64), justifyContent: "flex-start", alignItems: isDesktop ? "stretch" : "flex-start", maxWidth: 1600, marginLeft: 0, ...reveal("life") };
-    s.aboutImageCol = { position: "relative", width: isDesktop ? "48%" : "calc(100% + " + gutter + "px)", maxWidth: "none", aspectRatio: "4 / 3", flexShrink: 0, overflow: "hidden" };
-    s.imgPlaceholderLight = { position: "relative", width: "100%", height: "100%", aspectRatio: "1 / 1", background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" };
-    s.aboutContent = { display: "flex", flexDirection: "column", gap: 28, alignItems: "flex-start", justifyContent: "center", flexGrow: 1, width: isDesktop ? "auto" : "100%", boxSizing: "border-box", paddingLeft: isDesktop ? 0 : gutter };
-    s.aboutTextCol = { display: "flex", flexDirection: "column", gap: 16, alignItems: "flex-start", alignSelf: "stretch" };
-    s.aboutBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark };
-    s.cultureStrip = { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: pick(12, 16, 20), maxWidth: 1600, marginTop: pick(20, 24, 28), paddingRight: isDesktop ? 0 : gutter };
+    s.aboutWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start " + (isDesktop ? "items-stretch" : "items-start") + " max-w-[1600px] ml-0 " + reveal("life");
+    s.aboutImageCol = "relative " + (isDesktop ? "w-[48%]" : `w-[calc(100%+${gutter}px)]`) + " max-w-none aspect-[4/3] shrink-0 overflow-hidden";
+    s.imgPlaceholderLight = "relative w-full h-full aspect-square bg-[rgb(232,232,232)] flex items-center justify-center box-border";
+    s.aboutContent = "flex flex-col gap-[28px] items-start justify-center grow " + (isDesktop ? "w-auto" : "w-full") + " box-border " + (isDesktop ? "pl-0" : `pl-[${gutter}px]`);
+    s.aboutTextCol = "flex flex-col gap-[16px] items-start self-stretch";
+    s.aboutBody = `font-normal text-[16px] leading-[24px] text-[${dark}]`;
+    s.cultureStrip = `grid grid-cols-3 gap-[12px] md:gap-[16px] xl:gap-[20px] max-w-[1600px] ${pick("mt-[20px]", "mt-[24px]", "mt-[28px]")} ` + (isDesktop ? "pr-0" : `pr-[${gutter}px]`);
 
     // ---------- WHY WORK HERE (reused MVV card) ----------
-    s.mvvWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), maxWidth: 1600, margin: "0 auto", ...reveal("whyWork") };
-    s.whyWorkGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(4, 1fr)"), gap: pick(16, 20, 24) };
-    s.mvvCard = { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 12, padding: pick("24px", "28px", "28px"), boxSizing: "border-box", border: "1px solid rgba(0,0,0,0.1)", borderRadius: 4 };
-    s.mvvIconPlaceholder = { width: 80, height: 80, flexShrink: 0, background: "rgb(232,232,232)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 4 };
-    s.mvvCardLabel = { fontWeight: 600, fontSize: 18, lineHeight: "24px", color: red };
-    s.mvvCardBody = { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: dark };
+    s.mvvWrap = "flex flex-col gap-[24px] md:gap-[32px] xl:gap-[40px] max-w-[1600px] mx-auto " + reveal("whyWork");
+    s.whyWorkGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px] xl:gap-[24px]";
+    s.mvvCard = "flex flex-col items-start gap-[12px] box-border border border-solid border-[rgba(0,0,0,0.1)] rounded-[4px] " + pick("p-[24px]", "p-[28px]", "p-[28px]");
+    s.mvvIconPlaceholder = "w-[80px] h-[80px] shrink-0 bg-[rgb(232,232,232)] flex items-center justify-center mb-[4px]";
+    s.mvvCardLabel = `font-semibold text-[18px] leading-[24px] text-[${red}]`;
+    s.mvvCardBody = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
     // ---------- CURRENT OPENINGS ----------
-    s.openingsWrap = { display: "flex", flexDirection: "column", gap: pick(24, 32, 40), maxWidth: 1600, margin: "0 auto", ...reveal("openings") };
-    s.openingsCard = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: 20, alignItems: isMobile ? "flex-start" : "center", justifyContent: "space-between", background: "rgb(245,245,245)", borderRadius: 8, padding: pick("24px", "32px", "40px"), boxSizing: "border-box" };
-    s.openingsCardText = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: dark, maxWidth: 720 };
+    s.openingsWrap = "flex flex-col gap-[24px] md:gap-[32px] xl:gap-[40px] max-w-[1600px] mx-auto " + reveal("openings");
+    s.openingsCard = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[20px] " + (isMobile ? "items-start" : "items-center") + " justify-between bg-[rgb(245,245,245)] rounded-[8px] box-border " + pick("p-[24px]", "p-[32px]", "p-[40px]");
+    s.openingsCardText = `font-normal text-[16px] leading-[24px] text-[${dark}] max-w-[720px]`;
 
     // ---------- APPLICATION FORM ----------
-    s.formWrap = { display: "flex", flexDirection: "column", gap: pick(24, 28, 32), maxWidth: 900, margin: "0 auto", width: "100%", ...reveal("form") };
-    s.formGrid = { display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: pick(16, 20, 20), width: "100%" };
-    s.formGroup = { display: "flex", flexDirection: "column", gap: 6 };
-    s.formGroupFull = { display: "flex", flexDirection: "column", gap: 6, gridColumn: isMobile ? "auto" : "1 / -1" };
-    s.formLabel = { fontWeight: 500, fontSize: 14, lineHeight: "20px", color: dark };
-    s.formInput = { width: "100%", padding: "12px 16px", fontSize: 15, fontFamily: "inherit", border: "1px solid rgba(0,0,0,0.15)", borderRadius: 4, boxSizing: "border-box", color: dark, background: "#fff" };
-    s.formFileInput = { width: "100%", padding: "10px 0", fontSize: 14, fontFamily: "inherit", color: dark, boxSizing: "border-box" };
-    s.formTextarea = { width: "100%", padding: "12px 16px", fontSize: 15, fontFamily: "inherit", border: "1px solid rgba(0,0,0,0.15)", borderRadius: 4, boxSizing: "border-box", color: dark, background: "#fff", minHeight: 120, resize: "vertical" };
-    s.formSubmitRow = { ...s.pillDark, alignSelf: "flex-start" };
-    s.confirmationBox = { display: "flex", flexDirection: "column", gap: 8, background: "rgb(245,245,245)", borderRadius: 8, padding: pick("24px", "32px", "40px"), boxSizing: "border-box" };
-    s.confirmationHeading = { fontWeight: 600, fontSize: 20, lineHeight: "26px", color: dark };
-    s.confirmationBody = { fontWeight: 400, fontSize: 15, lineHeight: "22px", color: dark };
+    s.formWrap = "flex flex-col gap-[24px] md:gap-[28px] xl:gap-[32px] max-w-[900px] mx-auto w-full " + reveal("form");
+    s.formGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[20px] w-full";
+    s.formGroup = "flex flex-col gap-[6px]";
+    s.formGroupFull = "flex flex-col gap-[6px] " + (isMobile ? "col-auto" : "col-[1/-1]");
+    s.formLabel = `font-medium text-[14px] leading-[20px] text-[${dark}]`;
+    s.formInput = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white`;
+    s.formFileInput = `w-full py-[10px] px-0 text-[14px] font-[inherit] text-[${dark}] box-border`;
+    s.formTextarea = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white min-h-[120px] resize-y`;
+    s.formSubmitRow = s.pillDark + ` bg-[${near}] self-start`;
+    s.confirmationBox = "flex flex-col gap-[8px] bg-[rgb(245,245,245)] rounded-[8px] box-border " + pick("p-[24px]", "p-[32px]", "p-[40px]");
+    s.confirmationHeading = `font-semibold text-[20px] leading-[26px] text-[${dark}]`;
+    s.confirmationBody = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
     // ---------- COLLABORATE (inherited, content customized per page) ----------
-    s.collabOuter = { position: "relative", width: "auto", marginLeft: -gutter, marginRight: -gutter, overflow: "hidden", boxSizing: "border-box", padding: pick("64px 20px", "88px 40px", "112px 64px"), display: "flex", justifyContent: "center" };
-    s.collabBg = { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" };
-    s.collabCanvas = { position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" };
-    s.collabOverlay = { position: "absolute", inset: 0, background: "rgba(17,17,17,0.55)", pointerEvents: "none" };
-    s.collabWrap = { position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: 24, alignItems: "center", maxWidth: 640, margin: "0 auto", textAlign: "center", ...reveal("collab") };
-    s.collabHeading = { fontWeight: 500, fontSize: pick(32, 40, 48), lineHeight: pick("38px", "46px", "56px"), letterSpacing: "-1.5px", color: "#fff", textAlign: "center" };
-    s.collabBody = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "rgba(255,255,255,0.85)", textAlign: "center" };
-    s.collabBtnRow = { display: "flex", flexDirection: "row", gap: 8, flexWrap: "wrap", justifyContent: "center" };
-    const collabPillBase = { borderRadius: 32, display: "flex", flexDirection: "row", gap: 6, padding: pick("12px 18px", "14px 20px", "16px 24px"), justifyContent: "center", alignItems: "center", boxSizing: "border-box", cursor: "pointer", flexShrink: 0 };
+    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center ` +
+      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
+    s.collabBg = "absolute inset-0 w-full h-full object-cover";
+    s.collabCanvas = "absolute inset-0 w-full h-full pointer-events-none";
+    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.55)] pointer-events-none";
+    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
+    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
+    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
+    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
+    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
     s.pillGetQuote = makeHeroCta("openingsApply", collabPillBase);
     s.pillGetQuote2 = makeHeroCta("collabApply", collabPillBase);
     s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
-    s.collabGetQuoteText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillGetQuote.textColor, whiteSpace: "nowrap" };
-    s.collabGetQuoteText2 = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillGetQuote2.textColor, whiteSpace: "nowrap" };
-    s.collabContactUsText = { fontWeight: 500, fontSize: pick(14, 15, 16), lineHeight: "20px", color: s.pillContactUs.textColor, whiteSpace: "nowrap" };
+    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
+    s.collabGetQuoteText2 = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote2.textColor}]`;
+    s.collabContactUsText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactUs.textColor}]`;
 
     // ---------- FOOTER (inherited) ----------
-    s.footerWrap = { position: "relative", zIndex: 2, width: "100%", background: footerGradient, overflow: "hidden", padding: pick("40px 20px 32px", "56px 40px 40px", "64px 64px 48px"), boxSizing: "border-box", display: "flex", flexDirection: "column", gap: pick(40, 48, 56), ...reveal("footer", { distance: 14, duration: 900 }) };
-    s.footerTopRow = { display: "flex", flexDirection: isDesktop ? "row" : "column", gap: pick(32, 40, 56) };
-    s.newsletterBox = { width: isDesktop ? 320 : "100%", background: "rgba(255,255,255,0.1)", display: "flex", flexDirection: "column", gap: 20, padding: 24, boxSizing: "border-box", flexShrink: 0 };
-    s.newsletterHeading = { fontWeight: 500, fontSize: 26, lineHeight: "30px", letterSpacing: "-1px", color: "#fff" };
-    s.footerRight = { flexGrow: 1, display: "flex", flexDirection: "column", gap: pick(28, 32, 36) };
-    s.breadcrumbRow = { display: "flex", flexDirection: "row", flexWrap: "wrap", gap: pick(12, 18, 24) };
-    s.breadcrumbText = { fontWeight: 400, fontSize: pick(14, 15, 16), lineHeight: "24px", color: "#fff", whiteSpace: "nowrap" };
-    s.footerDivider = { height: 1, background: "rgba(255,255,255,0.2)" };
-    s.footerColsGrid = { display: "grid", gridTemplateColumns: pick("1fr", "1fr 1fr", "repeat(3, 1fr)"), gap: pick(28, 32, 24) };
-    s.footerColLabel = { fontWeight: 400, fontSize: 18, lineHeight: "24px", color: "rgba(255,255,255,0.4)" };
-    s.footerLink = { fontWeight: 400, fontSize: 16, lineHeight: "24px", color: "#fff", textDecoration: "none" };
-    s.socialsCluster = { display: "flex", flexDirection: "row", gap: 16, alignItems: isDesktop ? "stretch" : "center", flexShrink: 0, alignSelf: isDesktop ? "center" : "flex-start" };
+    s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
+      pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
+    s.footerTopRow = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[40px] xl:gap-[56px]";
+    s.newsletterBox = (isDesktop ? "w-[320px]" : "w-full") + " bg-[rgba(255,255,255,0.1)] flex flex-col gap-[20px] p-[24px] box-border shrink-0";
+    s.newsletterHeading = "font-medium text-[26px] leading-[30px] tracking-[-1px] text-white";
+    s.footerRight = "grow flex flex-col gap-[28px] md:gap-[32px] xl:gap-[36px]";
+    s.breadcrumbRow = "flex flex-row flex-wrap gap-[12px] md:gap-[18px] xl:gap-[24px]";
+    s.breadcrumbText = "font-normal text-[14px] md:text-[15px] xl:text-[16px] leading-[24px] text-white whitespace-nowrap";
+    s.footerDivider = "h-[1px] bg-[rgba(255,255,255,0.2)]";
+    s.footerColsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[28px] md:gap-[32px] xl:gap-[24px]";
+    s.footerColLabel = "font-normal text-[18px] leading-[24px] text-[rgba(255,255,255,0.4)]";
+    s.footerLink = "font-normal text-[16px] leading-[24px] text-white no-underline";
+    s.socialsCluster = "flex flex-row gap-[16px] " + (isDesktop ? "items-stretch" : "items-center") + " shrink-0 " + (isDesktop ? "self-center" : "self-start");
     s.socialsSmallCol = isDesktop
-      ? { display: "grid", gridTemplateColumns: "repeat(2, 40px)", gridAutoRows: "40px", gap: 12, order: 0 }
-      : { display: "flex", flexDirection: "row", gap: 12, alignItems: "center", flexWrap: "wrap" };
-    const makeBrandCircle = (key, base, brandColor) => {
+      ? "grid grid-cols-[repeat(2,40px)] auto-rows-[40px] gap-[12px] order-none"
+      : "flex flex-row gap-[12px] items-center flex-wrap";
+    const makeBrandCircle = (key, baseClass, brandColor) => {
       const hovered = this.state.hoveredKey === key;
+      const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
       return {
-        style: {
-          ...base,
-          background: hovered ? brandColor : "transparent",
-          boxShadow: hovered ? ("0 16px 32px -12px " + brandColor.replace("rgb", "rgba").replace(")", ",0.45)")) : "inset 0 0 0 1px rgba(255,255,255,0.3)",
-          transform: hovered ? "translateY(-2px)" : "translateY(0)",
-          transition: "background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease",
-        },
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${brandColor}] ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
     const socialLgBase = isDesktop
-      ? { width: 56, borderRadius: 999, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0, order: 1 }
-      : { width: 56, height: 56, borderRadius: 56, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+      ? "w-[56px] rounded-[999px] flex justify-center items-center cursor-pointer shrink-0 order-1"
+      : "w-[56px] h-[56px] rounded-[56px] flex justify-center items-center cursor-pointer shrink-0";
     s.socialLg = makeCircle("socialLg", socialLgBase);
-    const socialSmallBase = { width: 40, height: 40, borderRadius: 40, display: "flex", justifyContent: "center", alignItems: "center", cursor: "pointer", flexShrink: 0 };
+    const socialSmallBase = "w-[40px] h-[40px] rounded-[40px] flex justify-center items-center cursor-pointer shrink-0";
     s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
     s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
     s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
     s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
-    s.footerBottomRow = { display: "flex", flexDirection: isMobile ? "column" : "row", gap: 16, justifyContent: "space-between", alignItems: isMobile ? "flex-start" : "flex-end", paddingTop: 24, borderTop: "1px solid rgba(255,255,255,0.15)" };
-    s.footerWordmark = { display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "flex-end", gap: 4 };
-    s.footerWordmarkImg = { width: pick(180, 220, 260), height: "auto" };
+    s.footerBottomRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[16px] justify-between " + (isMobile ? "items-start" : "items-end") + " pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+    s.footerWordmark = "flex flex-col " + (isMobile ? "items-start" : "items-end") + " gap-[4px]";
+    s.footerWordmarkImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
 
     // ---------- DATA ----------
     const whyWorkData = [
