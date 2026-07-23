@@ -86,23 +86,8 @@
     </a>
   </div>
 
-  <!-- ============ PAGE BANNER ============ -->
-  <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
-    <div className="{{ s.imgPlaceholder }}">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
-    </div>
-    <div className="{{ s.bannerOverlay }}"></div>
-    <div className="{{ s.bannerContent }}">
-      <span className="{{ s.eyebrowOnDark }}">We're Here to Help</span>
-      <span className="{{ s.bannerHeadline }}">Get in Touch</span>
-      <span className="{{ s.bannerSubtext }}">Have a project in mind? Tell us about it and we'll get back to you within one business day.</span>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
   <!-- ============ ENQUIRY FORM + CONTACT INFO ============ -->
-  <div data-screen-label="Enquiry Form" className="{{ s.sectionPad }}">
+  <div data-screen-label="Enquiry Form" className="{{ s.firstSectionPad }}">
     <div className="{{ s.formWrap }}" ref="{{ formRevealRef }}">
       <div className="{{ s.sectionHeadingGroup }}">
         <span className="{{ s.eyebrow }}">Enquiry</span>
@@ -389,9 +374,6 @@ class Component extends DCLogic {
   state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, enquirySubmitted: false, openFaqIndex: 0 };
 
   componentDidMount() {
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      this.setState((st) => ({ revealed: { ...st.revealed, banner: true } }));
-    }));
     this._onResize = () => { this._updateBp(); };
     window.addEventListener("resize", this._onResize);
     this._updateBp();
@@ -698,9 +680,9 @@ class Component extends DCLogic {
       };
     };
 
-    // ---------- TOPBAR (same properties as homepage) ----------
+    // ---------- TOPBAR (same properties as homepage, but always opaque — this page has no hero banner for it to sit over) ----------
     s.logoLink = "flex shrink-0";
-    const navScrolled = this.state.navScrolled;
+    const navScrolled = true;
     s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
       (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
     s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
@@ -762,22 +744,17 @@ class Component extends DCLogic {
     s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
     s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
-    // ---------- PAGE BANNER (260-360px, full width) ----------
-    s.bannerWrap = `relative w-full ${pick("h-[260px]", "h-[300px]", "h-[360px]")} flex flex-col justify-end box-border overflow-hidden`;
-    s.imgPlaceholder = "absolute inset-0 w-full h-full bg-[rgb(60,55,90)] flex items-center justify-center box-border";
-    s.bannerOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.35)] pointer-events-none";
-    s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[20px] px-[20px] pb-[24px]", "pt-[32px] px-[40px] pb-[36px]", "pt-[40px] px-[64px] pb-[44px]");
-    s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
-    s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
+    // ---------- FIRST SECTION (no banner on this page — clear the fixed topbar) ----------
+    s.firstSectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px] pt-[92px] md:pt-[100px] xl:pt-[108px]";
 
     // ---------- ENQUIRY FORM ----------
-    s.formWrap = "flex flex-col gap-[24px] md:gap-[28px] xl:gap-[32px] max-w-[1600px] mx-auto w-full " + reveal("form");
-    s.formGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[20px] w-full";
-    s.formGroup = "flex flex-col gap-[6px]";
-    s.formGroupFull = "flex flex-col gap-[6px] " + (isMobile ? "col-auto" : "col-[1/-1]");
+    s.formWrap = "flex flex-col gap-[16px] md:gap-[18px] xl:gap-[20px] max-w-[1600px] mx-auto w-full " + reveal("form");
+    s.formGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[10px] md:gap-[12px] xl:gap-[12px] w-full";
+    s.formGroup = "flex flex-col gap-[4px]";
+    s.formGroupFull = "flex flex-col gap-[4px] " + (isMobile ? "col-auto" : "col-[1/-1]");
     s.formLabel = `font-medium text-[14px] leading-[20px] text-[${dark}]`;
-    s.formInput = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white`;
-    s.formTextarea = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white min-h-[120px] resize-y`;
+    s.formInput = `w-full py-[9px] px-[14px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white`;
+    s.formTextarea = `w-full py-[9px] px-[14px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white min-h-[64px] resize-y`;
     s.formSubmitRow = s.pillDark + ` bg-[${near}] self-start`;
     s.confirmationBox = "flex flex-col gap-[8px] bg-white rounded-none box-border " + pick("p-[24px]", "p-[32px]", "p-[40px]");
     s.confirmationHeading = `font-semibold text-[20px] leading-[26px] text-[${dark}]`;
@@ -785,10 +762,10 @@ class Component extends DCLogic {
 
     // ---------- CONTACT INFO CARDS (reused reference layout) ----------
     s.themeRed = red;
-    s.contactGrid = "flex flex-col xl:flex-row gap-[24px] xl:gap-[28px] items-stretch";
-    s.formCard = "flex flex-col gap-[20px] bg-[rgb(245,245,245)] rounded-none box-border xl:w-[60%] " + pick("p-[24px]", "p-[28px]", "p-[32px]");
-    s.contactInfoCol = "flex flex-col gap-[20px] xl:gap-[24px] xl:w-[40%]";
-    s.infoCard = "flex flex-col gap-[16px] bg-[rgb(245,245,245)] rounded-none box-border " + pick("p-[24px]", "p-[28px]", "p-[32px]");
+    s.contactGrid = "flex flex-col xl:flex-row gap-[16px] xl:gap-[20px] items-stretch";
+    s.formCard = "flex flex-col gap-[14px] bg-[rgb(245,245,245)] rounded-none box-border xl:w-[60%] " + pick("p-[16px]", "p-[18px]", "p-[20px]");
+    s.contactInfoCol = "flex flex-col gap-[12px] xl:gap-[14px] xl:w-[40%]";
+    s.infoCard = "flex flex-col gap-[10px] bg-[rgb(245,245,245)] rounded-none box-border " + pick("p-[16px]", "p-[18px]", "p-[20px]");
     s.contactCardLabel = `font-semibold text-[18px] md:text-[20px] leading-[26px] text-[${dark}]`;
     s.contactCardDivider = "h-[1px] bg-[rgba(0,0,0,0.1)] w-full";
     s.detailsIconRow = "flex flex-row items-center gap-[8px]";
