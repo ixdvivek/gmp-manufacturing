@@ -101,7 +101,7 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ ENQUIRY FORM ============ -->
+  <!-- ============ ENQUIRY FORM + CONTACT INFO ============ -->
   <div data-screen-label="Enquiry Form" className="{{ s.sectionPad }}">
     <div className="{{ s.formWrap }}" ref="{{ formRevealRef }}">
       <div className="{{ s.sectionHeadingGroup }}">
@@ -109,78 +109,107 @@
         <span className="{{ s.h2 }}">Tell Us About Your Project</span>
       </div>
 
-      <sc-if value="{{ showEnquiryForm }}" hint-placeholder-val="{{ true }}">
-        <div className="{{ s.formGrid }}">
-          <div className="{{ s.formGroup }}">
-            <span className="{{ s.formLabel }}">Full Name *</span>
-            <input type="text" placeholder="Jane Doe" className="{{ s.formInput }}">
+      <div className="{{ s.contactGrid }}">
+        <div className="{{ s.formCard }}">
+          <span className="{{ s.contactCardLabel }}">Get in Touch</span>
+          <div className="{{ s.contactCardDivider }}"></div>
+          <sc-if value="{{ showEnquiryForm }}" hint-placeholder-val="{{ true }}">
+            <div className="{{ s.formGrid }}">
+              <div className="{{ s.formGroup }}">
+                <span className="{{ s.formLabel }}">Full Name *</span>
+                <input type="text" placeholder="Jane Doe" className="{{ s.formInput }}">
+              </div>
+              <div className="{{ s.formGroup }}">
+                <span className="{{ s.formLabel }}">Email Address *</span>
+                <input type="email" placeholder="jane@example.com" className="{{ s.formInput }}">
+              </div>
+              <div className="{{ s.formGroup }}">
+                <span className="{{ s.formLabel }}">Company</span>
+                <input type="text" placeholder="Company name" className="{{ s.formInput }}">
+              </div>
+              <div className="{{ s.formGroup }}">
+                <span className="{{ s.formLabel }}">Sector</span>
+                <select className="{{ s.formInput }}">
+                  <option>Pharmaceutical</option>
+                  <option>Veterinary</option>
+                  <option>Medical Device</option>
+                  <option>Cosmetic</option>
+                  <option>Supplements</option>
+                  <option>Biocide</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div className="{{ s.formGroupFull }}">
+                <span className="{{ s.formLabel }}">Message *</span>
+                <textarea placeholder="Tell us about your product or enquiry..." className="{{ s.formTextarea }}"></textarea>
+              </div>
+            </div>
+            <div className="{{ s.formSubmitRow }}" onClick="{{ onSubmitEnquiry }}">
+              <span className="{{ s.pillDarkText }}">Send Enquiry</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showEnquiryConfirmation }}" hint-placeholder-val="{{ false }}">
+            <div className="{{ s.confirmationBox }}">
+              <span className="{{ s.confirmationHeading }}">Thanks — your enquiry has been received.</span>
+              <span className="{{ s.confirmationBody }}">A member of our team will get back to you within one business day.</span>
+            </div>
+          </sc-if>
+        </div>
+
+        <div className="{{ s.contactInfoCol }}">
+          <div className="{{ s.infoCard }}">
+            <span className="{{ s.contactCardLabel }}">Contact Information</span>
+            <div className="{{ s.contactCardDivider }}"></div>
+            <div className="{{ s.detailsItem }}">
+              <div className="{{ s.detailsIconRow }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRed }}" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span className="{{ s.detailsLabel }}">Phone</span>
+              </div>
+              <span className="{{ s.detailsValue }}">+44 (0) 1482 707 138</span>
+            </div>
+            <div className="{{ s.detailsItem }}">
+              <div className="{{ s.detailsIconRow }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRed }}" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+                <span className="{{ s.detailsLabel }}">Address</span>
+              </div>
+              <span className="{{ s.detailsValue }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+            </div>
+            <div className="{{ s.detailsItem }}">
+              <div className="{{ s.detailsIconRow }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRed }}" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="0"></rect><path d="M2 6l10 7 10-7"></path></svg>
+                <span className="{{ s.detailsLabel }}">Email</span>
+              </div>
+              <span className="{{ s.detailsValue }}">info@gmpgroup.co.uk</span>
+            </div>
           </div>
-          <div className="{{ s.formGroup }}">
-            <span className="{{ s.formLabel }}">Email Address *</span>
-            <input type="email" placeholder="jane@example.com" className="{{ s.formInput }}">
-          </div>
-          <div className="{{ s.formGroup }}">
-            <span className="{{ s.formLabel }}">Company</span>
-            <input type="text" placeholder="Company name" className="{{ s.formInput }}">
-          </div>
-          <div className="{{ s.formGroup }}">
-            <span className="{{ s.formLabel }}">Sector</span>
-            <select className="{{ s.formInput }}">
-              <option>Pharmaceutical</option>
-              <option>Veterinary</option>
-              <option>Medical Device</option>
-              <option>Cosmetic</option>
-              <option>Supplements</option>
-              <option>Biocide</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div className="{{ s.formGroupFull }}">
-            <span className="{{ s.formLabel }}">Message *</span>
-            <textarea placeholder="Tell us about your product or enquiry..." className="{{ s.formTextarea }}"></textarea>
+
+          <div className="{{ s.infoCard }}">
+            <span className="{{ s.contactCardLabel }}">Business Hours</span>
+            <div className="{{ s.contactCardDivider }}"></div>
+            <div className="{{ s.hoursRow }}">
+              <div className="{{ s.detailsItem }}">
+                <span className="{{ s.detailsLabel }}">Monday - Friday</span>
+                <span className="{{ s.detailsValue }}">8:00 am - 5:00 pm</span>
+              </div>
+              <div className="{{ s.detailsItem }}">
+                <span className="{{ s.detailsLabel }}">Saturday - Sunday</span>
+                <span className="{{ s.detailsValue }}">Closed</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="{{ s.formSubmitRow }}" onClick="{{ onSubmitEnquiry }}">
-          <span className="{{ s.pillDarkText }}">Send Enquiry</span>
-        </div>
-      </sc-if>
-      <sc-if value="{{ showEnquiryConfirmation }}" hint-placeholder-val="{{ false }}">
-        <div className="{{ s.confirmationBox }}">
-          <span className="{{ s.confirmationHeading }}">Thanks — your enquiry has been received.</span>
-          <span className="{{ s.confirmationBody }}">A member of our team will get back to you within one business day.</span>
-        </div>
-      </sc-if>
+      </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ CONTACT DETAILS + MAP ============ -->
-  <div data-screen-label="Contact Details" className="{{ s.sectionPad }}">
-    <div className="{{ s.detailsWrap }}" ref="{{ detailsRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Contact Details</span>
-        <span className="{{ s.h2 }}">Other Ways to Reach Us</span>
-      </div>
-      <div className="{{ s.detailsRow }}">
-        <div className="{{ s.detailsCol }}">
-          <div className="{{ s.detailsItem }}">
-            <span className="{{ s.detailsLabel }}">Email</span>
-            <span className="{{ s.detailsValue }}">info@gmpgroup.co.uk</span>
-          </div>
-          <div className="{{ s.detailsItem }}">
-            <span className="{{ s.detailsLabel }}">Call us</span>
-            <span className="{{ s.detailsValue }}">+44 (0) 1482 707 138</span>
-          </div>
-          <div className="{{ s.detailsItem }}">
-            <span className="{{ s.detailsLabel }}">Address</span>
-            <span className="{{ s.detailsValue }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
-          </div>
-        </div>
-        <div className="{{ s.mapPlaceholder }}">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-          <span className="{{ s.mapPlaceholderText }}">Map placeholder</span>
-        </div>
+  <!-- ============ MAP ============ -->
+  <div data-screen-label="Map" className="{{ s.sectionPad }}">
+    <div className="{{ s.mapWrap }}" ref="{{ detailsRevealRef }}">
+      <div className="{{ s.mapPlaceholder }}">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+        <span className="{{ s.mapPlaceholderText }}">Map placeholder</span>
       </div>
     </div>
   </div>
@@ -742,7 +771,7 @@ class Component extends DCLogic {
     s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
 
     // ---------- ENQUIRY FORM ----------
-    s.formWrap = "flex flex-col gap-[24px] md:gap-[28px] xl:gap-[32px] max-w-[900px] mx-auto w-full " + reveal("form");
+    s.formWrap = "flex flex-col gap-[24px] md:gap-[28px] xl:gap-[32px] max-w-[1600px] mx-auto w-full " + reveal("form");
     s.formGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[20px] w-full";
     s.formGroup = "flex flex-col gap-[6px]";
     s.formGroupFull = "flex flex-col gap-[6px] " + (isMobile ? "col-auto" : "col-[1/-1]");
@@ -750,18 +779,27 @@ class Component extends DCLogic {
     s.formInput = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white`;
     s.formTextarea = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white min-h-[120px] resize-y`;
     s.formSubmitRow = s.pillDark + ` bg-[${near}] self-start`;
-    s.confirmationBox = "flex flex-col gap-[8px] bg-[rgb(245,245,245)] rounded-[8px] box-border " + pick("p-[24px]", "p-[32px]", "p-[40px]");
+    s.confirmationBox = "flex flex-col gap-[8px] bg-white rounded-none box-border " + pick("p-[24px]", "p-[32px]", "p-[40px]");
     s.confirmationHeading = `font-semibold text-[20px] leading-[26px] text-[${dark}]`;
     s.confirmationBody = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
-    // ---------- CONTACT DETAILS + MAP ----------
-    s.detailsWrap = "flex flex-col gap-[24px] md:gap-[32px] xl:gap-[40px] max-w-[1600px] mx-auto " + reveal("details");
-    s.detailsRow = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[24px] md:gap-[32px] xl:gap-[40px]";
-    s.detailsCol = "flex flex-col gap-[20px] " + (isDesktop ? "w-[340px]" : "w-full") + " shrink-0";
+    // ---------- CONTACT INFO CARDS (reused reference layout) ----------
+    s.themeRed = red;
+    s.contactGrid = "flex flex-col xl:flex-row gap-[24px] xl:gap-[28px] items-stretch";
+    s.formCard = "flex flex-col gap-[20px] bg-[rgb(245,245,245)] rounded-none box-border xl:w-[60%] " + pick("p-[24px]", "p-[28px]", "p-[32px]");
+    s.contactInfoCol = "flex flex-col gap-[20px] xl:gap-[24px] xl:w-[40%]";
+    s.infoCard = "flex flex-col gap-[16px] bg-[rgb(245,245,245)] rounded-none box-border " + pick("p-[24px]", "p-[28px]", "p-[32px]");
+    s.contactCardLabel = `font-semibold text-[18px] md:text-[20px] leading-[26px] text-[${dark}]`;
+    s.contactCardDivider = "h-[1px] bg-[rgba(0,0,0,0.1)] w-full";
+    s.detailsIconRow = "flex flex-row items-center gap-[8px]";
+    s.hoursRow = "flex flex-row flex-wrap gap-[24px] md:gap-[32px]";
+
+    // ---------- MAP ----------
+    s.mapWrap = "max-w-[1600px] mx-auto w-full";
     s.detailsItem = "flex flex-col gap-[4px]";
     s.detailsLabel = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.5)]";
     s.detailsValue = `font-medium text-[16px] leading-[24px] text-[${dark}]`;
-    s.mapPlaceholder = `grow ${pick("min-h-[220px]", "min-h-[260px]", "min-h-[300px]")} bg-[rgb(232,232,232)] flex flex-col items-center justify-center gap-[8px] rounded-[4px]`;
+    s.mapPlaceholder = `w-full ${pick("min-h-[240px]", "min-h-[300px]", "min-h-[360px]")} bg-[rgb(232,232,232)] flex flex-col items-center justify-center gap-[8px] rounded-none`;
     s.mapPlaceholderText = "font-normal text-[14px] text-[rgba(51,51,51,0.5)]";
 
     // ---------- QUICK LINKS ----------
