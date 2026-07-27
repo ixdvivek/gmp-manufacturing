@@ -40,14 +40,35 @@
     <div className="{{ s.heroNav }}">
       <a href="index.html" className="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
       <a href="about.html" className="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
-      <div className="flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
         <a href="services.html" className="{{ s.navServicesStyle }}">Services</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.servicesMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="services-manufacturing-filling-packing.html" className="{{ s.navMenuItem }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="services-qc-micro-stability.html" className="{{ s.navMenuItem }}">QC, Micro &amp; Stability</a>
+            <a href="services-technology-transfer.html" className="{{ s.navMenuItem }}">Technology Transfer</a>
+            <a href="services-product-development-remediation.html" className="{{ s.navMenuItem }}">Product Development &amp; Remediation</a>
+            <a href="services-qp-rp-regulatory-support.html" className="{{ s.navMenuItem }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="services-co-packing-contract-manufacturing.html" className="{{ s.navMenuItem }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="services-research-development.html" className="{{ s.navMenuItem }}">Research &amp; Development</a>
+          </div>
+        </div>
       </div>
       <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
-      <div className="flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
         <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.sectorsMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="sectors-pharmaceutical.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sectors-veterinary.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sectors-medical-device.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sectors-cosmetic.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sectors-supplements.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sectors-biocide.html" className="{{ s.navMenuItem }}">Biocide</a>
+          </div>
+        </div>
       </div>
     </div>
     <div className="{{ s.heroTopbarRightGroup }}">
@@ -490,7 +511,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
   &quot;marqueeScroll&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Logo strip&quot; }
 }">
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1 };
+  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -923,13 +944,19 @@ class Component extends DCLogic {
     s.navServicesStyle = navLinkStyle(2, "services");
     s.navInnovationsStyle = navLinkStyle(3, "innovations");
     s.navSectorsStyle = navLinkStyle(4, "sectors");
-    const navEnter = (i) => () => this.setState({ hoveredNav: i });
-    s.navLeave = () => this.setState({ hoveredNav: -1 });
+    const navEnter = (i, menu) => () => this.setState({ hoveredNav: i, openNavMenu: menu || null });
+    s.navLeave = () => this.setState({ hoveredNav: -1, openNavMenu: null });
     s.navEnterHome = navEnter(0);
     s.navEnterAbout = navEnter(1);
-    s.navEnterServices = navEnter(2);
+    s.navEnterServices = navEnter(2, "services");
     s.navEnterInnovations = navEnter(3);
-    s.navEnterSectors = navEnter(4);
+    s.navEnterSectors = navEnter(4, "sectors");
+    const openNavMenu = this.state.openNavMenu;
+    const navMenuPanelBase = "absolute top-full left-0 pt-[12px] z-[60] [transition:opacity_0.2s_ease,transform_0.2s_ease]";
+    s.servicesMenuPanel = navMenuPanelBase + " " + (openNavMenu === "services" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.sectorsMenuPanel = navMenuPanelBase + " " + (openNavMenu === "sectors" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.navMenuInner = `bg-white shadow-[0_16px_44px_rgba(17,17,17,0.18)] py-[10px] min-w-[300px] flex flex-col gap-[2px] border-t-[3px] border-solid border-[${red}]`;
+    s.navMenuItem = `block py-[11px] px-[20px] text-[14px] font-medium text-[${near}] no-underline whitespace-nowrap hover:bg-[rgb(245,243,240)] hover:text-[${red}] transition-colors duration-150`;
     const heroCtaBase = "rounded-[32px] flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
     s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
     s.heroCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaCtl.textColor}]`;
