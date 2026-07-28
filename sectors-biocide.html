@@ -541,11 +541,11 @@ class Component extends DCLogic {
     s.overviewBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[560px]`;
 
     // ---------- RELEVANT SERVICES (image collage + icon list, hover gradient) ----------
-    s.relatedWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-start max-w-[1600px] mx-auto " + reveal("related");
+    s.relatedWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-center max-w-[1600px] mx-auto " + reveal("related");
     s.relatedImageCol = "relative " + (isDesktop ? "w-[38%]" : "w-full") + " shrink-0 flex flex-col gap-[12px] md:gap-[16px] box-border";
     s.relatedImageBig = "relative w-full aspect-[16/11] object-cover box-border";
-    s.relatedImageRow = "flex flex-row gap-[12px] md:gap-[16px]";
-    s.relatedImageSmall = "relative w-1/2 aspect-[4/3] object-cover box-border";
+    s.relatedImageRow = "grid grid-cols-2 gap-[12px] md:gap-[16px]";
+    s.relatedImageSmall = "relative w-full aspect-[4/3] object-cover box-border";
     s.relatedContent = "flex flex-col gap-[28px] md:gap-[32px] " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
     s.relatedList = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-x-[28px] md:gap-x-[36px] xl:gap-x-[44px] gap-y-[32px] md:gap-y-[40px] xl:gap-y-[48px]";
     const makeRelated = (i) => {
