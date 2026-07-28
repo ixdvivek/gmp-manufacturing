@@ -139,46 +139,47 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ RELEVANT SERVICES (icon-card grid) ============ -->
+  <!-- ============ RELEVANT SERVICES (image collage + icon list, hover gradient) ============ -->
   <div data-screen-label="Relevant Services" className="{{ s.sectionPad }}">
     <div className="{{ s.relatedWrap }}" ref="{{ relatedRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Relevant Services</span>
-        <span className="{{ s.h2 }}">How we support this sector</span>
+      <div className="{{ s.relatedImageCol }}">
+        <img src="assets2/placeholder-sector-supplements.jpg" alt="Food supplement manufacturing" loading="lazy" className="{{ s.relatedImageBig }}">
+        <div className="{{ s.relatedImageRow }}">
+          <img src="assets2/about-real.jpg" alt="GMP Manufacturing Ltd facility" loading="lazy" className="{{ s.relatedImageSmall }}">
+          <img src="assets2/hero-bg.webp" alt="GMP Manufacturing Ltd facility" loading="lazy" className="{{ s.relatedImageSmall }}">
+        </div>
       </div>
-      <div className="{{ s.relatedGrid }}">
-        <a href="services-manufacturing-filling-packing.html" className="{{ s.relatedCard }}">
-          <div className="{{ s.relatedIcon }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
-          </div>
-          <span className="{{ s.relatedCardTitle }}">Manufacturing, Filling & Packing</span>
-          <span className="{{ s.relatedCardDesc }}">Full production, filling and packing on one site.</span>
-          <span className="{{ s.relatedCardLink }}">View service &rarr;</span>
+      <div className="{{ s.relatedContent }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Relevant Services</span>
+          <span className="{{ s.h2 }}">How we support this sector</span>
+        </div>
+        <div className="{{ s.relatedList }}">
+        <a href="services-manufacturing-filling-packing.html" className="{{ s.related0.containerStyle }}" onMouseEnter="{{ s.related0.enter }}" onMouseLeave="{{ s.related0.leave }}">
+          <div className="{{ s.related0.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related0.iconColor }}" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
+          <span className="{{ s.related0.titleStyle }}">Manufacturing, Filling & Packing</span>
+          <span className="{{ s.related0.descStyle }}">Full production, filling and packing on one site.</span>
         </a>
-        <a href="services-qc-micro-stability.html" className="{{ s.relatedCard }}">
-          <div className="{{ s.relatedIcon }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
-          </div>
-          <span className="{{ s.relatedCardTitle }}">QC, Micro & Stability</span>
-          <span className="{{ s.relatedCardDesc }}">In-house testing keeps every batch compliant.</span>
-          <span className="{{ s.relatedCardLink }}">View service &rarr;</span>
+        <a href="services-qc-micro-stability.html" className="{{ s.related1.containerStyle }}" onMouseEnter="{{ s.related1.enter }}" onMouseLeave="{{ s.related1.leave }}">
+          <div className="{{ s.related1.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related1.iconColor }}" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+          <span className="{{ s.related1.titleStyle }}">QC, Micro & Stability</span>
+          <span className="{{ s.related1.descStyle }}">In-house testing keeps every batch compliant.</span>
         </a>
-        <a href="services-co-packing-contract-manufacturing.html" className="{{ s.relatedCard }}">
-          <div className="{{ s.relatedIcon }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><path d="M4 4h16v16H4z"></path><path d="M4 9h16"></path></svg>
-          </div>
-          <span className="{{ s.relatedCardTitle }}">Co-Packing & Contract Manufacturing</span>
-          <span className="{{ s.relatedCardDesc }}">Flexible capacity scaled to your volumes.</span>
-          <span className="{{ s.relatedCardLink }}">View service &rarr;</span>
+        <a href="services-co-packing-contract-manufacturing.html" className="{{ s.related2.containerStyle }}" onMouseEnter="{{ s.related2.enter }}" onMouseLeave="{{ s.related2.leave }}">
+          <div className="{{ s.related2.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related2.iconColor }}" stroke-width="1.5"><path d="M4 4h16v16H4z"></path><path d="M4 9h16"></path></svg>
+          <span className="{{ s.related2.titleStyle }}">Co-Packing & Contract Manufacturing</span>
+          <span className="{{ s.related2.descStyle }}">Flexible capacity scaled to your volumes.</span>
         </a>
-        <a href="services-research-development.html" className="{{ s.relatedCard }}">
-          <div className="{{ s.relatedIcon }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
-          </div>
-          <span className="{{ s.relatedCardTitle }}">Research & Development</span>
-          <span className="{{ s.relatedCardDesc }}">From concept to market-ready product.</span>
-          <span className="{{ s.relatedCardLink }}">View service &rarr;</span>
+        <a href="services-research-development.html" className="{{ s.related3.containerStyle }}" onMouseEnter="{{ s.related3.enter }}" onMouseLeave="{{ s.related3.leave }}">
+          <div className="{{ s.related3.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related3.iconColor }}" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
+          <span className="{{ s.related3.titleStyle }}">Research & Development</span>
+          <span className="{{ s.related3.descStyle }}">From concept to market-ready product.</span>
         </a>
+        </div>
       </div>
     </div>
   </div>
@@ -356,7 +357,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, hoveredRelated: -1, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -545,14 +546,31 @@ class Component extends DCLogic {
     s.overviewContent = "flex flex-col gap-[20px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
     s.overviewBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[560px]`;
 
-    // ---------- RELEVANT SERVICES (icon-card grid) ----------
-    s.relatedWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("related");
-    s.relatedGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[16px] md:gap-[20px]";
-    s.relatedCard = cardHoverBase + " flex flex-col gap-[12px] items-start no-underline " + pick("p-[20px]", "p-[22px]", "p-[24px]");
-    s.relatedIcon = "w-[40px] h-[40px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.relatedCardTitle = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
-    s.relatedCardDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
-    s.relatedCardLink = `font-medium text-[13px] leading-[18px] text-[${purple}] mt-[4px]`;
+    // ---------- RELEVANT SERVICES (image collage + icon list, hover gradient) ----------
+    s.relatedWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-start max-w-[1600px] mx-auto " + reveal("related");
+    s.relatedImageCol = "relative " + (isDesktop ? "w-[38%]" : "w-full") + " shrink-0 flex flex-col gap-[12px] md:gap-[16px] box-border";
+    s.relatedImageBig = "relative w-full aspect-[16/11] object-cover box-border";
+    s.relatedImageRow = "flex flex-row gap-[12px] md:gap-[16px]";
+    s.relatedImageSmall = "relative w-1/2 aspect-[4/3] object-cover box-border";
+    s.relatedContent = "flex flex-col gap-[28px] md:gap-[32px] " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.relatedList = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-x-[28px] md:gap-x-[36px] xl:gap-x-[44px] gap-y-[32px] md:gap-y-[40px] xl:gap-y-[48px]";
+    const makeRelated = (i) => {
+      const hovered = this.state.hoveredRelated === i;
+      return {
+        containerStyle: "relative overflow-hidden flex flex-col gap-[10px] items-start no-underline box-border cursor-pointer transition-[box-shadow] duration-200 ease-in-out " +
+          pick("p-[16px] -m-[16px]", "p-[18px] -m-[18px]", "p-[20px] -m-[20px]"),
+        sweepStyle: "absolute inset-0 bg-gmp-gradient [transform-origin:left_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none " + (hovered ? "scale-x-100" : "scale-x-0"),
+        iconColor: hovered ? "rgb(255,255,255)" : red,
+        titleStyle: "relative z-[1] font-semibold text-[16px] md:text-[17px] leading-[22px] transition-colors duration-200 ease-in-out " + (hovered ? "text-white" : `text-[${red}]`),
+        descStyle: "relative z-[1] font-normal text-[14px] leading-[20px] transition-colors duration-200 ease-in-out " + (hovered ? "text-white" : "text-[rgba(51,51,51,0.7)]"),
+        enter: () => this.setState({ hoveredRelated: i }),
+        leave: () => this.setState({ hoveredRelated: -1 }),
+      };
+    };
+    s.related0 = makeRelated(0);
+    s.related1 = makeRelated(1);
+    s.related2 = makeRelated(2);
+    s.related3 = makeRelated(3);
 
     // ---------- WHY GMP (bento grid: 1 headline tile + supporting tiles) ----------
     s.bentoWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("bento");
