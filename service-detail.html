@@ -11,7 +11,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — Technology Transfer</title>
+  <title>GMP Manufacturing Ltd — Services</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -22,6 +22,8 @@
   <style>
     html, body { margin: 0; padding: 0; background: #fff; }
     .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes gmp-node-pulse { 0%, 100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.6); } }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -30,7 +32,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Service Detail — Responsive" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd Service Detail — Template" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -45,13 +47,13 @@
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
         <div className="{{ s.servicesMenuPanel }}">
           <div className="{{ s.navMenuInner }}">
-            <a href="services-manufacturing-filling-packing.html" className="{{ s.navMenuItem }}">Manufacturing, Filling &amp; Packing</a>
-            <a href="services-qc-micro-stability.html" className="{{ s.navMenuItem }}">QC, Micro &amp; Stability</a>
-            <a href="services-technology-transfer.html" className="{{ s.navMenuItem }}">Technology Transfer</a>
-            <a href="services-product-development-remediation.html" className="{{ s.navMenuItem }}">Product Development &amp; Remediation</a>
-            <a href="services-qp-rp-regulatory-support.html" className="{{ s.navMenuItem }}">QP, RP, RP-I &amp; Regulatory Support</a>
-            <a href="services-co-packing-contract-manufacturing.html" className="{{ s.navMenuItem }}">Co-Packing &amp; Contract Manufacturing</a>
-            <a href="services-research-development.html" className="{{ s.navMenuItem }}">Research &amp; Development</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Research &amp; Development</a>
           </div>
         </div>
       </div>
@@ -110,78 +112,48 @@
 
   <!-- ============ PAGE BANNER ============ -->
   <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
-    <img src="assets2/hero-bg.webp" alt="Production line equipment" className="{{ s.bannerBg }}">
+    <img src="assets2/hero-bg.webp" alt="Manufacturing services" className="{{ s.bannerBg }}">
     <div className="{{ s.bannerOverlay }}"></div>
     <div className="{{ s.bannerContent }}">
-      <span className="{{ s.bannerBreadcrumb }}">Home / Services / Technology Transfer</span>
-      <span className="{{ s.bannerHeadline }}">Technology Transfer</span>
-      <span className="{{ s.bannerSubtext }}">Smooth, de-risked scale-up from lab batch to full production line.</span>
+      <span className="{{ s.bannerHeadline }}">Manufacturing Services</span>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- TODO: client copy needed — source content for this service exists only as a one-line USP tile on the live site, not a full description -->
-  <!-- ============ OVERVIEW (50:50) ============ -->
-  <div data-screen-label="Overview" className="{{ s.sectionPad }}">
-    <div className="{{ s.overviewWrap }}" ref="{{ overviewRevealRef }}">
-      <div className="{{ s.overviewContent }}">
-        <div className="{{ s.sectionHeadingGroup }}">
-          <span className="{{ s.eyebrow }}">Overview</span>
-          <span className="{{ s.h2 }}">De-risked scale-up, start to finish</span>
+  <!-- ============ PANEL A (text left, image right) ============ -->
+  <div data-screen-label="Panel A" className="{{ s.sectionPad }}">
+    <div className="{{ s.panelWrap }}" ref="{{ panelARevealRef }}">
+      <div className="{{ s.panelContent }}">
+        <span className="{{ s.h2 }}">Formulation, manufacturing and everything in between</span>
+        <div className="{{ s.subheadingBlock }}">
+          <span className="{{ s.subheadingTitle }}">Full-Scale Production</span>
+          <span className="{{ s.subheadingBody }}">From bulk manufacture through to finished, labelled pack, every stage runs through our own UK facilities — one process, one accountable team.</span>
         </div>
-        <span className="{{ s.overviewBody }}">Smooth, de-risked scale-up from lab batch to full production line — protecting product quality at every stage of transfer, in or out of our facilities.</span>
       </div>
-      <div className="{{ s.overviewImageCol }}">
-        <img src="assets2/hero-bg.webp" alt="Production line equipment" loading="lazy" className="{{ s.overviewImage }}">
+      <div className="{{ s.panelImageCol }}">
+        <img src="assets2/placeholder-team-3.jpg" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ WHAT'S INCLUDED (icon-card grid) ============ -->
-  <div data-screen-label="What's Included" className="{{ s.sectionPad }}">
-    <div className="{{ s.includedWrap }}" ref="{{ includedRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">What's Included</span>
-        <span className="{{ s.h2 }}">Capabilities covered</span>
+  <!-- ============ PANEL B (image left, text right) ============ -->
+  <div data-screen-label="Panel B" className="{{ s.sectionPad }}">
+    <div className="{{ s.panelWrapReverse }}" ref="{{ panelBRevealRef }}">
+      <div className="{{ s.panelImageCol }}">
+        <img src="assets2/placeholder-team-2.jpg" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
       </div>
-      <div className="{{ s.includedGrid }}">
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconBlue }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Scale-Up Planning</span>
-          <span className="{{ s.includedCardDesc }}">Process mapped from lab batch to full line.</span>
+      <div className="{{ s.panelContent }}">
+        <span className="{{ s.h2 }}">Built around your product, not the other way around</span>
+        <div className="{{ s.subheadingBlock }}">
+          <span className="{{ s.subheadingTitle }}">Flexible Capacity</span>
+          <span className="{{ s.subheadingBody }}">Whether you need a single validation batch or full commercial-scale runs, our lines flex to your volumes without compromising on quality.</span>
         </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconRed }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Site Readiness Assessment</span>
-          <span className="{{ s.includedCardDesc }}">Equipment and facilities checked against the process.</span>
-        </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconBlue }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><path d="M4 4h16v16H4z"></path><path d="M4 9h16"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Documentation Transfer</span>
-          <span className="{{ s.includedCardDesc }}">Full technical file handed over cleanly.</span>
-        </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconRed }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"></path><circle cx="12" cy="12" r="3"></circle></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Pilot & Validation Batches</span>
-          <span className="{{ s.includedCardDesc }}">Trial runs confirm the process before go-live.</span>
-        </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconBlue }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><path d="M3 12l4-8 4 8-4 8-4-8Z"></path><path d="M13 12l4-8 4 8-4 8-4-8Z"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Process Optimisation</span>
-          <span className="{{ s.includedCardDesc }}">Ongoing refinement once in production.</span>
+        <div className="{{ s.subheadingBlock }}">
+          <span className="{{ s.subheadingTitle }}">Full Documentation</span>
+          <span className="{{ s.subheadingBody }}">Every batch leaves with a complete paperwork trail — QC results, release certificates and audit-ready records included as standard.</span>
         </div>
       </div>
     </div>
@@ -189,33 +161,40 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ HOW IT WORKS (step strip) ============ -->
-  <div data-screen-label="How It Works" className="{{ s.sectionPad }}">
-    <div className="{{ s.stepWrap }}" ref="{{ stepRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">How It Works</span>
-        <span className="{{ s.h2 }}">From brief to delivery</span>
-      </div>
-      <div className="{{ s.stepStrip }}">
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">01</span>
-          <span className="{{ s.stepTitle }}">Brief</span>
-          <span className="{{ s.stepDesc }}">Share your product goals, volumes and timeline.</span>
+  <!-- ============ CAPABILITIES COVERED (grey band, photo cards) ============ -->
+  <div className="{{ s.greyBandOuter }}">
+    <div data-screen-label="Capabilities Covered" className="{{ s.sectionPad }}">
+      <div className="{{ s.capWrap }}" ref="{{ capRevealRef }}">
+        <div className="{{ s.capHeadWrap }}">
+          <span className="{{ s.h2 }}">Capabilities covered</span>
+          <span className="{{ s.capSubtext }}">Everything you need to get a product from formulation to finished pack, under one roof.</span>
         </div>
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">02</span>
-          <span className="{{ s.stepTitle }}">Development</span>
-          <span className="{{ s.stepDesc }}">We plan the formulation, process or transfer approach.</span>
-        </div>
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">03</span>
-          <span className="{{ s.stepTitle }}">Validation</span>
-          <span className="{{ s.stepDesc }}">Trial batches and testing confirm it works at scale.</span>
-        </div>
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">04</span>
-          <span className="{{ s.stepTitle }}">Delivery</span>
-          <span className="{{ s.stepDesc }}">Full production, QC release and on-time despatch.</span>
+        <div className="{{ s.capGrid }}">
+          <div className="{{ s.capCard }}">
+            <div className="{{ s.capImgWrap }}"><img src="assets2/hero-bg.webp" alt="Solid Dose Manufacturing" loading="lazy" className="{{ s.capImg }}"></div>
+            <span className="{{ s.capCardTitle }}">Solid Dose Manufacturing</span>
+            <span className="{{ s.capCardDesc }}">Tablets and capsules produced at full commercial scale.</span>
+          </div>
+          <div className="{{ s.capCard }}">
+            <div className="{{ s.capImgWrap }}"><img src="assets2/placeholder-team-2.jpg" alt="Liquid & Semi-Solid Filling" loading="lazy" className="{{ s.capImg }}"></div>
+            <span className="{{ s.capCardTitle }}">Liquid &amp; Semi-Solid Filling</span>
+            <span className="{{ s.capCardDesc }}">Creams, liquids and gels filled to spec.</span>
+          </div>
+          <div className="{{ s.capCard }}">
+            <div className="{{ s.capImgWrap }}"><img src="assets2/placeholder-team-3.jpg" alt="Primary & Secondary Packing" loading="lazy" className="{{ s.capImg }}"></div>
+            <span className="{{ s.capCardTitle }}">Primary &amp; Secondary Packing</span>
+            <span className="{{ s.capCardDesc }}">Blister, bottle and carton packing lines.</span>
+          </div>
+          <div className="{{ s.capCard }}">
+            <div className="{{ s.capImgWrap }}"><img src="assets2/team-4-real.webp" alt="Batch Release & Documentation" loading="lazy" className="{{ s.capImg }}"></div>
+            <span className="{{ s.capCardTitle }}">Batch Release &amp; Documentation</span>
+            <span className="{{ s.capCardDesc }}">Full paperwork trail for every batch.</span>
+          </div>
+          <div className="{{ s.capCard }}">
+            <div className="{{ s.capImgWrap }}"><img src="assets2/placeholder-sector-pharma.jpg" alt="Serialisation & Labelling" loading="lazy" className="{{ s.capImg }}"></div>
+            <span className="{{ s.capCardTitle }}">Serialisation &amp; Labelling</span>
+            <span className="{{ s.capCardDesc }}">Track-and-trace compliant labelling.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -223,41 +202,53 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ FULL-BLEED FACILITY INSERT ============ -->
+  <!-- ============ FULL-BLEED FACILITY INSERT (white caption box) ============ -->
   <div className="{{ s.fullBleedOuter }}">
     <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.fullBleedImg }}">
     <div className="{{ s.fullBleedCaptionWrap }}">
-      <span className="{{ s.fullBleedCaption }}">A look inside our UK manufacturing facility</span>
+      <span className="{{ s.fullBleedCaptionTitle }}">A look inside our UK manufacturing facility</span>
+      <span className="{{ s.fullBleedCaptionDesc }}">Every stage of production takes place under one roof, from raw material through to finished, market-ready product.</span>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ WHY GMP FOR THIS SERVICE (credential chips) ============ -->
-  <div data-screen-label="Why GMP" className="{{ s.sectionPad }}">
-    <div className="{{ s.credWrap }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Why GMP</span>
-        <span className="{{ s.h2 }}">Backed by the right credentials</span>
-      </div>
-      <div className="{{ s.credChipRow }}">
-        <div className="{{ s.credChip }}">
-          <div className="{{ s.credChipIcon }}">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg>
-          </div>
-          De-Risked Scale-Up
+  <!-- ============ HOW IT WORKS (grey band, icon-placeholder + arrow strip) ============ -->
+  <div className="{{ s.greyBandOuter }}">
+    <div data-screen-label="How It Works" className="{{ s.sectionPad }}">
+      <div className="{{ s.stepWrap }}" ref="{{ stepRevealRef }}">
+        <div className="{{ s.capHeadWrap }}">
+          <span className="{{ s.h2 }}">How It Works</span>
+          <span className="{{ s.capSubtext }}">A clear, four-step path from first brief to finished product.</span>
         </div>
-        <div className="{{ s.credChip }}">
-          <div className="{{ s.credChipIcon }}">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg>
+        <div className="{{ s.stepStrip }}">
+          <div className="{{ s.stepItem }}">
+            <div className="{{ s.stepIconBox }}"></div>
+            <span className="{{ s.stepNumber }}">01</span>
+            <span className="{{ s.stepTitle }}">Brief</span>
+            <span className="{{ s.stepDesc }}">Share your product goals, volumes and timeline.</span>
           </div>
-          MHRA-Licensed Site
-        </div>
-        <div className="{{ s.credChip }}">
-          <div className="{{ s.credChipIcon }}">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg>
+          <svg className="{{ s.stepArrow }}" width="32" height="12" viewBox="0 0 32 12" fill="none" stroke="rgba(51,51,51,0.3)" stroke-width="1.5"><path d="M0 6h28M22 1l6 5-6 5"></path></svg>
+          <div className="{{ s.stepItem }}">
+            <div className="{{ s.stepIconBox }}"></div>
+            <span className="{{ s.stepNumber }}">02</span>
+            <span className="{{ s.stepTitle }}">Development</span>
+            <span className="{{ s.stepDesc }}">We plan the formulation, process or transfer approach.</span>
           </div>
-          Dedicated Project Team
+          <svg className="{{ s.stepArrow }}" width="32" height="12" viewBox="0 0 32 12" fill="none" stroke="rgba(51,51,51,0.3)" stroke-width="1.5"><path d="M0 6h28M22 1l6 5-6 5"></path></svg>
+          <div className="{{ s.stepItem }}">
+            <div className="{{ s.stepIconBox }}"></div>
+            <span className="{{ s.stepNumber }}">03</span>
+            <span className="{{ s.stepTitle }}">Validation</span>
+            <span className="{{ s.stepDesc }}">Trial batches and testing confirm it works at scale.</span>
+          </div>
+          <svg className="{{ s.stepArrow }}" width="32" height="12" viewBox="0 0 32 12" fill="none" stroke="rgba(51,51,51,0.3)" stroke-width="1.5"><path d="M0 6h28M22 1l6 5-6 5"></path></svg>
+          <div className="{{ s.stepItem }}">
+            <div className="{{ s.stepIconBox }}"></div>
+            <span className="{{ s.stepNumber }}">04</span>
+            <span className="{{ s.stepTitle }}">Delivery</span>
+            <span className="{{ s.stepDesc }}">Full production, QC release and on-time despatch.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -265,61 +256,95 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ RELATED SECTORS (content scroller) ============ -->
-  <div data-screen-label="Related Sectors" className="{{ s.sectionPad }}">
-    <div className="{{ s.scrollerWrap }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Related Sectors</span>
+  <!-- ============ WHERE THIS SERVICE APPLIES (4-photo grid) ============ -->
+  <div data-screen-label="Where This Applies" className="{{ s.sectionPad }}">
+    <div className="{{ s.complianceWrap }}" ref="{{ appliesRevealRef }}">
+      <div className="{{ s.complianceHeadWrap }}">
         <span className="{{ s.h2 }}">Where this service applies</span>
       </div>
-      <div className="{{ s.scrollerRow }}">
-        <a href="sectors-pharmaceutical.html" className="{{ s.scrollerCard }}">
-          <div className="{{ s.scrollerImgWrap }}">
-            <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.scrollerImg }}">
-          </div>
-          <div className="{{ s.scrollerTextWrap }}">
-            <span className="{{ s.scrollerTitle }}">Pharmaceutical</span>
-            <span className="{{ s.scrollerLine }}">See how we support pharmaceutical products.</span>
-          </div>
+      <div className="{{ s.appliesGrid }}">
+        <a href="sectors-pharmaceutical.html" className="{{ s.complianceItem }}">
+          <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Pharmaceutical</span></div>
         </a>
-        <a href="sectors-veterinary.html" className="{{ s.scrollerCard }}">
-          <div className="{{ s.scrollerImgWrap }}">
-            <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.scrollerImg }}">
-          </div>
-          <div className="{{ s.scrollerTextWrap }}">
-            <span className="{{ s.scrollerTitle }}">Veterinary</span>
-            <span className="{{ s.scrollerLine }}">See how we support veterinary products.</span>
-          </div>
+        <a href="sectors-cosmetic.html" className="{{ s.complianceItem }}">
+          <img src="assets2/sector-cosmetic-real.webp" alt="Cosmetic" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Cosmetic</span></div>
         </a>
-        <a href="sectors-medical-device.html" className="{{ s.scrollerCard }}">
-          <div className="{{ s.scrollerImgWrap }}">
-            <img src="assets2/placeholder-sector-meddevice.jpg" alt="Medical Device" loading="lazy" className="{{ s.scrollerImg }}">
-          </div>
-          <div className="{{ s.scrollerTextWrap }}">
-            <span className="{{ s.scrollerTitle }}">Medical Device</span>
-            <span className="{{ s.scrollerLine }}">See how we support medical device products.</span>
-          </div>
+        <a href="sectors-supplements.html" className="{{ s.complianceItem }}">
+          <img src="assets2/placeholder-sector-supplements.jpg" alt="Supplements" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Supplements</span></div>
         </a>
+        <a href="sectors-veterinary.html" className="{{ s.complianceItem }}">
+          <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Veterinary</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ GLOBAL REACH (full-bleed map band) ============ -->
+  <div className="{{ s.mapOuter }}">
+    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="rgb(37,60,110)"></stop>
+          <stop offset="55%" stop-color="rgb(24,26,64)"></stop>
+          <stop offset="100%" stop-color="rgb(17,17,40)"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1600" height="560" fill="url(#mapBg)"></rect>
+      <g opacity="0.16" stroke="rgb(255,255,255)" stroke-width="1">
+        <path d="M0 80h1600M0 160h1600M0 240h1600M0 320h1600M0 400h1600M0 480h1600"></path>
+        <path d="M80 0v560M240 0v560M400 0v560M560 0v560M720 0v560M880 0v560M1040 0v560M1200 0v560M1360 0v560M1520 0v560"></path>
+      </g>
+      <g fill="none" stroke="rgb(255,255,255)" stroke-width="1.4" stroke-dasharray="4 6" opacity="0.55">
+        <path d="M260 260 C 420 100, 620 100, 760 220"></path>
+        <path d="M260 260 C 380 340, 520 380, 660 360"></path>
+        <path d="M760 220 C 900 150, 1040 160, 1160 230"></path>
+        <path d="M760 220 C 860 300, 980 340, 1120 360"></path>
+        <path d="M660 360 C 820 420, 980 430, 1120 360"></path>
+        <path d="M1160 230 C 1260 280, 1340 320, 1420 300"></path>
+        <path d="M260 260 C 220 180, 220 120, 300 70"></path>
+      </g>
+      <g fill="rgb(255,255,255)">
+        <circle cx="260" cy="260" r="5"></circle>
+        <circle cx="760" cy="220" r="6"></circle>
+        <circle cx="660" cy="360" r="4"></circle>
+        <circle cx="1160" cy="230" r="5"></circle>
+        <circle cx="1120" cy="360" r="4"></circle>
+        <circle cx="1420" cy="300" r="4"></circle>
+        <circle cx="300" cy="70" r="4"></circle>
+      </g>
+      <g fill="rgb(255,255,255)">
+        <circle cx="260" cy="260" r="9" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite;"></circle>
+        <circle cx="760" cy="220" r="10" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite 0.6s;"></circle>
+        <circle cx="1160" cy="230" r="9" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite 1.2s;"></circle>
+      </g>
+    </svg>
+    <div className="{{ s.mapCaptionWrap }}">
+      <span className="{{ s.mapCaption }}">Supplying partners across 30+ countries from our own UK facilities.</span>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ ACCREDITATIONS (reused marquee) ============ -->
+  <div data-screen-label="Accreditations" className="{{ s.sectionPad }}">
+    <div className="{{ s.marqueeOuter }}">
+      <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
+        <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
+          <div className="{{ s.marqueeItem }}">
+            <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
+          </div>
+        </sc-for>
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGapHalf }}"></div>
-
-  <!-- ============ CTA ============ -->
-  <div className="{{ s.collabOuter }}">
-    <div className="{{ s.collabOverlay }}"></div>
-    <div className="{{ s.collabWrap }}">
-      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Enquire About Technology Transfer</span>
-      <span className="{{ s.collabBody }}">Tell us about your product and our team will get back to you within one working day.</span>
-      <div className="{{ s.collabBtnRow }}">
-        <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-          <span className="{{ s.collabGetQuoteText }}">Enquire Now</span>
-          <div className="{{ s.collabGetQuoteIcon }}"></div>
-        </a>
-      </div>
-    </div>
-  </div>
 
   <!-- ============ FOOTER ============ -->
   <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
@@ -360,13 +385,13 @@
           <div className="flex flex-col gap-[12px] items-start">
             <span className="{{ s.footerColLabel }}">Services</span>
             <div className="flex flex-col gap-[8px] items-start">
-              <a href="services-manufacturing-filling-packing.html" className="{{ s.footerLink }}">Manufacturing, Filling &amp; Packing</a>
-              <a href="services-qc-micro-stability.html" className="{{ s.footerLink }}">QC, Micro &amp; Stability</a>
-              <a href="services-technology-transfer.html" className="{{ s.footerLink }}">Technology Transfer</a>
-              <a href="services-product-development-remediation.html" className="{{ s.footerLink }}">Product Development &amp; Remediation</a>
-              <a href="services-qp-rp-regulatory-support.html" className="{{ s.footerLink }}">QP, RP, RP-I &amp; Regulatory Support</a>
-              <a href="services-co-packing-contract-manufacturing.html" className="{{ s.footerLink }}">Co-Packing &amp; Contract Manufacturing</a>
-              <a href="services-research-development.html" className="{{ s.footerLink }}">Research &amp; Development</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">Manufacturing, Filling &amp; Packing</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">QC, Micro &amp; Stability</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">Technology Transfer</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">Product Development &amp; Remediation</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">QP, RP, RP-I &amp; Regulatory Support</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">Co-Packing &amp; Contract Manufacturing</a>
+              <a href="service-detail.html" className="{{ s.footerLink }}">Research &amp; Development</a>
             </div>
           </div>
           <div className="flex flex-col gap-[12px] items-start">
@@ -469,6 +494,9 @@ class Component extends DCLogic {
     const w = window.innerWidth;
     const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
     if (bp !== this.state.bp) this.setState({ bp });
+  }
+  _applyMarquee() {
+    if (this._marqueeEl) this._marqueeEl.style.animationPlayState = "running";
   }
 
   renderVals() {
@@ -603,73 +631,74 @@ class Component extends DCLogic {
     s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
     s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
-    // ---------- PAGE BANNER (gradient overlay, capped 320px) ----------
+    // ---------- PAGE BANNER (gradient overlay, guaranteed topbar clearance) ----------
     s.bannerWrap = `relative w-full ${pick("min-h-[220px]", "min-h-[280px]", "min-h-[320px]")} flex flex-col justify-end box-border overflow-hidden`;
     s.bannerBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.banner ? "scale-100" : "scale-[1.05]");
     s.bannerOverlay = "absolute inset-0 bg-gmp-gradient opacity-75 pointer-events-none";
-    s.bannerBreadcrumb = "font-normal text-[13px] leading-[18px] text-[rgba(255,255,255,0.75)]";
     s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[88px] px-[20px] pb-[24px]", "pt-[104px] px-[40px] pb-[36px]", "pt-[116px] px-[64px] pb-[44px]");
     s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
-    s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
 
-    // ---------- OVERVIEW (50:50, image right) ----------
-    s.overviewWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("overview");
-    s.overviewImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden " + pick("p-[12px]", "p-[16px]", "p-[20px]") + " bg-[rgb(245,243,240)]";
-    s.overviewImage = "relative w-full h-full object-cover box-border";
-    s.overviewContent = "flex flex-col gap-[20px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
-    s.overviewBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[560px]`;
+    // ---------- PANELS (alternating image/text, shared) ----------
+    s.panelWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelA");
+    s.panelWrapReverse = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelB");
+    s.panelImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden";
+    s.panelImage = "relative w-full h-full object-cover box-border";
+    s.panelContent = "flex flex-col gap-[24px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.subheadingBlock = "flex flex-col gap-[6px] items-start max-w-[560px]";
+    s.subheadingTitle = `font-semibold text-[17px] leading-[24px] text-[${near}]`;
+    s.subheadingBody = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.75)]";
 
-    // ---------- WHAT'S INCLUDED (icon-card grid) ----------
-    s.includedWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("included");
-    s.includedGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[16px] md:gap-[20px]";
-    s.includedCard = cardHoverBase + " flex flex-col gap-[12px] items-start " + pick("p-[20px]", "p-[22px]", "p-[24px]");
-    s.includedIconBlue = "w-[40px] h-[40px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.includedIconRed = "w-[40px] h-[40px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.includedCardTitle = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
-    s.includedCardDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
+    // ---------- GREY BAND WRAPPER (shared by Capabilities + How It Works) ----------
+    s.greyBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] box-border bg-[rgb(245,243,240)] px-[${gutter}px] ` + pick("py-[48px]", "py-[64px]", "py-[80px]");
+    s.capHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px] gap-[12px]";
+    s.capSubtext = "font-normal text-[16px] leading-[24px] text-[rgba(51,51,51,0.75)]";
 
-    // ---------- HOW IT WORKS (numbered step strip) ----------
-    s.stepWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("steps");
-    s.stepStrip = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[20px] md:gap-[24px]";
-    s.stepCard = `flex flex-col gap-[8px] items-start border-t-[3px] border-solid border-[${red}] pt-[16px]`;
-    s.stepNumber = `font-medium text-[28px] leading-[1.1] text-[${red}]`;
-    s.stepTitle = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
-    s.stepDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
+    // ---------- CAPABILITIES COVERED (photo cards) ----------
+    s.capWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("capabilities");
+    s.capGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[20px] md:gap-[24px]";
+    s.capCard = "flex flex-col gap-[12px] items-start";
+    s.capImgWrap = "w-full aspect-[4/3] overflow-hidden bg-[rgb(232,232,232)]";
+    s.capImg = "w-full h-full object-cover";
+    s.capCardTitle = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
+    s.capCardDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
 
-    // ---------- FULL-BLEED FACILITY INSERT ----------
-    s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[240px]", "h-[340px]", "h-[440px]")}`;
+    // ---------- FULL-BLEED FACILITY INSERT (white caption box) ----------
+    s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[380px]", "h-[460px]", "h-[560px]")}`;
     s.fullBleedImg = "absolute inset-0 w-full h-full object-cover";
-    s.fullBleedCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-gmp-navy/70 box-border py-[8px] px-[14px]`;
-    s.fullBleedCaption = "font-normal text-[13px] md:text-[14px] leading-[18px] text-white whitespace-nowrap";
+    s.fullBleedCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-white box-border flex flex-col gap-[6px] max-w-[380px] ` + pick("py-[16px] px-[18px]", "py-[20px] px-[22px]", "py-[24px] px-[26px]");
+    s.fullBleedCaptionTitle = `font-medium text-[19px] md:text-[21px] leading-[1.3] text-[${near}]`;
+    s.fullBleedCaptionDesc = "font-normal text-[13px] leading-[19px] text-[rgba(51,51,51,0.75)]";
 
-    // ---------- WHY GMP (credential chips) ----------
-    s.credWrap = "flex flex-col gap-[20px] max-w-[1600px] mx-auto";
-    s.credChipRow = "flex flex-row flex-wrap gap-[12px]";
-    s.credChip = `inline-flex flex-row items-center gap-[8px] border border-solid border-[rgba(0,0,0,0.15)] rounded-none py-[10px] px-[16px] text-[14px] font-medium text-[${dark}]`;
-    s.credChipIcon = `w-[16px] h-[16px] shrink-0 bg-[${red}] flex items-center justify-center`;
+    // ---------- HOW IT WORKS (icon-placeholder + arrow strip) ----------
+    s.stepWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("steps");
+    s.stepStrip = "flex " + (isDesktop ? "flex-row items-start justify-between" : "flex-col") + " gap-[20px] md:gap-[24px]";
+    s.stepItem = "flex flex-col gap-[10px] items-start " + (isDesktop ? "w-[22%]" : "w-full");
+    s.stepIconBox = "w-[52px] h-[52px] shrink-0 bg-[rgb(225,222,217)]";
+    s.stepNumber = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
+    s.stepTitle = `font-semibold text-[17px] leading-[22px] text-[${dark}]`;
+    s.stepDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
+    s.stepArrow = isDesktop ? "shrink-0 mt-[24px]" : "hidden";
 
-    // ---------- RELATED SECTORS (content scroller) ----------
-    s.scrollerWrap = "flex flex-col gap-[20px] max-w-[1600px] mx-auto";
-    s.scrollerRow = "flex flex-row gap-[16px] overflow-x-auto [scroll-snap-type:x_mandatory] pb-[8px] [-webkit-overflow-scrolling:touch]";
-    s.scrollerCard = cardHoverBase + " [scroll-snap-align:start] shrink-0 w-[240px] md:w-[260px] flex flex-col box-border no-underline overflow-hidden";
-    s.scrollerImgWrap = "w-full aspect-[3/2] overflow-hidden bg-[rgb(232,232,232)]";
-    s.scrollerImg = "w-full h-full object-cover";
-    s.scrollerTextWrap = "flex flex-col gap-[6px] p-[16px]";
-    s.scrollerTitle = `font-semibold text-[15px] leading-[20px] text-[${dark}]`;
-    s.scrollerLine = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.65)]";
+    // ---------- WHERE THIS SERVICE APPLIES / COMPLIANCE (shared 4-photo grid, white caption) ----------
+    s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("applies");
+    s.complianceHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px]";
+    s.appliesGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
+    s.complianceItem = "relative aspect-[3/4] overflow-hidden bg-[rgb(232,232,232)] block no-underline transition-[box-shadow,transform] duration-200 ease-in-out hover:-translate-y-1";
+    s.complianceImg = "absolute inset-0 w-full h-full object-cover";
+    s.complianceCaptionWrap = "absolute left-0 bottom-0 bg-white box-border py-[14px] px-[16px] " + pick("w-full", "w-full", "w-[85%]");
+    s.complianceCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
 
-    // ---------- CTA (static gradient, no ripple) ----------
-    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center bg-[${gradient}] ` +
-      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
-    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.15)] pointer-events-none";
-    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
-    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
-    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
-    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
-    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
-    s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
-    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
-    s.collabGetQuoteIcon = `w-[14px] h-[14px] bg-[${s.pillGetQuote.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    // ---------- GLOBAL REACH (full-bleed map band) ----------
+    s.mapOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[320px]", "h-[400px]", "h-[480px]")}`;
+    s.mapCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-white box-border max-w-[420px] ` + pick("py-[18px] px-[20px]", "py-[22px] px-[24px]", "py-[26px] px-[28px]");
+    s.mapCaption = `font-medium text-[20px] md:text-[24px] leading-[1.4] text-[${near}]`;
+
+    // ---------- ACCREDITATIONS (reused marquee) ----------
+    s.marqueeOuter = "w-full max-w-[1600px] overflow-hidden rounded-none bg-[rgb(245,245,245)] flex items-center box-border mx-auto " +
+      pick("py-[28px] px-[16px]", "py-[36px] px-[20px]", "py-[48px] px-[24px]");
+    s.marqueeInner = "flex flex-row gap-[24px] items-center w-max [animation:gmp-marquee_30s_linear_infinite]";
+    s.marqueeItem = `flex items-center justify-center shrink-0 ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
+    s.marqueeImg = "max-w-full max-h-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300";
 
     // ---------- FOOTER (inherited) ----------
     s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
@@ -711,13 +740,19 @@ class Component extends DCLogic {
     s.footerWordmark = "flex flex-col " + (isMobile ? "items-start" : "items-end") + " gap-[4px]";
     s.footerWordmarkImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
 
+    // ---------- DATA ----------
+    const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
+
     return {
       s,
-      overviewRevealRef: revealRef("overview"),
-      includedRevealRef: revealRef("included"),
+      panelARevealRef: revealRef("panelA"),
+      panelBRevealRef: revealRef("panelB"),
+      capRevealRef: revealRef("capabilities"),
       stepRevealRef: revealRef("steps"),
-      collabRevealRef: revealRef("collab"),
+      appliesRevealRef: revealRef("applies"),
       footerRevealRef: revealRef("footer"),
+      marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
+      logos: [...names, ...names],
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
       showHeroCtaIcon: !isMobile,
     };
