@@ -63,12 +63,12 @@
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
         <div className="{{ s.sectorsMenuPanel }}">
           <div className="{{ s.navMenuInner }}">
-            <a href="sectors-pharmaceutical.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
-            <a href="sectors-veterinary.html" className="{{ s.navMenuItem }}">Veterinary</a>
-            <a href="sectors-medical-device.html" className="{{ s.navMenuItem }}">Medical Device</a>
-            <a href="sectors-cosmetic.html" className="{{ s.navMenuItem }}">Cosmetic</a>
-            <a href="sectors-supplements.html" className="{{ s.navMenuItem }}">Supplements</a>
-            <a href="sectors-biocide.html" className="{{ s.navMenuItem }}">Biocide</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Biocide</a>
           </div>
         </div>
       </div>
@@ -121,9 +121,12 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ PANEL A (text left, image right) ============ -->
+  <!-- ============ PANEL A (image left, text right) ============ -->
   <div data-screen-label="Panel A" className="{{ s.sectionPad }}">
-    <div className="{{ s.panelWrap }}" ref="{{ panelARevealRef }}">
+    <div className="{{ s.panelWrapReverse }}" ref="{{ panelARevealRef }}">
+      <div className="{{ s.panelImageCol }}">
+        <img src="assets2/placeholder-team-3.jpg" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
+      </div>
       <div className="{{ s.panelContent }}">
         <span className="{{ s.h2 }}">Formulation, manufacturing and everything in between</span>
         <div className="{{ s.subheadingBlock }}">
@@ -131,20 +134,14 @@
           <span className="{{ s.subheadingBody }}">From bulk manufacture through to finished, labelled pack, every stage runs through our own UK facilities — one process, one accountable team.</span>
         </div>
       </div>
-      <div className="{{ s.panelImageCol }}">
-        <img src="assets2/placeholder-team-3.jpg" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
-      </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ PANEL B (image left, text right) ============ -->
+  <!-- ============ PANEL B (text left, image right) ============ -->
   <div data-screen-label="Panel B" className="{{ s.sectionPad }}">
-    <div className="{{ s.panelWrapReverse }}" ref="{{ panelBRevealRef }}">
-      <div className="{{ s.panelImageCol }}">
-        <img src="assets2/placeholder-team-2.jpg" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
-      </div>
+    <div className="{{ s.panelWrap }}" ref="{{ panelBRevealRef }}">
       <div className="{{ s.panelContent }}">
         <span className="{{ s.h2 }}">Built around your product, not the other way around</span>
         <div className="{{ s.subheadingBlock }}">
@@ -155,6 +152,9 @@
           <span className="{{ s.subheadingTitle }}">Full Documentation</span>
           <span className="{{ s.subheadingBody }}">Every batch leaves with a complete paperwork trail — QC results, release certificates and audit-ready records included as standard.</span>
         </div>
+      </div>
+      <div className="{{ s.panelImageCol }}">
+        <img src="assets2/placeholder-team-2.jpg" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
       </div>
     </div>
   </div>
@@ -263,19 +263,19 @@
         <span className="{{ s.h2 }}">Where this service applies</span>
       </div>
       <div className="{{ s.appliesGrid }}">
-        <a href="sectors-pharmaceutical.html" className="{{ s.complianceItem }}">
+        <a href="sector-detail.html" className="{{ s.complianceItem }}">
           <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.complianceImg }}">
           <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Pharmaceutical</span></div>
         </a>
-        <a href="sectors-cosmetic.html" className="{{ s.complianceItem }}">
+        <a href="sector-detail.html" className="{{ s.complianceItem }}">
           <img src="assets2/sector-cosmetic-real.webp" alt="Cosmetic" loading="lazy" className="{{ s.complianceImg }}">
           <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Cosmetic</span></div>
         </a>
-        <a href="sectors-supplements.html" className="{{ s.complianceItem }}">
+        <a href="sector-detail.html" className="{{ s.complianceItem }}">
           <img src="assets2/placeholder-sector-supplements.jpg" alt="Supplements" loading="lazy" className="{{ s.complianceImg }}">
           <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Supplements</span></div>
         </a>
-        <a href="sectors-veterinary.html" className="{{ s.complianceItem }}">
+        <a href="sector-detail.html" className="{{ s.complianceItem }}">
           <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.complianceImg }}">
           <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Veterinary</span></div>
         </a>
@@ -665,9 +665,12 @@ class Component extends DCLogic {
     // ---------- FULL-BLEED FACILITY INSERT (white caption box) ----------
     s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[380px]", "h-[460px]", "h-[560px]")}`;
     s.fullBleedImg = "absolute inset-0 w-full h-full object-cover";
-    s.fullBleedCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-white box-border flex flex-col gap-[6px] max-w-[380px] ` + pick("py-[16px] px-[18px]", "py-[20px] px-[22px]", "py-[24px] px-[26px]");
-    s.fullBleedCaptionTitle = `font-medium text-[19px] md:text-[21px] leading-[1.3] text-[${near}]`;
-    s.fullBleedCaptionDesc = "font-normal text-[13px] leading-[19px] text-[rgba(51,51,51,0.75)]";
+    s.fullBleedCaptionWrap = (isMobile
+      ? "absolute left-0 right-0 bottom-0 w-full"
+      : `absolute bottom-0 right-[${gutter}px] w-[${pick(0, 420, 560)}px]`
+    ) + " bg-white box-border flex flex-col " + pick("gap-[10px] py-[24px] px-[20px]", "gap-[12px] py-[32px] px-[32px]", "gap-[12px] py-[40px] px-[40px]");
+    s.fullBleedCaptionTitle = `font-semibold ${pick("text-[26px]", "text-[32px]", "text-[36px]")} leading-[1.22] tracking-[-0.72px] text-[${near}]`;
+    s.fullBleedCaptionDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[24px] text-[${dark}]`;
 
     // ---------- HOW IT WORKS (icon-placeholder + arrow strip) ----------
     s.stepWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("steps");
