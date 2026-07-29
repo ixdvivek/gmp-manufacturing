@@ -11,7 +11,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — Sectors We Serve</title>
+  <title>GMP Manufacturing Ltd — Biocide</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -22,8 +22,6 @@
   <style>
     html, body { margin: 0; padding: 0; background: #fff; }
     .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-    @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @keyframes gmp-node-pulse { 0%, 100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.6); } }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -32,7 +30,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Sector Detail — Template" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd Sector Detail — Responsive" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -63,12 +61,12 @@
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
         <div className="{{ s.sectorsMenuPanel }}">
           <div className="{{ s.navMenuInner }}">
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Veterinary</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Medical Device</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Cosmetic</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Supplements</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Biocide</a>
+            <a href="sectors-pharmaceutical.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sectors-veterinary.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sectors-medical-device.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sectors-cosmetic.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sectors-supplements.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sectors-biocide.html" className="{{ s.navMenuItem }}">Biocide</a>
           </div>
         </div>
       </div>
@@ -110,101 +108,71 @@
     </a>
   </div>
 
-  <!-- ============ OVERVIEW (image left, no hero photo band — type-led like News) ============ -->
-  <div data-screen-label="Overview" className="{{ s.overviewSectionPad }}">
+  <!-- ============ PAGE BANNER ============ -->
+  <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
+    <img src="assets2/placeholder-sector-biocide.jpg" alt="Biocidal product manufacturing" className="{{ s.bannerBg }}">
+    <div className="{{ s.bannerOverlay }}"></div>
+    <div className="{{ s.bannerContent }}">
+      <span className="{{ s.bannerBreadcrumb }}">Home / Sectors / Biocide</span>
+      <span className="{{ s.bannerHeadline }}">Biocide</span>
+      <span className="{{ s.bannerSubtext }}">Biocidal products developed and produced under strict regulatory and safety control.</span>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ SECTOR OVERVIEW (50:50, image LEFT — flipped vs service template) ============ -->
+  <div data-screen-label="Overview" className="{{ s.sectionPad }}">
     <div className="{{ s.overviewWrap }}" ref="{{ overviewRevealRef }}">
       <div className="{{ s.overviewImageCol }}">
-        <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical manufacturing" loading="lazy" className="{{ s.overviewImage }}">
+        <img src="assets2/placeholder-sector-biocide.jpg" alt="Biocidal product manufacturing" loading="lazy" className="{{ s.overviewImage }}">
       </div>
       <div className="{{ s.overviewContent }}">
-        <span className="{{ s.h1 }}">Built for pharmaceutical compliance</span>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Formulation &amp; Development</span>
-          <span className="{{ s.subheadingBody }}">Our in-house team works alongside you from early-stage formulation through analytical development, so every specification is right before a single batch reaches the line.</span>
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Overview</span>
+          <span className="{{ s.h2 }}">Safety-led, compliance-first production</span>
         </div>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">UK-Owned Manufacturing</span>
-          <span className="{{ s.subheadingBody }}">Every stage of production runs through our own Hull-based facilities — full control, no third-party handoffs, and no outsourcing surprises.</span>
-        </div>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Quality &amp; Regulatory Support</span>
-          <span className="{{ s.subheadingBody }}">QP and RP release, in-house QC and stability testing, and audit-ready documentation are built into every batch we manufacture.</span>
-        </div>
+        <span className="{{ s.overviewBody }}">Biocidal products developed and produced under strict regulatory and safety control — manufactured with the same discipline as our pharmaceutical lines.</span>
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ RELEVANT SERVICES (numbered strip, our services CTA) ============ -->
+  <!-- ============ RELEVANT SERVICES (image collage + icon list, hover gradient) ============ -->
   <div data-screen-label="Relevant Services" className="{{ s.sectionPad }}">
-    <div className="{{ s.relSvcRow }}" ref="{{ relSvcRevealRef }}">
-      <div className="{{ s.relSvcHeadCell }}">
-        <span className="{{ s.eyebrow }}">Relevant Services</span>
-        <span className="{{ s.h2 }}">How we support this sector</span>
-        <a href="services.html" className="{{ s.ourServicesBtn.className }}" onMouseEnter="{{ s.ourServicesBtn.enter }}" onMouseLeave="{{ s.ourServicesBtn.leave }}">Our Services</a>
-      </div>
-      <div className="{{ s.relSvcNumCell }}">
-        <span className="{{ s.relSvcNum }}">01</span>
-        <span className="{{ s.relSvcTitle }}">Development &amp; Formulation</span>
-        <span className="{{ s.relSvcDesc }}">Formulation, analytical development and remediation that ready your product for reliable scale-up.</span>
-      </div>
-      <div className="{{ s.relSvcNumCell }}">
-        <span className="{{ s.relSvcNum }}">02</span>
-        <span className="{{ s.relSvcTitle }}">UK In-house Manufacturing</span>
-        <span className="{{ s.relSvcDesc }}">Owned facilities in Hull — full control, no outsourcing surprises.</span>
-      </div>
-      <div className="{{ s.relSvcNumCell }}">
-        <span className="{{ s.relSvcNum }}">03</span>
-        <span className="{{ s.relSvcTitle }}">Tech Transfer &amp; Warehousing</span>
-        <span className="{{ s.relSvcDesc }}">Smooth, de-risked scale-up with integrated storage.</span>
-      </div>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ FULL-BLEED FACILITY INSERT (white caption box) ============ -->
-  <div className="{{ s.fullBleedOuter }}">
-    <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.fullBleedImg }}">
-    <div className="{{ s.fullBleedCaptionWrap }}">
-      <span className="{{ s.fullBleedCaptionTitle }}">A look inside our UK manufacturing facility</span>
-      <span className="{{ s.fullBleedCaptionDesc }}">Every stage of production takes place under one roof, from raw material through to finished, market-ready product.</span>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ BUILT FOR PHARMACEUTICAL COMPLIANCE (4-photo grid) ============ -->
-  <div data-screen-label="Compliance Grid" className="{{ s.sectionPad }}">
-    <div className="{{ s.complianceWrap }}" ref="{{ complianceRevealRef }}">
-      <div className="{{ s.complianceHeadWrap }}">
-        <span className="{{ s.h2 }}">Built for pharmaceutical compliance</span>
-      </div>
-      <div className="{{ s.complianceGrid }}">
-        <div className="{{ s.complianceItem }}">
-          <img src="assets2/hero-bg.webp" alt="MHRA-licensed manufacturing site" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}">
-            <span className="{{ s.complianceCaption }}">MHRA-licensed manufacturing site</span>
-          </div>
+    <div className="{{ s.relatedWrap }}" ref="{{ relatedRevealRef }}">
+      <div className="{{ s.relatedImageCol }}">
+        <img src="assets2/placeholder-sector-biocide.jpg" alt="Biocidal product manufacturing" loading="lazy" className="{{ s.relatedImageBig }}">
+        <div className="{{ s.relatedImageRow }}">
+          <img src="assets2/about-real.jpg" alt="GMP Manufacturing Ltd facility" loading="lazy" className="{{ s.relatedImageSmall }}">
+          <img src="assets2/hero-bg.webp" alt="GMP Manufacturing Ltd facility" loading="lazy" className="{{ s.relatedImageSmall }}">
         </div>
-        <div className="{{ s.complianceItem }}">
-          <img src="assets2/placeholder-team-2.jpg" alt="Full QP batch release" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}">
-            <span className="{{ s.complianceCaption }}">Full QP batch release</span>
-          </div>
+      </div>
+      <div className="{{ s.relatedContent }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Relevant Services</span>
+          <span className="{{ s.h2 }}">How we support this sector</span>
         </div>
-        <div className="{{ s.complianceItem }}">
-          <img src="assets2/placeholder-team-3.jpg" alt="Complete analytical and stability testing in-house" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}">
-            <span className="{{ s.complianceCaption }}">Complete analytical and stability testing in-house</span>
-          </div>
-        </div>
-        <div className="{{ s.complianceItem }}">
-          <img src="assets2/team-4-real.webp" alt="Audit ready documentation" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}">
-            <span className="{{ s.complianceCaption }}">Audit ready documentation</span>
-          </div>
+        <div className="{{ s.relatedList }}">
+        <a href="services-manufacturing-filling-packing.html" className="{{ s.related0.containerStyle }}" onMouseEnter="{{ s.related0.enter }}" onMouseLeave="{{ s.related0.leave }}">
+          <div className="{{ s.related0.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related0.iconColor }}" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
+          <span className="{{ s.related0.titleStyle }}">Manufacturing, Filling & Packing</span>
+          <span className="{{ s.related0.descStyle }}">Full production, filling and packing on one site.</span>
+        </a>
+        <a href="services-qc-micro-stability.html" className="{{ s.related1.containerStyle }}" onMouseEnter="{{ s.related1.enter }}" onMouseLeave="{{ s.related1.leave }}">
+          <div className="{{ s.related1.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related1.iconColor }}" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+          <span className="{{ s.related1.titleStyle }}">QC, Micro & Stability</span>
+          <span className="{{ s.related1.descStyle }}">In-house testing keeps every batch compliant.</span>
+        </a>
+        <a href="services-qp-rp-regulatory-support.html" className="{{ s.related2.containerStyle }}" onMouseEnter="{{ s.related2.enter }}" onMouseLeave="{{ s.related2.leave }}">
+          <div className="{{ s.related2.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related2.iconColor }}" stroke-width="1.5"><path d="M4 4h16v16H4z"></path><path d="M4 9h16"></path></svg>
+          <span className="{{ s.related2.titleStyle }}">QP, RP, RP-I & Regulatory Support</span>
+          <span className="{{ s.related2.descStyle }}">Compliant release across every market.</span>
+        </a>
         </div>
       </div>
     </div>
@@ -212,76 +180,62 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ GLOBAL REACH (full-bleed map band) ============ -->
-  <div className="{{ s.mapOuter }}">
-    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="rgb(37,60,110)"></stop>
-          <stop offset="55%" stop-color="rgb(24,26,64)"></stop>
-          <stop offset="100%" stop-color="rgb(17,17,40)"></stop>
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="1600" height="560" fill="url(#mapBg)"></rect>
-      <g opacity="0.16" stroke="rgb(255,255,255)" stroke-width="1">
-        <path d="M0 80h1600M0 160h1600M0 240h1600M0 320h1600M0 400h1600M0 480h1600"></path>
-        <path d="M80 0v560M240 0v560M400 0v560M560 0v560M720 0v560M880 0v560M1040 0v560M1200 0v560M1360 0v560M1520 0v560"></path>
-      </g>
-      <g fill="none" stroke="rgb(255,255,255)" stroke-width="1.4" stroke-dasharray="4 6" opacity="0.55">
-        <path d="M260 260 C 420 100, 620 100, 760 220"></path>
-        <path d="M260 260 C 380 340, 520 380, 660 360"></path>
-        <path d="M760 220 C 900 150, 1040 160, 1160 230"></path>
-        <path d="M760 220 C 860 300, 980 340, 1120 360"></path>
-        <path d="M660 360 C 820 420, 980 430, 1120 360"></path>
-        <path d="M1160 230 C 1260 280, 1340 320, 1420 300"></path>
-        <path d="M260 260 C 220 180, 220 120, 300 70"></path>
-      </g>
-      <g fill="rgb(255,255,255)">
-        <circle cx="260" cy="260" r="5"></circle>
-        <circle cx="760" cy="220" r="6"></circle>
-        <circle cx="660" cy="360" r="4"></circle>
-        <circle cx="1160" cy="230" r="5"></circle>
-        <circle cx="1120" cy="360" r="4"></circle>
-        <circle cx="1420" cy="300" r="4"></circle>
-        <circle cx="300" cy="70" r="4"></circle>
-      </g>
-      <g fill="rgb(255,255,255)">
-        <circle cx="260" cy="260" r="9" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite;"></circle>
-        <circle cx="760" cy="220" r="10" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite 0.6s;"></circle>
-        <circle cx="1160" cy="230" r="9" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite 1.2s;"></circle>
-      </g>
-    </svg>
-    <div className="{{ s.mapCaptionWrap }}">
-      <span className="{{ s.mapCaption }}">Supplying partners across 30+ countries from our own UK facilities.</span>
+  <!-- ============ WHY GMP FOR THIS SECTOR (bento grid) ============ -->
+  <div data-screen-label="Why GMP" className="{{ s.sectionPad }}">
+    <div className="{{ s.bentoWrap }}" ref="{{ bentoRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Why GMP</span>
+        <span className="{{ s.h2 }}">Built for biocide compliance</span>
+      </div>
+      <div className="{{ s.bentoGrid }}">
+        <div className="{{ s.bentoBigCard }}">
+          <div className="{{ s.bentoBigIcon }}">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
+          </div>
+          <span className="{{ s.bentoBigLabel }}">Controlled manufacturing environment</span>
+        </div>
+        <div className="{{ s.bentoSmallCard }}">
+          <div className="{{ s.bentoSmallIcon }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
+          <span className="{{ s.bentoSmallLabel }}">Full regulatory documentation support</span>
+        </div>
+        <div className="{{ s.bentoSmallCard }}">
+          <div className="{{ s.bentoSmallIcon }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M3 12l4-8 4 8-4 8-4-8Z"></path></svg>
+          </div>
+          <span className="{{ s.bentoSmallLabel }}">Rigorous batch testing and release</span>
+        </div>
+        <div className="{{ s.bentoSmallCard }}">
+          <div className="{{ s.bentoSmallIcon }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+          </div>
+          <span className="{{ s.bentoSmallLabel }}">Safety-led production processes</span>
+        </div>
+      </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ ACCREDITATIONS (reused marquee) ============ -->
-  <div data-screen-label="Accreditations" className="{{ s.sectionPad }}">
-    <div className="{{ s.marqueeOuter }}">
-      <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
-        <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
-          <div className="{{ s.marqueeItem }}">
-            <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
-          </div>
-        </sc-for>
-      </div>
+  <!-- ============ PROOF POINT (full-width, content-only) ============ -->
+  <div data-screen-label="Proof Point" className="{{ s.sectionPad }}">
+    <div className="{{ s.proofWrap }}">
+      <span className="{{ s.proofText }}">Manufactured to the same compliance standard as our pharmaceutical lines.</span>
     </div>
   </div>
 
   <div className="{{ s.sectionGapHalf }}"></div>
 
-  <!-- ============ CTA (static gradient, no ripple) ============ -->
+  <!-- ============ CTA ============ -->
   <div className="{{ s.collabOuter }}">
     <div className="{{ s.collabOverlay }}"></div>
     <div className="{{ s.collabWrap }}">
-      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Talk to Us About Your Product</span>
+      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Talk to Us About Your Biocide Product</span>
       <span className="{{ s.collabBody }}">Tell us about your product and our team will get back to you within one working day.</span>
       <div className="{{ s.collabBtnRow }}">
         <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-          <span className="{{ s.collabGetQuoteText }}">Enquire Now</span>
+          <span className="{{ s.collabGetQuoteText }}">Get in Touch</span>
           <div className="{{ s.collabGetQuoteIcon }}"></div>
         </a>
       </div>
@@ -397,9 +351,12 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, hoveredRelated: -1, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
 
   componentDidMount() {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      this.setState((st) => ({ revealed: { ...st.revealed, banner: true } }));
+    }));
     this._onResize = () => { this._updateBp(); };
     window.addEventListener("resize", this._onResize);
     this._updateBp();
@@ -433,9 +390,6 @@ class Component extends DCLogic {
     const w = window.innerWidth;
     const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
     if (bp !== this.state.bp) this.setState({ bp });
-  }
-  _applyMarquee() {
-    if (this._marqueeEl) this._marqueeEl.style.animationPlayState = "running";
   }
 
   renderVals() {
@@ -474,7 +428,6 @@ class Component extends DCLogic {
 
     s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
     s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
-    s.h1 = `font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-[${dark}]`;
     s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
     s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
@@ -500,19 +453,10 @@ class Component extends DCLogic {
         leave: () => this.setState({ hoveredKey: null }),
       };
     };
-    const makeDarkPill = (key, baseClass) => {
-      const hovered = this.state.hoveredKey === key;
-      return {
-        className: baseClass + ` no-underline text-center transition-[background,box-shadow,transform] duration-200 ease-in-out font-semibold text-[14px] leading-[20px] text-white ` +
-          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-[${near}] ${noShadowTw} translate-y-0`),
-        enter: () => this.setState({ hoveredKey: key }),
-        leave: () => this.setState({ hoveredKey: null }),
-      };
-    };
 
     // ---------- TOPBAR (same properties as homepage) ----------
     s.logoLink = "flex shrink-0";
-    const navScrolled = true;
+    const navScrolled = this.state.navScrolled;
     s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
       (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
     s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
@@ -580,52 +524,60 @@ class Component extends DCLogic {
     s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
     s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
-    // ---------- OVERVIEW (image left, no hero band — guaranteed topbar clearance) ----------
-    s.overviewSectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px] pt-[108px] md:pt-[132px] xl:pt-[156px]";
-    s.overviewWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-start max-w-[1600px] mx-auto " + reveal("overview");
-    s.overviewImageCol = "relative " + (isDesktop ? "w-[42%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden";
+    // ---------- PAGE BANNER (gradient overlay, guaranteed topbar clearance) ----------
+    s.bannerWrap = `relative w-full ${pick("min-h-[220px]", "min-h-[280px]", "min-h-[320px]")} flex flex-col justify-end box-border overflow-hidden`;
+    s.bannerBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.banner ? "scale-100" : "scale-[1.05]");
+    s.bannerOverlay = "absolute inset-0 bg-gmp-gradient opacity-75 pointer-events-none";
+    s.bannerBreadcrumb = "font-normal text-[13px] leading-[18px] text-[rgba(255,255,255,0.75)]";
+    s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[88px] px-[20px] pb-[24px]", "pt-[104px] px-[40px] pb-[36px]", "pt-[116px] px-[64px] pb-[44px]");
+    s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
+    s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
+
+    // ---------- SECTOR OVERVIEW (50:50, image left) ----------
+    s.overviewWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("overview");
+    s.overviewImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden " + pick("p-[12px]", "p-[16px]", "p-[20px]") + " bg-[rgb(245,243,240)]";
     s.overviewImage = "relative w-full h-full object-cover box-border";
-    s.overviewContent = "flex flex-col gap-[28px] items-start justify-start " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
-    s.subheadingBlock = "flex flex-col gap-[6px] items-start max-w-[560px]";
-    s.subheadingTitle = `font-semibold text-[17px] leading-[24px] text-[${near}]`;
-    s.subheadingBody = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.75)]";
+    s.overviewContent = "flex flex-col gap-[20px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.overviewBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[560px]`;
 
-    // ---------- RELEVANT SERVICES (numbered strip) ----------
-    s.relSvcRow = "grid " + pick("grid-cols-1 gap-[24px]", "grid-cols-2 gap-[28px]", "grid-cols-4 gap-0") + " max-w-[1600px] mx-auto " + reveal("relsvc");
-    s.relSvcHeadCell = "flex flex-col gap-[14px] items-start " + (isDesktop ? "pr-[32px]" : "");
-    s.ourServicesBtn = makeDarkPill("ourServicesBtn", "rounded-[32px] inline-flex py-[12px] px-[22px] mt-[6px] cursor-pointer shrink-0 box-border");
-    s.relSvcNumCell = "flex flex-col gap-[8px] items-start box-border " + (isDesktop ? "border-l border-solid border-[rgba(0,0,0,0.12)] pl-[24px] xl:pl-[32px]" : "border-t border-solid border-[rgba(0,0,0,0.12)] pt-[20px]");
-    s.relSvcNum = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
-    s.relSvcTitle = `font-semibold text-[18px] leading-[24px] text-[${red}]`;
-    s.relSvcDesc = "font-normal text-[14px] leading-[21px] text-[rgba(51,51,51,0.75)]";
+    // ---------- RELEVANT SERVICES (image collage + icon list, hover gradient) ----------
+    s.relatedWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-center max-w-[1600px] mx-auto " + reveal("related");
+    s.relatedImageCol = "relative " + (isDesktop ? "w-[38%]" : "w-full") + " shrink-0 flex flex-col gap-[12px] md:gap-[16px] box-border";
+    s.relatedImageBig = "relative w-full aspect-[16/11] object-cover box-border";
+    s.relatedImageRow = "grid grid-cols-2 gap-[12px] md:gap-[16px]";
+    s.relatedImageSmall = "relative w-full aspect-[4/3] object-cover box-border";
+    s.relatedContent = "flex flex-col gap-[28px] md:gap-[32px] " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.relatedList = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-x-[28px] md:gap-x-[36px] xl:gap-x-[44px] gap-y-[32px] md:gap-y-[40px] xl:gap-y-[48px]";
+    const makeRelated = (i) => {
+      const hovered = this.state.hoveredRelated === i;
+      return {
+        containerStyle: "relative overflow-hidden flex flex-col gap-[10px] items-start no-underline box-border cursor-pointer transition-[box-shadow] duration-200 ease-in-out " +
+          pick("p-[16px] -m-[16px]", "p-[18px] -m-[18px]", "p-[20px] -m-[20px]"),
+        sweepStyle: "absolute inset-0 bg-gmp-gradient [transform-origin:left_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none " + (hovered ? "scale-x-100" : "scale-x-0"),
+        iconColor: hovered ? "rgb(255,255,255)" : red,
+        titleStyle: "relative z-[1] font-semibold text-[16px] md:text-[17px] leading-[22px] transition-colors duration-200 ease-in-out " + (hovered ? "text-white" : `text-[${red}]`),
+        descStyle: "relative z-[1] font-normal text-[14px] leading-[20px] transition-colors duration-200 ease-in-out " + (hovered ? "text-white" : "text-[rgba(51,51,51,0.7)]"),
+        enter: () => this.setState({ hoveredRelated: i }),
+        leave: () => this.setState({ hoveredRelated: -1 }),
+      };
+    };
+    s.related0 = makeRelated(0);
+    s.related1 = makeRelated(1);
+    s.related2 = makeRelated(2);
 
-    // ---------- FULL-BLEED FACILITY INSERT (white caption box) ----------
-    s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[380px]", "h-[460px]", "h-[560px]")}`;
-    s.fullBleedImg = "absolute inset-0 w-full h-full object-cover";
-    s.fullBleedCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-white box-border flex flex-col gap-[6px] max-w-[380px] ` + pick("py-[16px] px-[18px]", "py-[20px] px-[22px]", "py-[24px] px-[26px]");
-    s.fullBleedCaptionTitle = `font-medium text-[19px] md:text-[21px] leading-[1.3] text-[${near}]`;
-    s.fullBleedCaptionDesc = "font-normal text-[13px] leading-[19px] text-[rgba(51,51,51,0.75)]";
+    // ---------- WHY GMP (bento grid: 1 headline tile + supporting tiles) ----------
+    s.bentoWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("bento");
+    s.bentoGrid = "grid grid-cols-1 md:grid-cols-3 gap-[16px] md:gap-[20px]";
+    s.bentoBigCard = cardHoverBase + " md:col-span-3 flex flex-row items-center gap-[20px] " + pick("p-[24px]", "p-[28px]", "p-[32px]");
+    s.bentoBigIcon = "w-[48px] h-[48px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
+    s.bentoBigLabel = `font-semibold text-[19px] md:text-[21px] leading-[1.4] text-[${dark}]`;
+    s.bentoSmallCard = cardHoverBase + " flex flex-col gap-[10px] items-start " + pick("p-[20px]", "p-[22px]", "p-[24px]");
+    s.bentoSmallIcon = "w-[36px] h-[36px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
+    s.bentoSmallLabel = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
-    // ---------- BUILT FOR PHARMACEUTICAL COMPLIANCE (4-photo grid) ----------
-    s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("compliance");
-    s.complianceHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px]";
-    s.complianceGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
-    s.complianceItem = "relative aspect-[3/4] overflow-hidden bg-[rgb(232,232,232)]";
-    s.complianceImg = "absolute inset-0 w-full h-full object-cover";
-    s.complianceCaptionWrap = "absolute left-0 bottom-0 bg-white box-border py-[14px] px-[16px] " + pick("w-full", "w-full", "w-[85%]");
-    s.complianceCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
-
-    // ---------- GLOBAL REACH (full-bleed map band) ----------
-    s.mapOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[320px]", "h-[400px]", "h-[480px]")}`;
-    s.mapCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-white box-border max-w-[420px] ` + pick("py-[18px] px-[20px]", "py-[22px] px-[24px]", "py-[26px] px-[28px]");
-    s.mapCaption = `font-medium text-[20px] md:text-[24px] leading-[1.4] text-[${near}]`;
-
-    // ---------- ACCREDITATIONS (reused marquee) ----------
-    s.marqueeOuter = "w-full max-w-[1600px] overflow-hidden rounded-none bg-[rgb(245,245,245)] flex items-center box-border mx-auto " +
-      pick("py-[28px] px-[16px]", "py-[36px] px-[20px]", "py-[48px] px-[24px]");
-    s.marqueeInner = "flex flex-row gap-[24px] items-center w-max [animation:gmp-marquee_30s_linear_infinite]";
-    s.marqueeItem = `flex items-center justify-center shrink-0 ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
-    s.marqueeImg = "max-w-full max-h-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300";
+    // ---------- PROOF POINT ----------
+    s.proofWrap = `max-w-[1600px] mx-auto border-l-[3px] border-solid border-[${red}] pl-[24px] md:pl-[32px] py-[4px]`;
+    s.proofText = `font-medium text-[20px] md:text-[24px] leading-[1.5] text-[${dark}]`;
 
     // ---------- CTA (static gradient, no ripple) ----------
     s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center bg-[${gradient}] ` +
@@ -680,18 +632,13 @@ class Component extends DCLogic {
     s.footerWordmark = "flex flex-col " + (isMobile ? "items-start" : "items-end") + " gap-[4px]";
     s.footerWordmarkImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
 
-    // ---------- DATA ----------
-    const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
-
     return {
       s,
       overviewRevealRef: revealRef("overview"),
-      relSvcRevealRef: revealRef("relsvc"),
-      complianceRevealRef: revealRef("compliance"),
+      relatedRevealRef: revealRef("related"),
+      bentoRevealRef: revealRef("bento"),
       collabRevealRef: revealRef("collab"),
       footerRevealRef: revealRef("footer"),
-      marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
-      logos: [...names, ...names],
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
       showHeroCtaIcon: !isMobile,
     };

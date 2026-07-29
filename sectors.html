@@ -61,12 +61,12 @@
         <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
         <div className="{{ s.sectorsMenuPanel }}">
           <div className="{{ s.navMenuInner }}">
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Veterinary</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Medical Device</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Cosmetic</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Supplements</a>
-            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Biocide</a>
+            <a href="sectors-pharmaceutical.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sectors-veterinary.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sectors-medical-device.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sectors-cosmetic.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sectors-supplements.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sectors-biocide.html" className="{{ s.navMenuItem }}">Biocide</a>
           </div>
         </div>
       </div>
@@ -739,12 +739,12 @@ class Component extends DCLogic {
 
     // ---------- DATA: 6 SECTORS ----------
     const sectorData = [
-      { n: "01", h: "Pharmaceutical", d: "Full regulatory rigour for prescription and over-the-counter medicines, from formulation to finished pack.", href: "sector-detail.html" },
-      { n: "02", h: "Veterinary", d: "Veterinary medicines manufactured to the same GMP standard as human pharmaceuticals.", href: "sector-detail.html" },
-      { n: "03", h: "Medical Device", d: "Device manufacturing and packing that meets the compliance demands of a regulated market.", href: "sector-detail.html" },
-      { n: "04", h: "Cosmetic", d: "Cosmetic formulation and production backed by pharmaceutical-grade quality systems.", href: "sector-detail.html" },
-      { n: "05", h: "Supplements", d: "Food supplements manufactured with the traceability and testing your brand can stand behind.", href: "sector-detail.html" },
-      { n: "06", h: "Biocide", d: "Biocidal products developed and produced under strict regulatory and safety control.", href: "sector-detail.html" },
+      { n: "01", h: "Pharmaceutical", d: "Full regulatory rigour for prescription and over-the-counter medicines, from formulation to finished pack.", href: "sectors-pharmaceutical.html" },
+      { n: "02", h: "Veterinary", d: "Veterinary medicines manufactured to the same GMP standard as human pharmaceuticals.", href: "sectors-veterinary.html" },
+      { n: "03", h: "Medical Device", d: "Device manufacturing and packing that meets the compliance demands of a regulated market.", href: "sectors-medical-device.html" },
+      { n: "04", h: "Cosmetic", d: "Cosmetic formulation and production backed by pharmaceutical-grade quality systems.", href: "sectors-cosmetic.html" },
+      { n: "05", h: "Supplements", d: "Food supplements manufactured with the traceability and testing your brand can stand behind.", href: "sectors-supplements.html" },
+      { n: "06", h: "Biocide", d: "Biocidal products developed and produced under strict regulatory and safety control.", href: "sectors-biocide.html" },
     ];
     const sectorCols = isDesktop ? 3 : isTablet ? 2 : 1;
     const sectorItems = sectorData.map((item, i) => {

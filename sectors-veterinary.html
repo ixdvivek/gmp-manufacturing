@@ -11,7 +11,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — Technology Transfer</title>
+  <title>GMP Manufacturing Ltd — Veterinary</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -30,7 +30,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Service Detail — Responsive" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd Sector Detail — Responsive" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -110,78 +110,70 @@
 
   <!-- ============ PAGE BANNER ============ -->
   <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
-    <img src="assets2/hero-bg.webp" alt="Production line equipment" className="{{ s.bannerBg }}">
+    <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary medicine manufacturing" className="{{ s.bannerBg }}">
     <div className="{{ s.bannerOverlay }}"></div>
     <div className="{{ s.bannerContent }}">
-      <span className="{{ s.bannerBreadcrumb }}">Home / Services / Technology Transfer</span>
-      <span className="{{ s.bannerHeadline }}">Technology Transfer</span>
-      <span className="{{ s.bannerSubtext }}">Smooth, de-risked scale-up from lab batch to full production line.</span>
+      <span className="{{ s.bannerBreadcrumb }}">Home / Sectors / Veterinary</span>
+      <span className="{{ s.bannerHeadline }}">Veterinary</span>
+      <span className="{{ s.bannerSubtext }}">Veterinary medicines manufactured to the same GMP standard as human pharmaceuticals.</span>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- TODO: client copy needed — source content for this service exists only as a one-line USP tile on the live site, not a full description -->
-  <!-- ============ OVERVIEW (50:50) ============ -->
+  <!-- TODO: client copy needed — Veterinary is new to this sitemap and has no existing source content anywhere -->
+  <!-- ============ SECTOR OVERVIEW (50:50, image LEFT — flipped vs service template) ============ -->
   <div data-screen-label="Overview" className="{{ s.sectionPad }}">
     <div className="{{ s.overviewWrap }}" ref="{{ overviewRevealRef }}">
+      <div className="{{ s.overviewImageCol }}">
+        <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary medicine manufacturing" loading="lazy" className="{{ s.overviewImage }}">
+      </div>
       <div className="{{ s.overviewContent }}">
         <div className="{{ s.sectionHeadingGroup }}">
           <span className="{{ s.eyebrow }}">Overview</span>
-          <span className="{{ s.h2 }}">De-risked scale-up, start to finish</span>
+          <span className="{{ s.h2 }}">Animal health, human-grade discipline</span>
         </div>
-        <span className="{{ s.overviewBody }}">Smooth, de-risked scale-up from lab batch to full production line — protecting product quality at every stage of transfer, in or out of our facilities.</span>
-      </div>
-      <div className="{{ s.overviewImageCol }}">
-        <img src="assets2/hero-bg.webp" alt="Production line equipment" loading="lazy" className="{{ s.overviewImage }}">
+        <span className="{{ s.overviewBody }}">Veterinary medicines manufactured to the same GMP standard as human pharmaceuticals — supporting animal health brands with full regulatory traceability.</span>
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ WHAT'S INCLUDED (icon-card grid) ============ -->
-  <div data-screen-label="What's Included" className="{{ s.sectionPad }}">
-    <div className="{{ s.includedWrap }}" ref="{{ includedRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">What's Included</span>
-        <span className="{{ s.h2 }}">Capabilities covered</span>
+  <!-- ============ RELEVANT SERVICES (image collage + icon list, hover gradient) ============ -->
+  <div data-screen-label="Relevant Services" className="{{ s.sectionPad }}">
+    <div className="{{ s.relatedWrap }}" ref="{{ relatedRevealRef }}">
+      <div className="{{ s.relatedImageCol }}">
+        <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary medicine manufacturing" loading="lazy" className="{{ s.relatedImageBig }}">
+        <div className="{{ s.relatedImageRow }}">
+          <img src="assets2/about-real.jpg" alt="GMP Manufacturing Ltd facility" loading="lazy" className="{{ s.relatedImageSmall }}">
+          <img src="assets2/hero-bg.webp" alt="GMP Manufacturing Ltd facility" loading="lazy" className="{{ s.relatedImageSmall }}">
+        </div>
       </div>
-      <div className="{{ s.includedGrid }}">
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconBlue }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Scale-Up Planning</span>
-          <span className="{{ s.includedCardDesc }}">Process mapped from lab batch to full line.</span>
+      <div className="{{ s.relatedContent }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Relevant Services</span>
+          <span className="{{ s.h2 }}">How we support this sector</span>
         </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconRed }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Site Readiness Assessment</span>
-          <span className="{{ s.includedCardDesc }}">Equipment and facilities checked against the process.</span>
-        </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconBlue }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><path d="M4 4h16v16H4z"></path><path d="M4 9h16"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Documentation Transfer</span>
-          <span className="{{ s.includedCardDesc }}">Full technical file handed over cleanly.</span>
-        </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconRed }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"></path><circle cx="12" cy="12" r="3"></circle></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Pilot & Validation Batches</span>
-          <span className="{{ s.includedCardDesc }}">Trial runs confirm the process before go-live.</span>
-        </div>
-        <div className="{{ s.includedCard }}">
-          <div className="{{ s.includedIconBlue }}">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><path d="M3 12l4-8 4 8-4 8-4-8Z"></path><path d="M13 12l4-8 4 8-4 8-4-8Z"></path></svg>
-          </div>
-          <span className="{{ s.includedCardTitle }}">Process Optimisation</span>
-          <span className="{{ s.includedCardDesc }}">Ongoing refinement once in production.</span>
+        <div className="{{ s.relatedList }}">
+        <a href="services-manufacturing-filling-packing.html" className="{{ s.related0.containerStyle }}" onMouseEnter="{{ s.related0.enter }}" onMouseLeave="{{ s.related0.leave }}">
+          <div className="{{ s.related0.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related0.iconColor }}" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 12h8M8 16h5"></path></svg>
+          <span className="{{ s.related0.titleStyle }}">Manufacturing, Filling & Packing</span>
+          <span className="{{ s.related0.descStyle }}">Full production, filling and packing on one site.</span>
+        </a>
+        <a href="services-qc-micro-stability.html" className="{{ s.related1.containerStyle }}" onMouseEnter="{{ s.related1.enter }}" onMouseLeave="{{ s.related1.leave }}">
+          <div className="{{ s.related1.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related1.iconColor }}" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+          <span className="{{ s.related1.titleStyle }}">QC, Micro & Stability</span>
+          <span className="{{ s.related1.descStyle }}">In-house testing keeps every batch compliant.</span>
+        </a>
+        <a href="services-co-packing-contract-manufacturing.html" className="{{ s.related2.containerStyle }}" onMouseEnter="{{ s.related2.enter }}" onMouseLeave="{{ s.related2.leave }}">
+          <div className="{{ s.related2.sweepStyle }}"></div>
+          <svg className="relative z-[1]" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ s.related2.iconColor }}" stroke-width="1.5"><path d="M4 4h16v16H4z"></path><path d="M4 9h16"></path></svg>
+          <span className="{{ s.related2.titleStyle }}">Co-Packing & Contract Manufacturing</span>
+          <span className="{{ s.related2.descStyle }}">Flexible capacity scaled to your volumes.</span>
+        </a>
         </div>
       </div>
     </div>
@@ -189,75 +181,37 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ HOW IT WORKS (step strip) ============ -->
-  <div data-screen-label="How It Works" className="{{ s.sectionPad }}">
-    <div className="{{ s.stepWrap }}" ref="{{ stepRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">How It Works</span>
-        <span className="{{ s.h2 }}">From brief to delivery</span>
-      </div>
-      <div className="{{ s.stepStrip }}">
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">01</span>
-          <span className="{{ s.stepTitle }}">Brief</span>
-          <span className="{{ s.stepDesc }}">Share your product goals, volumes and timeline.</span>
-        </div>
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">02</span>
-          <span className="{{ s.stepTitle }}">Development</span>
-          <span className="{{ s.stepDesc }}">We plan the formulation, process or transfer approach.</span>
-        </div>
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">03</span>
-          <span className="{{ s.stepTitle }}">Validation</span>
-          <span className="{{ s.stepDesc }}">Trial batches and testing confirm it works at scale.</span>
-        </div>
-        <div className="{{ s.stepCard }}">
-          <span className="{{ s.stepNumber }}">04</span>
-          <span className="{{ s.stepTitle }}">Delivery</span>
-          <span className="{{ s.stepDesc }}">Full production, QC release and on-time despatch.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ FULL-BLEED FACILITY INSERT ============ -->
-  <div className="{{ s.fullBleedOuter }}">
-    <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.fullBleedImg }}">
-    <div className="{{ s.fullBleedCaptionWrap }}">
-      <span className="{{ s.fullBleedCaption }}">A look inside our UK manufacturing facility</span>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ WHY GMP FOR THIS SERVICE (credential chips) ============ -->
+  <!-- ============ WHY GMP FOR THIS SECTOR (bento grid) ============ -->
   <div data-screen-label="Why GMP" className="{{ s.sectionPad }}">
-    <div className="{{ s.credWrap }}">
+    <div className="{{ s.bentoWrap }}" ref="{{ bentoRevealRef }}">
       <div className="{{ s.sectionHeadingGroup }}">
         <span className="{{ s.eyebrow }}">Why GMP</span>
-        <span className="{{ s.h2 }}">Backed by the right credentials</span>
+        <span className="{{ s.h2 }}">Built for veterinary compliance</span>
       </div>
-      <div className="{{ s.credChipRow }}">
-        <div className="{{ s.credChip }}">
-          <div className="{{ s.credChipIcon }}">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg>
+      <div className="{{ s.bentoGrid }}">
+        <div className="{{ s.bentoBigCard }}">
+          <div className="{{ s.bentoBigIcon }}">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
           </div>
-          De-Risked Scale-Up
+          <span className="{{ s.bentoBigLabel }}">VMD-aligned manufacturing practices</span>
         </div>
-        <div className="{{ s.credChip }}">
-          <div className="{{ s.credChipIcon }}">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg>
+        <div className="{{ s.bentoSmallCard }}">
+          <div className="{{ s.bentoSmallIcon }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"></path><circle cx="12" cy="12" r="3"></circle></svg>
           </div>
-          MHRA-Licensed Site
+          <span className="{{ s.bentoSmallLabel }}">Species-specific formulation experience</span>
         </div>
-        <div className="{{ s.credChip }}">
-          <div className="{{ s.credChipIcon }}">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"></path></svg>
+        <div className="{{ s.bentoSmallCard }}">
+          <div className="{{ s.bentoSmallIcon }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M3 12l4-8 4 8-4 8-4-8Z"></path></svg>
           </div>
-          Dedicated Project Team
+          <span className="{{ s.bentoSmallLabel }}">Full batch traceability and release testing</span>
+        </div>
+        <div className="{{ s.bentoSmallCard }}">
+          <div className="{{ s.bentoSmallIcon }}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+          </div>
+          <span className="{{ s.bentoSmallLabel }}">Flexible production volumes</span>
         </div>
       </div>
     </div>
@@ -265,42 +219,10 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ RELATED SECTORS (content scroller) ============ -->
-  <div data-screen-label="Related Sectors" className="{{ s.sectionPad }}">
-    <div className="{{ s.scrollerWrap }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Related Sectors</span>
-        <span className="{{ s.h2 }}">Where this service applies</span>
-      </div>
-      <div className="{{ s.scrollerRow }}">
-        <a href="sectors-pharmaceutical.html" className="{{ s.scrollerCard }}">
-          <div className="{{ s.scrollerImgWrap }}">
-            <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.scrollerImg }}">
-          </div>
-          <div className="{{ s.scrollerTextWrap }}">
-            <span className="{{ s.scrollerTitle }}">Pharmaceutical</span>
-            <span className="{{ s.scrollerLine }}">See how we support pharmaceutical products.</span>
-          </div>
-        </a>
-        <a href="sectors-veterinary.html" className="{{ s.scrollerCard }}">
-          <div className="{{ s.scrollerImgWrap }}">
-            <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.scrollerImg }}">
-          </div>
-          <div className="{{ s.scrollerTextWrap }}">
-            <span className="{{ s.scrollerTitle }}">Veterinary</span>
-            <span className="{{ s.scrollerLine }}">See how we support veterinary products.</span>
-          </div>
-        </a>
-        <a href="sectors-medical-device.html" className="{{ s.scrollerCard }}">
-          <div className="{{ s.scrollerImgWrap }}">
-            <img src="assets2/placeholder-sector-meddevice.jpg" alt="Medical Device" loading="lazy" className="{{ s.scrollerImg }}">
-          </div>
-          <div className="{{ s.scrollerTextWrap }}">
-            <span className="{{ s.scrollerTitle }}">Medical Device</span>
-            <span className="{{ s.scrollerLine }}">See how we support medical device products.</span>
-          </div>
-        </a>
-      </div>
+  <!-- ============ PROOF POINT (full-width, content-only) ============ -->
+  <div data-screen-label="Proof Point" className="{{ s.sectionPad }}">
+    <div className="{{ s.proofWrap }}">
+      <span className="{{ s.proofText }}">“GMP's veterinary line gives us the same confidence we get from our human-medicine manufacturing partners.”</span>
     </div>
   </div>
 
@@ -310,11 +232,11 @@
   <div className="{{ s.collabOuter }}">
     <div className="{{ s.collabOverlay }}"></div>
     <div className="{{ s.collabWrap }}">
-      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Enquire About Technology Transfer</span>
+      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Talk to Us About Your Veterinary Product</span>
       <span className="{{ s.collabBody }}">Tell us about your product and our team will get back to you within one working day.</span>
       <div className="{{ s.collabBtnRow }}">
         <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-          <span className="{{ s.collabGetQuoteText }}">Enquire Now</span>
+          <span className="{{ s.collabGetQuoteText }}">Get in Touch</span>
           <div className="{{ s.collabGetQuoteIcon }}"></div>
         </a>
       </div>
@@ -430,7 +352,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, hoveredRelated: -1, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -557,7 +479,7 @@ class Component extends DCLogic {
     s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
     s.mobileNavLinks = "flex flex-col gap-[24px] md:gap-[28px] items-start mt-[16px]";
     s.mobileNavLink = "font-medium text-[28px] md:text-[32px] leading-[1.3] tracking-[-0.7px] text-white cursor-pointer no-underline";
-    const CURRENT_PAGE = "services";
+    const CURRENT_PAGE = "sectors";
     const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
       const active = key === CURRENT_PAGE;
@@ -603,7 +525,7 @@ class Component extends DCLogic {
     s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
     s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
-    // ---------- PAGE BANNER (gradient overlay, capped 320px) ----------
+    // ---------- PAGE BANNER (gradient overlay, guaranteed topbar clearance) ----------
     s.bannerWrap = `relative w-full ${pick("min-h-[220px]", "min-h-[280px]", "min-h-[320px]")} flex flex-col justify-end box-border overflow-hidden`;
     s.bannerBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.banner ? "scale-100" : "scale-[1.05]");
     s.bannerOverlay = "absolute inset-0 bg-gmp-gradient opacity-75 pointer-events-none";
@@ -612,51 +534,51 @@ class Component extends DCLogic {
     s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
     s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
 
-    // ---------- OVERVIEW (50:50, image right) ----------
+    // ---------- SECTOR OVERVIEW (50:50, image left) ----------
     s.overviewWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("overview");
     s.overviewImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden " + pick("p-[12px]", "p-[16px]", "p-[20px]") + " bg-[rgb(245,243,240)]";
     s.overviewImage = "relative w-full h-full object-cover box-border";
     s.overviewContent = "flex flex-col gap-[20px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
     s.overviewBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[560px]`;
 
-    // ---------- WHAT'S INCLUDED (icon-card grid) ----------
-    s.includedWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("included");
-    s.includedGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[16px] md:gap-[20px]";
-    s.includedCard = cardHoverBase + " flex flex-col gap-[12px] items-start " + pick("p-[20px]", "p-[22px]", "p-[24px]");
-    s.includedIconBlue = "w-[40px] h-[40px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.includedIconRed = "w-[40px] h-[40px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.includedCardTitle = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
-    s.includedCardDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
+    // ---------- RELEVANT SERVICES (image collage + icon list, hover gradient) ----------
+    s.relatedWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-center max-w-[1600px] mx-auto " + reveal("related");
+    s.relatedImageCol = "relative " + (isDesktop ? "w-[38%]" : "w-full") + " shrink-0 flex flex-col gap-[12px] md:gap-[16px] box-border";
+    s.relatedImageBig = "relative w-full aspect-[16/11] object-cover box-border";
+    s.relatedImageRow = "grid grid-cols-2 gap-[12px] md:gap-[16px]";
+    s.relatedImageSmall = "relative w-full aspect-[4/3] object-cover box-border";
+    s.relatedContent = "flex flex-col gap-[28px] md:gap-[32px] " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.relatedList = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-x-[28px] md:gap-x-[36px] xl:gap-x-[44px] gap-y-[32px] md:gap-y-[40px] xl:gap-y-[48px]";
+    const makeRelated = (i) => {
+      const hovered = this.state.hoveredRelated === i;
+      return {
+        containerStyle: "relative overflow-hidden flex flex-col gap-[10px] items-start no-underline box-border cursor-pointer transition-[box-shadow] duration-200 ease-in-out " +
+          pick("p-[16px] -m-[16px]", "p-[18px] -m-[18px]", "p-[20px] -m-[20px]"),
+        sweepStyle: "absolute inset-0 bg-gmp-gradient [transform-origin:left_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none " + (hovered ? "scale-x-100" : "scale-x-0"),
+        iconColor: hovered ? "rgb(255,255,255)" : red,
+        titleStyle: "relative z-[1] font-semibold text-[16px] md:text-[17px] leading-[22px] transition-colors duration-200 ease-in-out " + (hovered ? "text-white" : `text-[${red}]`),
+        descStyle: "relative z-[1] font-normal text-[14px] leading-[20px] transition-colors duration-200 ease-in-out " + (hovered ? "text-white" : "text-[rgba(51,51,51,0.7)]"),
+        enter: () => this.setState({ hoveredRelated: i }),
+        leave: () => this.setState({ hoveredRelated: -1 }),
+      };
+    };
+    s.related0 = makeRelated(0);
+    s.related1 = makeRelated(1);
+    s.related2 = makeRelated(2);
 
-    // ---------- HOW IT WORKS (numbered step strip) ----------
-    s.stepWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("steps");
-    s.stepStrip = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[20px] md:gap-[24px]";
-    s.stepCard = `flex flex-col gap-[8px] items-start border-t-[3px] border-solid border-[${red}] pt-[16px]`;
-    s.stepNumber = `font-medium text-[28px] leading-[1.1] text-[${red}]`;
-    s.stepTitle = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
-    s.stepDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
+    // ---------- WHY GMP (bento grid: 1 headline tile + supporting tiles) ----------
+    s.bentoWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("bento");
+    s.bentoGrid = "grid grid-cols-1 md:grid-cols-3 gap-[16px] md:gap-[20px]";
+    s.bentoBigCard = cardHoverBase + " md:col-span-3 flex flex-row items-center gap-[20px] " + pick("p-[24px]", "p-[28px]", "p-[32px]");
+    s.bentoBigIcon = "w-[48px] h-[48px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
+    s.bentoBigLabel = `font-semibold text-[19px] md:text-[21px] leading-[1.4] text-[${dark}]`;
+    s.bentoSmallCard = cardHoverBase + " flex flex-col gap-[10px] items-start " + pick("p-[20px]", "p-[22px]", "p-[24px]");
+    s.bentoSmallIcon = "w-[36px] h-[36px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
+    s.bentoSmallLabel = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
-    // ---------- FULL-BLEED FACILITY INSERT ----------
-    s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[240px]", "h-[340px]", "h-[440px]")}`;
-    s.fullBleedImg = "absolute inset-0 w-full h-full object-cover";
-    s.fullBleedCaptionWrap = `absolute left-[${gutter + 16}px] bottom-[16px] md:bottom-[24px] bg-gmp-navy/70 box-border py-[8px] px-[14px]`;
-    s.fullBleedCaption = "font-normal text-[13px] md:text-[14px] leading-[18px] text-white whitespace-nowrap";
-
-    // ---------- WHY GMP (credential chips) ----------
-    s.credWrap = "flex flex-col gap-[20px] max-w-[1600px] mx-auto";
-    s.credChipRow = "flex flex-row flex-wrap gap-[12px]";
-    s.credChip = `inline-flex flex-row items-center gap-[8px] border border-solid border-[rgba(0,0,0,0.15)] rounded-none py-[10px] px-[16px] text-[14px] font-medium text-[${dark}]`;
-    s.credChipIcon = `w-[16px] h-[16px] shrink-0 bg-[${red}] flex items-center justify-center`;
-
-    // ---------- RELATED SECTORS (content scroller) ----------
-    s.scrollerWrap = "flex flex-col gap-[20px] max-w-[1600px] mx-auto";
-    s.scrollerRow = "flex flex-row gap-[16px] overflow-x-auto [scroll-snap-type:x_mandatory] pb-[8px] [-webkit-overflow-scrolling:touch]";
-    s.scrollerCard = cardHoverBase + " [scroll-snap-align:start] shrink-0 w-[240px] md:w-[260px] flex flex-col box-border no-underline overflow-hidden";
-    s.scrollerImgWrap = "w-full aspect-[3/2] overflow-hidden bg-[rgb(232,232,232)]";
-    s.scrollerImg = "w-full h-full object-cover";
-    s.scrollerTextWrap = "flex flex-col gap-[6px] p-[16px]";
-    s.scrollerTitle = `font-semibold text-[15px] leading-[20px] text-[${dark}]`;
-    s.scrollerLine = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.65)]";
+    // ---------- PROOF POINT ----------
+    s.proofWrap = `max-w-[1600px] mx-auto border-l-[3px] border-solid border-[${red}] pl-[24px] md:pl-[32px] py-[4px]`;
+    s.proofText = `font-medium text-[20px] md:text-[24px] leading-[1.5] text-[${dark}]`;
 
     // ---------- CTA (static gradient, no ripple) ----------
     s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center bg-[${gradient}] ` +
@@ -714,8 +636,8 @@ class Component extends DCLogic {
     return {
       s,
       overviewRevealRef: revealRef("overview"),
-      includedRevealRef: revealRef("included"),
-      stepRevealRef: revealRef("steps"),
+      relatedRevealRef: revealRef("related"),
+      bentoRevealRef: revealRef("bento"),
       collabRevealRef: revealRef("collab"),
       footerRevealRef: revealRef("footer"),
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
