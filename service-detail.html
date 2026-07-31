@@ -273,21 +273,21 @@
         <span className="{{ s.h2 }}">Where this service applies</span>
       </div>
       <div className="{{ s.appliesGrid }}">
-        <a href="sector-detail.html" className="{{ s.complianceItem }}">
-          <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Pharmaceutical</span></div>
+        <a href="sector-detail.html" className="{{ s.appliesItem }}">
+          <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.appliesImg }}">
+          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Pharmaceutical</span></div>
         </a>
-        <a href="sector-detail.html" className="{{ s.complianceItem }}">
-          <img src="assets2/sector-cosmetic-real.webp" alt="Cosmetic" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Cosmetic</span></div>
+        <a href="sector-detail.html" className="{{ s.appliesItem }}">
+          <img src="assets2/sector-cosmetic-real.webp" alt="Cosmetic" loading="lazy" className="{{ s.appliesImg }}">
+          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Cosmetic</span></div>
         </a>
-        <a href="sector-detail.html" className="{{ s.complianceItem }}">
-          <img src="assets2/placeholder-sector-supplements.jpg" alt="Supplements" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Supplements</span></div>
+        <a href="sector-detail.html" className="{{ s.appliesItem }}">
+          <img src="assets2/placeholder-sector-supplements.jpg" alt="Supplements" loading="lazy" className="{{ s.appliesImg }}">
+          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Supplements</span></div>
         </a>
-        <a href="sector-detail.html" className="{{ s.complianceItem }}">
-          <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.complianceImg }}">
-          <div className="{{ s.complianceCaptionWrap }}"><span className="{{ s.complianceCaption }}">Veterinary</span></div>
+        <a href="sector-detail.html" className="{{ s.appliesItem }}">
+          <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.appliesImg }}">
+          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Veterinary</span></div>
         </a>
       </div>
     </div>
@@ -694,14 +694,14 @@ class Component extends DCLogic {
     s.stepTitle = `font-semibold ${pick("text-[22px]", "text-[24px]", "text-[26px]")} leading-[1.25] tracking-[-0.4px] text-[${dark}]`;
     s.stepDesc = "font-normal text-[15px] leading-[21px] text-[rgba(51,51,51,0.7)]";
 
-    // ---------- WHERE THIS SERVICE APPLIES / COMPLIANCE (shared 4-photo grid, white caption) ----------
+    // ---------- WHERE THIS SERVICE APPLIES (4-photo grid, square, white caption) ----------
     s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("applies");
     s.complianceHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px]";
     s.appliesGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
-    s.complianceItem = "relative aspect-[3/4] overflow-hidden bg-[rgb(232,232,232)] block no-underline transition-[box-shadow,transform] duration-200 ease-in-out hover:-translate-y-1";
-    s.complianceImg = "absolute inset-0 w-full h-full object-cover";
-    s.complianceCaptionWrap = "absolute left-0 bottom-0 bg-white box-border py-[14px] px-[16px] " + pick("w-full", "w-full", "w-[85%]");
-    s.complianceCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
+    s.appliesItem = "relative aspect-square overflow-hidden bg-[rgb(232,232,232)] block no-underline transition-[box-shadow,transform] duration-200 ease-in-out hover:-translate-y-1";
+    s.appliesImg = "absolute inset-0 w-full h-full object-cover";
+    s.appliesCaptionWrap = "absolute left-0 bottom-0 bg-white box-border py-[14px] px-[16px] " + pick("w-full", "w-full", "w-[85%]");
+    s.appliesCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
 
     // ---------- GLOBAL REACH (full-bleed map band) ----------
     s.mapOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[320px]", "h-[400px]", "h-[480px]")}`;
