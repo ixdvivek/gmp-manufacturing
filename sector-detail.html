@@ -607,7 +607,7 @@ class Component extends DCLogic {
     s.fullBleedCaptionWrap = (isMobile
       ? "absolute left-0 right-0 bottom-0 w-full"
       : `absolute bottom-0 right-[${gutter}px] w-[${pick(0, 420, 560)}px]`
-    ) + " bg-white box-border flex flex-col " + pick("gap-[10px] py-[24px] px-[20px]", "gap-[12px] py-[32px] px-[32px]", "gap-[12px] py-[40px] px-[40px]");
+    ) + ` bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col ` + pick("gap-[10px] py-[24px] px-[20px]", "gap-[12px] py-[32px] px-[32px]", "gap-[12px] py-[40px] px-[40px]");
     s.fullBleedCaptionTitle = `font-semibold ${pick("text-[26px]", "text-[32px]", "text-[36px]")} leading-[1.22] tracking-[-0.72px] text-[${near}]`;
     s.fullBleedCaptionDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[24px] text-[${dark}]`;
 
