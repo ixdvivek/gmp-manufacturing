@@ -225,35 +225,39 @@
       <div className="{{ s.stepWrap }}" ref="{{ stepRevealRef }}">
         <div className="{{ s.capHeadWrap }}">
           <span className="{{ s.h2 }}">How It Works</span>
-          <span className="{{ s.capSubtext }}">A clear, four-step path from first brief to finished product.</span>
         </div>
         <div className="{{ s.stepStrip }}">
           <div className="{{ s.stepItem }}">
             <div className="{{ s.stepIconBox }}"></div>
-            <span className="{{ s.stepNumber }}">01</span>
-            <span className="{{ s.stepTitle }}">Brief</span>
-            <span className="{{ s.stepDesc }}">Share your product goals, volumes and timeline.</span>
+            <div className="{{ s.stepTextCol }}">
+              <span className="{{ s.stepNumber }}">01</span>
+              <span className="{{ s.stepTitle }}">Brief</span>
+              <span className="{{ s.stepDesc }}">Share your product goals, volumes and timeline.</span>
+            </div>
           </div>
-          <svg className="{{ s.stepArrow }}" width="32" height="12" viewBox="0 0 32 12" fill="none" stroke="rgba(51,51,51,0.3)" stroke-width="1.5"><path d="M0 6h28M22 1l6 5-6 5"></path></svg>
           <div className="{{ s.stepItem }}">
             <div className="{{ s.stepIconBox }}"></div>
-            <span className="{{ s.stepNumber }}">02</span>
-            <span className="{{ s.stepTitle }}">Development</span>
-            <span className="{{ s.stepDesc }}">We plan the formulation, process or transfer approach.</span>
+            <div className="{{ s.stepTextCol }}">
+              <span className="{{ s.stepNumber }}">02</span>
+              <span className="{{ s.stepTitle }}">Development</span>
+              <span className="{{ s.stepDesc }}">We plan the formulation, process or transfer approach.</span>
+            </div>
           </div>
-          <svg className="{{ s.stepArrow }}" width="32" height="12" viewBox="0 0 32 12" fill="none" stroke="rgba(51,51,51,0.3)" stroke-width="1.5"><path d="M0 6h28M22 1l6 5-6 5"></path></svg>
           <div className="{{ s.stepItem }}">
             <div className="{{ s.stepIconBox }}"></div>
-            <span className="{{ s.stepNumber }}">03</span>
-            <span className="{{ s.stepTitle }}">Validation</span>
-            <span className="{{ s.stepDesc }}">Trial batches and testing confirm it works at scale.</span>
+            <div className="{{ s.stepTextCol }}">
+              <span className="{{ s.stepNumber }}">03</span>
+              <span className="{{ s.stepTitle }}">Validation</span>
+              <span className="{{ s.stepDesc }}">Trial batches and testing confirm it works at scale.</span>
+            </div>
           </div>
-          <svg className="{{ s.stepArrow }}" width="32" height="12" viewBox="0 0 32 12" fill="none" stroke="rgba(51,51,51,0.3)" stroke-width="1.5"><path d="M0 6h28M22 1l6 5-6 5"></path></svg>
           <div className="{{ s.stepItem }}">
             <div className="{{ s.stepIconBox }}"></div>
-            <span className="{{ s.stepNumber }}">04</span>
-            <span className="{{ s.stepTitle }}">Delivery</span>
-            <span className="{{ s.stepDesc }}">Full production, QC release and on-time despatch.</span>
+            <div className="{{ s.stepTextCol }}">
+              <span className="{{ s.stepNumber }}">04</span>
+              <span className="{{ s.stepTitle }}">Delivery</span>
+              <span className="{{ s.stepDesc }}">Full production, QC release and on-time despatch.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -680,15 +684,15 @@ class Component extends DCLogic {
     s.fullBleedCaptionTitle = `font-semibold ${pick("text-[26px]", "text-[32px]", "text-[36px]")} leading-[1.22] tracking-[-0.72px] text-[${near}]`;
     s.fullBleedCaptionDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[24px] text-[${dark}]`;
 
-    // ---------- HOW IT WORKS (icon-placeholder + arrow strip) ----------
-    s.stepWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("steps");
-    s.stepStrip = "flex " + (isDesktop ? "flex-row items-start justify-between" : "flex-col") + " gap-[20px] md:gap-[24px]";
-    s.stepItem = "flex flex-col gap-[10px] items-start " + (isDesktop ? "w-[22%]" : "w-full");
-    s.stepIconBox = "w-[52px] h-[52px] shrink-0 bg-[rgb(225,222,217)]";
+    // ---------- HOW IT WORKS (icon left, text right, no arrows) ----------
+    s.stepWrap = "flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] max-w-[1600px] mx-auto " + reveal("steps");
+    s.stepStrip = "flex " + pick("flex-col", "flex-row flex-wrap", "flex-row justify-between") + " items-start " + pick("gap-[28px]", "gap-[32px] gap-y-[36px]", "gap-[0px]");
+    s.stepItem = "flex flex-row items-start " + pick("gap-[16px] w-full", "gap-[18px] w-[calc(50%-16px)]", "gap-[20px]");
+    s.stepIconBox = `shrink-0 ${pick("w-[100px] h-[100px]", "w-[120px] h-[120px]", "w-[132px] h-[132px]")} bg-[rgb(217,217,217)]`;
+    s.stepTextCol = "flex flex-col " + pick("gap-[6px] max-w-none", "gap-[7px] max-w-[220px]", "gap-[8px] max-w-[210px]");
     s.stepNumber = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
-    s.stepTitle = `font-semibold text-[17px] leading-[22px] text-[${dark}]`;
-    s.stepDesc = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.7)]";
-    s.stepArrow = isDesktop ? "shrink-0 mt-[24px]" : "hidden";
+    s.stepTitle = `font-semibold ${pick("text-[22px]", "text-[24px]", "text-[26px]")} leading-[1.25] tracking-[-0.4px] text-[${dark}]`;
+    s.stepDesc = "font-normal text-[15px] leading-[21px] text-[rgba(51,51,51,0.7)]";
 
     // ---------- WHERE THIS SERVICE APPLIES / COMPLIANCE (shared 4-photo grid, white caption) ----------
     s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("applies");
