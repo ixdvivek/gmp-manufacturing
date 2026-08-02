@@ -120,25 +120,51 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ OVERVIEW (image left, text right) ============ -->
+  <!-- ============ OVERVIEW (image left, text right, content-rich) ============ -->
   <div data-screen-label="Overview" className="{{ s.sectionPad }}">
     <div className="{{ s.overviewWrap }}" ref="{{ overviewRevealRef }}">
       <div className="{{ s.overviewImageCol }}">
         <img src="assets2/hero-bg.webp" alt="Pharmaceutical manufacturing" loading="lazy" className="{{ s.overviewImage }}">
+        <div className="{{ s.overviewMetricCard }}">
+          <div className="{{ s.overviewMetricTopRow }}">
+            <span className="{{ s.overviewMetricNumber }}">100%</span>
+            <div className="{{ s.overviewMetricIconBadge }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+            </div>
+          </div>
+          <span className="{{ s.overviewMetricLabel }}">In-house QC &amp; QP release</span>
+        </div>
       </div>
       <div className="{{ s.overviewContent }}">
+        <span className="{{ s.overviewEyebrowPill }}">SECTOR OVERVIEW</span>
         <span className="{{ s.h2 }}">Built for pharmaceutical compliance</span>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Formulation &amp; Development</span>
-          <span className="{{ s.subheadingBody }}">Our in-house team works alongside you from early-stage formulation through analytical development, so every specification is right before a single batch reaches the line.</span>
+        <span className="{{ s.overviewBody }}">Pharmaceutical manufacturing demands precision at every step, from formulation through to final release. Our in-house team manages the full journey under one roof — in our own MHRA-licensed UK facilities — so your product moves from specification to shelf without third-party handoffs or added risk.</span>
+        <div className="{{ s.overviewPointsRow }}">
+          <div className="{{ s.overviewPoint }}">
+            <div className="{{ s.overviewPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6"></path><path d="M10 2v6.5L4 19a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-6-10.5V2"></path><path d="M6.5 14h11"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">Formulation &amp; Development</span>
+            <span className="{{ s.subheadingBody }}">Our in-house team works alongside you from early-stage formulation through analytical development, so every specification is right before a single batch reaches the line.</span>
+          </div>
+          <div className="{{ s.overviewPoint }}">
+            <div className="{{ s.overviewPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path><path d="M9 21v-6h6v6"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">UK-Owned Manufacturing</span>
+            <span className="{{ s.subheadingBody }}">Every stage of production runs through our own Hull-based facilities — full control, no third-party handoffs, and no outsourcing surprises.</span>
+          </div>
+          <div className="{{ s.overviewPoint }}">
+            <div className="{{ s.overviewPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">Quality &amp; Regulatory Support</span>
+            <span className="{{ s.subheadingBody }}">QP and RP release, in-house QC and stability testing, and audit-ready documentation are built into every batch we manufacture.</span>
+          </div>
         </div>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">UK-Owned Manufacturing</span>
-          <span className="{{ s.subheadingBody }}">Every stage of production runs through our own Hull-based facilities — full control, no third-party handoffs, and no outsourcing surprises.</span>
-        </div>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Quality &amp; Regulatory Support</span>
-          <span className="{{ s.subheadingBody }}">QP and RP release, in-house QC and stability testing, and audit-ready documentation are built into every batch we manufacture.</span>
+        <div className="{{ s.overviewCtaRow }}">
+          <a href="contact.html" className="{{ s.overviewCtaSecondary.className }}" onMouseEnter="{{ s.overviewCtaSecondary.enter }}" onMouseLeave="{{ s.overviewCtaSecondary.leave }}">Get In Touch</a>
+          <a href="contact.html" className="{{ s.overviewCtaPrimary.className }}" onMouseEnter="{{ s.overviewCtaPrimary.enter }}" onMouseLeave="{{ s.overviewCtaPrimary.leave }}">Get A Quote</a>
         </div>
       </div>
     </div>
@@ -405,6 +431,7 @@ class Component extends DCLogic {
 
     s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
     s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
+    s.red = red;
     s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
     s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
@@ -514,6 +541,37 @@ class Component extends DCLogic {
     s.subheadingBlock = "flex flex-col gap-[6px] items-start max-w-[560px]";
     s.subheadingTitle = `font-semibold text-[17px] leading-[24px] text-[${near}]`;
     s.subheadingBody = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.75)]";
+
+    // ---------- OVERVIEW (content-rich: eyebrow, body copy, icon points, inset metric, CTAs) ----------
+    s.overviewEyebrowPill = `inline-flex items-center rounded-[999px] bg-[rgba(178,33,38,0.08)] text-[${red}] font-medium text-[12px] tracking-[0.6px] leading-[16px] py-[6px] px-[14px] box-border w-fit`;
+    s.overviewBody = "font-normal text-[16px] md:text-[17px] leading-[26px] md:leading-[27px] text-[rgba(51,51,51,0.8)] max-w-[560px]";
+    s.overviewPointsRow = "flex " + pick("flex-col", "flex-row flex-wrap", "flex-row flex-wrap") + " gap-[24px] md:gap-[28px] w-full";
+    s.overviewPoint = "flex flex-col gap-[10px] items-start " + pick("w-full", "w-[calc(50%-14px)]", "w-[calc((100%-56px)/3)]");
+    s.overviewPointIconBox = `flex items-center justify-center w-[40px] h-[40px] shrink-0 rounded-none bg-[rgba(178,33,38,0.08)] box-border`;
+    s.overviewMetricCard = `absolute bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col gap-[4px] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.35)] ` +
+      pick("top-[16px] right-[16px] w-[152px] py-[16px] px-[16px]", "top-[24px] right-[24px] w-[178px] py-[18px] px-[20px]", "top-[28px] right-[28px] w-[196px] py-[20px] px-[22px]");
+    s.overviewMetricTopRow = "flex flex-row items-center justify-between w-full";
+    s.overviewMetricNumber = `font-semibold ${pick("text-[26px]", "text-[30px]", "text-[34px]")} leading-[1.1] tracking-[-0.5px] text-[${near}]`;
+    s.overviewMetricIconBadge = `flex items-center justify-center w-[26px] h-[26px] rounded-full bg-[${red}] shrink-0`;
+    s.overviewMetricLabel = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.7)]";
+    s.overviewCtaRow = "flex flex-row flex-wrap gap-[16px] items-center pt-[8px]";
+    const makeOverviewCta = (key, filled) => {
+      const hovered = this.state.hoveredKey === key;
+      const base = "rounded-[999px] flex flex-row items-center justify-center gap-[8px] py-[14px] px-[28px] box-border cursor-pointer shrink-0 no-underline font-medium text-[15px] transition-[background,border-color,color,box-shadow,transform] duration-200 ease-in-out";
+      const filledClass = hovered
+        ? `bg-[${near}] text-white border border-solid border-[${near}] ${hoverShadowTw} -translate-y-[2px]`
+        : `bg-[${red}] text-white border border-solid border-[${red}] ${noShadowTw} translate-y-0`;
+      const outlineClass = hovered
+        ? `bg-[${red}] text-white border border-solid border-[${red}] -translate-y-[2px]`
+        : `bg-transparent text-[${near}] border border-solid border-[rgba(51,51,51,0.25)] translate-y-0`;
+      return {
+        className: base + " " + (filled ? filledClass : outlineClass),
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    s.overviewCtaPrimary = makeOverviewCta("overviewCtaPrimary", true);
+    s.overviewCtaSecondary = makeOverviewCta("overviewCtaSecondary", false);
 
     // ---------- RELEVANT SERVICES (numbered strip) ----------
     s.relSvcRow = "grid " + pick("grid-cols-1 gap-[24px]", "grid-cols-2 gap-[28px]", "grid-cols-4 gap-0") + " max-w-[1600px] mx-auto " + reveal("relsvc");
