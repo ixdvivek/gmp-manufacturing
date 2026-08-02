@@ -120,17 +120,40 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ PANEL A (image left, text right) ============ -->
+  <!-- ============ PANEL A (image left, text right, content-rich) ============ -->
   <div data-screen-label="Panel A" className="{{ s.sectionPad }}">
     <div className="{{ s.panelWrapReverse }}" ref="{{ panelARevealRef }}">
       <div className="{{ s.panelImageCol }}">
         <img src="assets2/placeholder-team-3.jpg" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
+        <div className="{{ s.panelAMetricCard }}">
+          <div className="{{ s.panelAMetricTopRow }}">
+            <span className="{{ s.panelAMetricNumber }}">2X</span>
+            <div className="{{ s.panelAMetricIconBadge }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+            </div>
+          </div>
+          <span className="{{ s.panelAMetricLabel }}">Production capacity, same footprint</span>
+        </div>
       </div>
       <div className="{{ s.panelContent }}">
+        <span className="{{ s.panelAEyebrowPill }}">OUR APPROACH</span>
         <span className="{{ s.h2 }}">Formulation, manufacturing and everything in between</span>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Full-Scale Production</span>
-          <span className="{{ s.subheadingBody }}">From bulk manufacture through to finished, labelled pack, every stage runs through our own UK facilities — one process, one accountable team.</span>
+        <span className="{{ s.panelABody }}">From early-stage formulation and process development through to full-scale, GMP-compliant manufacturing, every stage of your product's journey runs through our own UK facilities. One accountable team carries it from first trial batch to final, labelled pack — so nothing gets lost in translation between partners.</span>
+        <div className="{{ s.panelAPointsRow }}">
+          <div className="{{ s.panelAPoint }}">
+            <div className="{{ s.panelAPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V14M12 20V8M20 20V4"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">Full-Scale Production</span>
+            <span className="{{ s.subheadingBody }}">From bulk manufacture through to finished, labelled pack, every stage runs through our own UK facilities — one process, one accountable team.</span>
+          </div>
+          <div className="{{ s.panelAPoint }}">
+            <div className="{{ s.panelAPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6"></path><path d="M10 2v6.5L4 19a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-6-10.5V2"></path><path d="M6.5 14h11"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">Formulation Expertise</span>
+            <span className="{{ s.subheadingBody }}">Our in-house formulation science team works alongside production from day one, turning your specification into a robust, scalable process.</span>
+          </div>
         </div>
       </div>
     </div>
@@ -477,6 +500,7 @@ class Component extends DCLogic {
 
     s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
     s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
+    s.red = red;
     s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
     s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
@@ -580,6 +604,19 @@ class Component extends DCLogic {
     s.subheadingBlock = "flex flex-col gap-[6px] items-start max-w-[560px]";
     s.subheadingTitle = `font-semibold text-[17px] leading-[24px] text-[${near}]`;
     s.subheadingBody = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.75)]";
+
+    // ---------- PANEL A (content-rich: eyebrow, body copy, icon points, inset metric) ----------
+    s.panelAEyebrowPill = `inline-flex items-center rounded-[999px] bg-[rgba(178,33,38,0.08)] text-[${red}] font-medium text-[12px] tracking-[0.6px] leading-[16px] py-[6px] px-[14px] box-border w-fit`;
+    s.panelABody = "font-normal text-[16px] md:text-[17px] leading-[26px] md:leading-[27px] text-[rgba(51,51,51,0.8)] max-w-[560px]";
+    s.panelAPointsRow = "flex " + pick("flex-col", "flex-row flex-wrap", "flex-row flex-wrap") + " gap-[24px] md:gap-[28px] w-full";
+    s.panelAPoint = "flex flex-col gap-[10px] items-start " + (isMobile ? "w-full" : "w-[calc(50%-14px)]");
+    s.panelAPointIconBox = `flex items-center justify-center w-[40px] h-[40px] shrink-0 rounded-none bg-[rgba(178,33,38,0.08)] box-border`;
+    s.panelAMetricCard = `absolute bg-white box-border flex flex-col gap-[4px] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.35)] ` +
+      pick("top-[16px] right-[16px] w-[152px] py-[16px] px-[16px]", "top-[24px] right-[24px] w-[178px] py-[18px] px-[20px]", "top-[28px] right-[28px] w-[196px] py-[20px] px-[22px]");
+    s.panelAMetricTopRow = "flex flex-row items-center justify-between w-full";
+    s.panelAMetricNumber = `font-semibold ${pick("text-[26px]", "text-[30px]", "text-[34px]")} leading-[1.1] tracking-[-0.5px] text-[${near}]`;
+    s.panelAMetricIconBadge = `flex items-center justify-center w-[26px] h-[26px] rounded-full bg-[${red}] shrink-0`;
+    s.panelAMetricLabel = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.7)]";
 
     // ---------- GREY BAND WRAPPER (shared by Capabilities + How It Works) ----------
     s.greyBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] box-border bg-[rgb(245,243,240)] px-[${gutter}px] ` + pick("py-[40px]", "py-[48px]", "py-[56px]");
