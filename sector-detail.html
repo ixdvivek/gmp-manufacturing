@@ -23,7 +23,6 @@
     html, body { margin: 0; padding: 0; background: #fff; }
     .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    @keyframes gmp-node-pulse { 0%, 100% { opacity: 0.45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.6); } }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -225,43 +224,7 @@
 
   <!-- ============ GLOBAL REACH (full-bleed map band, white caption bottom-left) ============ -->
   <div className="{{ s.mapOuter }}">
-    <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="rgb(37,60,110)"></stop>
-          <stop offset="55%" stop-color="rgb(24,26,64)"></stop>
-          <stop offset="100%" stop-color="rgb(17,17,40)"></stop>
-        </linearGradient>
-      </defs>
-      <rect x="0" y="0" width="1600" height="560" fill="url(#mapBg)"></rect>
-      <g opacity="0.16" stroke="rgb(255,255,255)" stroke-width="1">
-        <path d="M0 80h1600M0 160h1600M0 240h1600M0 320h1600M0 400h1600M0 480h1600"></path>
-        <path d="M80 0v560M240 0v560M400 0v560M560 0v560M720 0v560M880 0v560M1040 0v560M1200 0v560M1360 0v560M1520 0v560"></path>
-      </g>
-      <g fill="none" stroke="rgb(255,255,255)" stroke-width="1.4" stroke-dasharray="4 6" opacity="0.55">
-        <path d="M260 260 C 420 100, 620 100, 760 220"></path>
-        <path d="M260 260 C 380 340, 520 380, 660 360"></path>
-        <path d="M760 220 C 900 150, 1040 160, 1160 230"></path>
-        <path d="M760 220 C 860 300, 980 340, 1120 360"></path>
-        <path d="M660 360 C 820 420, 980 430, 1120 360"></path>
-        <path d="M1160 230 C 1260 280, 1340 320, 1420 300"></path>
-        <path d="M260 260 C 220 180, 220 120, 300 70"></path>
-      </g>
-      <g fill="rgb(255,255,255)">
-        <circle cx="260" cy="260" r="5"></circle>
-        <circle cx="760" cy="220" r="6"></circle>
-        <circle cx="660" cy="360" r="4"></circle>
-        <circle cx="1160" cy="230" r="5"></circle>
-        <circle cx="1120" cy="360" r="4"></circle>
-        <circle cx="1420" cy="300" r="4"></circle>
-        <circle cx="300" cy="70" r="4"></circle>
-      </g>
-      <g fill="rgb(255,255,255)">
-        <circle cx="260" cy="260" r="9" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite;"></circle>
-        <circle cx="760" cy="220" r="10" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite 0.6s;"></circle>
-        <circle cx="1160" cy="230" r="9" opacity="0.5" style="animation: gmp-node-pulse 2.6s ease-in-out infinite 1.2s;"></circle>
-      </g>
-    </svg>
+    <img src="assets/world-map.png" alt="World map showing GMP Manufacturing's global supply network" loading="lazy" className="{{ s.mapImg }}">
     <div className="{{ s.mapCaptionWrap }}">
       <span className="{{ s.mapCaption }}">Supplying partners across 30+ countries from our own UK facilities.</span>
     </div>
@@ -622,6 +585,7 @@ class Component extends DCLogic {
 
     // ---------- GLOBAL REACH (full-bleed map band, bottom-left caption) ----------
     s.mapOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[320px]", "h-[400px]", "h-[480px]")}`;
+    s.mapImg = "absolute inset-0 w-full h-full object-cover";
     s.mapCaptionWrap = (isMobile
       ? "absolute left-0 right-0 bottom-0 w-full"
       : `absolute bottom-0 left-[${gutter}px] w-[${pick(0, 420, 560)}px]`
