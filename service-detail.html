@@ -302,22 +302,16 @@
     </div>
   </div>
 
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ ACCREDITATIONS (reused marquee) ============ -->
-  <div data-screen-label="Accreditations" className="{{ s.sectionPad }}">
-    <div className="{{ s.marqueeOuter }}">
-      <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
-        <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
-          <div className="{{ s.marqueeItem }}">
-            <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
-          </div>
-        </sc-for>
-      </div>
+  <!-- ============ ACCREDITATIONS (reused marquee, full-bleed) ============ -->
+  <div data-screen-label="Accreditations" className="{{ s.marqueeOuter }}">
+    <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
+      <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
+        <div className="{{ s.marqueeItem }}">
+          <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
+        </div>
+      </sc-for>
     </div>
   </div>
-
-  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ FOOTER ============ -->
   <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
@@ -675,8 +669,8 @@ class Component extends DCLogic {
     ) + ` bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col ` + pick("py-[24px] px-[20px]", "py-[32px] px-[32px]", "py-[40px] px-[40px]");
     s.mapCaption = `font-semibold ${pick("text-[22px]", "text-[26px]", "text-[30px]")} leading-[1.3] tracking-[-0.4px] text-[${near}]`;
 
-    // ---------- ACCREDITATIONS (reused marquee) ----------
-    s.marqueeOuter = "w-full max-w-[1600px] overflow-hidden rounded-none bg-[rgb(245,245,245)] flex items-center box-border mx-auto " +
+    // ---------- ACCREDITATIONS (reused marquee, full-bleed) ----------
+    s.marqueeOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden bg-[rgb(245,245,245)] flex items-center box-border ` +
       pick("py-[28px] px-[16px]", "py-[36px] px-[20px]", "py-[48px] px-[24px]");
     s.marqueeInner = "flex flex-row gap-[24px] items-center w-max [animation:gmp-marquee_30s_linear_infinite]";
     s.marqueeItem = `flex items-center justify-center shrink-0 ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
