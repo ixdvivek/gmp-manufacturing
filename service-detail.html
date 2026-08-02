@@ -165,22 +165,45 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ PANEL B (text left, image right) ============ -->
+  <!-- ============ PANEL B (text left, image right, content-rich) ============ -->
   <div data-screen-label="Panel B" className="{{ s.sectionPad }}">
     <div className="{{ s.panelWrap }}" ref="{{ panelBRevealRef }}">
       <div className="{{ s.panelContent }}">
+        <span className="{{ s.panelAEyebrowPill }}">OUR COMMITMENT</span>
         <span className="{{ s.h2 }}">Built around your product, not the other way around</span>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Flexible Capacity</span>
-          <span className="{{ s.subheadingBody }}">Whether you need a single validation batch or full commercial-scale runs, our lines flex to your volumes without compromising on quality.</span>
+        <span className="{{ s.panelABody }}">We build our production schedule and quality processes around your product's specification — not the other way around. Whether that means a single validation batch, rapid scale-up, or full commercial-scale runs, our lines and systems flex to match your volumes, backed by complete, audit-ready documentation at every stage.</span>
+        <div className="{{ s.panelAPointsRow }}">
+          <div className="{{ s.panelAPoint }}">
+            <div className="{{ s.panelAPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">Flexible Capacity</span>
+            <span className="{{ s.subheadingBody }}">Whether you need a single validation batch or full commercial-scale runs, our lines flex to your volumes without compromising on quality.</span>
+          </div>
+          <div className="{{ s.panelAPoint }}">
+            <div className="{{ s.panelAPointIconBox }}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+            </div>
+            <span className="{{ s.subheadingTitle }}">Full Documentation</span>
+            <span className="{{ s.subheadingBody }}">Every batch leaves with a complete paperwork trail — QC results, release certificates and audit-ready records included as standard.</span>
+          </div>
         </div>
-        <div className="{{ s.subheadingBlock }}">
-          <span className="{{ s.subheadingTitle }}">Full Documentation</span>
-          <span className="{{ s.subheadingBody }}">Every batch leaves with a complete paperwork trail — QC results, release certificates and audit-ready records included as standard.</span>
+        <div className="{{ s.panelACtaRow }}">
+          <a href="contact.html" className="{{ s.panelBCtaSecondary.className }}" onMouseEnter="{{ s.panelBCtaSecondary.enter }}" onMouseLeave="{{ s.panelBCtaSecondary.leave }}">Get In Touch</a>
+          <a href="contact.html" className="{{ s.panelBCtaPrimary.className }}" onMouseEnter="{{ s.panelBCtaPrimary.enter }}" onMouseLeave="{{ s.panelBCtaPrimary.leave }}">Get A Quote</a>
         </div>
       </div>
       <div className="{{ s.panelImageCol }}">
         <img src="assets2/placeholder-team-2.jpg" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
+        <div className="{{ s.panelAMetricCard }}">
+          <div className="{{ s.panelAMetricTopRow }}">
+            <span className="{{ s.panelAMetricNumber }}">100%</span>
+            <div className="{{ s.panelAMetricIconBadge }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+            </div>
+          </div>
+          <span className="{{ s.panelAMetricLabel }}">Batch traceability, every release</span>
+        </div>
       </div>
     </div>
   </div>
@@ -639,6 +662,8 @@ class Component extends DCLogic {
     };
     s.panelACtaPrimary = makePanelACta("panelACtaPrimary", true);
     s.panelACtaSecondary = makePanelACta("panelACtaSecondary", false);
+    s.panelBCtaPrimary = makePanelACta("panelBCtaPrimary", true);
+    s.panelBCtaSecondary = makePanelACta("panelBCtaSecondary", false);
 
     // ---------- GREY BAND WRAPPER (shared by Capabilities + How It Works) ----------
     s.greyBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] box-border bg-[rgb(245,243,240)] px-[${gutter}px] ` + pick("py-[40px]", "py-[48px]", "py-[56px]");
