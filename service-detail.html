@@ -10,6 +10,12 @@
 <body>
 <div id="gmp-loader" aria-hidden="true"><div class="gmp-loader-box"><img src="assets2/logo-icon.svg" alt=""><span class="gmp-loader-ring"></span></div></div>
 <style>
+  html{scrollbar-gutter:stable}
+  /* Inline, so it is guaranteed to apply at first paint. Tailwind builds its
+     sheet at runtime; without this the app can paint unstyled for a frame and
+     then snap into the reveal state as those rules arrive. */
+  #dc-root{opacity:0}
+  html.gmp-ready #dc-root{opacity:1;transition:opacity .35s ease}
   #gmp-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
     background:#fff;opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s linear .45s}
   #gmp-loader.is-done{opacity:0;visibility:hidden}
@@ -30,15 +36,24 @@
   var el=document.getElementById("gmp-loader");
   if(!el)return;
   var done=false;
-  function hide(){ if(done)return; done=true; el.classList.add("is-done"); }
+  function hide(){ if(done)return; done=true;
+    document.documentElement.classList.add("gmp-ready");
+    el.classList.add("is-done");
+    window.__gmpReady=true; window.dispatchEvent(new Event("gmp:ready")); }
   function show(){ done=false; el.classList.remove("is-done"); }
   // Reveal the page once the app has painted, with a hard cap so a slow or
   // failed script can never leave the loader stuck over the content.
   function whenReady(){
     var t=setInterval(function(){
       var root=document.getElementById("dc-root");
-      if(root&&root.firstElementChild){clearInterval(t);setTimeout(hide,120);}
-    },60);
+      if(!root||!root.firstElementChild)return;
+      // Tailwind builds its stylesheet at runtime, so the first paint can land
+      // before the reveal rules exist. Lifting then makes sections flash in fully
+      // visible and snap back to animate. Wait until opacity-0 actually applies.
+      var probe=root.querySelector('[class*="opacity-0"]');
+      if(probe&&getComputedStyle(probe).opacity!=="0")return;
+      clearInterval(t);setTimeout(hide,140);
+    },50);
     setTimeout(function(){clearInterval(t);hide();},4000);
   }
   if(document.readyState==="complete"||document.readyState==="interactive")whenReady();
@@ -329,7 +344,7 @@
         </div>
         <div className="{{ s.stepStrip }}">
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"></div>
+            <div className="{{ s.stepIconBox }}"><img src="assets/brief.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">01</span>
               <span className="{{ s.stepTitle }}">Brief</span>
@@ -337,7 +352,7 @@
             </div>
           </div>
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"></div>
+            <div className="{{ s.stepIconBox }}"><img src="assets/development.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">02</span>
               <span className="{{ s.stepTitle }}">Development</span>
@@ -345,7 +360,7 @@
             </div>
           </div>
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"></div>
+            <div className="{{ s.stepIconBox }}"><img src="assets/validation.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">03</span>
               <span className="{{ s.stepTitle }}">Validation</span>
@@ -353,7 +368,7 @@
             </div>
           </div>
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"></div>
+            <div className="{{ s.stepIconBox }}"><img src="assets/delivery.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">04</span>
               <span className="{{ s.stepTitle }}">Delivery</span>
@@ -531,7 +546,14 @@ class Component extends DCLogic {
     const rect = el.getBoundingClientRect();
     if (rect.top < (window.innerHeight || 0) * 0.92) {
       // Two frames so the hidden state paints first and the change animates.
-      requestAnimationFrame(() => requestAnimationFrame(markShown));
+      const start = () => requestAnimationFrame(() => requestAnimationFrame(markShown));
+      // Wait for the loading curtain, else the entrance plays behind it and the
+      // section is simply already in place once it lifts.
+      if (window.__gmpReady) start();
+      else {
+        window.addEventListener("gmp:ready", start, { once: true });
+        setTimeout(start, 4500);
+      }
       this._revealObservers[key] = true;
       return;
     }
@@ -760,7 +782,8 @@ class Component extends DCLogic {
     s.stepWrap = "flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] max-w-[1600px] mx-auto " + reveal("steps");
     s.stepStrip = "flex " + pick("flex-col", "flex-row flex-wrap", "flex-row justify-between") + " items-start " + pick("gap-[28px]", "gap-[32px] gap-y-[36px]", "gap-[0px]");
     s.stepItem = "flex flex-row items-start " + pick("gap-[16px] w-full", "gap-[18px] w-[calc(50%-16px)]", "gap-[20px]");
-    s.stepIconBox = `shrink-0 ${pick("w-[100px] h-[100px]", "w-[120px] h-[120px]", "w-[132px] h-[132px]")} bg-[rgb(217,217,217)]`;
+    s.stepIconBox = `shrink-0 flex items-center justify-center ${pick("w-[76px] h-[76px]", "w-[88px] h-[88px]", "w-[96px] h-[96px]")}`;
+    s.stepIcon = "w-full h-full object-contain";
     s.stepTextCol = "flex flex-col " + pick("gap-[6px] max-w-none", "gap-[7px] max-w-[220px]", "gap-[8px] max-w-[210px]");
     s.stepNumber = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
     s.stepTitle = `font-semibold ${pick("text-[22px]", "text-[24px]", "text-[26px]")} leading-[1.25] tracking-[-0.4px] text-[${dark}]`;
