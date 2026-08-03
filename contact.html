@@ -164,43 +164,43 @@
         </div>
 
         <div className="{{ s.contactInfoCol }}">
-          <div className="{{ s.infoCard }}">
-            <span className="{{ s.contactCardLabel }}">Contact Information</span>
-            <div className="{{ s.contactCardDivider }}"></div>
+          <div className="{{ s.infoCardNavy }}">
+            <span className="{{ s.contactCardLabelOnDark }}">Contact Information</span>
+            <div className="{{ s.contactCardDividerOnDark }}"></div>
             <div className="{{ s.detailsItem }}">
               <div className="{{ s.detailsIconRow }}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRed }}" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span className="{{ s.detailsLabel }}">Phone</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeOnDark }}" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span className="{{ s.detailsLabelOnDark }}">Phone</span>
               </div>
-              <span className="{{ s.detailsValue }}">+44 (0) 1482 707 138</span>
+              <span className="{{ s.detailsValueOnDark }}">+44 (0) 1482 707 138</span>
             </div>
             <div className="{{ s.detailsItem }}">
               <div className="{{ s.detailsIconRow }}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRed }}" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-                <span className="{{ s.detailsLabel }}">Address</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeOnDark }}" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+                <span className="{{ s.detailsLabelOnDark }}">Address</span>
               </div>
-              <span className="{{ s.detailsValue }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+              <span className="{{ s.detailsValueOnDark }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
             </div>
             <div className="{{ s.detailsItem }}">
               <div className="{{ s.detailsIconRow }}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRed }}" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="0"></rect><path d="M2 6l10 7 10-7"></path></svg>
-                <span className="{{ s.detailsLabel }}">Email</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeOnDark }}" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="0"></rect><path d="M2 6l10 7 10-7"></path></svg>
+                <span className="{{ s.detailsLabelOnDark }}">Email</span>
               </div>
-              <span className="{{ s.detailsValue }}">info@gmpgroup.co.uk</span>
+              <span className="{{ s.detailsValueOnDark }}">info@gmpgroup.co.uk</span>
             </div>
           </div>
 
-          <div className="{{ s.infoCard }}">
-            <span className="{{ s.contactCardLabel }}">Business Hours</span>
-            <div className="{{ s.contactCardDivider }}"></div>
+          <div className="{{ s.infoCardGrape }}">
+            <span className="{{ s.contactCardLabelOnDark }}">Business Hours</span>
+            <div className="{{ s.contactCardDividerOnDark }}"></div>
             <div className="{{ s.hoursRow }}">
               <div className="{{ s.detailsItem }}">
-                <span className="{{ s.detailsLabel }}">Monday - Friday</span>
-                <span className="{{ s.detailsValue }}">8:00 am - 5:00 pm</span>
+                <span className="{{ s.detailsLabelOnDark }}">Monday - Friday</span>
+                <span className="{{ s.detailsValueOnDark }}">8:00 am - 5:00 pm</span>
               </div>
               <div className="{{ s.detailsItem }}">
-                <span className="{{ s.detailsLabel }}">Saturday - Sunday</span>
-                <span className="{{ s.detailsValue }}">Closed</span>
+                <span className="{{ s.detailsLabelOnDark }}">Saturday - Sunday</span>
+                <span className="{{ s.detailsValueOnDark }}">Closed</span>
               </div>
             </div>
           </div>
@@ -738,13 +738,20 @@ class Component extends DCLogic {
     s.confirmationBody = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
     // ---------- CONTACT INFO CARDS (reused reference layout) ----------
-    s.themeRed = red;
     s.contactGrid = "flex flex-col xl:flex-row gap-[16px] xl:gap-[20px] items-stretch";
     s.formCard = "flex flex-col gap-[14px] bg-[rgb(245,245,245)] rounded-none box-border xl:w-[60%] " + pick("p-[16px]", "p-[18px]", "p-[20px]");
     s.contactInfoCol = "flex flex-col gap-[12px] xl:gap-[14px] xl:w-[40%]";
-    s.infoCard = "flex flex-col gap-[10px] bg-[rgb(245,245,245)] rounded-none box-border " + pick("p-[16px]", "p-[18px]", "p-[20px]");
+    // Navy and grape are both lifted from the logo swoosh, which fades red -> #482551 -> navy.
+    const infoCardBase = "flex flex-col gap-[10px] rounded-none box-border " + pick("p-[16px]", "p-[18px]", "p-[20px]");
+    s.infoCardNavy = infoCardBase + " bg-[rgb(41,37,96)]";
+    s.infoCardGrape = infoCardBase + " bg-[rgb(72,37,81)]";
     s.contactCardLabel = `font-semibold text-[18px] md:text-[20px] leading-[26px] text-[${dark}]`;
+    s.contactCardLabelOnDark = "font-semibold text-[18px] md:text-[20px] leading-[26px] text-white";
     s.contactCardDivider = "h-[1px] bg-[rgba(0,0,0,0.1)] w-full";
+    s.contactCardDividerOnDark = "h-[1px] bg-[rgba(255,255,255,0.22)] w-full";
+    s.detailsLabelOnDark = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.6)]";
+    s.detailsValueOnDark = "font-medium text-[16px] leading-[24px] text-white";
+    s.themeOnDark = "rgb(255,255,255)";
     s.detailsIconRow = "flex flex-row items-center gap-[8px]";
     s.hoursRow = "flex flex-row flex-wrap gap-[24px] md:gap-[32px]";
 
@@ -752,8 +759,6 @@ class Component extends DCLogic {
     s.mapWrap = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden`;
     s.mapFrame = `block w-full border-0 ${pick("h-[280px]", "h-[340px]", "h-[420px]")}`;
     s.detailsItem = "flex flex-col gap-[4px]";
-    s.detailsLabel = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.5)]";
-    s.detailsValue = `font-medium text-[16px] leading-[24px] text-[${dark}]`;
 
     // ---------- FAQ ----------
     s.faqBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] px-[${gutter}px] box-border bg-[rgba(37,117,187,0.05)] ` + pick("py-[40px]", "py-[52px]", "py-[64px]");
