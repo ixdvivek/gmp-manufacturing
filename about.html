@@ -983,15 +983,17 @@ class Component extends DCLogic {
 
     // ---------- DATA ----------
     const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
+    // PLACEHOLDER NAMES - not real people. These sit alongside stock portraits and
+    // must be replaced with the actual leadership team before this page goes live.
     const leadershipData = [
-      { role: "Managing Director", img: "assets/team-3.webp" },
-      { role: "Head of Quality Assurance", img: "assets/team-1.webp" },
-      { role: "Director of Operations", img: "assets/team-2.webp" },
-      { role: "Head of Research & Development", img: "assets/team-4.webp" },
-      { role: "Head of Regulatory Affairs", img: "assets/team-5.webp" },
-      { role: "Head of Supply Chain", img: "assets/team-6.webp" },
+      { role: "Managing Director", name: "Alan Whitfield", img: "assets/team-3.webp" },
+      { role: "Head of Quality Assurance", name: "Elena Marsh", img: "assets/team-1.webp" },
+      { role: "Director of Operations", name: "James Holloway", img: "assets/team-2.webp" },
+      { role: "Head of Research & Development", name: "Niamh Bradley", img: "assets/team-4.webp" },
+      { role: "Head of Regulatory Affairs", name: "Marcus Adeyemi", img: "assets/team-5.webp" },
+      { role: "Head of Supply Chain", name: "Rafael Duarte", img: "assets/team-6.webp" },
     ];
-    const leadershipItems = leadershipData.map((item) => ({ role: item.role, img: item.img, name: "Full Name" }));
+    const leadershipItems = leadershipData.map((item) => ({ role: item.role, img: item.img, name: item.name }));
 
     return {
       s,
