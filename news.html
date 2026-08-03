@@ -195,16 +195,52 @@
         </sc-for>
       </div>
 
-      <div className="{{ s.newsGrid }}">
-        <sc-for list="{{visibleItems}}" as="item" hint-placeholder-count="4">
-          <div className="{{ s.newsCard }}">
-            <div className="{{ s.newsImgPlaceholder }}"><img src="{{ item.img }}" alt="{{ item.title }}" loading="lazy" className="{{ s.newsImg }}"></div>
-            <span className="{{ s.newsCardTag }}">{{ item.tag }}</span>
-            <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
-            <span className="{{ s.newsCardDate }}">{{ item.date }}</span>
-          </div>
-        </sc-for>
-      </div>
+      <!-- News + Events: thumbnail, headline, date -->
+      <sc-if value="{{ isSimpleTab }}" hint-placeholder-val="{{ true }}">
+        <div className="{{ s.newsGrid }}">
+          <sc-for list="{{simpleItems}}" as="item" hint-placeholder-count="6">
+            <a href="{{ item.href }}" className="{{ s.newsCard }}">
+              <div className="{{ s.newsImgWrap }}"><img src="{{ item.img }}" alt="{{ item.title }}" loading="lazy" className="{{ s.newsImg }}"></div>
+              <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
+              <span className="{{ s.newsCardDate }}">{{ item.date }}</span>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- Blogs: thumbnail, headline, excerpt, date, author -->
+      <sc-if value="{{ isBlogTab }}" hint-placeholder-val="{{ false }}">
+        <div className="{{ s.newsGrid }}">
+          <sc-for list="{{blogItems}}" as="item" hint-placeholder-count="4">
+            <a href="{{ item.href }}" className="{{ s.newsCard }}">
+              <div className="{{ s.newsImgWrap }}"><img src="{{ item.img }}" alt="{{ item.title }}" loading="lazy" className="{{ s.newsImg }}"></div>
+              <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
+              <span className="{{ s.blogExcerpt }}">{{ item.excerpt }}</span>
+              <div className="{{ s.blogMetaRow }}">
+                <span className="{{ s.blogAuthor }}">{{ item.author }}</span>
+                <span className="{{ s.blogMetaDot }}"></span>
+                <span className="{{ s.newsCardDate }}">{{ item.date }}</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <!-- Media gallery: images and video posters, click to open the lightbox -->
+      <sc-if value="{{ isGalleryTab }}" hint-placeholder-val="{{ false }}">
+        <div className="{{ s.mediaGrid }}">
+          <sc-for list="{{mediaItems}}" as="m" hint-placeholder-count="8">
+            <div className="{{ s.mediaCell }}" onClick="{{ m.onOpen }}">
+              <img src="{{ m.thumb }}" alt="{{ m.caption }}" loading="lazy" className="{{ s.mediaImg }}">
+              <sc-if value="{{ m.isVideo }}" hint-placeholder-val="{{ true }}">
+                <div className="{{ s.mediaPlayBadge }}">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="rgb(255,255,255)"><path d="M8 5v14l11-7z"></path></svg>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
     </div>
   </div>
 
@@ -247,6 +283,37 @@
       </div>
     </div>
   </div>
+
+
+  <!-- ============ MEDIA LIGHTBOX ============ -->
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div className="{{ s.lbOverlay }}" onClick="{{ closeLightbox }}">
+      <div className="{{ s.lbDialog }}" onClick="{{ stopPropagation }}">
+        <div className="{{ s.lbStage }}">
+          <sc-if value="{{ lbIsVideo }}" hint-placeholder-val="{{ false }}">
+            <iframe src="{{ lbVideoSrc }}" title="{{ lbCaption }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="{{ s.lbFrame }}"></iframe>
+          </sc-if>
+          <sc-if value="{{ lbIsImage }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ lbImage }}" alt="{{ lbCaption }}" className="{{ s.lbImage }}">
+          </sc-if>
+        </div>
+        <div className="{{ s.lbCaptionWrap }}">
+          <span className="{{ s.lbCaption }}">{{ lbCaption }}</span>
+          <span className="{{ s.lbDate }}">{{ lbDate }}</span>
+        </div>
+        <div className="{{ s.lbPrev }}" onClick="{{ prevLightbox }}" aria-label="Previous">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+        </div>
+        <div className="{{ s.lbNext }}" onClick="{{ nextLightbox }}" aria-label="Next">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+        </div>
+        <div className="{{ s.lbClose }}" onClick="{{ closeLightbox }}" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </div>
+        <span className="{{ s.lbCounter }}">{{ lbCounter }}</span>
+      </div>
+    </div>
+  </sc-if>
 
   <!-- ============ FOOTER ============ -->
   <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
@@ -332,9 +399,18 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null, activeFilter: "News" };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null, activeFilter: "News", lightboxIndex: null };
 
   componentDidMount() {
+    this._onLightboxKey = (e) => {
+      if (this.state.lightboxIndex === null || this.state.lightboxIndex === undefined) return;
+      if (e.key === "Escape") this.setState({ lightboxIndex: null });
+      else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        const d = e.key === "ArrowRight" ? 1 : -1;
+        this.setState((st) => ({ lightboxIndex: (st.lightboxIndex + d + 8) % 8 }));
+      }
+    };
+    window.addEventListener("keydown", this._onLightboxKey);
     this._onResize = () => { this._updateBp(); };
     window.addEventListener("resize", this._onResize);
     this._updateBp();
@@ -513,7 +589,7 @@ class Component extends DCLogic {
     s.newsWrap = "flex flex-col gap-[28px] md:gap-[32px] max-w-[1600px] mx-auto " + reveal("news");
     s.filterTabRow = "flex flex-row flex-wrap gap-[24px] md:gap-[32px] border-b border-solid border-[rgba(0,0,0,0.12)] pb-0";
     const activeFilter = this.state.activeFilter;
-    const FILTERS = ["News", "Events", "Media Gallery", "Blog"];
+    const FILTERS = ["News", "Events", "Blogs", "Media Gallery"];
     const filterTabs = FILTERS.map((label) => {
       const active = activeFilter === label;
       return {
@@ -524,7 +600,34 @@ class Component extends DCLogic {
       };
     });
     s.newsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[28px] md:gap-[32px] xl:gap-[36px]";
-    s.newsCard = "flex flex-col gap-[12px] items-start";
+    s.newsCard = "flex flex-col gap-[12px] items-start no-underline group cursor-pointer";
+    s.newsImgWrap = "w-full aspect-[16/9] bg-[rgb(232,232,232)] overflow-hidden box-border";
+    s.blogExcerpt = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.72)]";
+    s.blogMetaRow = "flex flex-row items-center gap-[10px] pt-[2px]";
+    s.blogAuthor = `font-medium text-[14px] leading-[20px] text-[${near}]`;
+    s.blogMetaDot = "w-[4px] h-[4px] rounded-full bg-[rgba(51,51,51,0.3)] shrink-0";
+
+    // ---------- MEDIA GALLERY ----------
+    s.mediaGrid = "grid " + pick("grid-cols-2", "grid-cols-3", "grid-cols-4") + " gap-[12px] md:gap-[16px]";
+    s.mediaCell = "relative aspect-square overflow-hidden bg-[rgb(232,232,232)] cursor-pointer group";
+    s.mediaImg = "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105";
+    s.mediaPlayBadge = "absolute inset-0 m-auto w-[54px] h-[54px] rounded-full bg-[rgba(17,17,17,0.55)] backdrop-blur-[2px] flex items-center justify-center pointer-events-none transition-[background,transform] duration-200 group-hover:bg-[rgba(178,33,38,0.9)] group-hover:scale-110";
+
+    // ---------- LIGHTBOX ----------
+    s.lbOverlay = "fixed inset-0 z-[2147482000] bg-[rgba(12,12,16,0.92)] flex items-center justify-center box-border " + pick("p-[16px]", "p-[32px]", "p-[48px]");
+    s.lbDialog = "relative flex flex-col gap-[16px] w-full max-w-[1100px] max-h-full";
+    s.lbStage = "relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center";
+    s.lbImage = "w-full h-full object-contain";
+    s.lbFrame = "w-full h-full border-0";
+    s.lbCaptionWrap = "flex flex-col gap-[4px] items-start";
+    s.lbCaption = `font-medium ${pick("text-[15px]", "text-[17px]", "text-[18px]")} leading-[1.4] text-white`;
+    s.lbDate = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.55)]";
+    const lbBtn = "absolute top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.24)] flex items-center justify-center cursor-pointer transition-colors duration-200 z-[2]";
+    s.lbPrev = lbBtn + " " + pick("left-[6px]", "-left-[8px]", "-left-[64px]");
+    s.lbNext = lbBtn + " " + pick("right-[6px]", "-right-[8px]", "-right-[64px]");
+    s.lbClose = "absolute -top-[12px] right-0 md:-top-[40px] md:right-0 w-[40px] h-[40px] rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.24)] flex items-center justify-center cursor-pointer transition-colors duration-200 z-[2]";
+    s.lbCounter = "absolute -top-[6px] left-0 md:-top-[34px] font-normal text-[13px] leading-[18px] text-[rgba(255,255,255,0.55)]";
+
     s.newsImgPlaceholder = "w-full aspect-[16/9] bg-[rgb(232,232,232)] overflow-hidden box-border";
     s.newsImg = "w-full h-full object-cover";
     s.newsCardTag = `font-normal text-[13px] leading-[18px] text-[${red}] uppercase tracking-[0.5px]`;
@@ -587,17 +690,57 @@ class Component extends DCLogic {
     s.footerBottomRow = "flex flex-row items-center pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
 
     // ---------- DATA: NEWS / EVENTS / MEDIA GALLERY / BLOG ----------
+    // PLACEHOLDER EDITORIAL - invented headlines, dates and copy so the layouts can be
+    // reviewed. Replace with real content before launch.
     const newsData = [
-      { tag: "News", title: "GMP Manufacturing Achieves ISO 13485 Recertification", date: "12 Jun 2026", img: "assets/gmp-3.webp" },
-      { tag: "News", title: "New Filling Line Now Live at Our Hull Facility", date: "03 Apr 2026", img: "assets/gmp-8.webp" },
-      { tag: "Events", title: "Meet Us at CPhI Worldwide 2026", date: "18 Aug 2026", img: "assets/gmp-6.webp" },
-      { tag: "Events", title: "Healthcare Exhibition — Stand 42B", date: "22 May 2026", img: "assets/gmp-11.webp" },
-      { tag: "Media Gallery", title: "Inside Our Hull Manufacturing Facility", date: "Photo Gallery", img: "assets/gmp-5.webp" },
-      { tag: "Media Gallery", title: "Behind the Scenes: Formulation Lab", date: "Photo Gallery", img: "assets/gmp-12.webp" },
-      { tag: "Blog", title: "Why Technology Transfer Timelines Matter", date: "27 Jul 2026", img: "assets/gmp-4.webp" },
-      { tag: "Blog", title: "Choosing the Right CDMO Partner: A Buyer's Checklist", date: "14 Jan 2026", img: "assets/gmp-1.webp" },
+      { title: "GMP Manufacturing Achieves ISO 13485 Recertification", date: "12 Jun 2026", img: "assets/gmp-3.webp" },
+      { title: "New Filling Line Now Live at Our Hull Facility", date: "03 Apr 2026", img: "assets/gmp-8.webp" },
+      { title: "Investment in Expanded Warehousing Capacity", date: "21 Feb 2026", img: "assets/gmp-10.webp" },
+      { title: "Analytical Lab Adds Extended Stability Testing", date: "09 Jan 2026", img: "assets/gmp-2.webp" },
     ];
-    const visibleItems = newsData.filter((item) => item.tag === activeFilter);
+    const eventsData = [
+      { title: "Meet Us at CPhI Worldwide 2026", date: "18 Aug 2026", img: "assets/gmp-6.webp" },
+      { title: "Healthcare Exhibition — Stand 42B", date: "22 May 2026", img: "assets/gmp-11.webp" },
+      { title: "Open Day: Inside Our Hull Facility", date: "14 Mar 2026", img: "assets/gmp-5.webp" },
+    ];
+    const blogsData = [
+      { title: "Why Technology Transfer Timelines Matter", date: "27 Jul 2026", author: "Niamh Bradley", img: "assets/gmp-4.webp",
+        excerpt: "Transfer is where most delays hide. A look at what actually drives the timeline, and where partners can pull weeks back." },
+      { title: "Choosing the Right CDMO Partner: A Buyer's Checklist", date: "14 Jan 2026", author: "Elena Marsh", img: "assets/gmp-1.webp",
+        excerpt: "Capacity is the easy question. These are the ones worth asking before you commit a product to a manufacturing partner." },
+      { title: "What Good Documentation Practice Really Costs", date: "02 Dec 2025", author: "Marcus Adeyemi", img: "assets/gmp-12.webp",
+        excerpt: "Audit-ready paperwork is not overhead. Here is how it earns its keep when a regulator or a customer comes asking." },
+    ];
+    // type "video" carries a youtubeId; the tile shows a poster with a play badge.
+    const mediaData = [
+      { type: "image", img: "assets/gmp-5.webp",  caption: "Analytical testing in our Hull laboratory", date: "Jun 2026" },
+      { type: "video", img: "assets/gmp-8.webp",  youtubeId: "dQw4w9WgXcQ", caption: "Inside the new filling line", date: "Apr 2026" },
+      { type: "image", img: "assets/gmp-3.webp",  caption: "Batch inspection before QP release", date: "Jun 2026" },
+      { type: "image", img: "assets/gmp-10.webp", caption: "Finished goods warehousing", date: "Feb 2026" },
+      { type: "video", img: "assets/gmp-4.webp",  youtubeId: "dQw4w9WgXcQ", caption: "Automated packing line walkthrough", date: "Jan 2026" },
+      { type: "image", img: "assets/gmp-6.webp",  caption: "Solid dose production", date: "Nov 2025" },
+      { type: "image", img: "assets/gmp-2.webp",  caption: "Stability testing plates", date: "Oct 2025" },
+      { type: "image", img: "assets/gmp-12.webp", caption: "Formulation development", date: "Sep 2025" },
+    ];
+
+    const isSimpleTab  = activeFilter === "News" || activeFilter === "Events";
+    const isBlogTab    = activeFilter === "Blogs";
+    const isGalleryTab = activeFilter === "Media Gallery";
+    const simpleSource = activeFilter === "Events" ? eventsData : newsData;
+    const simpleHref   = activeFilter === "Events" ? "event-detail.html" : "news-detail.html";
+    const simpleItems  = simpleSource.map((i) => ({ ...i, href: simpleHref }));
+    const blogItems    = blogsData.map((i) => ({ ...i, href: "blog-detail.html" }));
+    const mediaItems   = mediaData.map((m, i) => ({
+      thumb: m.img, caption: m.caption, isVideo: m.type === "video",
+      onOpen: () => this.setState({ lightboxIndex: i }),
+    }));
+
+    const lbIndex = this.state.lightboxIndex;
+    const lightboxOpen = lbIndex !== null && lbIndex !== undefined;
+    const lbItem = lightboxOpen ? mediaData[lbIndex] : null;
+    const step = (d) => this.setState((st) => ({
+      lightboxIndex: (st.lightboxIndex + d + mediaData.length) % mediaData.length,
+    }));
 
     return {
       s,
@@ -608,7 +751,20 @@ class Component extends DCLogic {
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
       showHeroCtaIcon: !isMobile,
       filterTabs,
-      visibleItems,
+      isSimpleTab, isBlogTab, isGalleryTab,
+      simpleItems, blogItems, mediaItems,
+      lightboxOpen,
+      lbIsVideo: !!(lbItem && lbItem.type === "video"),
+      lbIsImage: !!(lbItem && lbItem.type !== "video"),
+      lbImage: lbItem ? lbItem.img : "",
+      lbVideoSrc: lbItem && lbItem.youtubeId ? `https://www.youtube-nocookie.com/embed/${lbItem.youtubeId}?rel=0&autoplay=1` : "",
+      lbCaption: lbItem ? lbItem.caption : "",
+      lbDate: lbItem ? lbItem.date : "",
+      lbCounter: lightboxOpen ? `${lbIndex + 1} / ${mediaData.length}` : "",
+      closeLightbox: () => this.setState({ lightboxIndex: null }),
+      prevLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); step(-1); },
+      nextLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); step(1); },
+      stopPropagation: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
     };
   }
 }
