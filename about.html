@@ -129,7 +129,7 @@
       <div className="{{ s.aboutContent }}">
         <div className="{{ s.sectionHeadingGroup }}">
           <span className="{{ s.eyebrow }}">Our Story</span>
-          <span className="{{ s.h2 }}">Two decades of pharmaceutical manufacturing, under one roof</span>
+          <span className="{{ s.h2 }}">Over a decade of pharmaceutical manufacturing, under one roof</span>
         </div>
         <div className="{{ s.aboutTextCol }}">
           <span className="{{ s.aboutBody }}">GMP Manufacturing Ltd was founded to give pharmaceutical, veterinary, cosmetic and medical device brands a single, accountable manufacturing partner — one that owns every stage of the process instead of outsourcing it piecemeal.</span>
@@ -141,7 +141,7 @@
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
         </div>
         <div className="{{ s.aboutYearsBox }}">
-          <span className="{{ s.aboutYearsNumber }}">20+</span>
+          <span className="{{ s.aboutYearsNumber }}">{{ s.yearsInOperation }}</span>
           <span className="{{ s.aboutYearsLabel }}">years</span>
         </div>
       </div>
@@ -729,7 +729,13 @@ class Component extends DCLogic {
     const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
 
     const gutter = pick(20, 40, 64);
+
+    // Single source of truth for every "years in operation" claim on the page.
+    const FOUNDED_YEAR = 2012;
+    const yearsInOperation = new Date().getFullYear() - FOUNDED_YEAR;
+
     const s = {};
+    s.yearsInOperation = yearsInOperation;
 
     const revealed = this.state.revealed || {};
     const reveal = (key, opts = {}) => {
@@ -984,7 +990,7 @@ class Component extends DCLogic {
       s,
       logos: [...names, ...names],
       marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
-      statRefYears: (el) => this._observeCounter(el, 14, {}),
+      statRefYears: (el) => this._observeCounter(el, yearsInOperation, {}),
       statRefFacilities: (el) => this._observeCounter(el, 4, { pad: 2 }),
       statRefCountries: (el) => this._observeCounter(el, 30, { suffix: "+" }),
       statRefAccred: (el) => this._observeCounter(el, 4, { pad: 2 }),
