@@ -276,7 +276,7 @@
   <!-- ============ ACCREDITATIONS & CERTIFICATIONS ============ -->
   <div data-screen-label="Accreditations" className="{{ s.sectionPad }}">
     <div className="{{ s.accredWrap }}" ref="{{ accredRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
+      <div className="{{ s.accredHeadingGroup }}">
         <span className="{{ s.eyebrow }}">Trusted &amp; Compliant</span>
         <span className="{{ s.h2 }}">Accreditations &amp; Certifications</span>
       </div>
@@ -898,8 +898,9 @@ class Component extends DCLogic {
 
     // ---------- ACCREDITATIONS (reused marquee) ----------
     s.accredWrap = "flex flex-col max-w-[1600px] mx-auto " + pick("mb-[24px]", "mb-[28px]", "mb-[32px]") + " " + reveal("accred");
-    s.marqueeOuter = "w-full max-w-[1600px] overflow-hidden rounded-none bg-[rgb(245,245,245)] flex items-center box-border mx-auto " +
-      pick("py-[28px] px-[16px]", "py-[36px] px-[20px]", "py-[48px] px-[24px]");
+    s.accredHeadingGroup = "flex flex-col gap-[8px] items-center text-center";
+    s.marqueeOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden rounded-none flex items-center box-border ` +
+      pick("py-[28px]", "py-[36px]", "py-[48px]");
     s.marqueeInner = "flex flex-row gap-[24px] items-center w-max [animation:gmp-marquee_30s_linear_infinite]";
     s.marqueeItem = `flex items-center justify-center shrink-0 ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
     s.marqueeImg = "max-w-full max-h-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300";
