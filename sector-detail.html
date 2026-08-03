@@ -598,7 +598,7 @@ class Component extends DCLogic {
     s.complianceGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
     s.complianceItem = "relative aspect-[3/4] overflow-hidden bg-[rgb(232,232,232)]";
     s.complianceImg = "absolute inset-0 w-full h-full object-cover";
-    s.complianceCaptionWrap = "absolute left-0 bottom-0 bg-white box-border py-[14px] px-[16px] " + pick("w-full", "w-full", "w-[85%]");
+    s.complianceCaptionWrap = pick("absolute left-[12px] right-[12px] bottom-[12px]", "absolute left-[16px] bottom-[16px] w-[78%]", "absolute left-[20px] bottom-[20px] w-[78%]") + " bg-white box-border py-[14px] px-[16px]";
     s.complianceCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
 
     // ---------- GLOBAL REACH (full-bleed map band, bottom-left caption) ----------
