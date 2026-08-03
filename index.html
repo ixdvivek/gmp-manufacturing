@@ -158,6 +158,13 @@
     <img src="assets2/hero-bg.webp" alt="Molecule under a laboratory microscope" className="{{ s.heroBg }}">
     <div className="{{ s.heroOverlay }}"></div>
     <div className="{{ s.mobileNavOverlay }}">
+      <div className="{{ s.mobileNavDecor }}">
+        <div className="{{ s.mobileNavGlowA }}"></div>
+        <div className="{{ s.mobileNavGlowB }}"></div>
+        <svg viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.07)" className="{{ s.mobileNavMark }}">
+          <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+        </svg>
+      </div>
       <div className="{{ s.mobileNavCloseRow }}">
         <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
         <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
@@ -166,17 +173,21 @@
         </div>
       </div>
       <div className="{{ s.mobileNavLinks }}">
-        <a href="index.html" className="{{ s.mobileNavLink }}">Home</a>
-        <a href="about.html" className="{{ s.mobileNavLink }}">About Us</a>
-        <a href="services.html" className="{{ s.mobileNavLink }}">Services</a>
-        <a href="innovations.html" className="{{ s.mobileNavLink }}">Innovations</a>
-        <a href="sectors.html" className="{{ s.mobileNavLink }}">Sectors</a>
-      <a href="contact.html" className="{{ s.mobileNavLink }}">Contact Us</a>
+        <sc-for list="{{mobileNavItems}}" as="m" hint-placeholder-count="8">
+          <a href="{{ m.href }}" className="{{ m.linkStyle }}">
+            <span className="{{ m.numStyle }}">{{ m.n }}</span>
+            <span className="{{ m.labelStyle }}">{{ m.label }}</span>
+          </a>
+        </sc-for>
       </div>
-      <a href="contact.html" className="{{ s.heroCtaCtl.className }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
-        <span className="{{ s.heroCtaText }}">Get A Quote</span>
-        <div className="{{ s.heroCtaIconStyle }}"></div>
-      </a>
+      <div className="{{ s.mobileNavFoot }}">
+        <a href="contact.html" className="{{ s.mobileNavCta }}">Get A Quote</a>
+        <div className="{{ s.mobileNavMetaRow }}">
+          <a href="mailto:info@gmpgroup.co.uk" className="{{ s.mobileNavMeta }}">info@gmpgroup.co.uk</a>
+          <a href="tel:+441482707138" className="{{ s.mobileNavMeta }}">+44 (0) 1482 707 138</a>
+          <span className="{{ s.mobileNavMetaDim }}">Marfleet House, Valletta Street, Hull, HU9 5NP</span>
+        </div>
+      </div>
     </div>
     <div className="{{ s.heroContent }}">
       <div className="{{ s.heroHeadlineWrap }}">
@@ -975,13 +986,59 @@ class Component extends DCLogic {
     s.hamburgerBar3 = barBase;
     s.hamburgerBarX1 = barBaseOnDark + " [transform:rotate(45deg)_translate(5px,5px)]";
     s.hamburgerBarX2 = barBaseOnDark + " [transform:rotate(-45deg)_translate(5px,-5px)]";
-    s.mobileNavOverlay = "fixed inset-0 bg-[rgb(41,37,96)] flex flex-col gap-[40px] box-border z-[100] py-[20px] px-[20px] pb-[40px] md:py-[24px] md:px-[40px] md:pb-[48px] [transition:opacity_0.3s_ease,transform_0.3s_ease] " +
-      (menuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-[16px]");
-    s.mobileNavCloseRow = "flex flex-row items-center justify-between";
+    // ---------- MOBILE NAV (full-screen brand panel) ----------
+    s.mobileNavOverlay = "fixed inset-0 bg-gmp-gradient flex flex-col box-border z-[100] overflow-y-auto overflow-x-hidden " +
+      "py-[20px] px-[20px] pb-[24px] md:py-[24px] md:px-[40px] md:pb-[40px] " +
+      "[transition:opacity_0.4s_cubic-bezier(0.16,1,0.3,1),transform_0.4s_cubic-bezier(0.16,1,0.3,1)] " +
+      // w-[100vw] only while open: html keeps a stable scrollbar gutter, and an
+      // inset-0 panel stops short of it, leaving a pale strip down the right edge.
+      // 100vw spans the gutter too; body scroll is locked so it cannot cause scroll.
+      (menuOpen ? "opacity-100 pointer-events-auto scale-100 w-[100vw]" : "opacity-0 pointer-events-none scale-[1.03]");
+    // Two soft brand glows plus the GMP mark as a watermark give the panel depth
+    // without needing artwork. They live in their own clipped layer: the panel is
+    // the scroll container, and decorations bleeding past its edges would otherwise
+    // add to its scroll height.
+    s.mobileNavDecor = "pointer-events-none absolute inset-0 overflow-hidden z-0";
+    s.mobileNavGlowA = "absolute -top-[90px] -right-[70px] w-[300px] h-[300px] rounded-full bg-[rgba(37,117,187,0.5)] blur-[90px]";
+    s.mobileNavGlowB = "absolute -bottom-[110px] -left-[90px] w-[340px] h-[340px] rounded-full bg-[rgba(178,33,38,0.45)] blur-[100px]";
+    s.mobileNavMark = "absolute -right-[48px] bottom-[96px] w-[250px] h-auto";
+    s.mobileNavCloseRow = "relative z-[2] flex flex-row items-center justify-between shrink-0";
     s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
-    s.mobileNavLinks = "flex flex-col gap-[24px] md:gap-[28px] items-start mt-[16px]";
-    s.mobileNavLink = "font-medium text-[28px] md:text-[32px] leading-[1.3] tracking-[-0.7px] text-white cursor-pointer no-underline";
+    s.mobileNavLinks = "relative z-[2] flex flex-col grow mt-[22px] md:mt-[40px]";
+    s.mobileNavFoot = "relative z-[2] flex flex-col gap-[14px] items-start shrink-0 pt-[20px] mt-[16px] border-t border-solid border-[rgba(255,255,255,0.18)]";
+    s.mobileNavCta = `rounded-none no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] text-[${near}] bg-white py-[12px] px-[26px]`;
+    s.mobileNavMetaRow = "flex flex-col gap-[4px]";
+    s.mobileNavMeta = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.7)] no-underline";
+    s.mobileNavMetaDim = "font-normal text-[13px] leading-[20px] text-[rgba(255,255,255,0.45)]";
     const CURRENT_PAGE = "home";
+    const MOBILE_NAV = [
+      { label: "Home", href: "index.html", key: "home" },
+      { label: "About Us", href: "about.html", key: "about" },
+      { label: "Services", href: "services.html", key: "services" },
+      { label: "Sectors", href: "sectors.html", key: "sectors" },
+      { label: "Innovations", href: "innovations.html", key: "innovations" },
+      { label: "News & Blogs", href: "news.html", key: "news" },
+      { label: "Careers", href: "careers.html", key: "careers" },
+      { label: "Contact Us", href: "contact.html", key: "contact" },
+    ];
+    const mobileNavItems = MOBILE_NAV.map((m, i) => {
+      const on = m.key === CURRENT_PAGE;
+      return {
+        label: m.label, href: m.href, n: String(i + 1).padStart(2, "0"),
+        // Rows slide in one after another once the panel opens, and reset on close
+        // so the stagger replays every time rather than only on first open.
+        linkStyle: "flex flex-row items-baseline gap-[14px] no-underline py-[10px] md:py-[14px] border-b border-solid " +
+          (on ? `border-[${red}]` : "border-[rgba(255,255,255,0.14)]") +
+          // Longhand, not the `transition` shorthand: the shorthand resets
+          // transition-delay and would flatten the stagger below.
+          " transition-[opacity,transform] duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
+          (menuOpen ? `opacity-100 translate-x-0 delay-[${90 + i * 55}ms]` : "opacity-0 translate-x-[26px] delay-0"),
+        numStyle: "font-medium text-[12px] leading-[16px] tabular-nums shrink-0 w-[24px] " +
+          (on ? "text-white" : "text-[rgba(255,255,255,0.4)]"),
+        labelStyle: `font-medium ${pick("text-[26px]", "text-[32px]", "text-[32px]")} leading-[1.2] tracking-[-0.8px] ` +
+          (on ? "text-white" : "text-[rgba(255,255,255,0.82)]"),
+      };
+    });
     const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
       const active = key === CURRENT_PAGE;
@@ -1354,7 +1411,13 @@ class Component extends DCLogic {
       heroTextBlockRef: (el) => { this._heroTextBlockEl = el; this._measureHeroFit(); },
       heroHeadlineRef: (el) => { this._heroHeadlineEl = el; this._measureHeroFit(); },
       footerRevealRef: revealRef("footer"),
-      toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
+      mobileNavItems,
+      toggleMobileMenu: () => this.setState((st) => {
+        const open = !st.mobileMenuOpen;
+        // Stop the page behind the panel scrolling while it is open.
+        try { document.body.style.overflow = open ? "hidden" : ""; } catch (e) { /* no-op */ }
+        return { mobileMenuOpen: open };
+      }),
       showSectorsPill: !isMobile,
       showHeroCtaIcon: !isMobile,
       pathwayItems,
