@@ -374,6 +374,7 @@
 
     <div className="{{ s.footerBottomRow }}">
       <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+      <a href="terms.html" className="{{ s.footerLegalLink }}">Terms &amp; Conditions</a>
     </div>
   </div>
 
@@ -707,7 +708,8 @@ class Component extends DCLogic {
     s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
     s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
     s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
-    s.footerBottomRow = "flex flex-row items-center pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+    s.footerBottomRow = "flex flex-row flex-wrap gap-[12px] items-center justify-between pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+    s.footerLegalLink = "font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] no-underline hover:text-white transition-colors duration-200";
 
     // ---------- DATA: NEWS / EVENTS / MEDIA GALLERY / BLOG ----------
     // PLACEHOLDER EDITORIAL - invented event. Replace before launch.
