@@ -302,9 +302,7 @@
       <div className="{{ s.leadershipGrid }}">
         <sc-for list="{{leadershipItems}}" as="item" hint-placeholder-count="6">
           <div className="{{ s.leadershipCard }}">
-            <div className="{{ s.leadershipImgPlaceholder }}">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path></svg>
-            </div>
+            <div className="{{ s.leadershipImgPlaceholder }}"><img src="{{ item.img }}" alt="{{ item.role }}" loading="lazy" className="{{ s.leadershipImg }}"></div>
             <div className="{{ s.leadershipInfoRow }}">
               <div className="{{ s.leadershipTextCol }}">
                 <span className="{{ s.leadershipName }}">{{ item.name }}</span>
@@ -929,7 +927,8 @@ class Component extends DCLogic {
     s.leadershipSubtext = `font-normal text-[16px] md:text-[17px] leading-[24px] text-[${dark}]`;
     s.leadershipGrid = "grid " + pick("grid-cols-2", "grid-cols-3", "grid-cols-6") + " gap-[24px] md:gap-[32px] xl:gap-[32px]";
     s.leadershipCard = "flex flex-col gap-[12px] items-start transition-transform duration-200 ease-in-out hover:-translate-y-1";
-    s.leadershipImgPlaceholder = "w-full aspect-square rounded-none bg-[rgb(232,232,232)] flex items-center justify-center box-border";
+    s.leadershipImgPlaceholder = "relative w-full aspect-square rounded-none bg-[rgb(232,232,232)] overflow-hidden box-border";
+    s.leadershipImg = "w-full h-full object-cover";
     s.leadershipInfoRow = "flex flex-row items-center justify-between w-full gap-[8px]";
     s.leadershipTextCol = "flex flex-col gap-[2px] min-w-0";
     s.leadershipName = `font-semibold text-[14px] md:text-[15px] leading-[20px] text-[${dark}] whitespace-nowrap overflow-hidden text-ellipsis`;
@@ -985,14 +984,14 @@ class Component extends DCLogic {
     // ---------- DATA ----------
     const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
     const leadershipData = [
-      { role: "Managing Director" },
-      { role: "Head of Quality Assurance" },
-      { role: "Director of Operations" },
-      { role: "Head of Research & Development" },
-      { role: "Head of Regulatory Affairs" },
-      { role: "Head of Supply Chain" },
+      { role: "Managing Director", img: "assets/team-3.webp" },
+      { role: "Head of Quality Assurance", img: "assets/team-1.webp" },
+      { role: "Director of Operations", img: "assets/team-2.webp" },
+      { role: "Head of Research & Development", img: "assets/team-4.webp" },
+      { role: "Head of Regulatory Affairs", img: "assets/team-5.webp" },
+      { role: "Head of Supply Chain", img: "assets/team-6.webp" },
     ];
-    const leadershipItems = leadershipData.map((item) => ({ role: item.role, name: "Full Name" }));
+    const leadershipItems = leadershipData.map((item) => ({ role: item.role, img: item.img, name: "Full Name" }));
 
     return {
       s,
