@@ -209,51 +209,44 @@
     </div>
   </div>
 
-  <!-- ============ BUILT FOR PHARMACEUTICAL COMPLIANCE (grey band, photo cards — matches Capabilities Covered) ============ -->
-  <div className="{{ s.greyBandOuter }}">
-    <div data-screen-label="Compliance Grid" className="{{ s.sectionPad }}">
-      <div className="{{ s.complianceWrap }}" ref="{{ complianceRevealRef }}">
-        <div className="{{ s.complianceHeadWrap }}">
-          <span className="{{ s.h2 }}">Built for pharmaceutical compliance</span>
-          <span className="{{ s.complianceSubtext }}">The licences, release checks and documentation behind every batch we manufacture.</span>
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ BUILT FOR PHARMACEUTICAL COMPLIANCE (4-photo grid) ============ -->
+  <div data-screen-label="Compliance Grid" className="{{ s.sectionPad }}">
+    <div className="{{ s.complianceWrap }}" ref="{{ complianceRevealRef }}">
+      <div className="{{ s.complianceHeadWrap }}">
+        <span className="{{ s.h2 }}">Built for pharmaceutical compliance</span>
+      </div>
+      <div className="{{ s.complianceGrid }}">
+        <div className="{{ s.complianceItem }}">
+          <img src="assets2/placeholder-team-2.jpg" alt="MHRA-licensed manufacturing site" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}">
+            <span className="{{ s.complianceCaption }}">MHRA-licensed manufacturing site</span>
+          </div>
         </div>
-        <div className="{{ s.complianceGrid }}">
-          <div className="{{ s.complianceCard }}">
-            <div className="{{ s.complianceImgWrap }}">
-              <img src="assets2/placeholder-team-2.jpg" alt="MHRA-licensed manufacturing site" loading="lazy" className="{{ s.complianceImg }}">
-            </div>
-            <div className="{{ s.complianceTextBox }}">
-              <span className="{{ s.complianceCaption }}">MHRA-licensed manufacturing site</span>
-            </div>
+        <div className="{{ s.complianceItem }}">
+          <img src="assets2/placeholder-team-3.jpg" alt="Full QP batch release" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}">
+            <span className="{{ s.complianceCaption }}">Full QP batch release</span>
           </div>
-          <div className="{{ s.complianceCard }}">
-            <div className="{{ s.complianceImgWrap }}">
-              <img src="assets2/placeholder-team-3.jpg" alt="Full QP batch release" loading="lazy" className="{{ s.complianceImg }}">
-            </div>
-            <div className="{{ s.complianceTextBox }}">
-              <span className="{{ s.complianceCaption }}">Full QP batch release</span>
-            </div>
+        </div>
+        <div className="{{ s.complianceItem }}">
+          <img src="assets2/placeholder-sector-pharma.jpg" alt="Complete analytical and stability testing in-house" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}">
+            <span className="{{ s.complianceCaption }}">Complete analytical and stability testing in-house</span>
           </div>
-          <div className="{{ s.complianceCard }}">
-            <div className="{{ s.complianceImgWrap }}">
-              <img src="assets2/placeholder-sector-pharma.jpg" alt="Complete analytical and stability testing in-house" loading="lazy" className="{{ s.complianceImg }}">
-            </div>
-            <div className="{{ s.complianceTextBox }}">
-              <span className="{{ s.complianceCaption }}">Complete analytical and stability testing in-house</span>
-            </div>
-          </div>
-          <div className="{{ s.complianceCard }}">
-            <div className="{{ s.complianceImgWrap }}">
-              <img src="assets2/team-4-real.webp" alt="Audit ready documentation" loading="lazy" className="{{ s.complianceImg }}">
-            </div>
-            <div className="{{ s.complianceTextBox }}">
-              <span className="{{ s.complianceCaption }}">Audit ready documentation</span>
-            </div>
+        </div>
+        <div className="{{ s.complianceItem }}">
+          <img src="assets2/team-4-real.webp" alt="Audit ready documentation" loading="lazy" className="{{ s.complianceImg }}">
+          <div className="{{ s.complianceCaptionWrap }}">
+            <span className="{{ s.complianceCaption }}">Audit ready documentation</span>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ GLOBAL REACH (full-bleed map band, white caption bottom-left) ============ -->
   <div className="{{ s.mapOuter }}">
@@ -599,21 +592,14 @@ class Component extends DCLogic {
     s.fullBleedCaptionTitle = `font-semibold ${pick("text-[26px]", "text-[32px]", "text-[36px]")} leading-[1.22] tracking-[-0.72px] text-[${near}]`;
     s.fullBleedCaptionDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[24px] text-[${dark}]`;
 
-    // ---------- GREY BAND WRAPPER (shared by Compliance Grid) ----------
-    s.greyBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] box-border bg-[rgb(245,243,240)] px-[${gutter}px] ` + pick("py-[40px]", "py-[48px]", "py-[56px]");
-
-    // ---------- BUILT FOR PHARMACEUTICAL COMPLIANCE (grey band, photo cards — matches Capabilities Covered) ----------
-    s.complianceWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("compliance");
-    s.complianceHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px] gap-[8px]";
-    s.complianceSubtext = "font-normal text-[15px] leading-[22px] text-[rgba(51,51,51,0.75)]";
-    s.complianceGrid = "flex flex-row flex-wrap justify-center " + pick("gap-[20px]", "gap-[24px]", "gap-[28px]");
-    const complianceCols = pick(1, 2, 4);
-    const complianceGapPx = pick(20, 24, 28);
-    s.complianceCard = `flex flex-col items-stretch bg-[rgb(245,243,240)] box-border ` + pick("p-[14px]", "p-[16px]", "p-[18px]") + ` w-[calc((100%-${complianceGapPx * (complianceCols - 1)}px)/${complianceCols})]`;
-    s.complianceImgWrap = "w-full aspect-[5/2] overflow-hidden bg-[rgb(210,206,197)]";
-    s.complianceImg = "w-full h-full object-cover";
-    s.complianceTextBox = "bg-white box-border flex flex-col " + pick("gap-[6px] py-[16px] px-[16px]", "gap-[7px] py-[18px] px-[18px]", "gap-[8px] py-[20px] px-[20px]");
-    s.complianceCaption = `font-semibold ${pick("text-[16px]", "text-[17px]", "text-[18px]")} leading-[1.3] text-[${dark}]`;
+    // ---------- BUILT FOR PHARMACEUTICAL COMPLIANCE (4-photo grid, bottom-left caption) ----------
+    s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("compliance");
+    s.complianceHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px]";
+    s.complianceGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
+    s.complianceItem = "relative aspect-[3/4] overflow-hidden bg-[rgb(232,232,232)]";
+    s.complianceImg = "absolute inset-0 w-full h-full object-cover";
+    s.complianceCaptionWrap = "absolute left-0 bottom-0 bg-white box-border py-[14px] px-[16px] " + pick("w-full", "w-full", "w-[85%]");
+    s.complianceCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
 
     // ---------- GLOBAL REACH (full-bleed map band, bottom-left caption) ----------
     s.mapOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[320px]", "h-[400px]", "h-[480px]")}`;
