@@ -8,6 +8,56 @@
 <script src="tailwind.config.js"></script>
 </head>
 <body>
+<div id="gmp-loader" aria-hidden="true"><div class="gmp-loader-box"><img src="assets2/logo-icon.svg" alt=""><span class="gmp-loader-ring"></span></div></div>
+<style>
+  #gmp-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
+    background:#fff;opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s linear .45s}
+  #gmp-loader.is-done{opacity:0;visibility:hidden}
+  .gmp-loader-box{position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center}
+  .gmp-loader-box img{width:52px;height:52px;object-fit:contain;animation:gmp-loader-pulse 1.5s ease-in-out infinite}
+  .gmp-loader-ring{position:absolute;inset:0;border-radius:50%;
+    border:2px solid rgba(41,37,96,.12);border-top-color:rgb(178,33,38);
+    animation:gmp-loader-spin .9s linear infinite}
+  @keyframes gmp-loader-spin{to{transform:rotate(360deg)}}
+  @keyframes gmp-loader-pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    .gmp-loader-box img,.gmp-loader-ring{animation:none}
+    #gmp-loader{transition:none}
+  }
+</style>
+<script>
+(function(){
+  var el=document.getElementById("gmp-loader");
+  if(!el)return;
+  var done=false;
+  function hide(){ if(done)return; done=true; el.classList.add("is-done"); }
+  function show(){ done=false; el.classList.remove("is-done"); }
+  // Reveal the page once the app has painted, with a hard cap so a slow or
+  // failed script can never leave the loader stuck over the content.
+  function whenReady(){
+    var t=setInterval(function(){
+      var root=document.getElementById("dc-root");
+      if(root&&root.firstElementChild){clearInterval(t);setTimeout(hide,120);}
+    },60);
+    setTimeout(function(){clearInterval(t);hide();},4000);
+  }
+  if(document.readyState==="complete"||document.readyState==="interactive")whenReady();
+  else document.addEventListener("DOMContentLoaded",whenReady);
+  // Bring it back on internal navigation so page-to-page moves feel continuous.
+  document.addEventListener("click",function(e){
+    var a=e.target&&e.target.closest?e.target.closest("a[href]"):null;
+    if(!a)return;
+    var href=a.getAttribute("href")||"";
+    if(!href||href.charAt(0)==="#"||/^(mailto:|tel:|javascript:)/i.test(href))return;
+    if(a.target&&a.target!=="_self")return;
+    if(a.host&&a.host!==location.host)return;
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
+    show();
+  },true);
+  // Restoring from bfcache must not show a frozen loader.
+  window.addEventListener("pageshow",function(e){if(e.persisted)hide();});
+})();
+</script>
 <x-dc>
 <helmet>
   <meta charset="utf-8">
@@ -71,6 +121,7 @@
           </div>
         </div>
       </div>
+      <a href="contact.html" className="{{ s.navContactStyle }}" onMouseEnter="{{ s.navEnterContact }}" onMouseLeave="{{ s.navLeave }}">Contact Us</a>
     </div>
     <div className="{{ s.heroTopbarRightGroup }}">
       <a href="contact.html" className="{{ s.heroCtaTopbarCtl.className }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
@@ -102,6 +153,7 @@
       <a href="services.html" className="{{ s.mobileNavLink }}">Services</a>
       <a href="innovations.html" className="{{ s.mobileNavLink }}">Innovations</a>
       <a href="sectors.html" className="{{ s.mobileNavLink }}">Sectors</a>
+      <a href="contact.html" className="{{ s.mobileNavLink }}">Contact Us</a>
     </div>
     <a href="contact.html" className="{{ s.heroCtaCtl.className }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
       <span className="{{ s.heroCtaText }}">Get A Quote</span>
@@ -456,12 +508,22 @@ class Component extends DCLogic {
     if (!el) return;
     this._revealObservers = this._revealObservers || {};
     if (this._revealObservers[key]) return;
+    const markShown = () => this.setState((st) => ({ revealed: { ...st.revealed, [key]: true } }));
+    // Anything already inside the first viewport plays its entrance on load —
+    // otherwise above-the-fold sections sit hidden until the user happens to scroll.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < (window.innerHeight || 0) * 0.92) {
+      // Two frames so the hidden state paints first and the change animates.
+      requestAnimationFrame(() => requestAnimationFrame(markShown));
+      this._revealObservers[key] = true;
+      return;
+    }
     const obs = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        this.setState((st) => ({ revealed: { ...st.revealed, [key]: true } }));
+        markShown();
         obs.disconnect();
       }
-    }, { threshold: 0.12, rootMargin: "0px 0px -80px 0px" });
+    }, { threshold: 0.01, rootMargin: "0px 0px -60px 0px" });
     obs.observe(el);
     this._revealObservers[key] = obs;
   }
@@ -735,9 +797,9 @@ class Component extends DCLogic {
 
     const revealed = this.state.revealed || {};
     const reveal = (key, opts = {}) => {
-      const { distance = 18, duration = 800 } = opts;
+      const { distance = 44, duration = 900 } = opts;
       const shown = !!revealed[key];
-      return (shown ? "opacity-100 translate-y-0 " : `opacity-0 translate-y-[${distance}px] `) +
+      return (shown ? "opacity-100 translate-y-0 scale-100 " : `opacity-0 translate-y-[${distance}px] scale-[0.97] `) +
         `transition-[opacity,transform] duration-[${duration}ms] ease-[cubic-bezier(0.16,1,0.3,1)]`;
     };
     const revealRef = (key) => (el) => this._observeReveal(key, el);
@@ -808,6 +870,7 @@ class Component extends DCLogic {
     s.navServicesStyle = navLinkStyle(2, "services");
     s.navInnovationsStyle = navLinkStyle(3, "innovations");
     s.navSectorsStyle = navLinkStyle(4, "sectors");
+    s.navContactStyle = navLinkStyle(5, "contact");
     const navEnter = (i, menu) => () => this.setState({ hoveredNav: i, openNavMenu: menu || null });
     s.navLeave = () => this.setState({ hoveredNav: -1, openNavMenu: null });
     s.navEnterHome = navEnter(0);
@@ -815,6 +878,7 @@ class Component extends DCLogic {
     s.navEnterServices = navEnter(2, "services");
     s.navEnterInnovations = navEnter(3);
     s.navEnterSectors = navEnter(4, "sectors");
+    s.navEnterContact = navEnter(5);
     const openNavMenu = this.state.openNavMenu;
     const navMenuPanelBase = "absolute top-full left-0 pt-[12px] z-[60] [transition:opacity_0.2s_ease,transform_0.2s_ease]";
     s.servicesMenuPanel = navMenuPanelBase + " " + (openNavMenu === "services" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
