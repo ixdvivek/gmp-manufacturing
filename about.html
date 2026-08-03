@@ -294,7 +294,8 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ LEADERSHIP ============ -->
+  <!-- ============ LEADERSHIP (subtle blue band) ============ -->
+  <div className="{{ s.leadershipBandOuter }}">
   <div data-screen-label="Leadership" className="{{ s.sectionPad }}">
     <div className="{{ s.leadershipWrap }}" ref="{{ leadershipRevealRef }}">
       <div className="{{ s.leadershipHeadingGroup }}">
@@ -322,6 +323,7 @@
       </div>
       <span className="{{ s.leadershipNote }}">Full leadership bios coming soon.</span>
     </div>
+  </div>
   </div>
 
   <div className="{{ s.sectionGapHalf }}"></div>
@@ -926,12 +928,13 @@ class Component extends DCLogic {
     s.groupCardLink = `font-medium text-[15px] leading-[20px] text-[${red}] no-underline mt-[4px]`;
 
     // ---------- LEADERSHIP ----------
+    s.leadershipBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] px-[${gutter}px] box-border bg-[rgba(37,117,187,0.05)] ` + pick("py-[40px]", "py-[52px]", "py-[64px]");
     s.leadershipWrap = "flex flex-col gap-[32px] md:gap-[40px] xl:gap-[48px] max-w-[1600px] mx-auto " + reveal("leadership");
     s.leadershipHeadingGroup = "flex flex-col gap-[12px] items-center text-center max-w-[640px] mx-auto";
     s.leadershipSubtext = `font-normal text-[16px] md:text-[17px] leading-[24px] text-[${dark}]`;
     s.leadershipGrid = "grid " + pick("grid-cols-2", "grid-cols-3", "grid-cols-6") + " gap-[24px] md:gap-[32px] xl:gap-[32px]";
     s.leadershipCard = "flex flex-col gap-[12px] items-start transition-transform duration-200 ease-in-out hover:-translate-y-1";
-    s.leadershipImgPlaceholder = "w-full aspect-[3/4] rounded-none bg-[rgb(232,232,232)] flex items-center justify-center box-border";
+    s.leadershipImgPlaceholder = "w-full aspect-square rounded-none bg-[rgb(232,232,232)] flex items-center justify-center box-border";
     s.leadershipInfoRow = "flex flex-row items-center justify-between w-full gap-[8px]";
     s.leadershipTextCol = "flex flex-col gap-[2px] min-w-0";
     s.leadershipName = `font-semibold text-[14px] md:text-[15px] leading-[20px] text-[${dark}] whitespace-nowrap overflow-hidden text-ellipsis`;
