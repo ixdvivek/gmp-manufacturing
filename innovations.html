@@ -197,25 +197,23 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ INNOVATION PANELS ============ -->
-  <sc-for list="{{panelItems}}" as="panel" hint-placeholder-count="2">
-    <div className="{{ s.sectionPad }}">
-      <div className="{{ panel.wrapStyle }}" ref="{{ panel.revealRef }}">
-        <div className="{{ s.panelContent }}">
-          <div className="{{ s.sectionHeadingGroup }}">
-            <span className="{{ s.eyebrow }}">{{ panel.eyebrow }}</span>
-            <span className="{{ s.h2 }}">{{ panel.title }}</span>
+  <!-- ============ INNOVATION CARDS ============ -->
+  <div data-screen-label="Innovation Cards" className="{{ s.sectionPad }}">
+    <div className="{{ s.innoGrid }}" ref="{{ introRevealRef2 }}">
+      <sc-for list="{{panelItems}}" as="panel" hint-placeholder-count="2">
+        <a href="{{ panel.href }}" className="{{ panel.cardStyle }}">
+          <span className="{{ panel.subStyle }}">{{ panel.eyebrow }}</span>
+          <div className="{{ s.innoCardBottom }}">
+            <span className="{{ panel.titleStyle }}">{{ panel.title }}</span>
+            <div className="{{ panel.dividerStyle }}"></div>
+            <span className="{{ panel.descStyle }}">{{ panel.desc }}</span>
           </div>
-          <span className="{{ s.panelBody }}">{{ panel.desc }}</span>
-          <a href="{{ panel.href }}" className="{{ s.panelLink }}">Learn more &rarr;</a>
-        </div>
-        <div className="{{ s.panelImageCol }}">
-          <img src="assets/gmp-4.webp" alt="Advanced manufacturing equipment at GMP" loading="lazy" className="{{ s.contentPhoto }}">
-        </div>
-      </div>
+        </a>
+      </sc-for>
     </div>
-    <div className="{{ s.sectionGap }}"></div>
-  </sc-for>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ COLLABORATE ============ -->
   <div className="{{ s.collabOuter }}">
@@ -724,6 +722,18 @@ class Component extends DCLogic {
     s.introStrapText = `font-normal text-[18px] md:text-[20px] leading-[1.6] text-[${dark}] text-center block`;
 
     // ---------- INNOVATION PANELS (alternating image + content, no curved edges) ----------
+    // ---------- INNOVATION CARDS ----------
+    s.innoGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[24px] max-w-[1600px] mx-auto " + reveal("introCards");
+    const innoCardBase = "flex flex-col justify-between no-underline box-border transition-transform duration-300 ease-out hover:-translate-y-1 " +
+      pick("min-h-[320px] p-[26px]", "min-h-[400px] p-[34px]", "min-h-[460px] p-[42px]");
+    s.innoCardBlue = innoCardBase + " bg-[rgb(37,117,187)]";
+    s.innoCardNavy = innoCardBase + " bg-[rgb(41,37,96)]";
+    s.innoCardBottom = "flex flex-col gap-[18px] md:gap-[22px] items-start";
+    s.innoSub = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.6)]";
+    s.innoTitle = `font-semibold ${pick("text-[30px]", "text-[38px]", "text-[44px]")} leading-[1.12] tracking-[-1px] text-white`;
+    s.innoDivider = "h-[1px] w-full bg-[rgba(255,255,255,0.25)]";
+    s.innoDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[25px] text-[rgba(255,255,255,0.75)]`;
+
     s.panelWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelA");
     s.panelWrapReverse = "relative z-[1] flex " + (isDesktop ? "flex-row-reverse" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelB");
     s.panelImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border " + pick("p-[12px]", "p-[16px]", "p-[20px]") + " bg-[rgb(245,243,240)]";
@@ -786,25 +796,30 @@ class Component extends DCLogic {
         eyebrow: "Additive Manufacturing",
         title: "3D Printing",
         desc: "We're investing in 3D printing to prototype dosage forms and device components faster than traditional tooling allows.",
-        href: "innovation-3d-printing.html",
+        href: "innovation-detail.html?p=3d-printing",
       },
       {
         key: "space-age",
         eyebrow: "Coming Soon",
         title: "Space Age",
         desc: "A forward-looking initiative we're developing at GMP — full details to follow as the project takes shape.",
-        href: "innovation-space-age.html",
+        href: "innovation-detail.html?p=space-age",
       },
     ];
     const panelItems = panelData.map((p, i) => ({
       ...p,
-      wrapStyle: i % 2 === 0 ? s.panelWrap : s.panelWrapReverse,
+      cardStyle: i % 2 === 0 ? s.innoCardBlue : s.innoCardNavy,
+      subStyle: s.innoSub,
+      titleStyle: s.innoTitle,
+      dividerStyle: s.innoDivider,
+      descStyle: s.innoDesc,
       revealRef: revealRef(i % 2 === 0 ? "panelA" : "panelB"),
     }));
 
     return {
       s,
       introRevealRef: revealRef("intro"),
+      introRevealRef2: revealRef("introCards"),
       panelItems,
       collabRevealRef: revealRef("collab"),
       collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },

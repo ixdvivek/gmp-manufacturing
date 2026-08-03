@@ -76,7 +76,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — 3D Printing</title>
+  <title>GMP Manufacturing Ltd — Innovation</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -95,7 +95,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd 3D Printing — Responsive" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd Innovation Detail — Template" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -176,68 +176,97 @@
   </div>
 
   <!-- ============ PAGE BANNER ============ -->
-  <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
-    <img src="assets2/hero-bg.webp" alt="3D printing and additive manufacturing at GMP" className="{{ s.bannerBg }}">
-    <div className="{{ s.bannerOverlay }}"></div>
-    <div className="{{ s.bannerContent }}">
-      <span className="{{ s.bannerBreadcrumb }}">Home / Innovation / 3D Printing</span>
-      <span className="{{ s.bannerHeadline }}">3D Printing</span>
-      <span className="{{ s.bannerSubtext }}">Precision, on-demand production that shortens the distance between an idea and a testable part.</span>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ INTRO TEXT ============ -->
-  <div data-screen-label="Intro" className="{{ s.sectionPad }}">
-    <div className="{{ s.introStrapWrap }}" ref="{{ introRevealRef }}">
-      <span className="{{ s.introStrapText }}">We're building 3D printing capability in-house — precision, on-demand production that shortens the distance between an idea and a testable part.</span>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ SECTION A (image right, content left) ============ -->
-  <div data-screen-label="What We're Building" className="{{ s.sectionPad }}">
-    <div className="{{ s.panelWrap }}" ref="{{ sectionARevealRef }}">
-      <div className="{{ s.panelContent }}">
-        <div className="{{ s.sectionHeadingGroup }}">
-          <span className="{{ s.eyebrow }}">What We're Building</span>
-          <span className="{{ s.h2 }}">Precision, on-demand manufacturing</span>
-        </div>
-        <div className="{{ s.panelTextCol }}">
-          <span className="{{ s.panelBody }}">Traditional tooling can take weeks to produce a single prototype. 3D printing lets us go from design file to physical part in days — whether that's a dosage form concept, a device housing, or a custom fixture for one of our production lines.</span>
-          <span className="{{ s.panelBody }}">It's early-stage capability, built to sit alongside our existing manufacturing — not replace it — giving our formulation and engineering teams a faster way to test ideas before committing to full tooling.</span>
-        </div>
-      </div>
-      <div className="{{ s.panelImageCol }}">
-        <img src="assets/gmp-4.webp" alt="Additive manufacturing capability at GMP" loading="lazy" className="{{ s.contentPhoto }}">
+  <!-- ============ HEADLINE + DESCRIPTION ============ -->
+  <div data-screen-label="Headline" className="{{ s.firstSectionPad }}">
+    <div className="{{ s.idHeadWrap }}" ref="{{ idHeadRef }}">
+      <span className="{{ s.idEyebrow }}">{{ page.eyebrow }}</span>
+      <span className="{{ s.idHeadline }}"><sc-for list="{{headlineParts}}" as="part"><span className="{{ part.style }}">{{ part.text }}</span></sc-for></span>
+      <div className="{{ s.idDescRow }}">
+        <span className="{{ s.idDesc }}">{{ page.description }}</span>
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ SECTION B (image left, content right) ============ -->
-  <div data-screen-label="Where It's Heading" className="{{ s.sectionPad }}">
-    <div className="{{ s.panelWrapReverse }}" ref="{{ sectionBRevealRef }}">
-      <div className="{{ s.panelContent }}">
-        <div className="{{ s.sectionHeadingGroup }}">
-          <span className="{{ s.eyebrow }}">Where It's Heading</span>
-          <span className="{{ s.h2 }}">From prototyping to production support</span>
-        </div>
-        <div className="{{ s.panelTextCol }}">
-          <span className="{{ s.panelBody }}">Early applications span rapid prototyping, custom fixtures for our production lines, and exploratory work on printed dosage formats.</span>
-          <span className="{{ s.panelBody }}">As the capability matures, we expect it to support faster iteration on device components and short-run tooling — reducing lead times for partners working through development and pilot stages.</span>
-        </div>
+  <!-- ============ BANNER IMAGE ============ -->
+  <div data-screen-label="Banner Image" className="{{ s.sectionPad }}">
+    <div className="{{ s.idBannerWrap }}">
+      <img src="{{ page.banner }}" alt="{{ page.title }}" className="{{ s.idBannerImg }}">
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ CONTENT BLOCK 1 (text left, image right) ============ -->
+  <div data-screen-label="Block One" className="{{ s.sectionPad }}">
+    <div className="{{ s.idBlockWrap }}" ref="{{ idB1Ref }}">
+      <div className="{{ s.idBlockText }}">
+        <span className="{{ s.idBlockTitle }}">{{ page.block1.title }}</span>
+        <sc-for list="{{page.block1.paras}}" as="p"><span className="{{ s.idBlockPara }}">{{ p }}</span></sc-for>
       </div>
-      <div className="{{ s.panelImageCol }}">
-        <img src="assets/gmp-12.webp" alt="Prototyping components for device development" loading="lazy" className="{{ s.contentPhoto }}">
+      <div className="{{ s.idBlockImgCol }}">
+        <img src="{{ page.block1.img }}" alt="{{ page.block1.title }}" loading="lazy" className="{{ s.idBlockImg }}">
       </div>
     </div>
   </div>
 
-  <div className="{{ s.sectionGapHalf }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ CONTENT BLOCK 2 (image left, text right) ============ -->
+  <div data-screen-label="Block Two" className="{{ s.sectionPad }}">
+    <div className="{{ s.idBlockWrapReverse }}" ref="{{ idB2Ref }}">
+      <div className="{{ s.idBlockText }}">
+        <span className="{{ s.idBlockTitle }}">{{ page.block2.title }}</span>
+        <sc-for list="{{page.block2.paras}}" as="p"><span className="{{ s.idBlockPara }}">{{ p }}</span></sc-for>
+      </div>
+      <div className="{{ s.idBlockImgCol }}">
+        <img src="{{ page.block2.img }}" alt="{{ page.block2.title }}" loading="lazy" className="{{ s.idBlockImg }}">
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ STATEMENT (navy band, centred, max 3 lines) ============ -->
+  <div className="{{ s.idStatementOuter }}">
+    <div data-screen-label="Statement" className="{{ s.sectionPad }}">
+      <span className="{{ s.idStatement }}">{{ page.statement }}</span>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ GALLERY GRID ============ -->
+  <div data-screen-label="Gallery Grid" className="{{ s.sectionPad }}">
+    <div className="{{ s.idGalWrap }}" ref="{{ idGalRef }}">
+      <span className="{{ s.idBlockTitle }}">{{ page.galleryTitle }}</span>
+      <div className="{{ s.idGalGrid }}">
+        <sc-for list="{{page.gallery}}" as="g" hint-placeholder-count="6">
+          <div className="{{ s.idGalCell }}">
+            <img src="{{ g.img }}" alt="{{ g.alt }}" loading="lazy" className="{{ s.idGalImg }}">
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ CONTENT BLOCK 3 (text left, image right) ============ -->
+  <div data-screen-label="Block Three" className="{{ s.sectionPad }}">
+    <div className="{{ s.idBlockThirdWrap }}" ref="{{ idB3Ref }}">
+      <div className="{{ s.idBlockText }}">
+        <span className="{{ s.idBlockTitle }}">{{ page.block3.title }}</span>
+        <sc-for list="{{page.block3.paras}}" as="p"><span className="{{ s.idBlockPara }}">{{ p }}</span></sc-for>
+      </div>
+      <div className="{{ s.idBlockImgCol }}">
+        <img src="{{ page.block3.img }}" alt="{{ page.block3.title }}" loading="lazy" className="{{ s.idBlockImg }}">
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
 
   <!-- ============ COLLABORATE ============ -->
   <div className="{{ s.collabOuter }}">
@@ -640,6 +669,7 @@ class Component extends DCLogic {
     s.root = "gmp-font relative w-full bg-white flex flex-col overflow-x-clip overflow-y-clip";
 
     s.sectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px]";
+    s.firstSectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px] pt-[132px] md:pt-[144px] xl:pt-[156px]";
     s.sectionGap = "w-full h-[38px] md:h-[66px] xl:h-[96px] shrink-0";
     s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
 
@@ -662,7 +692,9 @@ class Component extends DCLogic {
 
     // ---------- TOPBAR (same properties as homepage) ----------
     s.logoLink = "flex shrink-0";
-    const navScrolled = this.state.navScrolled;
+    // This page opens on a white headline block, not a dark hero, so the nav is
+    // always on light — pin it solid rather than following scroll position.
+    const navScrolled = true;
     s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
       (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
     s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
@@ -755,6 +787,32 @@ class Component extends DCLogic {
     s.panelTextCol = "flex flex-col gap-[16px] items-start";
     s.panelBody = `font-normal text-[16px] md:text-[17px] leading-[26px] text-[${dark}] max-w-[560px]`;
 
+    // ---------- INNOVATION DETAIL ----------
+    s.idHeadWrap = "flex flex-col gap-[14px] items-start max-w-[1600px] mx-auto w-full " + reveal("idHead");
+    s.idEyebrow = `font-medium text-[13px] leading-[18px] tracking-[1.2px] uppercase text-[${dark}]`;
+    s.idHeadline = `block font-semibold ${pick("text-[32px]", "text-[46px]", "text-[62px]")} ${pick("leading-[40px]", "leading-[56px]", "leading-[74px]")} tracking-[-1.8px] max-w-[1180px]`;
+    s.idHeadStrong = `text-[${near}]`;
+    s.idHeadMuted = "text-[rgba(51,51,51,0.32)]";
+    s.idDescRow = "flex flex-row w-full " + (isDesktop ? "justify-end pt-[18px]" : "pt-[14px]");
+    s.idDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[26px] text-[rgba(51,51,51,0.7)] ${isDesktop ? "max-w-[520px]" : "max-w-none"}`;
+    s.idBannerWrap = `w-full max-w-[1600px] mx-auto overflow-hidden ${pick("h-[240px]", "h-[400px]", "h-[560px]")}`;
+    s.idBannerImg = "w-full h-full object-cover";
+    const idBlockBase = "flex gap-[32px] md:gap-[48px] xl:gap-[64px] items-center max-w-[1600px] mx-auto ";
+    s.idBlockWrap = idBlockBase + (isDesktop ? "flex-row" : "flex-col") + " " + reveal("idB1");
+    s.idBlockWrapReverse = idBlockBase + (isDesktop ? "flex-row-reverse" : "flex-col") + " " + reveal("idB2");
+    s.idBlockThirdWrap = idBlockBase + (isDesktop ? "flex-row" : "flex-col") + " " + reveal("idB3");
+    s.idBlockText = "flex flex-col gap-[14px] items-start " + (isDesktop ? "w-[52%]" : "w-full");
+    s.idBlockTitle = `font-medium ${pick("text-[26px]", "text-[32px]", "text-[38px]")} leading-[1.2] tracking-[-1px] text-[${dark}]`;
+    s.idBlockPara = "font-normal text-[16px] md:text-[17px] leading-[27px] text-[rgba(51,51,51,0.8)]";
+    s.idBlockImgCol = "relative " + (isDesktop ? "w-[48%]" : "w-full") + " aspect-[4/3] shrink-0 overflow-hidden bg-[rgb(232,232,232)]";
+    s.idBlockImg = "w-full h-full object-cover";
+    s.idStatementOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] px-[${gutter}px] box-border bg-[rgb(41,37,96)] ` + pick("py-[48px]", "py-[64px]", "py-[84px]");
+    s.idStatement = `block text-center mx-auto font-medium ${pick("text-[22px]", "text-[30px]", "text-[38px]")} ${pick("leading-[32px]", "leading-[42px]", "leading-[52px]")} tracking-[-0.8px] text-white max-w-[1000px]`;
+    s.idGalWrap = "flex flex-col gap-[18px] md:gap-[24px] max-w-[1600px] mx-auto " + reveal("idGal");
+    s.idGalGrid = "grid " + pick("grid-cols-2", "grid-cols-3", "grid-cols-3") + " gap-[12px] md:gap-[16px]";
+    s.idGalCell = "aspect-[4/3] overflow-hidden bg-[rgb(232,232,232)]";
+    s.idGalImg = "w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-105";
+
     // ---------- COLLABORATE (inherited, content customized per page) ----------
     s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center ` +
       pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
@@ -800,8 +858,128 @@ class Component extends DCLogic {
     s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
     s.footerBottomRow = "flex flex-row items-center pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
 
+    // PLACEHOLDER CONTENT - invented copy so the layout can be reviewed. Replace before launch.
+    // headline splits into segments; muted ones render in the lighter tone.
+    // PLACEHOLDER CONTENT - invented copy so the layout can be reviewed. Replace before launch.
+    // One shared template. Which innovation renders is chosen by the ?p= query
+    // param (see innovations.html); anything unrecognised falls back to the first.
+    // headline splits into segments; muted ones render in the lighter tone.
+    const PAGES = {
+      "3d-printing": {
+        eyebrow: "Additive Manufacturing",
+        title: "3D Printing",
+        headline: [
+          { text: "Prototype faster. ", muted: false },
+          { text: "Tool later. ", muted: true },
+          { text: "Get to a working dosage form in days.", muted: false },
+        ],
+        description: "We're investing in additive manufacturing to shorten the gap between an idea and something a formulation team can physically hold, test and iterate on — without committing to full production tooling first.",
+        banner: "assets/gmp-4.webp",
+        block1: {
+          title: "Why we brought it in-house",
+          img: "assets/gmp-12.webp",
+          paras: [
+            "Traditional tooling is precise and reliable, but it is slow and expensive to change. For early-stage work that is exactly the wrong trade — the whole point of a prototype is that it will be wrong, and you want to find out cheaply.",
+            "Bringing additive manufacturing in-house means our formulation and engineering teams can test a geometry in the morning and revise it the same afternoon, rather than waiting on an external supplier and a minimum order.",
+          ],
+        },
+        block2: {
+          title: "Where it fits alongside production",
+          img: "assets/gmp-6.webp",
+          paras: [
+            "This sits alongside our existing manufacturing rather than replacing any of it. Commercial batches still run on validated lines under the same quality system they always have.",
+            "What changes is the front end: development work reaches a confident specification sooner, so the transfer into full production starts from firmer ground.",
+          ],
+        },
+        statement: "Getting a prototype wrong quickly is worth more than getting it right slowly.",
+        galleryTitle: "In the workshop",
+        gallery: [
+          { img: "assets/gmp-4.webp",  alt: "Additive manufacturing equipment" },
+          { img: "assets/gmp-12.webp", alt: "Prototype component inspection" },
+          { img: "assets/gmp-6.webp",  alt: "Finished trial parts" },
+          { img: "assets/gmp-3.webp",  alt: "Dimensional checking" },
+          { img: "assets/gmp-8.webp",  alt: "Iterating a design" },
+          { img: "assets/gmp-2.webp",  alt: "Material testing" },
+        ],
+        block3: {
+          title: "What comes next",
+          img: "assets/gmp-5.webp",
+          paras: [
+            "The capability is early. As it matures we expect it to support short-run tooling and device components, reducing lead times for partners working through development and pilot stages.",
+            "If you have a project where the tooling timeline is the constraint, it is worth a conversation — we can often show you something physical sooner than you would expect.",
+          ],
+        },
+      },
+      "space-age": {
+        eyebrow: "Coming Soon",
+        title: "Space Age",
+        headline: [
+          { text: "A new programme. ", muted: false },
+          { text: "Early days. ", muted: true },
+          { text: "Worth watching.", muted: false },
+        ],
+        // TODO: awaiting the client brief on what "Space Age" actually covers.
+        // Everything below is deliberately generic and must be rewritten once we know.
+        description: "Space Age is an initiative we are developing at GMP. We are not ready to say much yet — but the direction is set, the work has started, and we will share detail as the project takes shape.",
+        banner: "assets/gmp-8.webp",
+        block1: {
+          title: "Why we are doing this",
+          img: "assets/gmp-2.webp",
+          paras: [
+            "Contract manufacturing rewards consistency, and consistency is easy to confuse with standing still. Space Age is our answer to that — a deliberate space to work on things that are not yet routine.",
+            "It is funded, staffed and running alongside the day job rather than instead of it. Nothing about our existing lines, validations or commitments changes while this develops.",
+          ],
+        },
+        block2: {
+          title: "How it connects to your product",
+          img: "assets/gmp-11.webp",
+          paras: [
+            "The intention is that anything proven here eventually reaches partners as capability, not as a press release — new options at the development stage, shorter routes through scale-up, fewer external dependencies.",
+            "Until then the honest answer is that it is early. We would rather tell you that than oversell it.",
+          ],
+        },
+        statement: "The work worth doing is rarely the work that already has a validated process behind it.",
+        galleryTitle: "Behind the scenes",
+        gallery: [
+          { img: "assets/gmp-8.webp",  alt: "Development area" },
+          { img: "assets/gmp-2.webp",  alt: "Equipment under trial" },
+          { img: "assets/gmp-11.webp", alt: "Team reviewing results" },
+          { img: "assets/gmp-5.webp",  alt: "Process development" },
+          { img: "assets/gmp-3.webp",  alt: "Analytical work" },
+          { img: "assets/gmp-12.webp", alt: "Prototype assessment" },
+        ],
+        block3: {
+          title: "What we can say today",
+          img: "assets/gmp-6.webp",
+          paras: [
+            "We will publish detail as it becomes real rather than while it is still an ambition. If you want to hear about it first, the quickest route is to tell us what you are working on.",
+            "Partners already working with us on development programmes will see this surface there first.",
+          ],
+        },
+      },
+    };
+    const PAGE_ORDER = ["3d-printing", "space-age"];
+    let pageKey = PAGE_ORDER[0];
+    try {
+      const q = new URLSearchParams(window.location.search).get("p");
+      if (q && PAGES[q]) pageKey = q;
+    } catch (e) { /* no-op: fall back to the first entry */ }
+    const page = PAGES[pageKey];
+    if (typeof document !== "undefined") {
+      document.title = "GMP Manufacturing Ltd \u2014 " + page.title;
+    }
+    const headlineParts = page.headline.map((h) => ({ text: h.text, style: h.muted ? s.idHeadMuted : s.idHeadStrong }));
+
+
     return {
       s,
+      page,
+      headlineParts,
+      idHeadRef: revealRef("idHead"),
+      idB1Ref: revealRef("idB1"),
+      idB2Ref: revealRef("idB2"),
+      idB3Ref: revealRef("idB3"),
+      idGalRef: revealRef("idGal"),
       introRevealRef: revealRef("intro"),
       sectionARevealRef: revealRef("sectionA"),
       sectionBRevealRef: revealRef("sectionB"),
