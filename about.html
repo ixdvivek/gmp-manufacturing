@@ -153,47 +153,60 @@
   <!-- ============ MISSION / VISION / VALUES ============ -->
   <div data-screen-label="Mission Vision Values" className="{{ s.sectionPad }}">
     <div className="{{ s.mvvWrap }}" ref="{{ mvvRevealRef }}">
-      <div className="{{ s.mvvHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">What Drives Us</span>
-        <span className="{{ s.h2 }}">Mission, Vision &amp; Values</span>
-        <span className="{{ s.mvvSubtext }}">The principles that guide every decision we make — from first formulation through to finished, market-ready product.</span>
-      </div>
-      <div className="{{ s.mvvGrid }}">
-        <div className="{{ s.mvvBigCard }}">
-          <div className="{{ s.mvvBigIcon }}">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgb(178,33,38)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+      <div className="{{ s.mvvSplit }}">
+
+        <div className="{{ s.mvvHeroCard }}">
+          <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.mvvHeroImg }}">
+          <div className="{{ s.mvvHeroScrim }}"></div>
+          <span className="{{ s.mvvHeroPill }}">WHAT DRIVES US</span>
+          <div className="{{ s.mvvHeroTextWrap }}">
+            <span className="{{ s.mvvHeroTitle }}">Mission, Vision &amp; Values</span>
+            <span className="{{ s.mvvHeroBody }}">The principles that guide every decision we make — from first formulation through to finished, market-ready product.</span>
           </div>
-          <span className="{{ s.mvvBigLabel }}">Mission</span>
-          <span className="{{ s.mvvBigBody }}">To be the most trusted manufacturing partner for regulated products — delivering quality, compliance and reliability our partners can build their business on.</span>
         </div>
-        <div className="{{ s.mvvBigCard }}">
-          <div className="{{ s.mvvBigIcon }}">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgb(37,117,187)" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+
+        <div className="{{ s.mvvGrid }}">
+          <div className="{{ s.mvvCardLight }}">
+            <div className="{{ s.mvvIconLight }}">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(41,37,96)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3"></circle></svg>
+            </div>
+            <div className="{{ s.mvvCardText }}">
+              <span className="{{ s.mvvLabelLight }}">Mission</span>
+              <span className="{{ s.mvvBodyLight }}">To be the most trusted manufacturing partner for regulated products — delivering the quality, compliance and technical rigour our partners build their business on.</span>
+            </div>
           </div>
-          <span className="{{ s.mvvBigLabel }}">Vision</span>
-          <span className="{{ s.mvvBigBody }}">A single UK-owned home for every stage of your product's journey, from early formulation through to market-ready manufacturing.</span>
-        </div>
-        <div className="{{ s.mvvSmallCard }}">
-          <div className="{{ s.mvvSmallIcon }}">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M9 12l2 2 4-4"></path><circle cx="12" cy="12" r="9"></circle></svg>
+
+          <div className="{{ s.mvvCardNavy }}">
+            <div className="{{ s.mvvIconNavy }}">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </div>
+            <div className="{{ s.mvvCardText }}">
+              <span className="{{ s.mvvLabelNavy }}">Vision</span>
+              <span className="{{ s.mvvBodyNavy }}">A single UK-owned home for every stage of your product's journey, from early formulation through to market-ready manufacturing.</span>
+            </div>
           </div>
-          <span className="{{ s.mvvSmallLabel }}">Accountability</span>
-          <span className="{{ s.mvvSmallBody }}">Every batch traceable, every decision owned.</span>
-        </div>
-        <div className="{{ s.mvvSmallCard }}">
-          <div className="{{ s.mvvSmallIcon }}">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+
+          <div className="{{ s.mvvCardNavy }}">
+            <div className="{{ s.mvvIconNavy }}">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+            </div>
+            <div className="{{ s.mvvCardText }}">
+              <span className="{{ s.mvvLabelNavy }}">Accountability</span>
+              <span className="{{ s.mvvBodyNavy }}">Every batch traceable and every decision owned, by one team answerable from raw material through to final release.</span>
+            </div>
           </div>
-          <span className="{{ s.mvvSmallLabel }}">Transparency</span>
-          <span className="{{ s.mvvSmallBody }}">Open, audit-ready documentation, always.</span>
-        </div>
-        <div className="{{ s.mvvSmallCard }}">
-          <div className="{{ s.mvvSmallIcon }}">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgb(51,51,51)" stroke-width="1.5"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"></path></svg>
+
+          <div className="{{ s.mvvCardLight }}">
+            <div className="{{ s.mvvIconLight }}">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(41,37,96)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M9 15l2 2 4-4"></path></svg>
+            </div>
+            <div className="{{ s.mvvCardText }}">
+              <span className="{{ s.mvvLabelLight }}">Transparency</span>
+              <span className="{{ s.mvvBodyLight }}">Open, audit-ready documentation as standard — full visibility of every process, result and release certificate.</span>
+            </div>
           </div>
-          <span className="{{ s.mvvSmallLabel }}">Technical Excellence</span>
-          <span className="{{ s.mvvSmallBody }}">Rigour in every formulation and process.</span>
         </div>
+
       </div>
     </div>
   </div>
@@ -846,19 +859,28 @@ class Component extends DCLogic {
     s.aboutBody = `font-normal text-[16px] leading-[24px] text-[${dark}]`;
 
     // ---------- MISSION / VISION / VALUES (bento grid: 2 headline tiles + 3 supporting tiles) ----------
-    s.mvvWrap = "flex flex-col gap-[32px] md:gap-[40px] xl:gap-[48px] max-w-[1600px] mx-auto " + reveal("mvv");
-    s.mvvHeadingGroup = "flex flex-col gap-[12px] items-center text-center max-w-[640px] mx-auto";
-    s.mvvSubtext = `font-normal text-[16px] md:text-[17px] leading-[24px] text-[${dark}]`;
-    s.mvvGrid = "grid grid-cols-1 md:grid-cols-6 gap-[16px] md:gap-[20px]";
-    const bentoCardBase = "flex flex-col items-start box-border border border-solid border-[rgba(0,0,0,0.12)] rounded-none transition-[box-shadow,transform] duration-200 ease-in-out hover:shadow-gmp-hover hover:-translate-y-1";
-    s.mvvBigCard = bentoCardBase + " md:col-span-3 gap-[16px] " + pick("p-[24px]", "p-[28px]", "p-[32px]");
-    s.mvvBigIcon = "w-[48px] h-[48px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.mvvBigLabel = `font-semibold text-[22px] leading-[28px] text-[${dark}]`;
-    s.mvvBigBody = "font-normal text-[16px] leading-[24px] text-[rgba(51,51,51,0.75)]";
-    s.mvvSmallCard = bentoCardBase + " md:col-span-2 gap-[10px] " + pick("p-[20px]", "p-[22px]", "p-[24px]");
-    s.mvvSmallIcon = "w-[36px] h-[36px] shrink-0 flex items-center justify-center bg-[rgb(245,243,240)]";
-    s.mvvSmallLabel = `font-semibold text-[16px] leading-[22px] text-[${dark}]`;
-    s.mvvSmallBody = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.65)]";
+    s.mvvWrap = "flex flex-col max-w-[1600px] mx-auto " + reveal("mvv");
+    s.mvvSplit = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[16px] md:gap-[20px] items-stretch";
+    s.mvvHeroCard = "relative overflow-hidden box-border " + (isDesktop ? "w-[38%] shrink-0" : "w-full " + pick("min-h-[400px]", "min-h-[460px]", ""));
+    s.mvvHeroImg = "absolute inset-0 w-full h-full object-cover";
+    s.mvvHeroScrim = "absolute inset-x-0 bottom-0 h-[75%] bg-gradient-to-t from-[rgb(41,37,96)] via-[rgba(41,37,96,0.78)] to-transparent pointer-events-none";
+    s.mvvHeroPill = "absolute z-[2] rounded-[999px] border border-solid border-[rgba(255,255,255,0.55)] text-white font-medium text-[12px] tracking-[0.8px] leading-[16px] py-[8px] px-[18px] " +
+      pick("top-[20px] left-[20px]", "top-[24px] left-[24px]", "top-[28px] left-[28px]");
+    s.mvvHeroTextWrap = "absolute z-[2] left-0 right-0 bottom-0 flex flex-col gap-[12px] box-border " + pick("p-[20px]", "p-[24px]", "p-[32px]");
+    s.mvvHeroTitle = `font-medium ${pick("text-[28px]", "text-[34px]", "text-[40px]")} leading-[1.15] tracking-[-1px] text-white`;
+    s.mvvHeroBody = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[24px] text-[rgba(255,255,255,0.85)]`;
+    s.mvvGrid = "grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[20px] grow";
+    const mvvCardBase = "flex flex-col justify-between box-border transition-transform duration-200 ease-in-out hover:-translate-y-1 " +
+      pick("gap-[24px] p-[24px]", "gap-[32px] p-[28px]", "gap-[40px] p-[32px]");
+    s.mvvCardLight = mvvCardBase + " bg-[rgb(245,243,240)]";
+    s.mvvCardNavy = mvvCardBase + " bg-[rgb(41,37,96)]";
+    s.mvvIconLight = "w-[48px] h-[48px] shrink-0 rounded-full flex items-center justify-center bg-[rgba(41,37,96,0.09)]";
+    s.mvvIconNavy = "w-[48px] h-[48px] shrink-0 rounded-full flex items-center justify-center bg-[rgba(255,255,255,0.14)]";
+    s.mvvCardText = "flex flex-col gap-[8px] items-start";
+    s.mvvLabelLight = `font-semibold ${pick("text-[19px]", "text-[20px]", "text-[21px]")} leading-[1.25] text-[${near}]`;
+    s.mvvLabelNavy = `font-semibold ${pick("text-[19px]", "text-[20px]", "text-[21px]")} leading-[1.25] text-white`;
+    s.mvvBodyLight = `font-normal ${pick("text-[14px]", "text-[15px]", "text-[15px]")} leading-[22px] text-[rgba(51,51,51,0.7)]`;
+    s.mvvBodyNavy = `font-normal ${pick("text-[14px]", "text-[15px]", "text-[15px]")} leading-[22px] text-[rgba(255,255,255,0.75)]`;
 
     // ---------- STAT COUNTER ROW ----------
     s.statWrap = "grid grid-cols-2 md:grid-cols-4 gap-[24px] md:gap-[32px] max-w-[1600px] mx-auto";
