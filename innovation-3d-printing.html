@@ -144,9 +144,7 @@
         </div>
       </div>
       <div className="{{ s.panelImageCol }}">
-        <div className="{{ s.imgPlaceholder }}">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
-        </div>
+        <img src="assets/gmp-4.webp" alt="Additive manufacturing capability at GMP" loading="lazy" className="{{ s.contentPhoto }}">
       </div>
     </div>
   </div>
@@ -167,9 +165,7 @@
         </div>
       </div>
       <div className="{{ s.panelImageCol }}">
-        <div className="{{ s.imgPlaceholder }}">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
-        </div>
+        <img src="assets/gmp-12.webp" alt="Prototyping components for device development" loading="lazy" className="{{ s.contentPhoto }}">
       </div>
     </div>
   </div>
@@ -668,6 +664,7 @@ class Component extends DCLogic {
     s.panelWrapReverse = "relative z-[1] flex " + (isDesktop ? "flex-row-reverse" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("sectionB");
     s.panelImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border " + pick("p-[12px]", "p-[16px]", "p-[20px]") + " bg-[rgb(245,243,240)]";
     s.imgPlaceholder = "relative w-full h-full bg-[rgb(232,232,232)] flex items-center justify-center box-border";
+    s.contentPhoto = "relative w-full h-full object-cover box-border";
     s.panelContent = "flex flex-col gap-[28px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
     s.panelTextCol = "flex flex-col gap-[16px] items-start";
     s.panelBody = `font-normal text-[16px] md:text-[17px] leading-[26px] text-[${dark}] max-w-[560px]`;

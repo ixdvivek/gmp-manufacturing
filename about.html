@@ -111,7 +111,7 @@
 
   <!-- ============ PAGE BANNER ============ -->
   <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
-    <img src="assets2/about-real.jpg" alt="GMP Manufacturing formulation specialist at work" className="{{ s.bannerBg }}">
+    <img src="assets/gmp-11.webp" alt="GMP Manufacturing formulation specialist at work" className="{{ s.bannerBg }}">
     <div className="{{ s.bannerOverlay }}"></div>
     <div className="{{ s.bannerContent }}">
       <span className="{{ s.bannerBreadcrumb }}">Home / About Us</span>
@@ -137,9 +137,7 @@
         </div>
       </div>
       <div className="{{ s.aboutImageCol }}">
-        <div className="{{ s.imgPlaceholder }}">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
-        </div>
+        <img src="assets/gmp-6.webp" alt="Inside the GMP Manufacturing facility in Hull" loading="lazy" className="{{ s.contentPhoto }}">
         <div className="{{ s.aboutYearsBox }}">
           <span className="{{ s.aboutYearsNumber }}">{{ s.yearsInOperation }}</span>
           <span className="{{ s.aboutYearsLabel }}">years</span>
@@ -156,7 +154,7 @@
       <div className="{{ s.mvvSplit }}">
 
         <div className="{{ s.mvvHeroCard }}">
-          <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.mvvHeroImg }}">
+          <img src="assets/gmp-5.webp" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.mvvHeroImg }}">
           <div className="{{ s.mvvHeroScrim }}"></div>
           <span className="{{ s.mvvHeroPill }}">WHAT DRIVES US</span>
           <div className="{{ s.mvvHeroTextWrap }}">
@@ -856,6 +854,7 @@ class Component extends DCLogic {
     s.aboutWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("story");
     s.aboutImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border";
     s.imgPlaceholder = "relative w-full h-full bg-[rgb(232,232,232)] flex items-center justify-center box-border";
+    s.contentPhoto = "relative w-full h-full object-cover box-border";
     s.aboutYearsBox = "absolute z-[2] bg-gmp-gradient flex flex-col items-start box-border shadow-[0_16px_40px_-12px_rgba(0,0,0,0.35)] " +
       pick("top-[16px] -left-[12px] py-[16px] px-[20px]", "top-[24px] -left-[20px] py-[20px] px-[26px]", "top-[32px] -left-[28px] py-[26px] px-[32px]");
     s.aboutYearsNumber = `font-bold ${pick("text-[34px]", "text-[44px]", "text-[54px]")} leading-[1.05] tracking-[-1.5px] text-white`;

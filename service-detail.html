@@ -124,7 +124,7 @@
   <div data-screen-label="Panel A" className="{{ s.sectionPad }}">
     <div className="{{ s.panelWrapReverse }}" ref="{{ panelARevealRef }}">
       <div className="{{ s.panelImageCol }}">
-        <img src="assets2/placeholder-team-3.jpg" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
+        <img src="assets/gmp-12.webp" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
         <div className="{{ s.panelAMetricCard }}">
           <div className="{{ s.panelAMetricTopRow }}">
             <span className="{{ s.panelAMetricNumber }}">2X</span>
@@ -194,7 +194,7 @@
         </div>
       </div>
       <div className="{{ s.panelImageCol }}">
-        <img src="assets2/placeholder-team-2.jpg" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
+        <img src="assets/gmp-4.webp" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
         <div className="{{ s.panelAMetricCard }}">
           <div className="{{ s.panelAMetricTopRow }}">
             <span className="{{ s.panelAMetricNumber }}">100%</span>
@@ -220,35 +220,35 @@
         </div>
         <div className="{{ s.capGrid }}">
           <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"></div>
+            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-6.webp" alt="Tablet and capsule production line" loading="lazy" className="{{ s.capImg }}"></div>
             <div className="{{ s.capTextBox }}">
               <span className="{{ s.capCardTitle }}">Solid Dose Manufacturing</span>
               <span className="{{ s.capCardDesc }}">Tablets and capsules produced at full commercial scale.</span>
             </div>
           </div>
           <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"></div>
+            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-8.webp" alt="Liquid and semi-solid filling line" loading="lazy" className="{{ s.capImg }}"></div>
             <div className="{{ s.capTextBox }}">
               <span className="{{ s.capCardTitle }}">Liquid &amp; Semi-Solid Filling</span>
               <span className="{{ s.capCardDesc }}">Creams, liquids and gels filled to spec.</span>
             </div>
           </div>
           <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"></div>
+            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-10.webp" alt="Primary and secondary packing area" loading="lazy" className="{{ s.capImg }}"></div>
             <div className="{{ s.capTextBox }}">
               <span className="{{ s.capCardTitle }}">Primary &amp; Secondary Packing</span>
               <span className="{{ s.capCardDesc }}">Blister, bottle and carton packing lines.</span>
             </div>
           </div>
           <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"></div>
+            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-3.webp" alt="Batch inspection before release" loading="lazy" className="{{ s.capImg }}"></div>
             <div className="{{ s.capTextBox }}">
               <span className="{{ s.capCardTitle }}">Batch Release &amp; Documentation</span>
               <span className="{{ s.capCardDesc }}">Full paperwork trail for every batch.</span>
             </div>
           </div>
           <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"></div>
+            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-2.webp" alt="Serialisation and labelling check" loading="lazy" className="{{ s.capImg }}"></div>
             <div className="{{ s.capTextBox }}">
               <span className="{{ s.capCardTitle }}">Serialisation &amp; Labelling</span>
               <span className="{{ s.capCardDesc }}">Track-and-trace compliant labelling.</span>
@@ -677,6 +677,7 @@ class Component extends DCLogic {
     const capGapPx = pick(20, 24, 28);
     s.capCard = `flex flex-col items-stretch bg-[rgb(245,243,240)] box-border ` + pick("p-[14px]", "p-[16px]", "p-[18px]") + ` w-[calc((100%-${capGapPx * (capCols - 1)}px)/${capCols})]`;
     s.capImgWrap = "w-full aspect-[5/2] overflow-hidden bg-[rgb(210,206,197)]";
+    s.capImg = "w-full h-full object-cover";
     s.capTextBox = "bg-white box-border flex flex-col " + pick("gap-[6px] py-[16px] px-[16px]", "gap-[7px] py-[18px] px-[18px]", "gap-[8px] py-[20px] px-[20px]");
     s.capCardTitle = `font-semibold ${pick("text-[16px]", "text-[17px]", "text-[18px]")} leading-[1.3] text-[${dark}]`;
     s.capCardDesc = `font-normal ${pick("text-[13px]", "text-[14px]", "text-[14px]")} leading-[19px] text-[rgba(51,51,51,0.7)]`;
