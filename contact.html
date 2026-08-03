@@ -211,37 +211,22 @@
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ MAP ============ -->
+  <!-- ============ MAP (full-bleed) ============ -->
   <div data-screen-label="Map" className="{{ s.sectionPad }}">
     <div className="{{ s.mapWrap }}" ref="{{ detailsRevealRef }}">
-      <div className="{{ s.mapPlaceholder }}">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgb(180,180,180)" stroke-width="1.5"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-        <span className="{{ s.mapPlaceholderText }}">Map placeholder</span>
-      </div>
+      <iframe
+        src="https://maps.google.com/maps?q=GMP+Manufacturing+Ltd,+Marfleet+House,+Valletta+Street,+Hull+HU9+5NP&z=16&output=embed"
+        title="GMP Manufacturing Ltd — Marfleet House, Valletta Street, Hull HU9 5NP"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        className="{{ s.mapFrame }}"></iframe>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ QUICK LINKS ============ -->
-  <div data-screen-label="Quick Links" className="{{ s.sectionPad }}">
-    <div className="{{ s.quickLinksWrap }}" ref="{{ quickLinksRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Quick Links</span>
-        <span className="{{ s.h2 }}">Looking for something specific?</span>
-      </div>
-      <div className="{{ s.quickLinksRow }}">
-        <a href="sectors.html" className="{{ s.quickLinkPill }}">For Pharmaceuticals</a>
-        <a href="sectors.html" className="{{ s.quickLinkPill }}">For Cosmetics</a>
-        <a href="sectors.html" className="{{ s.quickLinkPill }}">For Medical Devices</a>
-        <a href="sectors.html" className="{{ s.quickLinkPill }}">For Veterinary</a>
-      </div>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ FAQ ============ -->
+  <!-- ============ FAQ (subtle blue band) ============ -->
+  <div className="{{ s.faqBandOuter }}">
   <div data-screen-label="FAQ" className="{{ s.sectionPad }}">
     <div className="{{ s.faqWrap }}" ref="{{ faqRevealRef }}">
       <div className="{{ s.sectionHeadingGroup }}">
@@ -262,6 +247,7 @@
         </sc-for>
       </div>
     </div>
+  </div>
   </div>
 
   <div className="{{ s.sectionGapHalf }}"></div>
@@ -766,21 +752,15 @@ class Component extends DCLogic {
     s.detailsIconRow = "flex flex-row items-center gap-[8px]";
     s.hoursRow = "flex flex-row flex-wrap gap-[24px] md:gap-[32px]";
 
-    // ---------- MAP ----------
-    s.mapWrap = "max-w-[1600px] mx-auto w-full";
+    // ---------- MAP (full-bleed, no side padding so the frame reaches both edges) ----------
+    s.mapWrap = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden`;
+    s.mapFrame = `block w-full border-0 ${pick("h-[280px]", "h-[340px]", "h-[420px]")}`;
     s.detailsItem = "flex flex-col gap-[4px]";
     s.detailsLabel = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.5)]";
     s.detailsValue = `font-medium text-[16px] leading-[24px] text-[${dark}]`;
-    s.mapPlaceholder = `w-full ${pick("min-h-[240px]", "min-h-[300px]", "min-h-[360px]")} bg-[rgb(232,232,232)] flex flex-col items-center justify-center gap-[8px] rounded-none`;
-    s.mapPlaceholderText = "font-normal text-[14px] text-[rgba(51,51,51,0.5)]";
-
-    // ---------- QUICK LINKS ----------
-    s.quickLinksWrap = "flex flex-col gap-[20px] md:gap-[24px] xl:gap-[28px] max-w-[1600px] mx-auto " + reveal("quickLinks");
-    s.quickLinksRow = "flex flex-row flex-wrap gap-[12px]";
-    s.quickLinkPill = `rounded-[32px] border border-solid border-[${purple}] font-medium text-[14px] md:text-[15px] xl:text-[15px] text-[${purple}] no-underline box-border ` +
-      pick("py-[10px] px-[18px]", "py-[12px] px-[20px]", "py-[12px] px-[20px]");
 
     // ---------- FAQ ----------
+    s.faqBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] px-[${gutter}px] box-border bg-[rgba(37,117,187,0.05)] ` + pick("py-[40px]", "py-[52px]", "py-[64px]");
     s.faqWrap = "flex flex-col gap-[20px] md:gap-[24px] xl:gap-[28px] max-w-[900px] mx-auto " + reveal("faq");
     s.faqList = "flex flex-col w-full";
 
@@ -856,7 +836,6 @@ class Component extends DCLogic {
       s,
       formRevealRef: revealRef("form"),
       detailsRevealRef: revealRef("details"),
-      quickLinksRevealRef: revealRef("quickLinks"),
       faqRevealRef: revealRef("faq"),
       collabRevealRef: revealRef("collab"),
       collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
