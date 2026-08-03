@@ -76,7 +76,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — Careers</title>
+  <title>GMP Manufacturing Ltd — Role Detail</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -100,7 +100,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Careers — Responsive" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd Job Detail — Template" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -185,146 +185,127 @@
     <img src="assets/gmp-1.webp" alt="Working at GMP Manufacturing" className="{{ s.bannerPhoto }}">
     <div className="{{ s.bannerOverlay }}"></div>
     <div className="{{ s.bannerContent }}">
-      <span className="{{ s.eyebrowOnDark }}">Join Our Team</span>
-      <span className="{{ s.bannerHeadline }}">Careers</span>
-      <span className="{{ s.bannerSubtext }}">Build your career with a UK-owned pharmaceutical manufacturer trusted by partners across 30+ countries.</span>
+      <a href="careers.html" className="{{ s.backLink }}">&larr; All open positions</a>
+      <span className="{{ s.bannerHeadline }}">{{ job.title }}</span>
+      <div className="{{ s.bannerMetaRow }}">
+        <span className="{{ s.bannerTag }}">{{ job.dept }}</span>
+        <span className="{{ s.bannerMeta }}">{{ job.type }}</span>
+        <span className="{{ s.bannerMeta }}">{{ job.location }}</span>
+      </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ LIFE AT GMP ============ -->
-  <!-- ============ LIFE AT GMP ============ -->
-  <div data-screen-label="Life at GMP" className="{{ s.sectionPad }}">
-    <div className="{{ s.lifeWrap }}" ref="{{ lifeRevealRef }}">
-      <div className="{{ s.lifeImageCol }}">
-        <img src="assets/gmp-11.webp" alt="Working at GMP Manufacturing" loading="lazy" className="{{ s.lifeImage }}">
-        <div className="{{ s.lifeMetricCard }}">
-          <div className="{{ s.lifeMetricTopRow }}">
-            <span className="{{ s.lifeMetricNumber }}">1</span>
-            <div className="{{ s.lifeMetricIconBadge }}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V7l7-4 7 4v14"></path></svg>
-            </div>
-          </div>
-          <span className="{{ s.lifeMetricLabel }}">Site, every department together</span>
+  <!-- ============ ROLE DETAIL ============ -->
+  <div data-screen-label="Role Detail" className="{{ s.sectionPad }}">
+    <div className="{{ s.jobWrap }}" ref="{{ jobRevealRef }}">
+
+      <div className="{{ s.jobMainCol }}">
+        <div className="{{ s.jobBlock }}">
+          <span className="{{ s.jobH3 }}">About the role</span>
+          <span className="{{ s.jobBody }}">{{ job.summary }}</span>
         </div>
-      </div>
-      <div className="{{ s.lifeContent }}">
-        <span className="{{ s.lifeEyebrowPill }}">LIFE AT GMP</span>
-        <span className="{{ s.h2 }}">More than a manufacturing floor</span>
-        <span className="{{ s.lifeBody }}">Our people are the reason partners trust us with their products. Across formulation, manufacturing, quality and operations, everyone at GMP works from the same UK site — so ideas move fast and everyone sees the impact of their work.</span>
-        <span className="{{ s.lifeBody }}">We're a close-knit, hands-on team that takes pride in getting the details right, and we back that up with real investment in training, safety and career progression.</span>
-        <div className="{{ s.lifeCtaRow }}">
-          <a href="#openings" className="{{ s.lifeCtaSecondary.className }}" onMouseEnter="{{ s.lifeCtaSecondary.enter }}" onMouseLeave="{{ s.lifeCtaSecondary.leave }}">See Open Roles</a>
-          <a href="job-detail.html" className="{{ s.lifeCtaPrimary.className }}" onMouseEnter="{{ s.lifeCtaPrimary.enter }}" onMouseLeave="{{ s.lifeCtaPrimary.leave }}">Apply Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ GALLERY (horizontally scrollable bento strip) ============ -->
-  <div data-screen-label="Gallery" className="{{ s.sectionPad }}">
-    <div className="{{ s.galleryHead }}" ref="{{ galleryRevealRef }}">
-      <span className="{{ s.eyebrow }}">Inside GMP</span>
-      <span className="{{ s.h2 }}">A look around our Hull site</span>
-    </div>
-  </div>
-  <div className="{{ s.galleryOuter }}">
-    <div className="{{ s.galleryTrack }}" ref="{{ galleryTrackRef }}">
-      <sc-for list="{{galleryItems}}" as="tile" hint-placeholder-count="9">
-        <div className="{{ tile.cellStyle }}">
-          <img src="{{ tile.img }}" alt="{{ tile.alt }}" loading="lazy" className="{{ s.galleryImg }}">
-        </div>
-      </sc-for>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ BENEFITS (subtle blue band) ============ -->
-  <div className="{{ s.benefitsBandOuter }}">
-  <div data-screen-label="Benefits" className="{{ s.sectionPad }}">
-    <div className="{{ s.benefitsWrap }}" ref="{{ whyWorkRevealRef }}">
-      <div className="{{ s.benefitsHeadWrap }}">
-        <span className="{{ s.eyebrow }}">Why Work Here</span>
-        <span className="{{ s.h2 }}">Benefits of joining GMP</span>
-      </div>
-      <div className="{{ s.benefitsGrid }}">
-        <sc-for list="{{whyWorkItems}}" as="item" hint-placeholder-count="4">
-          <div className="{{ s.benefitCard }}">
-            <div className="{{ s.benefitIconBox }}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.themeRedIcon }}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
-            </div>
-            <div className="{{ s.benefitTextCol }}">
-              <span className="{{ s.benefitLabel }}">{{ item.h }}</span>
-              <span className="{{ s.benefitBody }}">{{ item.d }}</span>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-  </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ OPEN POSITIONS (list) ============ -->
-  <div data-screen-label="Current Openings" id="openings" className="{{ s.sectionPad }}">
-    <div className="{{ s.openingsWrap }}" ref="{{ openingsRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">Careers</span>
-        <span className="{{ s.h2 }}">Open positions</span>
-      </div>
-      <sc-if value="{{ hasOpenings }}" hint-placeholder-val="{{ true }}">
-        <div className="{{ s.openingsList }}">
-          <sc-for list="{{openingItems}}" as="job" hint-placeholder-count="5">
-            <a href="job-detail.html" className="{{ s.openingRow }}">
-              <div className="{{ s.openingMain }}">
-                <span className="{{ s.openingTitle }}">{{ job.title }}</span>
-                <div className="{{ s.openingMetaRow }}">
-                  <span className="{{ s.openingTag }}">{{ job.dept }}</span>
-                  <span className="{{ s.openingMeta }}">{{ job.type }}</span>
-                  <span className="{{ s.openingMeta }}">{{ job.location }}</span>
-                </div>
+        <div className="{{ s.jobBlock }}">
+          <span className="{{ s.jobH3 }}">What you'll do</span>
+          <div className="{{ s.jobList }}">
+            <sc-for list="{{job.duties}}" as="line" hint-placeholder-count="5">
+              <div className="{{ s.jobListRow }}">
+                <span className="{{ s.jobBullet }}"></span>
+                <span className="{{ s.jobListText }}">{{ line }}</span>
               </div>
-              <span className="{{ s.openingApply }}">Apply →</span>
-            </a>
-          </sc-for>
+            </sc-for>
+          </div>
         </div>
-      </sc-if>
-      <sc-if value="{{ noOpenings }}" hint-placeholder-val="{{ false }}">
-        <div className="{{ s.openingsCard }}">
-          <span className="{{ s.openingsCardText }}">We don't have any open positions right now, but we're always keen to hear from great people. Register your interest below and we'll be in touch as soon as a suitable role opens up.</span>
-          <a href="#hr" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
-            <span className="{{ s.collabGetQuoteText }}">Register Your Interest</span>
-          </a>
+        <div className="{{ s.jobBlock }}">
+          <span className="{{ s.jobH3 }}">What we're looking for</span>
+          <div className="{{ s.jobList }}">
+            <sc-for list="{{job.requirements}}" as="line" hint-placeholder-count="5">
+              <div className="{{ s.jobListRow }}">
+                <span className="{{ s.jobBullet }}"></span>
+                <span className="{{ s.jobListText }}">{{ line }}</span>
+              </div>
+            </sc-for>
+          </div>
         </div>
-      </sc-if>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ TALK TO HR (full-bleed navy band) ============ -->
-  <div className="{{ s.hrBandOuter }}">
-    <div data-screen-label="Talk to HR" id="hr" className="{{ s.sectionPad }}">
-      <div className="{{ s.hrWrap }}">
-        <div className="{{ s.hrTextCol }}">
-          <span className="{{ s.hrEyebrow }}">Nothing matching your skills?</span>
-          <span className="{{ s.hrHeading }}">Talk to our HR team directly</span>
-          <span className="{{ s.hrBody }}">We'd still like to hear from you. Send us your CV and a note about what you do, and we'll keep you in mind as roles open up across formulation, quality, production and operations.</span>
-        </div>
-        <div className="{{ s.hrActionsCol }}">
-          <a href="mailto:info@gmpgroup.co.uk?subject=Speculative%20application" className="{{ s.hrBtnPrimary }}">Email our HR team</a>
-          <a href="tel:+441482707138" className="{{ s.hrBtnGhost }}">+44 (0) 1482 707 138</a>
+        <div className="{{ s.jobBlock }}">
+          <span className="{{ s.jobH3 }}">What we offer</span>
+          <div className="{{ s.jobList }}">
+            <sc-for list="{{job.offer}}" as="line" hint-placeholder-count="4">
+              <div className="{{ s.jobListRow }}">
+                <span className="{{ s.jobBullet }}"></span>
+                <span className="{{ s.jobListText }}">{{ line }}</span>
+              </div>
+            </sc-for>
+          </div>
         </div>
       </div>
+
+      <div className="{{ s.jobSideCol }}">
+        <div className="{{ s.jobFactCard }}">
+          <span className="{{ s.jobFactHeading }}">Role details</span>
+          <div className="{{ s.jobFactDivider }}"></div>
+          <sc-for list="{{job.facts}}" as="fact" hint-placeholder-count="6">
+            <div className="{{ s.jobFactItem }}">
+              <span className="{{ s.jobFactLabel }}">{{ fact.k }}</span>
+              <span className="{{ s.jobFactValue }}">{{ fact.v }}</span>
+            </div>
+          </sc-for>
+          <a href="#apply" className="{{ s.jobApplyBtn }}">Apply for this role</a>
+          <a href="mailto:info@gmpgroup.co.uk?subject=Question%20about%20a%20role" className="{{ s.jobAskLink }}">Question about this role?</a>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ APPLICATION FORM ============ -->
+  <div data-screen-label="Application Form" id="apply" className="{{ s.sectionPad }}">
+    <div className="{{ s.formWrap }}" ref="{{ formRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Apply Now</span>
+        <span className="{{ s.h2 }}">Register Your Interest</span>
+      </div>
+
+      <sc-if value="{{ showApplicationForm }}" hint-placeholder-val="{{ true }}">
+        <div className="{{ s.formGrid }}">
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">Full Name *</span>
+            <input type="text" placeholder="Jane Doe" className="{{ s.formInput }}">
+          </div>
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">Email Address *</span>
+            <input type="email" placeholder="jane@example.com" className="{{ s.formInput }}">
+          </div>
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">Role You're Interested In</span>
+            <input type="text" placeholder="e.g. Quality Assurance" className="{{ s.formInput }}">
+          </div>
+          <div className="{{ s.formGroup }}">
+            <span className="{{ s.formLabel }}">CV / Resume</span>
+            <input type="file" accept=".pdf,.doc,.docx" className="{{ s.formFileInput }}">
+          </div>
+          <div className="{{ s.formGroupFull }}">
+            <span className="{{ s.formLabel }}">Cover Note (optional)</span>
+            <textarea placeholder="Tell us a little about yourself..." className="{{ s.formTextarea }}"></textarea>
+          </div>
+        </div>
+        <div className="{{ s.formSubmitRow }}" onClick="{{ onSubmitApplication }}">
+          <span className="{{ s.pillDarkText }}">Submit Application</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showApplicationConfirmation }}" hint-placeholder-val="{{ false }}">
+        <div className="{{ s.confirmationBox }}">
+          <span className="{{ s.confirmationHeading }}">Thanks — we've received your details.</span>
+          <span className="{{ s.confirmationBody }}">We'll be in touch if a suitable role opens up. In the meantime, feel free to explore more about life at GMP above.</span>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ COLLABORATE ============ -->
   <div className="{{ s.collabOuter }}">
@@ -429,7 +410,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, applicationSubmitted: false, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -452,53 +433,6 @@ class Component extends DCLogic {
     if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
     this._teardownRipple();
   }
-  _initGalleryMarquee(el) {
-    if (!el || el._marqueeInit) return;
-    el._marqueeInit = true;
-    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let paused = reduced, dragging = false, startX = 0, startScroll = 0, moved = 0, raf = 0;
-    // The track holds two copies of the tiles; wrapping at the halfway point
-    // keeps the loop seamless in both directions.
-    const half = () => el.scrollWidth / 2;
-    const wrap = () => {
-      const h = half();
-      if (h <= 0) return;
-      if (el.scrollLeft >= h) el.scrollLeft -= h;
-      else if (el.scrollLeft <= 0) el.scrollLeft += h;
-    };
-    const step = () => {
-      if (!paused && !dragging) { el.scrollLeft += 0.5; wrap(); }
-      raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    el.addEventListener("mouseenter", () => { if (!reduced) paused = true; });
-    el.addEventListener("mouseleave", () => { if (!reduced) paused = false; });
-    el.addEventListener("pointerdown", (e) => {
-      dragging = true; moved = 0;
-      startX = e.clientX; startScroll = el.scrollLeft;
-      el.setPointerCapture(e.pointerId);
-      el.classList.add("is-dragging");
-    });
-    el.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
-      const dx = e.clientX - startX;
-      moved = Math.max(moved, Math.abs(dx));
-      el.scrollLeft = startScroll - dx;
-      wrap();
-    });
-    const end = (e) => {
-      if (!dragging) return;
-      dragging = false;
-      el.classList.remove("is-dragging");
-      try { el.releasePointerCapture(e.pointerId); } catch (err) {}
-    };
-    el.addEventListener("pointerup", end);
-    el.addEventListener("pointercancel", end);
-    // A drag that travelled must not also fire the link underneath it.
-    el.addEventListener("click", (e) => { if (moved > 6) { e.preventDefault(); e.stopPropagation(); } }, true);
-    this._galleryRaf = raf;
-  }
-
   _observeReveal(key, el) {
     if (!el) return;
     this._revealObservers = this._revealObservers || {};
@@ -912,79 +846,43 @@ class Component extends DCLogic {
     s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
     const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
 
-    // ---------- LIFE AT GMP ----------
-    s.lifeWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("life");
-    s.lifeImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden";
-    s.lifeImage = "relative w-full h-full object-cover box-border";
-    s.lifeContent = "flex flex-col gap-[20px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
-    s.lifeEyebrowPill = `inline-flex items-center rounded-[999px] bg-[rgba(178,33,38,0.08)] text-[${red}] font-medium text-[12px] tracking-[0.6px] leading-[16px] py-[6px] px-[14px] box-border w-fit`;
-    s.lifeBody = "font-normal text-[16px] md:text-[17px] leading-[26px] md:leading-[27px] text-[rgba(51,51,51,0.8)] max-w-[560px]";
-    s.lifeMetricCard = `absolute bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col gap-[4px] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.35)] ` +
-      pick("top-[16px] right-[16px] w-[152px] py-[16px] px-[16px]", "top-[24px] right-[24px] w-[178px] py-[18px] px-[20px]", "top-[28px] right-[28px] w-[196px] py-[20px] px-[22px]");
-    s.lifeMetricTopRow = "flex flex-row items-center justify-between w-full";
-    s.lifeMetricNumber = `font-semibold ${pick("text-[26px]", "text-[30px]", "text-[34px]")} leading-[1.1] tracking-[-0.5px] text-[${near}]`;
-    s.lifeMetricIconBadge = `flex items-center justify-center w-[26px] h-[26px] rounded-full bg-[${red}] shrink-0`;
-    s.lifeMetricLabel = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.7)]";
-    s.lifeCtaRow = "flex flex-row flex-wrap gap-[16px] items-center pt-[8px]";
-    const makeLifeCta = (key, filled) => {
-      const hovered = this.state.hoveredKey === key;
-      const base = "rounded-[999px] flex flex-row items-center justify-center gap-[8px] py-[14px] px-[28px] box-border cursor-pointer shrink-0 no-underline font-medium text-[15px] transition-[background,border-color,color,box-shadow,transform] duration-200 ease-in-out";
-      const filledClass = hovered
-        ? `bg-[${near}] text-white border border-solid border-[${near}] ${hoverShadowTw} -translate-y-[2px]`
-        : `bg-[${red}] text-white border border-solid border-[${red}] ${noShadowTw} translate-y-0`;
-      const outlineClass = hovered
-        ? `bg-[${red}] text-white border border-solid border-[${red}] -translate-y-[2px]`
-        : `bg-transparent text-[${near}] border border-solid border-[rgba(51,51,51,0.25)] translate-y-0`;
-      return { className: base + " " + (filled ? filledClass : outlineClass),
-               enter: () => this.setState({ hoveredKey: key }),
-               leave: () => this.setState({ hoveredKey: null }) };
-    };
-    s.lifeCtaPrimary = makeLifeCta("lifeCtaPrimary", true);
-    s.lifeCtaSecondary = makeLifeCta("lifeCtaSecondary", false);
+    // ---------- JOB DETAIL ----------
+    s.backLink = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.75)] no-underline hover:text-white transition-colors duration-200 w-fit";
+    s.bannerMetaRow = "flex flex-row flex-wrap items-center gap-[10px] md:gap-[14px] pt-[6px]";
+    s.bannerTag = "inline-flex items-center rounded-[999px] bg-[rgba(255,255,255,0.16)] text-white font-medium text-[12px] tracking-[0.4px] leading-[16px] py-[5px] px-[12px] box-border";
+    s.bannerMeta = "font-normal text-[14px] md:text-[15px] leading-[20px] text-[rgba(255,255,255,0.8)]";
+    s.jobWrap = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[40px] xl:gap-[56px] items-start max-w-[1600px] mx-auto " + reveal("job");
+    s.jobMainCol = "flex flex-col gap-[28px] md:gap-[34px] " + (isDesktop ? "w-[62%]" : "w-full");
+    s.jobBlock = "flex flex-col gap-[12px] items-start";
+    s.jobH3 = `font-semibold ${pick("text-[20px]", "text-[22px]", "text-[24px]")} leading-[1.3] text-[${near}]`;
+    s.jobBody = "font-normal text-[16px] md:text-[17px] leading-[26px] md:leading-[27px] text-[rgba(51,51,51,0.8)]";
+    s.jobList = "flex flex-col gap-[10px] w-full";
+    s.jobListRow = "flex flex-row gap-[12px] items-start";
+    s.jobBullet = `shrink-0 w-[7px] h-[7px] rounded-full bg-[${red}] mt-[9px]`;
+    s.jobListText = "font-normal text-[15px] md:text-[16px] leading-[25px] text-[rgba(51,51,51,0.8)]";
+    s.jobSideCol = (isDesktop ? "w-[38%] sticky top-[96px]" : "w-full") + " shrink-0";
+    s.jobFactCard = "flex flex-col gap-[12px] box-border bg-[rgb(245,243,240)] " + pick("p-[24px]", "p-[28px]", "p-[32px]");
+    s.jobFactHeading = `font-semibold ${pick("text-[18px]", "text-[19px]", "text-[20px]")} leading-[1.3] text-[${near}]`;
+    s.jobFactDivider = "h-[1px] w-full bg-[rgba(0,0,0,0.12)]";
+    s.jobFactItem = "flex flex-col gap-[2px] items-start";
+    s.jobFactLabel = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
+    s.jobFactValue = `font-medium text-[16px] leading-[24px] text-[${dark}]`;
+    s.jobApplyBtn = `mt-[8px] rounded-[999px] bg-[${red}] text-white font-medium text-[15px] leading-[20px] no-underline text-center box-border py-[14px] px-[26px] transition-[background,transform] duration-200 ease-in-out hover:bg-[${near}] hover:-translate-y-[2px]`;
+    s.jobAskLink = `font-medium text-[14px] leading-[20px] text-[${red}] no-underline text-center`;
 
-    // ---------- GALLERY (bento tiles on one horizontal track) ----------
-    s.galleryHead = "flex flex-col gap-[8px] items-start max-w-[1600px] mx-auto " + pick("mb-[20px]", "mb-[24px]", "mb-[28px]") + " " + reveal("gallery");
-    s.galleryOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] box-border`;
-    // Two rows, flowing sideways: tall tiles span both, short ones pair up.
-    s.galleryTrack = `grid grid-rows-2 grid-flow-col gap-[12px] md:gap-[16px] overflow-x-auto overflow-y-hidden gmp-scroll-none gmp-drag box-border pl-[${gutter}px] pr-[${gutter}px] ` +
-      pick("h-[340px]", "h-[420px]", "h-[500px]");
-    s.galleryTall = `row-span-2 overflow-hidden bg-[rgb(232,232,232)] ${pick("w-[210px]", "w-[260px]", "w-[300px]")}`;
-    s.gallerySmall = `overflow-hidden bg-[rgb(232,232,232)] ${pick("w-[210px]", "w-[280px]", "w-[330px]")}`;
-    s.galleryImg = "w-full h-full object-cover";
-
-    // ---------- BENEFITS ----------
-    s.benefitsBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] px-[${gutter}px] box-border bg-[rgba(37,117,187,0.05)] ` + pick("py-[40px]", "py-[52px]", "py-[64px]");
-    s.benefitsWrap = "flex flex-col gap-[24px] md:gap-[32px] max-w-[1600px] mx-auto " + reveal("whyWork");
-    s.benefitsHeadWrap = "flex flex-col gap-[8px] items-start";
-    s.benefitsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
-    s.benefitCard = "flex flex-col gap-[16px] items-start bg-white box-border transition-transform duration-200 ease-in-out hover:-translate-y-1 " + pick("p-[22px]", "p-[26px]", "p-[30px]");
-    s.benefitIconBox = "flex items-center justify-center w-[42px] h-[42px] shrink-0 rounded-full bg-[rgba(178,33,38,0.08)] box-border";
-    s.themeRedIcon = red;
-    s.benefitTextCol = "flex flex-col gap-[8px] items-start";
-    s.benefitLabel = `font-semibold ${pick("text-[18px]", "text-[19px]", "text-[20px]")} leading-[1.3] text-[${near}]`;
-    s.benefitBody = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.72)]";
-
-    // ---------- OPEN POSITIONS ----------
-    s.openingsList = "flex flex-col w-full border-t border-solid border-[rgba(0,0,0,0.12)]";
-    s.openingRow = "group flex flex-row items-center justify-between gap-[16px] w-full no-underline box-border border-b border-solid border-[rgba(0,0,0,0.12)] transition-[background,padding] duration-200 ease-in-out hover:bg-[rgb(245,243,240)] " +
-      pick("py-[18px] px-[4px]", "py-[22px] px-[8px]", "py-[26px] px-[12px]");
-    s.openingMain = "flex flex-col gap-[8px] items-start";
-    s.openingTitle = `font-semibold ${pick("text-[18px]", "text-[20px]", "text-[22px]")} leading-[1.3] text-[${near}]`;
-    s.openingMetaRow = "flex flex-row flex-wrap items-center gap-[10px] md:gap-[14px]";
-    s.openingTag = `inline-flex items-center rounded-[999px] bg-[rgba(45,38,93,0.08)] text-[${purple}] font-medium text-[12px] tracking-[0.4px] leading-[16px] py-[5px] px-[12px] box-border`;
-    s.openingMeta = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.65)]";
-    s.openingApply = `font-medium ${pick("text-[14px]", "text-[15px]", "text-[15px]")} leading-[20px] text-[${red}] whitespace-nowrap shrink-0`;
-
-    // ---------- TALK TO HR ----------
-    s.hrBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] px-[${gutter}px] box-border bg-[rgb(41,37,96)] ` + pick("py-[40px]", "py-[52px]", "py-[64px]");
-    s.hrWrap = "flex " + (isDesktop ? "flex-row items-center justify-between" : "flex-col items-start") + " gap-[28px] md:gap-[36px] max-w-[1600px] mx-auto";
-    s.hrTextCol = "flex flex-col gap-[10px] items-start " + (isDesktop ? "max-w-[640px]" : "w-full");
-    s.hrEyebrow = "font-normal text-[15px] leading-[22px] text-[rgba(255,255,255,0.6)]";
-    s.hrHeading = `font-medium ${pick("text-[26px]", "text-[32px]", "text-[38px]")} leading-[1.2] tracking-[-1px] text-white`;
-    s.hrBody = "font-normal text-[15px] md:text-[16px] leading-[24px] text-[rgba(255,255,255,0.75)]";
-    s.hrActionsCol = "flex flex-row flex-wrap gap-[14px] items-center shrink-0";
-    s.hrBtnPrimary = "rounded-[999px] bg-white text-[rgb(41,37,96)] font-medium text-[15px] leading-[20px] no-underline box-border py-[14px] px-[26px] transition-transform duration-200 ease-in-out hover:-translate-y-[2px]";
-    s.hrBtnGhost = "rounded-[999px] bg-transparent text-white font-medium text-[15px] leading-[20px] no-underline box-border py-[14px] px-[26px] border border-solid border-[rgba(255,255,255,0.45)] transition-[background,transform] duration-200 ease-in-out hover:bg-[rgba(255,255,255,0.1)] hover:-translate-y-[2px]";
+    // ---------- APPLICATION FORM ----------
+    s.formWrap = "flex flex-col gap-[24px] md:gap-[28px] xl:gap-[32px] max-w-[900px] mx-auto w-full " + reveal("form");
+    s.formGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[20px] w-full";
+    s.formGroup = "flex flex-col gap-[6px]";
+    s.formGroupFull = "flex flex-col gap-[6px] " + (isMobile ? "col-auto" : "col-[1/-1]");
+    s.formLabel = `font-medium text-[14px] leading-[20px] text-[${dark}]`;
+    s.formInput = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white`;
+    s.formFileInput = `w-full py-[10px] px-0 text-[14px] font-[inherit] text-[${dark}] box-border`;
+    s.formTextarea = `w-full py-[12px] px-[16px] text-[15px] font-[inherit] border border-solid border-[rgba(0,0,0,0.15)] rounded-[4px] box-border text-[${dark}] bg-white min-h-[120px] resize-y`;
+    s.formSubmitRow = s.pillDark + ` bg-[${near}] self-start`;
+    s.confirmationBox = "flex flex-col gap-[8px] bg-[rgb(245,245,245)] rounded-[8px] box-border " + pick("p-[24px]", "p-[32px]", "p-[40px]");
+    s.confirmationHeading = `font-semibold text-[20px] leading-[26px] text-[${dark}]`;
+    s.confirmationBody = `font-normal text-[15px] leading-[22px] text-[${dark}]`;
 
     s.pillGetQuote = makeHeroCta("openingsApply", collabPillBase);
     s.pillGetQuote2 = makeHeroCta("collabApply", collabPillBase);
@@ -1022,69 +920,59 @@ class Component extends DCLogic {
     s.footerBottomRow = "flex flex-row items-center pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
 
     // ---------- DATA ----------
-    // PLACEHOLDER VACANCIES - invented to show the list design. Replace with real
-    // openings before launch: listing roles that do not exist will draw real
-    // applications. Fields mirror what the job detail page will need.
-    const openingsData = [
-      { title: "QC Analyst", dept: "Quality", type: "Full-time", location: "Hull, UK", salary: "Competitive", experience: "2+ years" },
-      { title: "Production Operative", dept: "Manufacturing", type: "Full-time", location: "Hull, UK", salary: "Competitive", experience: "Entry level" },
-      { title: "Formulation Scientist", dept: "Development", type: "Full-time", location: "Hull, UK", salary: "Competitive", experience: "3+ years" },
-      { title: "Regulatory Affairs Officer", dept: "Regulatory", type: "Full-time", location: "Hull, UK", salary: "Competitive", experience: "2+ years" },
-      { title: "Warehouse & Logistics Coordinator", dept: "Supply Chain", type: "Full-time", location: "Hull, UK", salary: "Competitive", experience: "1+ years" },
-    ];
-    const openingItems = openingsData.map((j) => ({
-      title: j.title, dept: j.dept, type: j.type, location: j.location,
-      salary: j.salary, experience: j.experience,
-    }));
-    const hasOpenings = openingItems.length > 0;
-    const noOpenings = openingItems.length === 0;
+    // PLACEHOLDER ROLE - invented content so the layout can be reviewed. Replace with
+    // a real vacancy before launch; a live job page draws real applications.
+    const job = {
+      title: "QC Analyst",
+      dept: "Quality",
+      type: "Full-time",
+      location: "Hull, UK",
+      summary: "You'll sit within our in-house quality team, running the analytical and stability testing that sits behind every batch we release. It's hands-on work across a varied product mix — pharmaceutical, veterinary, cosmetic and medical device — with the whole process under one roof, so you see a product through rather than a single step of it.",
+      duties: [
+        "Run routine analytical testing on raw materials, in-process samples and finished product.",
+        "Carry out stability studies and record results against protocol.",
+        "Investigate out-of-specification results and support root cause analysis.",
+        "Keep equipment calibrated, maintained and audit-ready.",
+        "Write up clear, complete documentation for every test performed.",
+      ],
+      requirements: [
+        "A degree in chemistry, pharmaceutical science or a related discipline.",
+        "Experience in a regulated laboratory — pharmaceutical, cosmetic or medical device.",
+        "Working knowledge of GMP and good documentation practice.",
+        "Comfortable with HPLC, dissolution and standard wet chemistry techniques.",
+        "Methodical, and confident raising an issue when something looks wrong.",
+      ],
+      offer: [
+        "Varied work across several regulated sectors, not one narrow product line.",
+        "Structured training and support toward further qualifications.",
+        "A single-site team where quality, production and development talk daily.",
+        "Company pension and holiday allowance rising with service.",
+      ],
+      facts: [
+        { k: "Department", v: "Quality" },
+        { k: "Contract", v: "Full-time, permanent" },
+        { k: "Location", v: "Marfleet House, Hull, UK" },
+        { k: "Experience", v: "2+ years in a regulated lab" },
+        { k: "Salary", v: "Competitive, depending on experience" },
+        { k: "Reports to", v: "Head of Quality Assurance" },
+      ],
+    };
 
-    // Alternating tall / stacked-pair tiles give the bento rhythm along the track.
-    const galleryData = [
-      { img: "assets/gmp-5.webp",  alt: "Laboratory bench work", tall: true },
-      { img: "assets/gmp-2.webp",  alt: "Analytical testing" },
-      { img: "assets/team-2.webp", alt: "A member of the GMP team" },
-      { img: "assets/gmp-10.webp", alt: "Warehouse and storage", tall: true },
-      { img: "assets/gmp-6.webp",  alt: "Finished product" },
-      { img: "assets/gmp-3.webp",  alt: "Batch inspection" },
-      { img: "assets/gmp-11.webp", alt: "Formulation work", tall: true },
-      { img: "assets/gmp-8.webp",  alt: "Filling line" },
-      { img: "assets/team-4.webp", alt: "A member of the GMP team" },
-      { img: "assets/gmp-12.webp", alt: "Sample preparation", tall: true },
-      { img: "assets/gmp-4.webp",  alt: "Automated production line" },
-      { img: "assets/team-6.webp", alt: "A member of the GMP team" },
-    ];
-    // Doubled so the marquee can wrap without a visible seam.
-    const galleryItems = [...galleryData, ...galleryData].map((t) => ({
-      img: t.img, alt: t.alt, cellStyle: t.tall ? s.galleryTall : s.gallerySmall,
-    }));
-
-    const whyWorkData = [
-      { h: "Real Ownership", d: "Work on products from formulation through to market, not just one narrow slice of the process." },
-      { h: "Room to Grow", d: "Structured training and a clear path to take on more responsibility as you develop." },
-      { h: "UK-Based Stability", d: "A UK-owned, established business with long-term partners and steady, varied work." },
-      { h: "One Team, One Site", d: "Every department works from the same Hull facility — no silos, no hand-offs." },
-    ];
-    const whyWorkItems = whyWorkData.map((item) => ({ h: item.h, d: item.d }));
 
     return {
       s,
-      lifeRevealRef: revealRef("life"),
-      whyWorkRevealRef: revealRef("whyWork"),
-      openingsRevealRef: revealRef("openings"),
+      jobRevealRef: revealRef("job"),
       collabRevealRef: revealRef("collab"),
       collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
       collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
       footerRevealRef: revealRef("footer"),
       toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
       showHeroCtaIcon: !isMobile,
-      whyWorkItems,
-      openingItems,
-      hasOpenings,
-      noOpenings,
-      galleryItems,
-      galleryRevealRef: revealRef("gallery"),
-      galleryTrackRef: (el) => this._initGalleryMarquee(el),
+      job,
+      formRevealRef: revealRef("form"),
+      showApplicationForm: !this.state.applicationSubmitted,
+      showApplicationConfirmation: this.state.applicationSubmitted,
+      onSubmitApplication: () => this.setState({ applicationSubmitted: true }),
     };
   }
 }
