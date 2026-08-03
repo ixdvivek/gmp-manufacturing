@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="tailwind.config.js"></script>
+</head>
+<body>
+<div id="gmp-loader" aria-hidden="true"><div class="gmp-loader-box"><img src="assets2/logo-icon.svg" alt=""><span class="gmp-loader-ring"></span></div></div>
+<style>
+  html{scrollbar-gutter:stable}
+  /* Inline, so it is guaranteed to apply at first paint. Tailwind builds its
+     sheet at runtime; without this the app can paint unstyled for a frame and
+     then snap into the reveal state as those rules arrive. */
+  #dc-root{opacity:0}
+  html.gmp-ready #dc-root{opacity:1;transition:opacity .35s ease}
+  #gmp-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
+    background:#fff;opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s linear .45s}
+  #gmp-loader.is-done{opacity:0;visibility:hidden}
+  .gmp-loader-box{position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center}
+  .gmp-loader-box img{width:52px;height:52px;object-fit:contain;animation:gmp-loader-pulse 1.5s ease-in-out infinite}
+  .gmp-loader-ring{position:absolute;inset:0;border-radius:50%;
+    border:2px solid rgba(41,37,96,.12);border-top-color:rgb(178,33,38);
+    animation:gmp-loader-spin .9s linear infinite}
+  @keyframes gmp-loader-spin{to{transform:rotate(360deg)}}
+  @keyframes gmp-loader-pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    .gmp-loader-box img,.gmp-loader-ring{animation:none}
+    #gmp-loader{transition:none}
+  }
+</style>
+<script>
+(function(){
+  var el=document.getElementById("gmp-loader");
+  if(!el)return;
+  var done=false;
+  function hide(){ if(done)return; done=true;
+    document.documentElement.classList.add("gmp-ready");
+    el.classList.add("is-done");
+    window.__gmpReady=true; window.dispatchEvent(new Event("gmp:ready")); }
+  function show(){ done=false; el.classList.remove("is-done"); }
+  // Reveal the page once the app has painted, with a hard cap so a slow or
+  // failed script can never leave the loader stuck over the content.
+  function whenReady(){
+    var t=setInterval(function(){
+      var root=document.getElementById("dc-root");
+      if(!root||!root.firstElementChild)return;
+      // Tailwind builds its stylesheet at runtime, so the first paint can land
+      // before the reveal rules exist. Lifting then makes sections flash in fully
+      // visible and snap back to animate. Wait until opacity-0 actually applies.
+      var probe=root.querySelector('[class*="opacity-0"]');
+      if(probe&&getComputedStyle(probe).opacity!=="0")return;
+      clearInterval(t);setTimeout(hide,140);
+    },50);
+    setTimeout(function(){clearInterval(t);hide();},4000);
+  }
+  if(document.readyState==="complete"||document.readyState==="interactive")whenReady();
+  else document.addEventListener("DOMContentLoaded",whenReady);
+  // Bring it back on internal navigation so page-to-page moves feel continuous.
+  document.addEventListener("click",function(e){
+    var a=e.target&&e.target.closest?e.target.closest("a[href]"):null;
+    if(!a)return;
+    var href=a.getAttribute("href")||"";
+    if(!href||href.charAt(0)==="#"||/^(mailto:|tel:|javascript:)/i.test(href))return;
+    if(a.target&&a.target!=="_self")return;
+    if(a.host&&a.host!==location.host)return;
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
+    show();
+  },true);
+  // Restoring from bfcache must not show a frozen loader.
+  window.addEventListener("pageshow",function(e){if(e.persisted)hide();});
+})();
+</script>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <title>GMP Manufacturing Ltd — News &amp; Media</title>
+  <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets2/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; }
+    .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    ::selection { background: rgb(37,117,187); color: #fff; }
+    ::-moz-selection { background: rgb(37,117,187); color: #fff; }
+  </style>
+</helmet>
+
+<div data-screen-label="GMP Mfd Event Detail — Template" className="{{ s.root }}">
+
+  <!-- ============ TOPBAR ============ -->
+  <div className="{{ s.heroTopbar }}">
+    <a href="index.html" className="{{ s.logoLink }}">
+      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.heroLogo }}">
+    </a>
+    <div className="{{ s.heroNav }}">
+      <a href="index.html" className="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
+      <a href="about.html" className="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="services.html" className="{{ s.navServicesStyle }}">Services</a>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.servicesMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Research &amp; Development</a>
+          </div>
+        </div>
+      </div>
+      <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.sectorsMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Biocide</a>
+          </div>
+        </div>
+      </div>
+      <a href="contact.html" className="{{ s.navContactStyle }}" onMouseEnter="{{ s.navEnterContact }}" onMouseLeave="{{ s.navLeave }}">Contact Us</a>
+    </div>
+    <div className="{{ s.heroTopbarRightGroup }}">
+      <a href="contact.html" className="{{ s.heroCtaTopbarCtl.className }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+        <span className="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+        <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
+          <div className="{{ s.heroCtaTopbarIconStyle }}"></div>
+        </sc-if>
+      </a>
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBar1 }}"></div>
+        <div className="{{ s.hamburgerBar2 }}"></div>
+        <div className="{{ s.hamburgerBar3 }}"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MOBILE NAV OVERLAY ============ -->
+  <div className="{{ s.mobileNavOverlay }}">
+    <div className="{{ s.mobileNavCloseRow }}">
+      <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBarX1 }}"></div>
+        <div className="{{ s.hamburgerBarX2 }}"></div>
+      </div>
+    </div>
+    <div className="{{ s.mobileNavLinks }}">
+      <a href="index.html" className="{{ s.mobileNavLink }}">Home</a>
+      <a href="about.html" className="{{ s.mobileNavLink }}">About Us</a>
+      <a href="services.html" className="{{ s.mobileNavLink }}">Services</a>
+      <a href="innovations.html" className="{{ s.mobileNavLink }}">Innovations</a>
+      <a href="sectors.html" className="{{ s.mobileNavLink }}">Sectors</a>
+      <a href="contact.html" className="{{ s.mobileNavLink }}">Contact Us</a>
+    </div>
+    <a href="contact.html" className="{{ s.heroCtaCtl.className }}" onMouseEnter="{{ s.heroCtaCtl.enter }}" onMouseLeave="{{ s.heroCtaCtl.leave }}">
+      <span className="{{ s.heroCtaText }}">Get A Quote</span>
+      <div className="{{ s.heroCtaIconStyle }}"></div>
+    </a>
+  </div>
+
+  <!-- ============ PAGE TITLE (no hero photo — type-led header) ============ -->
+  <!-- ============ ARTICLE HEAD ============ -->
+  <div data-screen-label="Article Head" className="{{ s.firstSectionPad }}">
+    <div className="{{ s.artHeadWrap }}" ref="{{ artRevealRef }}">
+      <a href="news.html" className="{{ s.artBack }}">&larr; Back to Events</a>
+      <span className="{{ s.artTag }}">{{ article.tag }}</span>
+      <span className="{{ s.artTitle }}">{{ article.title }}</span>
+      <div className="{{ s.artMetaRow }}">
+        <span className="{{ s.artMeta }}">{{ article.date }}</span>
+        <span className="{{ s.artMetaDot }}"></span>
+        <span className="{{ s.artMeta }}">{{ readingTime }}</span>
+        <div className="{{ s.artShareBtn }}" onClick="{{ onShare }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><path d="M16 6l-4-4-4 4"></path><path d="M12 2v14"></path></svg>
+          <span>{{ shareLabel }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGapHalf }}"></div>
+
+  <!-- ============ HERO IMAGE ============ -->
+  <div className="{{ s.artHeroOuter }}">
+    <img src="{{ article.hero }}" alt="{{ article.title }}" className="{{ s.artHeroImg }}">
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ ARTICLE BODY ============ -->
+  <div data-screen-label="Article Body" className="{{ s.sectionPad }}">
+    <div className="{{ s.artBodyWrap }}">
+      <sc-for list="{{blocks}}" as="b" hint-placeholder-count="6">
+        <div className="{{ b.wrapStyle }}">
+          <sc-if value="{{ b.isHeading }}" hint-placeholder-val="{{ false }}">
+            <span className="{{ s.artH3 }}">{{ b.text }}</span>
+          </sc-if>
+          <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ true }}">
+            <span className="{{ s.artPara }}">{{ b.text }}</span>
+          </sc-if>
+          <sc-if value="{{ b.isImage }}" hint-placeholder-val="{{ false }}">
+            <figure className="{{ s.artFigure }}">
+              <img src="{{ b.img }}" alt="{{ b.caption }}" loading="lazy" className="{{ s.artFigImg }}">
+              <figcaption className="{{ s.artFigCap }}">{{ b.caption }}<span className="{{ s.artFigSrc }}">{{ b.source }}</span></figcaption>
+            </figure>
+          </sc-if>
+          <sc-if value="{{ b.isVideo }}" hint-placeholder-val="{{ false }}">
+            <div className="{{ s.artVideoWrap }}">
+              <iframe src="{{ b.embed }}" title="{{ b.caption }}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="{{ s.artVideoFrame }}"></iframe>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ EVENT GALLERY ============ -->
+  <div data-screen-label="Event Gallery" className="{{ s.sectionPad }}">
+    <div className="{{ s.evGalWrap }}">
+      <span className="{{ s.artH3 }}">From the event</span>
+      <div className="{{ s.mediaGrid }}">
+        <sc-for list="{{mediaItems}}" as="m" hint-placeholder-count="6">
+          <div className="{{ s.mediaCell }}" onClick="{{ m.onOpen }}">
+            <img src="{{ m.thumb }}" alt="{{ m.caption }}" loading="lazy" className="{{ s.mediaImg }}">
+            <sc-if value="{{ m.isVideo }}" hint-placeholder-val="{{ false }}">
+              <div className="{{ s.mediaPlayBadge }}">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="rgb(255,255,255)"><path d="M8 5v14l11-7z"></path></svg>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div className="{{ s.lbOverlay }}" onClick="{{ closeLightbox }}">
+      <div className="{{ s.lbDialog }}" onClick="{{ stopPropagation }}">
+        <div className="{{ s.lbStage }}">
+          <sc-if value="{{ lbIsVideo }}" hint-placeholder-val="{{ false }}">
+            <iframe src="{{ lbVideoSrc }}" title="{{ lbCaption }}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen className="{{ s.lbFrame }}"></iframe>
+          </sc-if>
+          <sc-if value="{{ lbIsImage }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ lbImage }}" alt="{{ lbCaption }}" className="{{ s.lbImage }}">
+          </sc-if>
+        </div>
+        <div className="{{ s.lbCaptionWrap }}">
+          <span className="{{ s.lbCaption }}">{{ lbCaption }}</span>
+          <span className="{{ s.lbDate }}">{{ lbDate }}</span>
+        </div>
+        <div className="{{ s.lbPrev }}" onClick="{{ prevLightbox }}" aria-label="Previous"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></div>
+        <div className="{{ s.lbNext }}" onClick="{{ nextLightbox }}" aria-label="Next"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></div>
+        <div className="{{ s.lbClose }}" onClick="{{ closeLightbox }}" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></div>
+        <span className="{{ s.lbCounter }}">{{ lbCounter }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ RELATED ============ -->
+  <div data-screen-label="Related" className="{{ s.sectionPad }}">
+    <div className="{{ s.relWrap }}" ref="{{ relRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">{{ relatedEyebrow }}</span>
+        <span className="{{ s.h2 }}">{{ relatedHeading }}</span>
+      </div>
+      <div className="{{ s.relGrid }}">
+        <sc-for list="{{relatedItems}}" as="item" hint-placeholder-count="3">
+          <a href="{{ item.href }}" className="{{ s.newsCard }}">
+            <div className="{{ s.newsImgWrap }}"><img src="{{ item.img }}" alt="{{ item.title }}" loading="lazy" className="{{ s.newsImg }}"></div>
+            <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
+            <span className="{{ s.newsCardDate }}">{{ item.date }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ FOOTER ============ -->
+  <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
+    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" className="absolute -right-[20px] top-0 pointer-events-none">
+      <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+    </svg>
+
+    <div className="{{ s.footerTopRow }}">
+      <div className="{{ s.footerBrandCol }}">
+        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerLogoImg }}">
+        <span className="{{ s.footerTagline }}">A full-service UK CDMO supporting partners in 30+ countries — development, manufacturing, packing and regulatory support, all under one roof.</span>
+        <div className="{{ s.footerSocialRow }}">
+          <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
+            <div className="w-[13px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]"></div>
+          </div>
+          <div className="{{ s.socialD.className }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div className="w-[14px] h-[14px] bg-[rgb(255,255,255)] [mask:url('assets2/instagram.svg')_center/contain_no-repeat]"></div>
+          </div>
+          <div className="{{ s.socialC.className }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
+            <div className="w-[11px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/facebook.svg')_center/contain_no-repeat]"></div>
+          </div>
+          <div className="{{ s.socialB.className }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="rgb(255,255,255)"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="{{ s.footerColsGrid }}">
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Services</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="service-detail.html" className="{{ s.footerLink }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Research &amp; Development</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Sectors</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Biocide</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Pages</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="index.html" className="{{ s.footerLink }}">Home</a>
+            <a href="about.html" className="{{ s.footerLink }}">About Us</a>
+            <a href="innovations.html" className="{{ s.footerLink }}">Innovations</a>
+            <a href="news.html" className="{{ s.footerLink }}">News &amp; Blogs</a>
+            <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
+            <a href="contact.html" className="{{ s.footerLink }}">Contact Us</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Contact</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Email</span>
+            <span className="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Call us</span>
+            <span className="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Address</span>
+            <span className="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="{{ s.footerBottomRow }}">
+      <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null, shareState: "idle" };
+
+  componentDidMount() {
+    this._onResize = () => { this._updateBp(); };
+    window.addEventListener("resize", this._onResize);
+    this._updateBp();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+    if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
+  }
+  _shareArticle(title) {
+    const url = window.location.href;
+    // Native sheet where the browser offers one; otherwise copy the URL and say so.
+    if (navigator.share) {
+      navigator.share({ title, url }).catch(() => {});
+      return;
+    }
+    const done = () => {
+      this.setState({ shareState: "copied" });
+      clearTimeout(this._shareTimer);
+      this._shareTimer = setTimeout(() => this.setState({ shareState: "idle" }), 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(() => this.setState({ shareState: "failed" }));
+    } else {
+      const t = document.createElement("textarea");
+      t.value = url; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); done(); } catch (e) { this.setState({ shareState: "failed" }); }
+      document.body.removeChild(t);
+    }
+  }
+
+  _observeReveal(key, el) {
+    if (!el) return;
+    this._revealObservers = this._revealObservers || {};
+    if (this._revealObservers[key]) return;
+    const markShown = () => this.setState((st) => ({ revealed: { ...st.revealed, [key]: true } }));
+    // Anything already inside the first viewport plays its entrance on load —
+    // otherwise above-the-fold sections sit hidden until the user happens to scroll.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < (window.innerHeight || 0) * 0.92) {
+      // Two frames so the hidden state paints first and the change animates.
+      const start = () => requestAnimationFrame(() => requestAnimationFrame(markShown));
+      // Wait for the loading curtain, else the entrance plays behind it and the
+      // section is simply already in place once it lifts.
+      if (window.__gmpReady) start();
+      else {
+        window.addEventListener("gmp:ready", start, { once: true });
+        setTimeout(start, 4500);
+      }
+      this._revealObservers[key] = true;
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        markShown();
+        obs.disconnect();
+      }
+    }, { threshold: 0.01, rootMargin: "0px 0px -60px 0px" });
+    obs.observe(el);
+    this._revealObservers[key] = obs;
+  }
+  _updateBp() {
+    const w = window.innerWidth;
+    const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
+    if (bp !== this.state.bp) this.setState({ bp });
+  }
+
+  renderVals() {
+    const bp = this.state.bp;
+    const isMobile = bp === "mobile";
+    const isTablet = bp === "tablet";
+    const isDesktop = bp === "desktop";
+    const pick = (m, t, d) => (isMobile ? m : isTablet ? t : d);
+
+    const red = "rgb(178,33,38)";
+    const purple = "rgb(45,38,93)";
+    const dark = "rgb(51,51,51)";
+    const near = "rgb(17,17,17)";
+    const footerGradient = "linear-gradient(111.131deg,rgb(37,117,187)_-0.79%,rgb(41,37,96)_62.7%,rgb(178,33,38)_154.63%)";
+    const collabGradient = "linear-gradient(139.949deg,rgb(37,117,187)_3.69%,rgb(41,37,96)_58.52%,rgb(178,33,38)_137.9%)";
+    const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
+    const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
+
+    const gutter = pick(20, 40, 64);
+    const s = {};
+
+    const revealed = this.state.revealed || {};
+    const reveal = (key, opts = {}) => {
+      const { distance = 44, duration = 900 } = opts;
+      const shown = !!revealed[key];
+      return (shown ? "opacity-100 translate-y-0 scale-100 " : `opacity-0 translate-y-[${distance}px] scale-[0.97] `) +
+        `transition-[opacity,transform] duration-[${duration}ms] ease-[cubic-bezier(0.16,1,0.3,1)]`;
+    };
+    const revealRef = (key) => (el) => this._observeReveal(key, el);
+
+    s.root = "gmp-font relative w-full bg-white flex flex-col overflow-x-clip overflow-y-clip";
+
+    s.sectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px]";
+    s.sectionGap = "w-full h-[38px] md:h-[66px] xl:h-[96px] shrink-0";
+    s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
+
+    s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
+    s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
+    s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
+    s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
+
+    const makeHeroCta = (key, baseClass) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: baseClass + " no-underline transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-white ${noShadowTw} translate-y-0`),
+        textColor: hovered ? "#fff" : near,
+        iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+
+    // ---------- TOPBAR (same properties as homepage, but always opaque — this page has no hero banner for it to sit over) ----------
+    s.logoLink = "flex shrink-0";
+    const navScrolled = true;
+    s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
+      (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
+    s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
+    s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
+    s.heroNav = "hidden xl:flex flex-row gap-[32px] items-center";
+    s.heroTopbarRightGroup = "flex flex-row items-center gap-[10px] md:gap-[16px] shrink-0";
+    const menuOpen = this.state.mobileMenuOpen;
+    s.hamburgerBtn = "flex xl:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
+    const barBase = "w-[20px] h-[2px] rounded-[2px] [transition:transform_0.25s_ease,opacity_0.2s_ease,background_0.3s_ease] " + (navScrolled ? `bg-[${near}]` : "bg-white");
+    const barBaseOnDark = "w-[20px] h-[2px] rounded-[2px] bg-white [transition:transform_0.25s_ease,opacity_0.2s_ease]";
+    s.hamburgerBar1 = barBase;
+    s.hamburgerBar2 = barBase;
+    s.hamburgerBar3 = barBase;
+    s.hamburgerBarX1 = barBaseOnDark + " [transform:rotate(45deg)_translate(5px,5px)]";
+    s.hamburgerBarX2 = barBaseOnDark + " [transform:rotate(-45deg)_translate(5px,-5px)]";
+    s.mobileNavOverlay = "fixed inset-0 bg-[rgb(41,37,96)] flex flex-col gap-[40px] box-border z-[100] py-[20px] px-[20px] pb-[40px] md:py-[24px] md:px-[40px] md:pb-[48px] [transition:opacity_0.3s_ease,transform_0.3s_ease] " +
+      (menuOpen ? "opacity-100 pointer-events-auto translate-y-0" : "opacity-0 pointer-events-none -translate-y-[16px]");
+    s.mobileNavCloseRow = "flex flex-row items-center justify-between";
+    s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
+    s.mobileNavLinks = "flex flex-col gap-[24px] md:gap-[28px] items-start mt-[16px]";
+    s.mobileNavLink = "font-medium text-[28px] md:text-[32px] leading-[1.3] tracking-[-0.7px] text-white cursor-pointer no-underline";
+    const CURRENT_PAGE = "news";
+    const navLinkStyle = (i, key) => {
+      const hovered = this.state.hoveredNav === i;
+      const active = key === CURRENT_PAGE;
+      const emph = hovered || active;
+      const color = navScrolled ? (emph ? red : dark) : "#fff";
+      const opacity = navScrolled ? 1 : (emph ? 1 : 0.85);
+      const borderColor = navScrolled ? (emph ? red : "transparent") : (emph ? "rgba(255,255,255,0.8)" : "transparent");
+      return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
+    };
+    s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
+    s.navHomeStyle = navLinkStyle(0, "home");
+    s.navAboutStyle = navLinkStyle(1, "about");
+    s.navServicesStyle = navLinkStyle(2, "services");
+    s.navInnovationsStyle = navLinkStyle(3, "innovations");
+    s.navSectorsStyle = navLinkStyle(4, "sectors");
+    s.navContactStyle = navLinkStyle(5, "contact");
+    const navEnter = (i, menu) => () => this.setState({ hoveredNav: i, openNavMenu: menu || null });
+    s.navLeave = () => this.setState({ hoveredNav: -1, openNavMenu: null });
+    s.navEnterHome = navEnter(0);
+    s.navEnterAbout = navEnter(1);
+    s.navEnterServices = navEnter(2, "services");
+    s.navEnterInnovations = navEnter(3);
+    s.navEnterSectors = navEnter(4, "sectors");
+    s.navEnterContact = navEnter(5);
+    const openNavMenu = this.state.openNavMenu;
+    const navMenuPanelBase = "absolute top-full left-0 pt-[12px] z-[60] [transition:opacity_0.2s_ease,transform_0.2s_ease]";
+    s.servicesMenuPanel = navMenuPanelBase + " " + (openNavMenu === "services" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.sectorsMenuPanel = navMenuPanelBase + " " + (openNavMenu === "sectors" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.navMenuInner = `bg-white shadow-[0_16px_44px_rgba(17,17,17,0.18)] py-[10px] min-w-[300px] flex flex-col gap-[2px] border-t-[3px] border-solid border-[${red}]`;
+    s.navMenuItem = `block py-[11px] px-[20px] text-[14px] font-medium text-[${near}] no-underline whitespace-nowrap hover:bg-[rgb(245,243,240)] hover:text-[${red}] transition-colors duration-150`;
+    const heroCtaBase = "rounded-[32px] flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
+    s.heroCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaCtl.textColor}]`;
+    const heroCtaTopbarBase = "rounded-[32px] flex flex-row gap-[6px] py-[8px] px-[14px] md:py-[9px] md:px-[16px] justify-center items-center box-border cursor-pointer shrink-0";
+    const topbarCtaHovered = this.state.hoveredKey === "heroCtaTopbar";
+    s.heroCtaTopbarCtl = {
+      className: heroCtaTopbarBase + " no-underline transition-[background,box-shadow,transform] duration-300 ease-in-out " +
+        (topbarCtaHovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : (navScrolled ? `bg-[${purple}] ${noShadowTw} translate-y-0` : `bg-white ${noShadowTw} translate-y-0`)),
+      textColor: topbarCtaHovered || navScrolled ? "#fff" : near,
+      iconColor: topbarCtaHovered || navScrolled ? "rgb(255,255,255)" : "rgb(17,17,17)",
+      enter: () => this.setState({ hoveredKey: "heroCtaTopbar" }),
+      leave: () => this.setState({ hoveredKey: null }),
+    };
+    s.heroCtaTopbarText = `font-semibold text-[${isMobile ? 13 : 14}px] leading-[${isMobile ? 16 : 18}px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaTopbarCtl.textColor}]`;
+    s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+
+    // ---------- PAGE TITLE (no hero banner on this page — clear the fixed topbar, type-led header) ----------
+    s.firstSectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px] pt-[132px] md:pt-[144px] xl:pt-[156px]";
+    s.pageTitleWrap = "flex flex-col gap-[12px] max-w-[1600px] mx-auto";
+    s.h1 = `font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-[${dark}]`;
+    s.pageTitleIntro = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[620px] mt-[4px]`;
+
+    // ---------- FILTER TABS + NEWS GRID ----------
+    s.newsWrap = "flex flex-col gap-[28px] md:gap-[32px] max-w-[1600px] mx-auto " + reveal("news");
+    s.filterTabRow = "flex flex-row flex-wrap gap-[24px] md:gap-[32px] border-b border-solid border-[rgba(0,0,0,0.12)] pb-0";
+    const activeFilter = this.state.activeFilter;
+    const FILTERS = ["News", "Events", "Blogs", "Media Gallery"];
+    const filterTabs = FILTERS.map((label) => {
+      const active = activeFilter === label;
+      return {
+        label,
+        tabStyle: `pb-[14px] font-medium text-[15px] md:text-[16px] leading-[20px] cursor-pointer border-b-[2px] border-solid transition-colors duration-150 ` +
+          (active ? `text-[${red}] border-[${red}]` : `text-[rgba(51,51,51,0.55)] border-transparent hover:text-[${dark}]`),
+        onClick: () => this.setState({ activeFilter: label }),
+      };
+    });
+    s.newsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[28px] md:gap-[32px] xl:gap-[36px]";
+    s.newsCard = "flex flex-col gap-[12px] items-start no-underline group cursor-pointer";
+    s.newsImgWrap = "w-full aspect-[16/9] bg-[rgb(232,232,232)] overflow-hidden box-border";
+    s.blogExcerpt = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.72)]";
+    s.blogMetaRow = "flex flex-row items-center gap-[10px] pt-[2px]";
+    s.blogAuthor = `font-medium text-[14px] leading-[20px] text-[${near}]`;
+    s.blogMetaDot = "w-[4px] h-[4px] rounded-full bg-[rgba(51,51,51,0.3)] shrink-0";
+
+    // ---------- ARTICLE ----------
+    s.artHeadWrap = "flex flex-col gap-[14px] items-start max-w-[860px] mx-auto w-full " + reveal("art");
+    s.artBack = `font-normal text-[14px] leading-[20px] text-[${red}] no-underline w-fit`;
+    s.artTag = `font-normal text-[13px] leading-[18px] text-[${red}] uppercase tracking-[0.6px]`;
+    s.artTitle = `font-medium ${pick("text-[30px]", "text-[40px]", "text-[50px]")} ${pick("leading-[38px]", "leading-[48px]", "leading-[58px]")} tracking-[-1.5px] text-[${dark}]`;
+    s.artMetaRow = "flex flex-row flex-wrap items-center gap-[12px] pt-[4px]";
+    s.artMeta = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.6)]";
+    s.artMetaDot = "w-[4px] h-[4px] rounded-full bg-[rgba(51,51,51,0.28)] shrink-0";
+    s.artShareBtn = `ml-auto inline-flex flex-row items-center gap-[8px] rounded-[999px] border border-solid border-[rgba(51,51,51,0.22)] text-[${near}] font-medium text-[14px] leading-[20px] py-[9px] px-[18px] cursor-pointer select-none transition-[background,border-color,color] duration-200 hover:bg-[${red}] hover:text-white hover:border-[${red}]`;
+    s.artHeroOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden ${pick("h-[240px]", "h-[380px]", "h-[520px]")}`;
+    s.artHeroImg = "w-full h-full object-cover";
+    s.artBodyWrap = "flex flex-col max-w-[860px] mx-auto w-full";
+    s.artBlock = "flex flex-col " + pick("mb-[18px]", "mb-[20px]", "mb-[22px]");
+    s.artBlockHeading = "flex flex-col " + pick("mt-[18px] mb-[10px]", "mt-[24px] mb-[12px]", "mt-[28px] mb-[12px]");
+    s.artH3 = `font-semibold ${pick("text-[21px]", "text-[23px]", "text-[26px]")} leading-[1.3] text-[${near}]`;
+    s.artPara = `font-normal ${pick("text-[16px]", "text-[17px]", "text-[17px]")} leading-[28px] text-[rgba(51,51,51,0.85)]`;
+    s.artFigure = "flex flex-col gap-[8px] m-0 w-full";
+    s.artFigImg = "w-full h-auto object-cover";
+    s.artFigCap = "font-normal text-[13px] leading-[19px] text-[rgba(51,51,51,0.55)]";
+    s.artFigSrc = "italic";
+    s.artVideoWrap = "w-full aspect-video overflow-hidden bg-black";
+    s.artVideoFrame = "w-full h-full border-0";
+    s.relWrap = "flex flex-col gap-[20px] md:gap-[26px] max-w-[1600px] mx-auto " + reveal("rel");
+    s.relGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[24px] md:gap-[30px]";
+    s.evGalWrap = "flex flex-col gap-[16px] md:gap-[20px] max-w-[1600px] mx-auto";
+    // ---------- MEDIA GALLERY ----------
+    s.mediaGrid = "grid " + pick("grid-cols-2", "grid-cols-3", "grid-cols-4") + " gap-[12px] md:gap-[16px]";
+    s.mediaCell = "relative aspect-square overflow-hidden bg-[rgb(232,232,232)] cursor-pointer group";
+    s.mediaImg = "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105";
+    s.mediaPlayBadge = "absolute inset-0 m-auto w-[54px] h-[54px] rounded-full bg-[rgba(17,17,17,0.55)] backdrop-blur-[2px] flex items-center justify-center pointer-events-none transition-[background,transform] duration-200 group-hover:bg-[rgba(178,33,38,0.9)] group-hover:scale-110";
+
+    // ---------- LIGHTBOX ----------
+    s.lbOverlay = "fixed inset-0 z-[2147482000] bg-[rgba(12,12,16,0.92)] flex items-center justify-center box-border " + pick("p-[16px]", "p-[32px]", "p-[48px]");
+    s.lbDialog = "relative flex flex-col gap-[16px] w-full max-w-[1100px] max-h-full";
+    s.lbStage = "relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center";
+    s.lbImage = "w-full h-full object-contain";
+    s.lbFrame = "w-full h-full border-0";
+    s.lbCaptionWrap = "flex flex-col gap-[4px] items-start";
+    s.lbCaption = `font-medium ${pick("text-[15px]", "text-[17px]", "text-[18px]")} leading-[1.4] text-white`;
+    s.lbDate = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.55)]";
+    const lbBtn = "absolute top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.24)] flex items-center justify-center cursor-pointer transition-colors duration-200 z-[2]";
+    s.lbPrev = lbBtn + " " + pick("left-[6px]", "-left-[8px]", "-left-[64px]");
+    s.lbNext = lbBtn + " " + pick("right-[6px]", "-right-[8px]", "-right-[64px]");
+    s.lbClose = "absolute -top-[12px] right-0 md:-top-[40px] md:right-0 w-[40px] h-[40px] rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.24)] flex items-center justify-center cursor-pointer transition-colors duration-200 z-[2]";
+    s.lbCounter = "absolute -top-[6px] left-0 md:-top-[34px] font-normal text-[13px] leading-[18px] text-[rgba(255,255,255,0.55)]";
+
+    s.newsImgPlaceholder = "w-full aspect-[16/9] bg-[rgb(232,232,232)] overflow-hidden box-border";
+    s.newsImg = "w-full h-full object-cover";
+    s.newsCardTag = `font-normal text-[13px] leading-[18px] text-[${red}] uppercase tracking-[0.5px]`;
+    s.newsCardTitle = `font-medium text-[18px] leading-[26px] text-[${dark}]`;
+    s.newsCardDate = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.55)]";
+
+    // ---------- NEWSLETTER SIGNUP (distinct, lighter-weight block — separate from the universal CTA band) ----------
+    s.newsletterLightWrap = "flex " + (isDesktop ? "flex-row items-center justify-between" : "flex-col items-start") + " gap-[20px] md:gap-[24px] max-w-[1600px] mx-auto box-border border border-solid border-[rgba(0,0,0,0.12)] " +
+      pick("p-[24px]", "p-[28px]", "p-[32px]") + " " + reveal("newsletter");
+    s.newsletterLightText = "flex flex-col gap-[4px]";
+    s.newsletterLightHeading = `font-medium text-[22px] md:text-[24px] leading-[1.3] tracking-[-0.5px] text-[${dark}]`;
+    s.newsletterLightBody = "font-normal text-[14px] md:text-[15px] leading-[20px] text-[rgba(51,51,51,0.7)]";
+    s.newsletterFormRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[12px] items-stretch w-full " + (isDesktop ? "max-w-[380px]" : "max-w-[440px]") + " shrink-0";
+    s.newsletterInputWrap = `flex flex-row grow items-center border border-solid border-[rgba(0,0,0,0.15)] rounded-none py-[10px] px-[14px] bg-white`;
+    s.newsletterInputText = `grow text-left font-normal text-[15px] leading-[22px] text-[rgba(51,51,51,0.45)]`;
+    s.newsletterSubscribeBtn = `rounded-none flex flex-row gap-[6px] py-[10px] px-[20px] justify-center items-center box-border cursor-pointer shrink-0 bg-[${near}] hover:bg-[${red}] transition-colors duration-200`;
+    s.newsletterSubscribeText = "font-medium text-[14px] leading-[20px] text-white whitespace-nowrap";
+
+    // ---------- UNIVERSAL CTA BAND (same as every other page) ----------
+    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center bg-[${collabGradient}] ` +
+      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
+    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.15)] pointer-events-none";
+    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
+    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
+    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
+    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
+    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
+    s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
+    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
+    s.collabContactUsText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactUs.textColor}]`;
+    s.collabGetQuoteIcon = `w-[14px] h-[14px] bg-[${s.pillGetQuote.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+
+    // ---------- FOOTER (inherited) ----------
+    s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
+      pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
+    s.footerTopRow = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[40px] xl:gap-[56px]";
+    s.footerBrandCol = "flex flex-col gap-[16px] items-start " + (isDesktop ? "w-[280px]" : "w-full") + " shrink-0";
+    s.footerLogoImg = "w-[150px] md:w-[170px] xl:w-[190px] h-auto";
+    s.footerTagline = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.55)] max-w-[280px]";
+    s.footerSocialRow = "flex flex-row gap-[12px] items-center";
+    s.footerColsGrid = "grow grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[28px] md:gap-[32px] xl:gap-[24px]";
+    s.footerColLabel = "font-normal text-[18px] leading-[24px] text-[rgba(255,255,255,0.4)]";
+    s.footerLink = "font-normal text-[16px] leading-[24px] text-white no-underline";
+    const makeBrandCircle = (key, baseClass, brandColor) => {
+      const hovered = this.state.hoveredKey === key;
+      const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
+      return {
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${brandColor}] ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const socialSmallBase = "w-[40px] h-[40px] rounded-[40px] flex justify-center items-center cursor-pointer shrink-0";
+    s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
+    s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
+    s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
+    s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
+    s.footerBottomRow = "flex flex-row items-center pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+
+    // ---------- DATA: NEWS / EVENTS / MEDIA GALLERY / BLOG ----------
+    // PLACEHOLDER EDITORIAL - invented event. Replace before launch.
+    const article = { tag: "Event", title: "Meet Us at CPhI Worldwide 2026", date: "18 Aug 2026", hero: "assets/gmp-6.webp" };
+    const blocks = [
+      { type: "para", text: "Our commercial and technical teams will be at CPhI Worldwide this August, and we would be glad to talk through any project you have in the pipeline — from early formulation work to a full technology transfer." },
+      { type: "para", text: "We will have people on the stand across all three days who can speak to formulation, analytical testing, regulatory support and contract manufacturing, so conversations can get technical quickly rather than waiting on a follow-up call." },
+      { type: "heading", text: "Where to find us" },
+      { type: "para", text: "Look for the GMP Manufacturing stand in the contract services hall. If you would like to book a specific slot rather than drop by, email us ahead of the show and we will hold a time." },
+      { type: "heading", text: "What we will be showing" },
+      { type: "para", text: "Alongside our standard capability overview, we will be talking about the new filling line commissioned earlier this year and the extended stability testing now running in our analytical lab." },
+    ];
+    const mediaData = [
+      { type: "image", img: "assets/gmp-6.webp",  caption: "Our stand at last year's show", date: "Aug 2025" },
+      { type: "image", img: "assets/gmp-11.webp", caption: "Technical team on hand", date: "Aug 2025" },
+      { type: "video", img: "assets/gmp-8.webp",  youtubeId: "dQw4w9WgXcQ", caption: "Facility walkthrough shown at the stand", date: "Aug 2025" },
+      { type: "image", img: "assets/gmp-3.webp",  caption: "Product samples on display", date: "Aug 2025" },
+      { type: "image", img: "assets/gmp-5.webp",  caption: "Meeting partners on day two", date: "Aug 2025" },
+      { type: "image", img: "assets/gmp-12.webp", caption: "Formulation discussion", date: "Aug 2025" },
+    ];
+    const mediaItems = mediaData.map((m, i) => ({
+      thumb: m.img, caption: m.caption, isVideo: m.type === "video",
+      onOpen: () => this.setState({ lightboxIndex: i }),
+    }));
+    const lbIndex = this.state.lightboxIndex;
+    const lightboxOpen = lbIndex !== null && lbIndex !== undefined;
+    const lbItem = lightboxOpen ? mediaData[lbIndex] : null;
+    const stepLb = (d) => this.setState((st) => ({ lightboxIndex: (st.lightboxIndex + d + mediaData.length) % mediaData.length }));
+    const relatedItems = [
+      { title: "Healthcare Exhibition — Stand 42B", date: "22 May 2026", img: "assets/gmp-11.webp", href: "event-detail.html" },
+      { title: "Open Day: Inside Our Hull Facility", date: "14 Mar 2026", img: "assets/gmp-5.webp", href: "event-detail.html" },
+      { title: "Meet Us at CPhI Worldwide 2026", date: "18 Aug 2026", img: "assets/gmp-6.webp", href: "event-detail.html" },
+    ];
+
+    // Reading time is derived from the copy so it cannot drift as content changes.
+    const wordCount = blocks.reduce((n, blk) => n + String(blk.text || blk.caption || "").trim().split(/\s+/).filter(Boolean).length, 0);
+    const readingTime = Math.max(1, Math.round(wordCount / 200)) + " min read";
+    const shareState = this.state.shareState;
+    const shareLabel = shareState === "copied" ? "Link copied" : shareState === "failed" ? "Copy failed" : "Share";
+    const blockItems = blocks.map((blk) => ({
+      ...blk,
+      isHeading: blk.type === "heading", isPara: blk.type === "para",
+      isImage: blk.type === "image", isVideo: blk.type === "video",
+      embed: blk.youtubeId ? `https://www.youtube-nocookie.com/embed/${blk.youtubeId}?rel=0` : "",
+      source: blk.source ? ` — ${blk.source}` : "",
+      wrapStyle: blk.type === "heading" ? s.artBlockHeading : s.artBlock,
+    }));
+
+    return {
+      s,
+      article,
+      blocks: blockItems,
+      readingTime,
+      shareLabel,
+      onShare: () => this._shareArticle(article.title),
+      relatedItems,
+      relatedEyebrow: "More Events",
+      relatedHeading: "Other events",
+      artRevealRef: revealRef("art"),
+      relRevealRef: revealRef("rel"),
+      mediaItems,
+      lightboxOpen,
+      lbIsVideo: !!(lbItem && lbItem.type === "video"),
+      lbIsImage: !!(lbItem && lbItem.type !== "video"),
+      lbImage: lbItem ? lbItem.img : "",
+      lbVideoSrc: lbItem && lbItem.youtubeId ? `https://www.youtube-nocookie.com/embed/${lbItem.youtubeId}?rel=0&autoplay=1` : "",
+      lbCaption: lbItem ? lbItem.caption : "",
+      lbDate: lbItem ? lbItem.date : "",
+      lbCounter: lightboxOpen ? `${lbIndex + 1} / ${mediaData.length}` : "",
+      closeLightbox: () => this.setState({ lightboxIndex: null }),
+      prevLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); stepLb(-1); },
+      nextLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); stepLb(1); },
+      stopPropagation: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      newsletterRevealRef: revealRef("newsletter"),
+      collabRevealRef: revealRef("collab"),
+      footerRevealRef: revealRef("footer"),
+      toggleMobileMenu: () => this.setState((st) => ({ mobileMenuOpen: !st.mobileMenuOpen })),
+      showHeroCtaIcon: !isMobile,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
