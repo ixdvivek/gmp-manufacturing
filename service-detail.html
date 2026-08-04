@@ -880,7 +880,10 @@ class Component extends DCLogic {
     s.capGrid = "flex flex-row flex-wrap justify-start " + pick("gap-[20px]", "gap-[24px]", "gap-[28px]");
     const capCols = pick(1, 2, 3);
     const capGapPx = pick(20, 24, 28);
-    s.capCard = `group flex flex-col items-stretch bg-[rgb(245,243,240)] box-border shadow-[0_2px_10px_-4px_rgba(17,17,17,0.12)] transition-[box-shadow,transform] duration-300 ease-out hover:shadow-[0_18px_34px_-16px_rgba(17,17,17,0.28)] hover:-translate-y-[3px] ` + pick("p-[14px]", "p-[16px]", "p-[18px]") + ` w-[calc((100%-${capGapPx * (capCols - 1)}px)/${capCols})]`;
+    // The card sat on padding in the same colour as the band behind it, so that
+    // padding read as a dead frame once the card gained a shadow. The image and
+    // caption now fill the tile edge to edge.
+    s.capCard = `group flex flex-col items-stretch bg-white box-border overflow-hidden shadow-[0_2px_10px_-4px_rgba(17,17,17,0.12)] transition-[box-shadow,transform] duration-300 ease-out hover:shadow-[0_18px_34px_-16px_rgba(17,17,17,0.28)] hover:-translate-y-[3px] w-[calc((100%-${capGapPx * (capCols - 1)}px)/${capCols})]`;
     s.capImgWrap = "w-full aspect-[5/2] overflow-hidden bg-[rgb(210,206,197)]";
     s.capImg = "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105";
     s.capTextBox = "bg-white box-border flex flex-col " + pick("gap-[6px] py-[16px] px-[16px]", "gap-[7px] py-[18px] px-[18px]", "gap-[8px] py-[20px] px-[20px]");
