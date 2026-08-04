@@ -805,9 +805,13 @@ class Component extends DCLogic {
 
     // ---------- ACCREDITATIONS (reused marquee, full-bleed) ----------
     s.marqueeOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden bg-[rgb(245,245,245)] flex items-center box-border ` +
-      pick("py-[28px] px-[16px]", "py-[36px] px-[20px]", "py-[48px] px-[24px]");
-    s.marqueeInner = "flex flex-row gap-[24px] items-center w-max [animation:gmp-marquee_30s_linear_infinite]";
-    s.marqueeItem = `flex items-center justify-center shrink-0 ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
+      pick("py-[28px]", "py-[36px]", "py-[48px]");
+    // The keyframe translates the track by -50%, so half of it must be exactly
+    // one whole cycle. A flex `gap` breaks that: N items carry only N-1 gaps, so
+    // half the width lands half a gap short and the loop visibly jumps. Carrying
+    // the spacing as a right margin on every item makes the pitch uniform.
+    s.marqueeInner = "flex flex-row items-center w-max [animation:gmp-marquee_100s_linear_infinite]";
+    s.marqueeItem = `flex items-center justify-center shrink-0 mr-[24px] ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
     s.marqueeImg = "max-w-full max-h-full object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-[filter,opacity] duration-300";
 
     // ---------- FOOTER (inherited) ----------
@@ -843,6 +847,7 @@ class Component extends DCLogic {
 
     // ---------- DATA ----------
     const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
+    const MARQUEE_HALF = [names, names, names, names].flat();
 
     return {
       s,
@@ -851,7 +856,9 @@ class Component extends DCLogic {
       complianceRevealRef: revealRef("compliance"),
       footerRevealRef: revealRef("footer"),
       marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
-      logos: [...names, ...names],
+      // Four sets per half puts the half-track past 3000px at desktop, so the
+      // strip stays filled on wide screens. Both halves must be identical.
+      logos: [...MARQUEE_HALF, ...MARQUEE_HALF],
       mobileNavItems,
       toggleMobileMenu: () => this.setState((st) => {
         const open = !st.mobileMenuOpen;
