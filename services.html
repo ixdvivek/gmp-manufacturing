@@ -163,9 +163,10 @@
     </div>
     <div className="{{ s.mobileNavCloseRow }}">
       <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
-      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
-        <div className="{{ s.hamburgerBarX1 }}"></div>
-        <div className="{{ s.hamburgerBarX2 }}"></div>
+      <div className="{{ s.mobileNavCloseBtn }}" onClick="{{ toggleMobileMenu }}" role="button" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
       </div>
     </div>
     <div className="{{ s.mobileNavLinks }}">
@@ -717,8 +718,6 @@ class Component extends DCLogic {
     s.hamburgerBar1 = barBase;
     s.hamburgerBar2 = barBase;
     s.hamburgerBar3 = barBase;
-    s.hamburgerBarX1 = barBaseOnDark + " [transform:rotate(45deg)_translate(5px,5px)]";
-    s.hamburgerBarX2 = barBaseOnDark + " [transform:rotate(-45deg)_translate(5px,-5px)]";
     // ---------- MOBILE NAV (full-screen brand panel) ----------
     s.mobileNavOverlay = "fixed inset-0 bg-gmp-gradient flex flex-col box-border z-[100] overflow-y-auto overflow-x-hidden " +
       "py-[20px] px-[20px] pb-[24px] md:py-[24px] md:px-[40px] md:pb-[40px] " +
@@ -736,7 +735,9 @@ class Component extends DCLogic {
     s.mobileNavGlowB = "absolute -bottom-[110px] -left-[90px] w-[340px] h-[340px] rounded-full bg-[rgba(178,33,38,0.45)] blur-[100px]";
     s.mobileNavMark = "absolute -right-[48px] bottom-[96px] w-[250px] h-auto";
     s.mobileNavCloseRow = "relative z-[2] flex flex-row items-center justify-between shrink-0";
-    s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
+    s.mobileNavLogo = "w-[172px] md:w-[210px] h-auto";
+    // A plain X reads as "close" more immediately than two rotated bars.
+    s.mobileNavCloseBtn = "flex xl:hidden items-center justify-center w-[40px] h-[40px] -mr-[6px] shrink-0 cursor-pointer text-white z-20 transition-opacity duration-200 hover:opacity-70";
     s.mobileNavLinks = "relative z-[2] flex flex-col grow mt-[22px] md:mt-[40px]";
     s.mobileNavFoot = "relative z-[2] flex flex-col gap-[14px] items-start shrink-0 pt-[20px] mt-[16px] border-t border-solid border-[rgba(255,255,255,0.18)]";
     s.mobileNavCta = `rounded-[32px] no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] bg-white text-[${near}] py-[13px] px-[26px] transition-[background,color] duration-200 ease-in-out hover:bg-[${red}] hover:text-white`;
@@ -767,9 +768,11 @@ class Component extends DCLogic {
           " transition-[opacity,transform] duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
           (menuOpen ? `opacity-100 translate-x-0 delay-[${90 + i * 55}ms]` : "opacity-0 translate-x-[26px] delay-0"),
         numStyle: "font-medium text-[12px] leading-[16px] tabular-nums shrink-0 w-[24px] " +
-          (on ? "text-white" : "text-[rgba(255,255,255,0.4)]"),
-        labelStyle: `font-medium ${pick("text-[26px]", "text-[32px]", "text-[32px]")} leading-[1.2] tracking-[-0.8px] ` +
-          (on ? "text-white" : "text-[rgba(255,255,255,0.82)]"),
+          (on ? "text-white" : "text-[rgba(255,255,255,0.35)]"),
+        labelStyle: `font-medium ${pick("text-[21px]", "text-[27px]", "text-[27px]")} leading-[1.25] tracking-[-0.6px] ` +
+          // Non-current items step back so the current page reads clearly,
+          // matching how the desktop nav dims its inactive links.
+          (on ? "text-white" : "text-[rgba(255,255,255,0.6)]"),
       };
     });
     const navLinkStyle = (i, key) => {
@@ -779,7 +782,11 @@ class Component extends DCLogic {
       // red rule under otherwise-normal text; hover tints the text itself and shows
       // a lighter rule. Hovering the current page simply combines the two.
       const color = navScrolled ? (hovered ? red : dark) : "#fff";
-      const opacity = navScrolled ? 1 : (hovered || active ? 1 : 0.85);
+      // Once a page is current, step the other links back so the active one
+      // stands out. CURRENT_PAGE is empty on pages with no matching nav item,
+      // and then nothing is dimmed.
+      const dim = CURRENT_PAGE && !active && !hovered;
+      const opacity = navScrolled ? (dim ? 0.55 : 1) : (hovered || active ? 1 : (dim ? 0.6 : 0.85));
       const borderColor = navScrolled
         ? (active ? red : hovered ? "rgba(178,33,38,0.4)" : "transparent")
         : (active ? "rgba(255,255,255,0.9)" : hovered ? "rgba(255,255,255,0.45)" : "transparent");
@@ -860,7 +867,7 @@ class Component extends DCLogic {
       pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
     s.footerTopRow = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-5") + " gap-[32px] md:gap-[40px] xl:gap-[32px] items-start";
     s.footerBrandCol = "flex flex-col gap-[16px] items-start w-full min-w-0";
-    s.footerLogoImg = "w-[180px] md:w-[200px] xl:w-[220px] h-auto";
+    s.footerLogoImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";  // matches s.heroLogo
     s.footerTagline = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.62)] max-w-[280px]";
     s.footerSocialRow = "flex flex-row gap-[12px] items-center";
     // The four link columns are siblings of the brand column in footerTopRow at
