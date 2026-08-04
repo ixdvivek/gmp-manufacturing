@@ -728,6 +728,23 @@ class Component extends DCLogic {
     s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
 
     s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
+    // ---------- TYPE SCALE (canonical) ----------
+    // s.h2 above is the section heading. These are the tiers below it. Every page
+    // draws from the same four so headings and body copy match across the site.
+    // The OnDark variants exist because arbitrary Tailwind colour classes cannot
+    // be reliably overridden by appending a second one.
+    const h3Base = `font-semibold ${pick("text-[22px]", "text-[26px]", "text-[30px]")} leading-[1.25] tracking-[-0.6px]`;
+    s.h3 = h3Base + ` text-[${near}]`;
+    s.h3OnDark = h3Base + " text-white";
+    const h4Base = `font-semibold ${pick("text-[18px]", "text-[19px]", "text-[20px]")} leading-[1.3]`;
+    s.h4 = h4Base + ` text-[${near}]`;
+    s.h4OnDark = h4Base + " text-white";
+    const bodyBase = `font-normal ${pick("text-[16px]", "text-[17px]", "text-[17px]")} leading-[28px]`;
+    s.bodyText = bodyBase + " text-[rgba(51,51,51,0.82)]";
+    s.bodyTextOnDark = bodyBase + " text-[rgba(255,255,255,0.8)]";
+    const bodySmallBase = "font-normal text-[15px] leading-[23px]";
+    s.bodySmall = bodySmallBase + " text-[rgba(51,51,51,0.72)]";
+    s.bodySmallOnDark = bodySmallBase + " text-[rgba(255,255,255,0.75)]";
     s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
     s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
     s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
