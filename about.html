@@ -311,7 +311,7 @@
     </div>
   </div>
 
-  <div className="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ GROUP OF COMPANIES (full-bleed red band) ============ -->
   <div className="{{ s.groupBandOuter }}">
@@ -347,7 +347,7 @@
     </div>
   </div>
 
-  <div className="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ ACCREDITATIONS & CERTIFICATIONS ============ -->
   <div data-screen-label="Accreditations" className="{{ s.sectionPad }}">
@@ -965,10 +965,14 @@ class Component extends DCLogic {
     const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
       const active = key === CURRENT_PAGE;
-      const emph = hovered || active;
-      const color = navScrolled ? (emph ? red : dark) : "#fff";
-      const opacity = navScrolled ? 1 : (emph ? 1 : 0.85);
-      const borderColor = navScrolled ? (emph ? red : "transparent") : (emph ? "rgba(255,255,255,0.8)" : "transparent");
+      // Active and hover must read differently. The current page keeps a persistent
+      // red rule under otherwise-normal text; hover tints the text itself and shows
+      // a lighter rule. Hovering the current page simply combines the two.
+      const color = navScrolled ? (hovered ? red : dark) : "#fff";
+      const opacity = navScrolled ? 1 : (hovered || active ? 1 : 0.85);
+      const borderColor = navScrolled
+        ? (active ? red : hovered ? "rgba(178,33,38,0.4)" : "transparent")
+        : (active ? "rgba(255,255,255,0.9)" : hovered ? "rgba(255,255,255,0.45)" : "transparent");
       return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
     };
     s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";

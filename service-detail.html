@@ -284,7 +284,7 @@
     </div>
   </div>
 
-  <div className="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ CAPABILITIES COVERED (grey band, photo cards) ============ -->
   <div className="{{ s.greyBandOuter }}">
@@ -353,7 +353,10 @@
         </div>
         <div className="{{ s.stepStrip }}">
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"><img src="assets/brief.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+            <div className="{{ s.stepHeadRow }}">
+              <div className="{{ s.stepIconBox }}"><img src="assets/brief.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+              <span className="{{ s.stepRail }}"></span>
+            </div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">01</span>
               <span className="{{ s.stepTitle }}">Brief</span>
@@ -361,7 +364,10 @@
             </div>
           </div>
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"><img src="assets/development.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+            <div className="{{ s.stepHeadRow }}">
+              <div className="{{ s.stepIconBox }}"><img src="assets/development.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+              <span className="{{ s.stepRail }}"></span>
+            </div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">02</span>
               <span className="{{ s.stepTitle }}">Development</span>
@@ -369,7 +375,10 @@
             </div>
           </div>
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"><img src="assets/validation.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+            <div className="{{ s.stepHeadRow }}">
+              <div className="{{ s.stepIconBox }}"><img src="assets/validation.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+              <span className="{{ s.stepRail }}"></span>
+            </div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">03</span>
               <span className="{{ s.stepTitle }}">Validation</span>
@@ -377,7 +386,10 @@
             </div>
           </div>
           <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepIconBox }}"><img src="assets/delivery.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+            <div className="{{ s.stepHeadRow }}">
+              <div className="{{ s.stepIconBox }}"><img src="assets/delivery.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
+              <span className="{{ s.stepRailEnd }}"></span>
+            </div>
             <div className="{{ s.stepTextCol }}">
               <span className="{{ s.stepNumber }}">04</span>
               <span className="{{ s.stepTitle }}">Delivery</span>
@@ -389,7 +401,7 @@
     </div>
   </div>
 
-  <div className="{{ s.sectionGap }}"></div>
+  <div className="{{ s.sectionGapHalf }}"></div>
 
   <!-- ============ WHERE THIS SERVICE APPLIES (4-photo grid) ============ -->
   <div data-screen-label="Where This Applies" className="{{ s.sectionPad }}">
@@ -741,10 +753,14 @@ class Component extends DCLogic {
     const navLinkStyle = (i, key) => {
       const hovered = this.state.hoveredNav === i;
       const active = key === CURRENT_PAGE;
-      const emph = hovered || active;
-      const color = navScrolled ? (emph ? red : dark) : "#fff";
-      const opacity = navScrolled ? 1 : (emph ? 1 : 0.85);
-      const borderColor = navScrolled ? (emph ? red : "transparent") : (emph ? "rgba(255,255,255,0.8)" : "transparent");
+      // Active and hover must read differently. The current page keeps a persistent
+      // red rule under otherwise-normal text; hover tints the text itself and shows
+      // a lighter rule. Hovering the current page simply combines the two.
+      const color = navScrolled ? (hovered ? red : dark) : "#fff";
+      const opacity = navScrolled ? 1 : (hovered || active ? 1 : 0.85);
+      const borderColor = navScrolled
+        ? (active ? red : hovered ? "rgba(178,33,38,0.4)" : "transparent")
+        : (active ? "rgba(255,255,255,0.9)" : hovered ? "rgba(255,255,255,0.45)" : "transparent");
       return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
     };
     s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
@@ -856,14 +872,20 @@ class Component extends DCLogic {
 
     // ---------- HOW IT WORKS (icon left, text right, no arrows) ----------
     s.stepWrap = "flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] max-w-[1600px] mx-auto " + reveal("steps");
-    s.stepStrip = "flex " + pick("flex-col", "flex-row flex-wrap", "flex-row justify-between") + " items-start " + pick("gap-[28px]", "gap-[32px] gap-y-[36px]", "gap-[0px]");
-    s.stepItem = "flex flex-row items-start " + pick("gap-[16px] w-full", "gap-[18px] w-[calc(50%-16px)]", "gap-[20px]");
+    // Equal columns read as a sequence; a hairline rail joins the icons so the
+    // eye follows 01 -> 04. The rail only shows at desktop, where all four sit
+    // on one row — at narrower widths the stacked numbers carry the order.
+    s.stepStrip = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " " + pick("gap-[26px]", "gap-[30px] gap-y-[34px]", "gap-[24px]");
+    s.stepItem = "flex flex-col gap-[14px] items-start w-full min-w-0";
+    s.stepHeadRow = "flex flex-row items-center gap-[14px] w-full";
     s.stepIconBox = `shrink-0 flex items-center justify-center ${pick("w-[38px] h-[38px]", "w-[44px] h-[44px]", "w-[48px] h-[48px]")}`;
     s.stepIcon = "w-full h-full object-contain";
-    s.stepTextCol = "flex flex-col " + pick("gap-[6px] max-w-none", "gap-[7px] max-w-[220px]", "gap-[8px] max-w-[210px]");
-    s.stepNumber = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
-    s.stepTitle = `font-semibold ${pick("text-[22px]", "text-[24px]", "text-[26px]")} leading-[1.25] tracking-[-0.4px] text-[${dark}]`;
-    s.stepDesc = "font-normal text-[15px] leading-[21px] text-[rgba(51,51,51,0.7)]";
+    s.stepRail = (isDesktop ? "block " : "hidden ") + "grow h-px bg-[rgba(17,17,17,0.14)]";
+    s.stepRailEnd = "hidden";
+    s.stepTextCol = "flex flex-col gap-[7px] max-w-[260px]";
+    s.stepNumber = `font-semibold text-[12px] leading-[16px] tracking-[1.4px] text-[${red}]`;
+    s.stepTitle = `font-semibold ${pick("text-[20px]", "text-[21px]", "text-[22px]")} leading-[1.25] tracking-[-0.4px] text-[${near}]`;
+    s.stepDesc = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.72)]";
 
     // ---------- WHERE THIS SERVICE APPLIES (4-photo grid, square, white caption) ----------
     s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("applies");
