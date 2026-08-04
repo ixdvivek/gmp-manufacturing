@@ -364,7 +364,7 @@
 
     <div className="{{ s.footerTopRow }}">
       <div className="{{ s.footerBrandCol }}">
-        <img src="assets2/logo-footer.png" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerLogoImg }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerLogoImg }}">
         <span className="{{ s.footerTagline }}">A full-service UK CDMO supporting partners in 30+ countries — development, manufacturing, packing and regulatory support, all under one roof.</span>
         <div className="{{ s.footerSocialRow }}">
           <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
@@ -794,7 +794,6 @@ class Component extends DCLogic {
     s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
     s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
-    s.pillDark = "rounded-[32px] inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline";
     s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
 
     const makeHeroCta = (key, baseClass) => {
@@ -804,6 +803,34 @@ class Component extends DCLogic {
           (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-white ${noShadowTw} translate-y-0`),
         textColor: hovered ? "#fff" : near,
         iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+
+    // ---------- BUTTON SYSTEM (canonical — matches the approved Home treatment) ----------
+    // Three roles, used sitewide. Do not introduce a fourth: if a button does not
+    // fit one of these, it is probably not a button.
+    //   makePill()          primary, on light   — purple, goes red on hover
+    //   makeSecondaryPill() secondary, on light — outlined purple, goes red on hover
+    //   makeHeroCta()       either role on dark — white, goes red on hover
+    s.pillDark = "rounded-[32px] inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline";
+    s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
+    const makePill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: s.pillDark + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-[${purple}] ${noShadowTw} translate-y-0`),
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeSecondaryPill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color] duration-200 ease-in-out " +
+          (hovered ? `border-[${red}]` : `border-[${purple}]`),
+        textColor: hovered ? red : purple,
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
@@ -847,7 +874,7 @@ class Component extends DCLogic {
     s.mobileNavLogo = "w-[150px] md:w-[190px] h-auto";
     s.mobileNavLinks = "relative z-[2] flex flex-col grow mt-[22px] md:mt-[40px]";
     s.mobileNavFoot = "relative z-[2] flex flex-col gap-[14px] items-start shrink-0 pt-[20px] mt-[16px] border-t border-solid border-[rgba(255,255,255,0.18)]";
-    s.mobileNavCta = `rounded-none no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] text-[${near}] bg-white py-[12px] px-[26px]`;
+    s.mobileNavCta = `rounded-[32px] no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] bg-white text-[${near}] py-[13px] px-[26px] transition-[background,color] duration-200 ease-in-out hover:bg-[${red}] hover:text-white`;
     s.mobileNavMetaRow = "flex flex-col gap-[4px]";
     s.mobileNavMeta = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.7)] no-underline";
     s.mobileNavMetaDim = "font-normal text-[13px] leading-[20px] text-[rgba(255,255,255,0.45)]";
@@ -984,18 +1011,14 @@ class Component extends DCLogic {
     s.lifeMetricIconBadge = `flex items-center justify-center w-[26px] h-[26px] rounded-full bg-[${red}] shrink-0`;
     s.lifeMetricLabel = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.7)]";
     s.lifeCtaRow = "flex flex-row flex-wrap gap-[16px] items-center pt-[8px]";
+    // Kept for its (key, filled) call sites; both branches now delegate to the
+    // canonical roles, so these match every other button on the site.
     const makeLifeCta = (key, filled) => {
-      const hovered = this.state.hoveredKey === key;
-      const base = "rounded-[999px] flex flex-row items-center justify-center gap-[8px] py-[14px] px-[28px] box-border cursor-pointer shrink-0 no-underline font-medium text-[15px] transition-[background,border-color,color,box-shadow,transform] duration-200 ease-in-out";
-      const filledClass = hovered
-        ? `bg-[${near}] text-white border border-solid border-[${near}] ${hoverShadowTw} -translate-y-[2px]`
-        : `bg-[${red}] text-white border border-solid border-[${red}] ${noShadowTw} translate-y-0`;
-      const outlineClass = hovered
-        ? `bg-[${red}] text-white border border-solid border-[${red}] -translate-y-[2px]`
-        : `bg-transparent text-[${near}] border border-solid border-[rgba(51,51,51,0.25)] translate-y-0`;
-      return { className: base + " " + (filled ? filledClass : outlineClass),
-               enter: () => this.setState({ hoveredKey: key }),
-               leave: () => this.setState({ hoveredKey: null }) };
+      const p = filled ? makePill(key) : makeSecondaryPill(key);
+      const type = " font-medium text-[15px]";
+      return filled
+        ? { ...p, className: p.className + type + " text-white" }
+        : { ...p, className: p.className + type + ` text-[${p.textColor}]` };
     };
     s.lifeCtaPrimary = makeLifeCta("lifeCtaPrimary", true);
     s.lifeCtaSecondary = makeLifeCta("lifeCtaSecondary", false);
@@ -1041,8 +1064,8 @@ class Component extends DCLogic {
     s.hrHeading = `font-medium ${pick("text-[26px]", "text-[32px]", "text-[38px]")} leading-[1.2] tracking-[-1px] text-white`;
     s.hrBody = "font-normal text-[15px] md:text-[16px] leading-[24px] text-[rgba(255,255,255,0.75)]";
     s.hrActionsCol = "flex flex-row flex-wrap gap-[14px] items-center shrink-0";
-    s.hrBtnPrimary = "rounded-[999px] bg-white text-[rgb(41,37,96)] font-medium text-[15px] leading-[20px] no-underline box-border py-[14px] px-[26px] transition-transform duration-200 ease-in-out hover:-translate-y-[2px]";
-    s.hrBtnGhost = "rounded-[999px] bg-transparent text-white font-medium text-[15px] leading-[20px] no-underline box-border py-[14px] px-[26px] border border-solid border-[rgba(255,255,255,0.45)] transition-[background,transform] duration-200 ease-in-out hover:bg-[rgba(255,255,255,0.1)] hover:-translate-y-[2px]";
+    s.hrBtnPrimary = `rounded-[32px] bg-white text-[${near}] font-medium text-[15px] leading-[20px] no-underline box-border py-[14px] px-[26px] transition-[background,color,transform] duration-200 ease-in-out hover:bg-[${red}] hover:text-white hover:-translate-y-[2px]`;
+    s.hrBtnGhost = `rounded-[32px] bg-transparent text-white font-medium text-[15px] leading-[20px] no-underline box-border py-[14px] px-[26px] border border-solid border-[rgba(255,255,255,0.45)] transition-[background,border-color,transform] duration-200 ease-in-out hover:bg-[${red}] hover:border-[${red}] hover:-translate-y-[2px]`;
 
     s.pillGetQuote = makeHeroCta("openingsApply", collabPillBase);
     s.pillGetQuote2 = makeHeroCta("collabApply", collabPillBase);
@@ -1054,14 +1077,16 @@ class Component extends DCLogic {
     // ---------- FOOTER (inherited) ----------
     s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
       pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
-    s.footerTopRow = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[40px] xl:gap-[56px]";
-    s.footerBrandCol = "flex flex-col gap-[16px] items-start " + (isDesktop ? "w-[280px]" : "w-full") + " shrink-0";
-    s.footerLogoImg = "w-[150px] md:w-[170px] xl:w-[190px] h-auto";
-    s.footerTagline = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.55)] max-w-[280px]";
+    s.footerTopRow = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-5") + " gap-[32px] md:gap-[40px] xl:gap-[32px] items-start";
+    s.footerBrandCol = "flex flex-col gap-[16px] items-start w-full min-w-0";
+    s.footerLogoImg = "w-[180px] md:w-[200px] xl:w-[220px] h-auto";
+    s.footerTagline = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.62)] max-w-[280px]";
     s.footerSocialRow = "flex flex-row gap-[12px] items-center";
-    s.footerColsGrid = "grow grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[28px] md:gap-[32px] xl:gap-[24px]";
-    s.footerColLabel = "font-normal text-[18px] leading-[24px] text-[rgba(255,255,255,0.4)]";
-    s.footerLink = "font-normal text-[16px] leading-[24px] text-white no-underline";
+    // The four link columns are siblings of the brand column in footerTopRow at
+    // desktop, so every column gets the same gap. Below xl they stay grouped.
+    s.footerColsGrid = "contents " + (isDesktop ? "" : "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-[28px] md:gap-[32px] col-span-full");
+    s.footerColLabel = "font-medium text-[15px] leading-[22px] tracking-[0.4px] uppercase text-[rgba(255,255,255,0.5)] pb-[2px]";
+    s.footerLink = "font-normal text-[15px] leading-[26px] text-[rgba(255,255,255,0.88)] no-underline transition-colors duration-200 hover:text-white";
     const makeBrandCircle = (key, baseClass, brandColor) => {
       const hovered = this.state.hoveredKey === key;
       const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
