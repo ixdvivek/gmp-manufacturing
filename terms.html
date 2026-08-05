@@ -479,10 +479,10 @@ class Component extends DCLogic {
       (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
     s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
     s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
-    s.heroNav = "hidden xl:flex flex-row gap-[32px] items-center";
+    s.heroNav = "hidden nav:flex flex-row gap-[26px] xl:gap-[32px] items-center";
     s.heroTopbarRightGroup = "flex flex-row items-center gap-[10px] md:gap-[16px] shrink-0";
     const menuOpen = this.state.mobileMenuOpen;
-    s.hamburgerBtn = "flex xl:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
+    s.hamburgerBtn = "flex nav:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
     const barBase = "w-[20px] h-[2px] rounded-[2px] [transition:transform_0.25s_ease,opacity_0.2s_ease,background_0.3s_ease] " + (navScrolled ? `bg-[${near}]` : "bg-white");
     const barBaseOnDark = "w-[20px] h-[2px] rounded-[2px] bg-white [transition:transform_0.25s_ease,opacity_0.2s_ease]";
     s.hamburgerBar1 = barBase;
@@ -507,7 +507,7 @@ class Component extends DCLogic {
     s.mobileNavCloseRow = "relative z-[2] flex flex-row items-center justify-between shrink-0";
     s.mobileNavLogo = "w-[172px] md:w-[210px] h-auto";
     // A plain X reads as "close" more immediately than two rotated bars.
-    s.mobileNavCloseBtn = "flex xl:hidden items-center justify-center w-[40px] h-[40px] -mr-[6px] shrink-0 cursor-pointer text-white z-20 transition-opacity duration-200 hover:opacity-70";
+    s.mobileNavCloseBtn = "flex nav:hidden items-center justify-center w-[40px] h-[40px] -mr-[6px] shrink-0 cursor-pointer text-white z-20 transition-opacity duration-200 hover:opacity-70";
     s.mobileNavLinks = "relative z-[2] flex flex-col grow mt-[22px] md:mt-[40px]";
     s.mobileNavFoot = "relative z-[2] flex flex-col gap-[14px] items-start shrink-0 pt-[20px] mt-[16px] border-t border-solid border-[rgba(255,255,255,0.18)]";
     s.mobileNavCta = `rounded-[32px] no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] bg-white text-[${near}] py-[13px] px-[26px] transition-[background,color] duration-200 ease-in-out hover:bg-[${red}] hover:text-white`;

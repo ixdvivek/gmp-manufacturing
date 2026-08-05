@@ -15,6 +15,12 @@
 tailwind.config = {
   theme: {
     extend: {
+      screens: {
+        // The desktop nav measures 1044px wide, so it can appear well before
+        // the 1280px layout breakpoint. Without this, a 1366px laptop at the
+        // usual 125% Windows scaling (~1093px CSS) falls back to the hamburger.
+        nav: "1080px",
+      },
       colors: {
         "gmp-red": "rgb(178,33,38)",
         "gmp-purple": "rgb(45,38,93)",
