@@ -202,6 +202,9 @@
 
   <!-- ============ INTRO ============ -->
   <div data-screen-label="Sectors Intro" className="{{ s.sectionPad }}">
+    <div className="{{ s.introDecor }}">
+      <img src="assets2/brand-watermark.svg" alt="" className="{{ s.introWatermark }}">
+    </div>
     <div className="{{ s.introWrap }}" ref="{{ introRevealRef }}">
       <div className="{{ s.sectionHeadingGroup }}">
         <span className="{{ s.eyebrow }}">Our Markets</span>
@@ -839,7 +842,21 @@ class Component extends DCLogic {
     s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
 
     // ---------- INTRO ----------
-    s.introWrap = "flex flex-col gap-[16px] max-w-[1600px] mx-auto " + reveal("intro");
+    // The brand mark sits in its own clipped layer so the section edge cuts off
+    // its top and only the lower part shows, the way it reads on Home and About.
+    // Clipping here rather than on the section keeps the reveal transform free to
+    // move without being cropped mid-animation.
+    // Taller than the section so the mark carries on down past the copy into the
+    // space above the cards, which is the area that reads as empty.
+    // Stops above the card row so it never sits behind card copy, and fades out
+    // at its foot rather than ending on a hard cut.
+    s.introDecor = "pointer-events-none absolute left-0 right-0 top-0 overflow-hidden z-0 " +
+      "[mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] " +
+      "[-webkit-mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] " +
+      pick("h-0", "h-[270px]", "h-[320px]");
+    s.introWatermark = (isMobile ? "hidden " : "block ") +
+      `absolute w-auto ${pick("", "top-[-150px] right-[-130px] h-[560px]", "top-[-170px] right-[-70px] h-[660px]")}`;
+    s.introWrap = "relative z-[1] flex flex-col gap-[16px] max-w-[1600px] mx-auto " + reveal("intro");
     s.introBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[820px]`;
 
     // ---------- SECTOR CARDS (reused pathway-card treatment) ----------
