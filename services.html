@@ -850,10 +850,13 @@ class Component extends DCLogic {
     // space above the cards, which is the area that reads as empty.
     // Stops above the card row so it never sits behind card copy, and fades out
     // at its foot rather than ending on a hard cut.
-    s.introDecor = "pointer-events-none absolute left-0 right-0 top-0 overflow-hidden z-0 " +
+    s.introDecor = "pointer-events-none absolute left-0 right-0 overflow-hidden z-0 " +
       "[mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] " +
       "[-webkit-mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] " +
-      pick("h-0", "h-[270px]", "h-[320px]");
+      // Pulled up by exactly the section gap that sits between the banner and this
+      // section, so the layer's top edge meets the banner's bottom edge and the
+      // mark reads as carrying on out from under the image with no white band.
+      pick("top-0 h-0", "top-[-66px] h-[336px]", "top-[-96px] h-[416px]");
     s.introWatermark = (isMobile ? "hidden " : "block ") +
       `absolute w-auto ${pick("", "top-[-150px] right-[-130px] h-[560px]", "top-[-170px] right-[-70px] h-[660px]")}`;
     s.introWrap = "relative z-[1] flex flex-col gap-[16px] max-w-[1600px] mx-auto " + reveal("intro");
