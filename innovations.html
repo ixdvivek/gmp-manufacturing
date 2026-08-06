@@ -838,8 +838,12 @@ class Component extends DCLogic {
     // ---------- INNOVATION PANELS (alternating image + content, no curved edges) ----------
     // ---------- INNOVATION CARDS ----------
     s.innoGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[24px] max-w-[1600px] mx-auto " + reveal("introCards");
-    const innoCardBase = "flex flex-col justify-between no-underline box-border transition-transform duration-300 ease-out hover:-translate-y-1 " +
-      pick("min-h-[320px] p-[26px]", "min-h-[400px] p-[34px]", "min-h-[460px] p-[42px]");
+    // justify-between pinned the eyebrow to the top and the title block to the
+    // bottom of a tall min-height card, leaving a dead gap between them — 212px
+    // at desktop. Content now sits together near the top with a fixed gap, and
+    // the card is only as tall as it needs to be.
+    const innoCardBase = "flex flex-col justify-start no-underline box-border transition-transform duration-300 ease-out hover:-translate-y-1 " +
+      pick("gap-[26px] p-[26px]", "gap-[30px] p-[34px]", "gap-[34px] p-[42px]");
     s.innoCardBlue = innoCardBase + " bg-[rgb(37,117,187)]";
     s.innoCardNavy = innoCardBase + " bg-[rgb(41,37,96)]";
     s.innoCardBottom = "flex flex-col gap-[18px] md:gap-[22px] items-start";
