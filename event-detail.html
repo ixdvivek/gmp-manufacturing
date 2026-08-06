@@ -321,16 +321,16 @@
         <span className="{{ s.footerTagline }}">A full-service UK CDMO supporting partners in 30+ countries — development, manufacturing, packing and regulatory support, all under one roof.</span>
         <div className="{{ s.footerSocialRow }}">
           <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
-            <div className="w-[13px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]"></div>
+            <div className="{{ s.socialAIcon }}"></div>
           </div>
           <div className="{{ s.socialD.className }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
-            <div className="w-[14px] h-[14px] bg-[rgb(255,255,255)] [mask:url('assets2/instagram.svg')_center/contain_no-repeat]"></div>
+            <div className="{{ s.socialDIcon }}"></div>
           </div>
           <div className="{{ s.socialC.className }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
-            <div className="w-[11px] h-[13px] bg-[rgb(255,255,255)] [mask:url('assets2/facebook.svg')_center/contain_no-repeat]"></div>
+            <div className="{{ s.socialCIcon }}"></div>
           </div>
           <div className="{{ s.socialB.className }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
-            <svg width="18" height="12" viewBox="0 0 18 12" fill="rgb(255,255,255)"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="{{ s.socialB.iconColor }}" className="transition-colors duration-200"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
           </div>
         </div>
       </div>
@@ -812,8 +812,11 @@ class Component extends DCLogic {
       const hovered = this.state.hoveredKey === key;
       const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
       return {
+        // Hover inverts to a white chip with the icon itself picking up the
+        // brand colour, rather than a coloured circle with a white icon.
         className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
-          (hovered ? `bg-[${brandColor}] ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
+          (hovered ? `bg-white ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
+        iconColor: hovered ? brandColor : "rgb(255,255,255)",
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
       };
@@ -823,6 +826,12 @@ class Component extends DCLogic {
     s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
     s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
     s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
+    // Icon classes, built from the colour makeBrandCircle already resolved for
+    // each — kept as a full string per the rest of the codebase's convention
+    // rather than interpolating a partial Tailwind arbitrary value.
+    s.socialAIcon = `w-[13px] h-[13px] bg-[${s.socialA.iconColor}] transition-colors duration-200 [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]`;
+    s.socialDIcon = `w-[14px] h-[14px] bg-[${s.socialD.iconColor}] transition-colors duration-200 [mask:url('assets2/instagram.svg')_center/contain_no-repeat]`;
+    s.socialCIcon = `w-[11px] h-[13px] bg-[${s.socialC.iconColor}] transition-colors duration-200 [mask:url('assets2/facebook.svg')_center/contain_no-repeat]`;
     s.footerBottomRow = "flex flex-row flex-wrap gap-[12px] items-center justify-between pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
     s.footerLegalLink = "font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] no-underline hover:text-white transition-colors duration-200";
 
