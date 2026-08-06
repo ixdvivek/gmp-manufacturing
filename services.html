@@ -203,7 +203,7 @@
   <!-- ============ INTRO ============ -->
   <div data-screen-label="Services Intro" className="{{ s.sectionPad }}">
     <div className="{{ s.introDecor }}">
-      <img src="assets2/brand-watermark.svg" alt="" className="{{ s.introWatermark }}">
+      <div className="{{ s.introWatermark }}"></div>
     </div>
     <div className="{{ s.introWrap }}" ref="{{ introRevealRef }}">
       <div className="{{ s.sectionHeadingGroup }}">
@@ -856,15 +856,18 @@ class Component extends DCLogic {
       // Pulled up by exactly the section gap that sits between the banner and this
       // section, so the layer's top edge meets the banner's bottom edge and the
       // mark reads as carrying on out from under the image with no white band.
-      pick("top-0 h-0", "top-[-66px] h-[336px]", "top-[-96px] h-[416px]");
-    // The artwork is a crop of a larger swoosh, so its own left boundary slices
-    // straight through the dots. Off-canvas on Home and About; here it sits mid
-    // page, so fade that edge out. The layer above carries the vertical fade —
-    // one axis each, rather than compositing two masks on one element.
-    s.introWatermark = (isMobile ? "hidden " : "block ") +
-      "[mask-image:linear-gradient(to_right,transparent_0%,#000_34%)] " +
-      "[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_34%)] " +
-      `absolute w-auto ${pick("", "top-[-150px] right-[-130px] h-[560px]", "top-[-170px] right-[-70px] h-[660px]")}`;
+      pick("top-0 h-0", "top-0 h-0", "top-[-96px] h-[416px]");
+    // The full icon rather than brand-watermark.svg, which is a crop of a larger
+    // swoosh and so carries a hard sliced edge. Painted through a mask so the
+    // brand colours in the source become one flat grey — the same #F5F8FA the
+    // old watermark was already shaded to.
+    // Desktop only. Below xl the intro copy runs the full content width, so
+    // there is no empty space for it to fill and it would just sit behind text.
+    s.introWatermark = (isDesktop ? "block " : "hidden ") +
+      "absolute bg-[#F5F8FA] [mask:url('assets2/logo-icon.svg')_center/contain_no-repeat] " +
+      "[-webkit-mask:url('assets2/logo-icon.svg')_center/contain_no-repeat] " +
+      // sits half above the banner edge, so only its lower half shows
+      "top-[-240px] right-[28px] w-[480px] h-[480px]";
     s.introWrap = "relative z-[1] flex flex-col gap-[16px] max-w-[1600px] mx-auto " + reveal("intro");
     s.introBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[820px]`;
 
