@@ -628,15 +628,29 @@ class Component extends DCLogic {
     this._revealObservers[key] = obs;
   }
   _goToIndustry(i) {
-    if (i === this.state.industryActiveIndex || this.state.blindsPhase === "active") return;
+    // A click that arrives mid-transition was being silently dropped rather
+    // than queued, so clicking through the captions at a normal pace (faster
+    // than the ~2.2s blinds reveal) left the section stuck on whichever one
+    // was active when the clicking started — every click after the first was
+    // simply discarded. It is now remembered and applied the moment the
+    // current transition finishes, so no click is lost; only the latest one
+    // in a burst is kept, so a quick run of clicks lands on the last target
+    // rather than replaying every intermediate one.
+    if (i === this.state.industryActiveIndex) { this._queuedIndustryIndex = null; return; }
+    if (this.state.blindsPhase === "active") { this._queuedIndustryIndex = i; return; }
+    this._queuedIndustryIndex = null;
     if (this._blindsTimer1) clearTimeout(this._blindsTimer1);
     if (this._blindsTimer2) clearTimeout(this._blindsTimer2);
-    if (this._blindsTimer3) clearTimeout(this._blindsTimer3);
     this.setState({ blindsPhase: "active", pendingIndex: i });
     this._blindsTimer1 = setTimeout(() => {
       this.setState({ industryActiveIndex: i, blindsPhase: "reset" });
       this._blindsTimer2 = setTimeout(() => {
         this.setState({ blindsPhase: "idle", pendingIndex: null });
+        const queued = this._queuedIndustryIndex;
+        if (queued != null && queued !== i) {
+          this._queuedIndustryIndex = null;
+          this._goToIndustry(queued);
+        }
       }, 30);
     }, 2200);
   }
