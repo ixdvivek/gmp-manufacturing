@@ -259,21 +259,17 @@
         <span className="{{ s.h2 }}">How we support this sector</span>
         <a href="services.html" className="{{ s.ourServicesBtn.className }}" onMouseEnter="{{ s.ourServicesBtn.enter }}" onMouseLeave="{{ s.ourServicesBtn.leave }}">Our Services</a>
       </div>
-      <div className="{{ s.relSvcNumCell }}">
-        <span className="{{ s.relSvcNum }}">01</span>
-        <span className="{{ s.relSvcTitle }}">Development &amp; Formulation</span>
-        <span className="{{ s.relSvcDesc }}">Formulation, analytical development and remediation that ready your product for reliable scale-up.</span>
-      </div>
-      <div className="{{ s.relSvcNumCell }}">
-        <span className="{{ s.relSvcNum }}">02</span>
-        <span className="{{ s.relSvcTitle }}">UK In-house Manufacturing</span>
-        <span className="{{ s.relSvcDesc }}">Owned facilities in Hull — full control, no outsourcing surprises.</span>
-      </div>
-      <div className="{{ s.relSvcNumCell }}">
-        <span className="{{ s.relSvcNum }}">03</span>
-        <span className="{{ s.relSvcTitle }}">Tech Transfer &amp; Warehousing</span>
-        <span className="{{ s.relSvcDesc }}">Smooth, de-risked scale-up with integrated storage.</span>
-      </div>
+      <sc-for list="{{relSvcItems}}" as="item" hint-placeholder-count="3">
+        <a href="{{ item.href }}" className="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
+          <div className="{{ item.sweepStyle }}"></div>
+          <span className="{{ item.numStyle }}">{{ item.n }}</span>
+          <span className="{{ item.headStyle }}">{{ item.h }}</span>
+          <span className="{{ item.descStyle }}">{{ item.d }}</span>
+          <svg className="{{ item.arrowStyle }}" width="48" height="16" viewBox="0 0 48 16" fill="none" stroke="{{ item.arrowColor }}" stroke-width="1.5">
+            <path d="M0 8h44M36 2l8 6-8 6"></path>
+          </svg>
+        </a>
+      </sc-for>
     </div>
   </div>
 
@@ -431,7 +427,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, hoveredRelSvc: -1, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -777,10 +773,38 @@ class Component extends DCLogic {
     s.relSvcRow = "grid " + pick("grid-cols-1 gap-[24px]", "grid-cols-2 gap-[28px]", "grid-cols-4 gap-0") + " max-w-[1600px] mx-auto " + reveal("relsvc");
     s.relSvcHeadCell = "flex flex-col gap-[14px] items-start " + (isDesktop ? "pr-[32px]" : "");
     s.ourServicesBtn = makeDarkPill("ourServicesBtn", "rounded-[32px] inline-flex py-[12px] px-[22px] mt-[6px] cursor-pointer shrink-0 box-border");
-    s.relSvcNumCell = "flex flex-col gap-[8px] items-start box-border " + (isDesktop ? "border-l border-solid border-[rgba(0,0,0,0.12)] pl-[24px] xl:pl-[32px]" : "border-t border-solid border-[rgba(0,0,0,0.12)] pt-[20px]");
-    s.relSvcNum = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.55)]";
-    s.relSvcTitle = `font-semibold text-[18px] leading-[24px] text-[${red}]`;
-    s.relSvcDesc = "font-normal text-[14px] leading-[21px] text-[rgba(51,51,51,0.75)]";
+    // Same sweep-card treatment as the Home "why GMP" pathway and the Services
+    // listing grid: a border-adjacent cell fills with the brand gradient on
+    // hover, text flips to white, an arrow slides in. Unlike those two, this
+    // row also carries a head cell (title + Our Services button) inline at
+    // gap-0, so the hover width-expand trick they use — growing a card into
+    // its neighbouring gap — has no gap here to expand into and is dropped;
+    // everything else about the interaction matches.
+    const relSvcItems = [
+      { n: "01", h: "Development & Formulation", d: "Formulation, analytical development and remediation that ready your product for reliable scale-up." },
+      { n: "02", h: "UK In-house Manufacturing", d: "Owned facilities in Hull — full control, no outsourcing surprises." },
+      { n: "03", h: "Tech Transfer & Warehousing", d: "Smooth, de-risked scale-up with integrated storage." },
+    ].map((item, i) => {
+      const hovered = this.state.hoveredRelSvc === i;
+      return {
+        n: item.n, h: item.h, d: item.d, href: "service-detail.html",
+        containerStyle: "relative overflow-hidden flex flex-col gap-[10px] items-start justify-start text-left box-border cursor-pointer no-underline " +
+          (isDesktop ? "border-l border-solid border-[rgba(0,0,0,0.2)]" : "border-t border-solid border-[rgba(0,0,0,0.2)]") + " " +
+          (hovered ? "z-[2]" : "z-[1]") + " " +
+          pick("py-[20px] px-[16px]", "py-[24px] pl-[24px] xl:pl-[32px]", "py-[28px] pl-[24px] xl:pl-[32px]") + " " +
+          (hovered ? "shadow-[0_24px_48px_-16px_rgba(0,0,0,0.35)]" : noShadowTw) +
+          " transition-[box-shadow] duration-[250ms] ease-in-out",
+        sweepStyle: `absolute inset-0 bg-[${gradient}] [transform-origin:left_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none ` + (hovered ? "scale-x-100" : "scale-x-0"),
+        numStyle: "relative z-[1] font-normal text-[13px] leading-[18px] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-[rgba(255,255,255,0.75)]" : "text-[rgba(51,51,51,0.55)]"),
+        headStyle: "relative z-[1] font-semibold text-[18px] leading-[24px] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${near}]`),
+        descStyle: "relative z-[1] font-normal text-[14px] leading-[21px] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : "text-[rgba(51,51,51,0.75)]"),
+        arrowStyle: "relative z-[1] mt-[2px] pointer-events-none transition-[opacity,transform] duration-[250ms] ease-in-out " +
+          ((hovered || !isDesktop) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[8px]"),
+        arrowColor: hovered ? "rgb(255,255,255)" : near,
+        onEnter: () => this.setState({ hoveredRelSvc: i }),
+        onLeave: () => this.setState({ hoveredRelSvc: -1 }),
+      };
+    });
 
     // ---------- FULL-BLEED FACILITY INSERT (white caption box, bottom-right, flush) ----------
     s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[380px]", "h-[460px]", "h-[560px]")}`;
@@ -867,6 +891,7 @@ class Component extends DCLogic {
 
     return {
       s,
+      relSvcItems,
       overviewRevealRef: revealRef("overview"),
       relSvcRevealRef: revealRef("relsvc"),
       complianceRevealRef: revealRef("compliance"),
