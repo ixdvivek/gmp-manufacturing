@@ -857,7 +857,13 @@ class Component extends DCLogic {
       // section, so the layer's top edge meets the banner's bottom edge and the
       // mark reads as carrying on out from under the image with no white band.
       pick("top-0 h-0", "top-[-66px] h-[336px]", "top-[-96px] h-[416px]");
+    // The artwork is a crop of a larger swoosh, so its own left boundary slices
+    // straight through the dots. Off-canvas on Home and About; here it sits mid
+    // page, so fade that edge out. The layer above carries the vertical fade —
+    // one axis each, rather than compositing two masks on one element.
     s.introWatermark = (isMobile ? "hidden " : "block ") +
+      "[mask-image:linear-gradient(to_right,transparent_0%,#000_34%)] " +
+      "[-webkit-mask-image:linear-gradient(to_right,transparent_0%,#000_34%)] " +
       `absolute w-auto ${pick("", "top-[-150px] right-[-130px] h-[560px]", "top-[-170px] right-[-70px] h-[660px]")}`;
     s.introWrap = "relative z-[1] flex flex-col gap-[16px] max-w-[1600px] mx-auto " + reveal("intro");
     s.introBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[820px]`;
