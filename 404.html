@@ -370,6 +370,9 @@ class Component extends DCLogic {
     const collabGradient = "linear-gradient(139.949deg,rgb(37,117,187)_3.69%,rgb(41,37,96)_58.52%,rgb(178,33,38)_137.9%)";
     const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
     const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
+    // The outlined button is mostly white, so the primary's red glow would spread
+    // out from under it and read as a halo rather than a lift. Neutral and lighter.
+    const secondaryShadowTw = "shadow-[0_10px_20px_-10px_rgba(17,17,17,0.18)]";
 
     const gutter = pick(20, 40, 64);
     const s = {};
@@ -443,8 +446,8 @@ class Component extends DCLogic {
     const makeSecondaryPill = (key) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color] duration-200 ease-in-out " +
-          (hovered ? `border-[${red}]` : `border-[${purple}]`),
+        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `border-[${red}] ${secondaryShadowTw} -translate-y-[2px]` : `border-[${purple}] ${noShadowTw} translate-y-0`),
         textColor: hovered ? red : purple,
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
@@ -594,7 +597,7 @@ class Component extends DCLogic {
     s.nfBody = s.bodyText + " max-w-[620px]";
     s.nfBtnRow = "flex flex-row flex-wrap gap-[12px] items-center pt-[8px]";
     s.nfPrimary = s.pillDark + ` bg-[${purple}] text-white font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] transition-[background,box-shadow,transform] duration-200 ease-in-out hover:bg-[${red}] hover:-translate-y-[2px]`;
-    s.nfSecondary = `rounded-[32px] bg-white inline-flex flex-row justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] border-[${purple}] text-[${purple}] transition-[border-color,color] duration-200 ease-in-out hover:border-[${red}] hover:text-[${red}]`;
+    s.nfSecondary = `rounded-[32px] bg-white inline-flex flex-row justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] border-[${purple}] text-[${purple}] transition-[border-color,color,box-shadow,transform] duration-200 ease-in-out hover:border-[${red}] hover:text-[${red}] hover:shadow-[0_10px_20px_-10px_rgba(17,17,17,0.18)] hover:-translate-y-[2px]`;
     s.nfLinksWrap = "flex flex-col gap-[18px] md:gap-[24px] max-w-[1600px] mx-auto " + reveal("nfLinks");
     s.nfLinksLabel = "font-medium text-[13px] leading-[18px] uppercase tracking-[0.6px] text-[rgba(51,51,51,0.45)]";
     s.nfLinksGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[12px] md:gap-[16px]";

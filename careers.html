@@ -770,6 +770,9 @@ class Component extends DCLogic {
     const footerGradient = "linear-gradient(111.131deg,rgb(37,117,187)_-0.79%,rgb(41,37,96)_62.7%,rgb(178,33,38)_154.63%)";
     const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
     const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
+    // The outlined button is mostly white, so the primary's red glow would spread
+    // out from under it and read as a halo rather than a lift. Neutral and lighter.
+    const secondaryShadowTw = "shadow-[0_10px_20px_-10px_rgba(17,17,17,0.18)]";
 
     const gutter = pick(20, 40, 64);
     const s = {};
@@ -846,8 +849,8 @@ class Component extends DCLogic {
     const makeSecondaryPill = (key) => {
       const hovered = this.state.hoveredKey === key;
       return {
-        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color] duration-200 ease-in-out " +
-          (hovered ? `border-[${red}]` : `border-[${purple}]`),
+        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `border-[${red}] ${secondaryShadowTw} -translate-y-[2px]` : `border-[${purple}] ${noShadowTw} translate-y-0`),
         textColor: hovered ? red : purple,
         enter: () => this.setState({ hoveredKey: key }),
         leave: () => this.setState({ hoveredKey: null }),
