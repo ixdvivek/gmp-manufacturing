@@ -1219,8 +1219,20 @@ class Component extends DCLogic {
     s.industriesWrap = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[16px] md:gap-[48px] xl:gap-[80px] max-w-[1600px] mx-auto items-start w-full " + (isMobile ? "h-full" : "h-auto") + " min-h-0 box-border " + reveal("industries");
     s.industriesLeft = "flex flex-col gap-[10px] md:gap-[40px] items-start " + (isMobile ? "w-full" : pick("w-0", "w-[280px]", "w-[380px]")) + " shrink-0";
     s.industriesList = "flex flex-col gap-[5px] md:gap-[25px] xl:gap-[31px] items-start";
-    s.industryItemDim = `opacity-30 font-medium text-[15px] md:text-[18px] leading-[20px] md:leading-[24px] tracking-[-0.7px] text-[${dark}] cursor-pointer transition-[opacity,color] duration-300 ease-in-out`;
-    s.industryItemActive = `font-bold text-[15px] md:text-[18px] leading-[20px] md:leading-[24px] tracking-[-0.7px] text-[${red}] cursor-pointer transition-[opacity,color] duration-300 ease-in-out`;
+    // Three states have to stay legible at a glance: resting, hovered, and the
+    // sector currently on screen. Hover therefore comes up to full strength and
+    // steps sideways but stays dark — red is what marks the selection, and if
+    // hover took it too the two would be separated by weight alone. The sideways
+    // step also matches the caption arrow and the service cards rather than
+    // borrowing the buttons' vertical lift, which would break the list baseline.
+    // Font weight is kept out of the shared base: font-medium and font-bold have
+    // equal specificity, so having both on one element would leave the winner to
+    // stylesheet order rather than intent.
+    const industryItemBase = "text-[15px] md:text-[18px] leading-[20px] md:leading-[24px] tracking-[-0.7px] cursor-pointer transition-[opacity,color,transform] duration-300 ease-in-out";
+    s.industryItemDim = `${industryItemBase} font-medium opacity-30 text-[${dark}] translate-x-0 hover:opacity-100 hover:translate-x-[6px]`;
+    // No hover treatment on the active one — clicking it is a no-op, so it
+    // should not offer to be clicked.
+    s.industryItemActive = `${industryItemBase} font-bold text-[${red}] translate-x-0`;
     s.industriesRight = "relative grow w-full " + (isMobile ? "h-full" : "h-auto") + " min-h-0 flex flex-col items-center";
     const industriesFitHeight = this.state.industriesLeftH || pick(220, 300, 360);
     s.industriesImgWrap = "relative z-0 [isolation:isolate] w-full overflow-hidden " +
