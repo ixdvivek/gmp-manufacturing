@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./quote-modal.js" defer></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="tailwind.config.js"></script>
 </head>
@@ -235,7 +236,7 @@
           </div>
         </div>
         <div className="{{ s.panelACtaRow }}">
-          <a href="contact.html" className="{{ s.panelACtaPrimary.className }}" onMouseEnter="{{ s.panelACtaPrimary.enter }}" onMouseLeave="{{ s.panelACtaPrimary.leave }}">Get A Quote</a>
+          <a href="contact.html" data-quote-modal data-quote-subject="Manufacturing Services" className="{{ s.panelACtaPrimary.className }}" onMouseEnter="{{ s.panelACtaPrimary.enter }}" onMouseLeave="{{ s.panelACtaPrimary.leave }}">Get A Quote</a>
         </div>
       </div>
     </div>
@@ -267,7 +268,7 @@
           </div>
         </div>
         <div className="{{ s.panelACtaRow }}">
-          <a href="contact.html" className="{{ s.panelBCtaPrimary.className }}" onMouseEnter="{{ s.panelBCtaPrimary.enter }}" onMouseLeave="{{ s.panelBCtaPrimary.leave }}">Get A Quote</a>
+          <a href="contact.html" data-quote-modal data-quote-subject="Manufacturing Services" className="{{ s.panelBCtaPrimary.className }}" onMouseEnter="{{ s.panelBCtaPrimary.enter }}" onMouseLeave="{{ s.panelBCtaPrimary.leave }}">Get A Quote</a>
         </div>
       </div>
       <div className="{{ s.panelImageCol }}">

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./quote-modal.js" defer></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="tailwind.config.js"></script>
 </head>
@@ -242,8 +243,8 @@
           </div>
         </div>
         <div className="{{ s.overviewCtaRow }}">
-          <a href="contact.html" className="{{ s.overviewCtaSecondary.className }}" onMouseEnter="{{ s.overviewCtaSecondary.enter }}" onMouseLeave="{{ s.overviewCtaSecondary.leave }}">Get In Touch</a>
-          <a href="contact.html" className="{{ s.overviewCtaPrimary.className }}" onMouseEnter="{{ s.overviewCtaPrimary.enter }}" onMouseLeave="{{ s.overviewCtaPrimary.leave }}">Get A Quote</a>
+          <a href="contact.html" data-quote-modal data-quote-subject="Pharmaceutical manufacturing" data-quote-sector="Pharmaceutical" className="{{ s.overviewCtaSecondary.className }}" onMouseEnter="{{ s.overviewCtaSecondary.enter }}" onMouseLeave="{{ s.overviewCtaSecondary.leave }}">Get In Touch</a>
+          <a href="contact.html" data-quote-modal data-quote-subject="Pharmaceutical manufacturing" data-quote-sector="Pharmaceutical" className="{{ s.overviewCtaPrimary.className }}" onMouseEnter="{{ s.overviewCtaPrimary.enter }}" onMouseLeave="{{ s.overviewCtaPrimary.leave }}">Get A Quote</a>
         </div>
       </div>
     </div>
