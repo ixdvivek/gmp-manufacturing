@@ -88,6 +88,24 @@
     html, body { margin: 0; padding: 0; background: #fff; }
     .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Sector image transition. Written out by hand rather than composed from
+       Tailwind arbitrary values on purpose: the previous nine-strip version
+       built a different class string per strip per phase, so every one of them
+       had to be generated at runtime by the Play CDN. Whenever a rule was not
+       ready in time that strip skipped its transition and the picture froze
+       part-old part-new. These are plain static classes in the page's own
+       stylesheet, so they exist before the first paint and nothing can race. */
+    .gmp-curtain {
+      position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none;
+      clip-path: inset(0 100% 0 0); -webkit-clip-path: inset(0 100% 0 0);
+      transition: clip-path 900ms cubic-bezier(0.76, 0, 0.24, 1),
+                  -webkit-clip-path 900ms cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .gmp-curtain.is-open { clip-path: inset(0 0 0 0); -webkit-clip-path: inset(0 0 0 0); }
+    /* Closed states must snap, never animate back out. */
+    .gmp-curtain.is-reset { transition: none; }
+    .gmp-curtain-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -342,11 +360,9 @@ to Market</span>
           <sc-for list="{{sectorImages}}" as="img" hint-placeholder-count="6">
             <img src="{{ img.src }}" alt="{{ img.name }} manufacturing" loading="lazy" className="{{ img.style }}">
           </sc-for>
-          <sc-for list="{{blindStrips}}" as="strip" hint-placeholder-count="9">
-            <div className="{{ strip.style }}">
-              <img src="{{ strip.imgSrc }}" className="{{ strip.imgStyle }}">
-            </div>
-          </sc-for>
+          <div className="{{ curtain.style }}">
+            <img src="{{ curtain.src }}" alt="{{ curtain.name }} manufacturing" className="gmp-curtain-img">
+          </div>
         </div>
         <div className="{{ s.industriesCaption }}" onMouseEnter="{{ onCaptionEnter }}" onMouseLeave="{{ onCaptionLeave }}" onClick="{{ onCaptionClick }}">
           <div className="{{ s.industriesCaptionSweep }}"></div>
@@ -567,16 +583,11 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
 <script type="text/x-dc" data-dc-script data-props="{
   &quot;marqueeScroll&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Logo strip&quot; }
 }">
-// Blinds wipe: each of the 9 strips runs BLINDS_WIPE_MS, staggered by
-// BLINDS_STAGGER_MS, so the last one lands at wipe + 8 × stagger. Keep
-// BLINDS_TOTAL_MS just past that — it is when the revealed image is committed
-// to the base layer and the strips are cleared.
-const BLINDS_WIPE_MS = 900;
-const BLINDS_STAGGER_MS = 45;
-const BLINDS_TOTAL_MS = BLINDS_WIPE_MS + BLINDS_STAGGER_MS * 8 + 40;
+// Must match the 900ms in the .gmp-curtain rule in the helmet stylesheet.
+const CURTAIN_MS = 900;
 
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, industrySelectedIndex: 0, pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1, openNavMenu: null };
+  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, industrySelectedIndex: 0, curtainIndex: null, curtainPhase: "idle", pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -601,9 +612,8 @@ class Component extends DCLogic {
     window.removeEventListener("scroll", this._onScroll);
     if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
     if (this._industriesLeftRO) this._industriesLeftRO.disconnect();
-    if (this._blindsTimer1) clearTimeout(this._blindsTimer1);
-    if (this._blindsTimer2) clearTimeout(this._blindsTimer2);
-    if (this._blindsTimer3) clearTimeout(this._blindsTimer3);
+    if (this._curtainTimer) clearTimeout(this._curtainTimer);
+    if (this._curtainRaf) cancelAnimationFrame(this._curtainRaf);
     this._teardownRipple();
   }
   _observeReveal(key, el) {
@@ -645,29 +655,32 @@ class Component extends DCLogic {
     // the click, and only the image transition takes time.
     if (i === this.state.industrySelectedIndex) return;
     this.setState({ industrySelectedIndex: i });
-    this._runBlinds(i);
+    this._runCurtain(i);
   }
-  _runBlinds(i) {
-    if (this._blindsTimer1) clearTimeout(this._blindsTimer1);
-    if (this._blindsTimer2) clearTimeout(this._blindsTimer2);
-    if (this._blindsTimer3) clearTimeout(this._blindsTimer3);
-    const grow = () => {
-      this.setState({ blindsPhase: "active", pendingIndex: i });
-      this._blindsTimer1 = setTimeout(() => {
-        this.setState({ industryActiveIndex: i, blindsPhase: "reset" });
-        this._blindsTimer2 = setTimeout(() => this.setState({ blindsPhase: "idle", pendingIndex: null }), 30);
-      }, BLINDS_TOTAL_MS);
-    };
-    if (this.state.blindsPhase === "active") {
-      // Interrupting a wipe: commit whatever it was revealing to the base image
-      // before restarting, so the strips snap away over the picture they were
-      // already most of the way through rather than flicking back to the old one.
-      const inFlight = this.state.pendingIndex != null ? this.state.pendingIndex : this.state.industryActiveIndex;
-      this.setState({ industryActiveIndex: inFlight, blindsPhase: "reset", pendingIndex: i });
-      this._blindsTimer3 = setTimeout(grow, 30);
-      return;
+  _runCurtain(i) {
+    // One overlay, one transition, three phases. "armed" puts the incoming
+    // picture in the curtain and holds it closed with no transition; a frame
+    // later "open" sweeps it across; on completion the picture is handed to the
+    // base layer and the curtain snaps closed again, ready for the next one.
+    if (this._curtainTimer) clearTimeout(this._curtainTimer);
+    if (this._curtainRaf) cancelAnimationFrame(this._curtainRaf);
+    if (this.state.curtainPhase === "open") {
+      // Interrupting a sweep: hand the picture it was revealing to the base
+      // layer first, so re-arming does not flick back to the previous one.
+      const inFlight = this.state.curtainIndex != null ? this.state.curtainIndex : this.state.industryActiveIndex;
+      this.setState({ industryActiveIndex: inFlight });
     }
-    grow();
+    this.setState({ curtainIndex: i, curtainPhase: "armed" });
+    // Two frames, so the closed state is painted before the open class lands —
+    // one frame is not always enough for the browser to register a start value.
+    this._curtainRaf = requestAnimationFrame(() => {
+      this._curtainRaf = requestAnimationFrame(() => {
+        this.setState({ curtainPhase: "open" });
+        this._curtainTimer = setTimeout(() => {
+          this.setState({ industryActiveIndex: i, curtainPhase: "idle", curtainIndex: null });
+        }, CURTAIN_MS + 60);
+      });
+    });
   }
   _measureIndustriesLeft() {
     if (!this._industriesLeftEl) return;
@@ -1448,22 +1461,14 @@ class Component extends DCLogic {
       style: "absolute inset-0 w-full h-full object-cover " + (j === industryActive ? "opacity-100" : "opacity-0"),
     }));
     const activeSector = sectorData[industrySelected];
-    const blindsPhase = this.state.blindsPhase || "idle";
-    const numStrips = 9;
-    const stripTargetIndex = this.state.pendingIndex != null ? this.state.pendingIndex : industryActive;
-    const stripTargetSrc = sectorData[stripTargetIndex].img;
-    const growing = blindsPhase === "active";
-    const stripFitHeight = industriesFitHeight;
-    const blindStrips = Array.from({ length: numStrips }, (_, k) => {
-      const delay = growing ? k * BLINDS_STAGGER_MS : 0;
-      const transitionClass = blindsPhase === "reset" ? "[transition:none]" : `[transition:clip-path_${BLINDS_WIPE_MS}ms_cubic-bezier(0.76,0,0.24,1)_${delay}ms]`;
-      return {
-        imgSrc: stripTargetSrc,
-        imgStyle: `absolute bottom-0 left-[${-(k * 100)}%] w-[${numStrips * 100}%] h-[${stripFitHeight}px] object-cover`,
-        style: `absolute left-[${(k * 100) / numStrips}%] top-0 w-[${100 / numStrips}%] h-full overflow-hidden z-[2] pointer-events-none ` +
-          (growing ? "[clip-path:inset(0%_0_0_0)]" : "[clip-path:inset(100%_0_0_0)]") + " " + transitionClass,
-      };
-    });
+    // Only the sweep itself carries a transition; both closed states snap.
+    const curtainPhase = this.state.curtainPhase || "idle";
+    const curtainIndex = this.state.curtainIndex != null ? this.state.curtainIndex : industryActive;
+    const curtain = {
+      src: sectorData[curtainIndex].img,
+      name: sectorData[curtainIndex].name,
+      style: "gmp-curtain " + (curtainPhase === "open" ? "is-open" : "is-reset"),
+    };
 
     return {
       s,
@@ -1502,7 +1507,7 @@ class Component extends DCLogic {
       sectorListItems,
       sectorImages,
       activeSector,
-      blindStrips,
+      curtain,
       newsItems,
     };
   }
