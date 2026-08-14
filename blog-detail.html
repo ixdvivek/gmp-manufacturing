@@ -120,6 +120,7 @@
           </div>
         </div>
       </div>
+      <a href="cdmo.html" className="{{ s.navCdmoStyle }}" onMouseEnter="{{ s.navEnterCdmo }}" onMouseLeave="{{ s.navLeave }}">CDMO</a>
       <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
       <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
         <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
@@ -339,6 +340,7 @@
           <div className="flex flex-col gap-[8px] items-start">
             <a href="index.html" className="{{ s.footerLink }}">Home</a>
             <a href="about.html" className="{{ s.footerLink }}">About Us</a>
+            <a href="cdmo.html" className="{{ s.footerLink }}">CDMO</a>
             <a href="innovations.html" className="{{ s.footerLink }}">Innovations</a>
             <a href="news.html" className="{{ s.footerLink }}">News &amp; Blogs</a>
             <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
@@ -585,6 +587,7 @@ class Component extends DCLogic {
       { label: "Home", href: "index.html", key: "home" },
       { label: "About Us", href: "about.html", key: "about" },
       { label: "Services", href: "services.html", key: "services" },
+      { label: "CDMO", href: "cdmo.html", key: "cdmo" },
       { label: "Sectors", href: "sectors.html", key: "sectors" },
       { label: "Innovations", href: "innovations.html", key: "innovations" },
       { label: "News & Blogs", href: "news.html", key: "news" },
@@ -632,17 +635,19 @@ class Component extends DCLogic {
     s.navHomeStyle = navLinkStyle(0, "home");
     s.navAboutStyle = navLinkStyle(1, "about");
     s.navServicesStyle = navLinkStyle(2, "services");
-    s.navInnovationsStyle = navLinkStyle(3, "innovations");
-    s.navSectorsStyle = navLinkStyle(4, "sectors");
-    s.navContactStyle = navLinkStyle(5, "contact");
+    s.navCdmoStyle = navLinkStyle(3, "cdmo");
+    s.navInnovationsStyle = navLinkStyle(4, "innovations");
+    s.navSectorsStyle = navLinkStyle(5, "sectors");
+    s.navContactStyle = navLinkStyle(6, "contact");
     const navEnter = (i, menu) => () => this.setState({ hoveredNav: i, openNavMenu: menu || null });
     s.navLeave = () => this.setState({ hoveredNav: -1, openNavMenu: null });
     s.navEnterHome = navEnter(0);
     s.navEnterAbout = navEnter(1);
     s.navEnterServices = navEnter(2, "services");
-    s.navEnterInnovations = navEnter(3);
-    s.navEnterSectors = navEnter(4, "sectors");
-    s.navEnterContact = navEnter(5);
+    s.navEnterCdmo = navEnter(3);
+    s.navEnterInnovations = navEnter(4);
+    s.navEnterSectors = navEnter(5, "sectors");
+    s.navEnterContact = navEnter(6);
     const openNavMenu = this.state.openNavMenu;
     const navMenuPanelBase = "absolute top-full left-0 pt-[12px] z-[60] [transition:opacity_0.2s_ease,transform_0.2s_ease]";
     s.servicesMenuPanel = navMenuPanelBase + " " + (openNavMenu === "services" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");

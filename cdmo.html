@@ -77,7 +77,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — Services</title>
+  <title>GMP Manufacturing Ltd — CDMO</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -88,7 +88,6 @@
   <style>
     html, body { margin: 0; padding: 0; background: #fff; }
     .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-    @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
@@ -97,7 +96,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Service Detail — Template" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd CDMO — Responsive" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -192,265 +191,179 @@
 
   <!-- ============ PAGE BANNER ============ -->
   <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
-    <img src="assets2/hero-bg.webp" alt="Manufacturing services" className="{{ s.bannerBg }}">
+    <img src="assets/gmp-2.webp" alt="Sterile liquid and semi-solid manufacturing suite" className="{{ s.bannerBg }}">
     <div className="{{ s.bannerOverlay }}"></div>
     <div className="{{ s.bannerContent }}">
-      <span className="{{ s.bannerHeadline }}">Manufacturing Services</span>
+      <span className="{{ s.eyebrowOnDark }}">Contract Development &amp; Manufacturing</span>
+      <span className="{{ s.bannerHeadline }}">CDMO</span>
+      <span className="{{ s.bannerSubtext }}">Liquid and semi-solid pharmaceutical formulations, from early-stage development through to commercialisation.</span>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ PANEL A (image left, text right, content-rich) ============ -->
-  <div data-screen-label="Panel A" className="{{ s.sectionPad }}">
-    <div className="{{ s.panelWrapReverse }}" ref="{{ panelARevealRef }}">
-      <div className="{{ s.panelImageCol }}">
-        <img src="assets/gmp-12.webp" alt="Formulation and manufacturing" loading="lazy" className="{{ s.panelImage }}">
-        <div className="{{ s.panelAMetricCard }}">
-          <div className="{{ s.panelAMetricTopRow }}">
-            <span className="{{ s.panelAMetricNumber }}">2X</span>
-            <div className="{{ s.panelAMetricIconBadge }}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
-            </div>
-          </div>
-          <span className="{{ s.panelAMetricLabel }}">Production capacity, same footprint</span>
-        </div>
+  <!-- ============ STREAMLINE YOUR CDMO JOURNEY (intro split) ============ -->
+  <div data-screen-label="CDMO Intro" className="{{ s.sectionPad }}">
+    <div className="{{ s.introDecor }}">
+      <div className="{{ s.introWatermark }}"></div>
+    </div>
+    <div className="{{ s.splitWrapCentered }}" ref="{{ introRevealRef }}">
+      <div className="{{ s.splitMediaCol }}">
+        <img src="assets/gmp-4.webp" alt="Analysts working in a GMP-compliant cleanroom" loading="lazy" className="{{ s.splitImage }}">
       </div>
-      <div className="{{ s.panelContent }}">
-        <span className="{{ s.panelAEyebrowPill }}">OUR APPROACH</span>
-        <span className="{{ s.h2 }}">Formulation, manufacturing and everything in between</span>
-        <span className="{{ s.panelABody }}">From early-stage formulation and process development through to full-scale, GMP-compliant manufacturing, every stage of your product's journey runs through our own UK facilities. One accountable team carries it from first trial batch to final, labelled pack — so nothing gets lost in translation between partners.</span>
-        <div className="{{ s.panelAPointsRow }}">
-          <div className="{{ s.panelAPoint }}">
-            <div className="{{ s.panelAPointIconBox }}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V14M12 20V8M20 20V4"></path></svg>
-            </div>
-            <span className="{{ s.subheadingTitle }}">Full-Scale Production</span>
-            <span className="{{ s.subheadingBody }}">From bulk manufacture through to finished, labelled pack, every stage runs through our own UK facilities — one process, one accountable team.</span>
-          </div>
-          <div className="{{ s.panelAPoint }}">
-            <div className="{{ s.panelAPointIconBox }}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6"></path><path d="M10 2v6.5L4 19a2 2 0 0 0 1.8 3h12.4a2 2 0 0 0 1.8-3l-6-10.5V2"></path><path d="M6.5 14h11"></path></svg>
-            </div>
-            <span className="{{ s.subheadingTitle }}">Formulation Expertise</span>
-            <span className="{{ s.subheadingBody }}">Our in-house formulation science team works alongside production from day one, turning your specification into a robust, scalable process.</span>
-          </div>
-        </div>
-        <div className="{{ s.panelACtaRow }}">
-          <a href="contact.html" data-quote-modal data-quote-subject="Manufacturing Services" className="{{ s.panelACtaPrimary.className }}" onMouseEnter="{{ s.panelACtaPrimary.enter }}" onMouseLeave="{{ s.panelACtaPrimary.leave }}">Get A Quote</a>
-        </div>
+      <div className="{{ s.splitContent }}">
+        <span className="{{ s.eyebrow }}">Your CDMO Partner</span>
+        <span className="{{ s.h2 }}">Streamline your CDMO journey</span>
+        <span className="{{ s.splitBody }}">GMP Manufacturing Ltd is a leading CDMO specialising in liquid and semi-solid pharmaceutical formulations. With a commitment to quality, compliance, and innovation, we provide comprehensive services to support your product journey, from early-stage development to commercialisation.</span>
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ PANEL B (text left, image right, content-rich) ============ -->
-  <div data-screen-label="Panel B" className="{{ s.sectionPad }}">
-    <div className="{{ s.panelWrap }}" ref="{{ panelBRevealRef }}">
-      <div className="{{ s.panelContent }}">
-        <span className="{{ s.panelAEyebrowPill }}">OUR COMMITMENT</span>
-        <span className="{{ s.h2 }}">Built around your product, not the other way around</span>
-        <span className="{{ s.panelABody }}">We build our production schedule and quality processes around your product's specification — not the other way around. Whether that means a single validation batch, rapid scale-up, or full commercial-scale runs, our lines and systems flex to match your volumes, backed by complete, audit-ready documentation at every stage.</span>
-        <div className="{{ s.panelAPointsRow }}">
-          <div className="{{ s.panelAPoint }}">
-            <div className="{{ s.panelAPointIconBox }}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg>
-            </div>
-            <span className="{{ s.subheadingTitle }}">Flexible Capacity</span>
-            <span className="{{ s.subheadingBody }}">Whether you need a single validation batch or full commercial-scale runs, our lines flex to your volumes without compromising on quality.</span>
-          </div>
-          <div className="{{ s.panelAPoint }}">
-            <div className="{{ s.panelAPointIconBox }}">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.red }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
-            </div>
-            <span className="{{ s.subheadingTitle }}">Full Documentation</span>
-            <span className="{{ s.subheadingBody }}">Every batch leaves with a complete paperwork trail — QC results, release certificates and audit-ready records included as standard.</span>
-          </div>
-        </div>
-        <div className="{{ s.panelACtaRow }}">
-          <a href="contact.html" data-quote-modal data-quote-subject="Manufacturing Services" className="{{ s.panelBCtaPrimary.className }}" onMouseEnter="{{ s.panelBCtaPrimary.enter }}" onMouseLeave="{{ s.panelBCtaPrimary.leave }}">Get A Quote</a>
-        </div>
-      </div>
-      <div className="{{ s.panelImageCol }}">
-        <img src="assets/gmp-4.webp" alt="Flexible manufacturing capacity" loading="lazy" className="{{ s.panelImage }}">
-        <div className="{{ s.panelAMetricCard }}">
-          <div className="{{ s.panelAMetricTopRow }}">
-            <span className="{{ s.panelAMetricNumber }}">100%</span>
-            <div className="{{ s.panelAMetricIconBadge }}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
-            </div>
-          </div>
-          <span className="{{ s.panelAMetricLabel }}">Batch traceability, every release</span>
-        </div>
+  <!-- ============ KEY SERVICES (sweep cards) ============ -->
+  <div data-screen-label="Key Services" className="{{ s.sectionPad }}">
+    <div className="{{ s.introWrap }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">What We Provide</span>
+        <span className="{{ s.h2 }}">Key services</span>
       </div>
     </div>
   </div>
 
   <div className="{{ s.sectionGapHalf }}"></div>
 
-  <!-- ============ CAPABILITIES COVERED (grey band, photo cards) ============ -->
-  <div className="{{ s.greyBandOuter }}">
-    <div data-screen-label="Capabilities Covered" className="{{ s.sectionPad }}">
-      <div className="{{ s.capWrap }}" ref="{{ capRevealRef }}">
-        <div className="{{ s.capHeadWrap }}">
-          <span className="{{ s.h2 }}">Capabilities covered</span>
-          <span className="{{ s.capSubtext }}">Everything you need to get a product from formulation to finished pack, under one roof.</span>
-        </div>
-        <div className="{{ s.capGrid }}">
-          <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-6.webp" alt="Tablet and capsule production line" loading="lazy" className="{{ s.capImg }}"></div>
-            <div className="{{ s.capTextBox }}">
-              <span className="{{ s.capCardTitle }}">Solid Dose Manufacturing</span>
-              <span className="{{ s.capCardDesc }}">Tablets and capsules produced at full commercial scale.</span>
-            </div>
-          </div>
-          <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-8.webp" alt="Liquid and semi-solid filling line" loading="lazy" className="{{ s.capImg }}"></div>
-            <div className="{{ s.capTextBox }}">
-              <span className="{{ s.capCardTitle }}">Liquid &amp; Semi-Solid Filling</span>
-              <span className="{{ s.capCardDesc }}">Creams, liquids and gels filled to spec.</span>
-            </div>
-          </div>
-          <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-10.webp" alt="Primary and secondary packing area" loading="lazy" className="{{ s.capImg }}"></div>
-            <div className="{{ s.capTextBox }}">
-              <span className="{{ s.capCardTitle }}">Primary &amp; Secondary Packing</span>
-              <span className="{{ s.capCardDesc }}">Blister, bottle and carton packing lines.</span>
-            </div>
-          </div>
-          <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-3.webp" alt="Batch inspection before release" loading="lazy" className="{{ s.capImg }}"></div>
-            <div className="{{ s.capTextBox }}">
-              <span className="{{ s.capCardTitle }}">Batch Release &amp; Documentation</span>
-              <span className="{{ s.capCardDesc }}">Full paperwork trail for every batch.</span>
-            </div>
-          </div>
-          <div className="{{ s.capCard }}">
-            <div className="{{ s.capImgWrap }}"><img src="assets/gmp-2.webp" alt="Serialisation and labelling check" loading="lazy" className="{{ s.capImg }}"></div>
-            <div className="{{ s.capTextBox }}">
-              <span className="{{ s.capCardTitle }}">Serialisation &amp; Labelling</span>
-              <span className="{{ s.capCardDesc }}">Track-and-trace compliant labelling.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ============ FULL-BLEED FACILITY INSERT (white caption box) ============ -->
-  <div className="{{ s.fullBleedOuter }}">
-    <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.fullBleedImg }}">
-    <div className="{{ s.fullBleedCaptionWrap }}">
-      <span className="{{ s.fullBleedCaptionTitle }}">A look inside our UK manufacturing facility</span>
-      <span className="{{ s.fullBleedCaptionDesc }}">Every stage of production takes place under one roof, from raw material through to finished, market-ready product.</span>
-    </div>
-  </div>
-
-  <!-- ============ HOW IT WORKS (grey band, icon-placeholder + arrow strip) ============ -->
-  <div className="{{ s.greyBandOuter }}">
-    <div data-screen-label="How It Works" className="{{ s.sectionPad }}">
-      <div className="{{ s.stepWrap }}" ref="{{ stepRevealRef }}">
-        <div className="{{ s.capHeadWrap }}">
-          <span className="{{ s.h2 }}">How It Works</span>
-        </div>
-        <div className="{{ s.stepStrip }}">
-          <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepHeadRow }}">
-              <div className="{{ s.stepIconBox }}"><img src="assets/brief.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
-              <span className="{{ s.stepRail }}"></span>
-            </div>
-            <div className="{{ s.stepTextCol }}">
-              <span className="{{ s.stepNumber }}">01</span>
-              <span className="{{ s.stepTitle }}">Brief</span>
-              <span className="{{ s.stepDesc }}">Share your product goals, volumes and timeline.</span>
-            </div>
-          </div>
-          <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepHeadRow }}">
-              <div className="{{ s.stepIconBox }}"><img src="assets/development.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
-              <span className="{{ s.stepRail }}"></span>
-            </div>
-            <div className="{{ s.stepTextCol }}">
-              <span className="{{ s.stepNumber }}">02</span>
-              <span className="{{ s.stepTitle }}">Development</span>
-              <span className="{{ s.stepDesc }}">We plan the formulation, process or transfer approach.</span>
-            </div>
-          </div>
-          <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepHeadRow }}">
-              <div className="{{ s.stepIconBox }}"><img src="assets/validation.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
-              <span className="{{ s.stepRail }}"></span>
-            </div>
-            <div className="{{ s.stepTextCol }}">
-              <span className="{{ s.stepNumber }}">03</span>
-              <span className="{{ s.stepTitle }}">Validation</span>
-              <span className="{{ s.stepDesc }}">Trial batches and testing confirm it works at scale.</span>
-            </div>
-          </div>
-          <div className="{{ s.stepItem }}">
-            <div className="{{ s.stepHeadRow }}">
-              <div className="{{ s.stepIconBox }}"><img src="assets/delivery.png" alt="" loading="lazy" className="{{ s.stepIcon }}"></div>
-              <span className="{{ s.stepRailEnd }}"></span>
-            </div>
-            <div className="{{ s.stepTextCol }}">
-              <span className="{{ s.stepNumber }}">04</span>
-              <span className="{{ s.stepTitle }}">Delivery</span>
-              <span className="{{ s.stepDesc }}">Full production, QC release and on-time despatch.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGapHalf }}"></div>
-
-  <!-- ============ WHERE THIS SERVICE APPLIES (4-photo grid) ============ -->
-  <div data-screen-label="Where This Applies" className="{{ s.sectionPad }}">
-    <div className="{{ s.complianceWrap }}" ref="{{ appliesRevealRef }}">
-      <div className="{{ s.complianceHeadWrap }}">
-        <span className="{{ s.h2 }}">Where this service applies</span>
-      </div>
-      <div className="{{ s.appliesGrid }}">
-        <a href="sector-detail.html" className="{{ s.appliesItem }}">
-          <img src="assets2/placeholder-sector-pharma.jpg" alt="Pharmaceutical" loading="lazy" className="{{ s.appliesImg }}">
-          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Pharmaceutical</span></div>
+  <div className="{{ s.sectionPad }}">
+    <div className="{{ s.serviceGrid }}">
+      <sc-for list="{{serviceItems}}" as="item" hint-placeholder-count="6">
+        <a href="{{ item.href }}" className="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
+          <div className="{{ item.sweepStyle }}"></div>
+          <span className="{{ item.numStyle }}">{{ item.n }}</span>
+          <span className="{{ item.headStyle }}">{{ item.h }}</span>
+          <span className="{{ item.descStyle }}">{{ item.d }}</span>
+          <svg className="{{ item.arrowStyle }}" width="48" height="16" viewBox="0 0 48 16" fill="none" stroke="{{ item.arrowColor }}" stroke-width="1.5">
+            <path d="M0 8h44M36 2l8 6-8 6"></path>
+          </svg>
         </a>
-        <a href="sector-detail.html" className="{{ s.appliesItem }}">
-          <img src="assets2/sector-cosmetic-real.webp" alt="Cosmetic" loading="lazy" className="{{ s.appliesImg }}">
-          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Cosmetic</span></div>
-        </a>
-        <a href="sector-detail.html" className="{{ s.appliesItem }}">
-          <img src="assets2/placeholder-sector-supplements.jpg" alt="Supplements" loading="lazy" className="{{ s.appliesImg }}">
-          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Supplements</span></div>
-        </a>
-        <a href="sector-detail.html" className="{{ s.appliesItem }}">
-          <img src="assets2/placeholder-sector-vet.jpg" alt="Veterinary" loading="lazy" className="{{ s.appliesImg }}">
-          <div className="{{ s.appliesCaptionWrap }}"><span className="{{ s.appliesCaption }}">Veterinary</span></div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
-
-  <!-- ============ GLOBAL REACH (full-bleed map band) ============ -->
-  <div className="{{ s.mapOuter }}">
-    <img src="assets/world-map.png" alt="World map showing GMP Manufacturing's global supply network" loading="lazy" className="{{ s.mapImg }}">
-    <div className="{{ s.mapCaptionWrap }}">
-      <span className="{{ s.mapCaption }}">Supplying partners across 30+ countries from our own UK facilities.</span>
-    </div>
-  </div>
-
-  <!-- ============ ACCREDITATIONS (reused marquee, full-bleed) ============ -->
-  <div data-screen-label="Accreditations" className="{{ s.marqueeOuter }}">
-    <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
-      <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
-        <div className="{{ s.marqueeItem }}">
-          <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
-        </div>
       </sc-for>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ WHY CHOOSE GMP MANUFACTURING ============ -->
+  <div data-screen-label="Why Choose GMP" className="{{ s.sectionPad }}">
+    <div className="{{ s.splitWrapReverse }}" ref="{{ splitARevealRef }}">
+      <div className="{{ s.splitMediaCol }}">
+        <img src="assets/gmp-5.webp" alt="FrymaKoruma processing vessel at GMP Manufacturing" loading="lazy" className="{{ s.splitImageFramed }}">
+      </div>
+      <div className="{{ s.splitContent }}">
+        <span className="{{ s.eyebrow }}">Why GMP</span>
+        <span className="{{ s.h2 }}">Why choose GMP Manufacturing</span>
+        <div className="{{ s.splitPointsCol }}">
+          <div className="{{ s.splitPoint }}">
+            <span className="{{ s.splitPointTitle }}">Expertise and Experience</span>
+            <span className="{{ s.splitPointBody }}">Our team of experienced professionals has a deep understanding of the liquid and semi solid formulations and the challenges associated with their development and manufacturing. We have expertise and collective experience of 700 long years.</span>
+          </div>
+          <div className="{{ s.splitPoint }}">
+            <span className="{{ s.splitPointTitle }}">Quality and Compliance</span>
+            <span className="{{ s.splitPointBody }}">We are committed to delivering the highest quality products and services, adhering to strict GMP standards and regulatory guidelines.</span>
+          </div>
+          <div className="{{ s.splitPoint }}">
+            <span className="{{ s.splitPointTitle }}">Innovation and Customisation</span>
+            <span className="{{ s.splitPointBody }}">We leverage cutting-edge technology and a customer-centric approach to develop customised solutions that meet your unique needs. We have sound knowledge in 3D printing, quick turn around, speed and agility achieved through technology with a best in class technology platform.</span>
+          </div>
+        </div>
+        <span className="{{ s.splitStatement }}">GMPM is your trusted partner for formulation development and manufacturing. With our expertise, state-of-the-art facilities, and commitment to excellence, we are dedicated to helping you bring your innovative products to market.</span>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ MANUFACTURING CAPABILITY ============ -->
+  <div data-screen-label="Manufacturing Capability" className="{{ s.sectionPad }}">
+    <div className="{{ s.splitWrap }}" ref="{{ capabilityRevealRef }}">
+      <div className="{{ s.splitContent }}">
+        <span className="{{ s.eyebrow }}">Capacity</span>
+        <span className="{{ s.h2 }}">Manufacturing capability</span>
+        <span className="{{ s.splitBody }}">Leverage the power of our UK-based, industry-leading technology to revolutionise your R&amp;D team's efficiency. As a globally recognised provider of high-volume, cost-effective, and rapid solutions, we empower your team to accelerate innovation and achieve groundbreaking results.</span>
+        <ul className="{{ s.specList }}">
+          <sc-for list="{{capacitySpecs}}" as="spec" hint-placeholder-count="6">
+            <li className="{{ s.specItem }}"><span className="{{ s.specMarker }}" aria-hidden="true">—</span><span>{{ spec }}</span></li>
+          </sc-for>
+        </ul>
+        <span className="{{ s.specSubheading }}">Filling Capacity</span>
+        <ul className="{{ s.specList }}">
+          <sc-for list="{{fillingSpecs}}" as="spec" hint-placeholder-count="6">
+            <li className="{{ s.specItem }}"><span className="{{ s.specMarker }}" aria-hidden="true">—</span><span>{{ spec }}</span></li>
+          </sc-for>
+        </ul>
+      </div>
+      <div className="{{ s.splitMediaCol }}">
+        <img src="assets/gmp-6.webp" alt="Stainless steel processing vessels in the GMP Manufacturing suite" loading="lazy" className="{{ s.splitImage }}">
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ EQUIPMENT CAPACITY ============ -->
+  <div data-screen-label="Equipment Capacity" className="{{ s.sectionPad }}">
+    <div className="{{ s.splitWrap }}" ref="{{ equipmentRevealRef }}">
+      <div className="{{ s.splitContent }}">
+        <span className="{{ s.eyebrow }}">Equipment</span>
+        <span className="{{ s.h2 }}">Equipment capacity at GMPM</span>
+        <div className="{{ s.tableScroll }}">
+          <table className="{{ s.table }}">
+            <caption className="{{ s.tableCaption }}">Manufacturing vessel and processing suite capacities.</caption>
+            <thead>
+              <tr>
+                <th scope="col" className="{{ s.tableHeadCell }}">Manufacturing Equipment</th>
+                <th scope="col" className="{{ s.tableHeadCell }}">Capacity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{equipmentRows}}" as="row" hint-placeholder-count="9">
+                <tr>
+                  <td className="{{ row.rowStyle }}">{{ row.e }}</td>
+                  <td className="{{ row.rowStyle }}">{{ row.c }}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <span className="{{ s.specSubheading }}">Packaging</span>
+        <ul className="{{ s.specList }}">
+          <li className="{{ s.specItem }}"><span className="{{ s.specMarker }}" aria-hidden="true">—</span><span>Tube line 50gms to 2kg</span></li>
+          <li className="{{ s.specItem }}"><span className="{{ s.specMarker }}" aria-hidden="true">—</span><span>Liquid line 50ml – 5L</span></li>
+        </ul>
+      </div>
+      <div className="{{ s.splitMediaCol }}">
+        <img src="assets/gmp-1.webp" alt="Becomix liquid processing suite" loading="lazy" className="{{ s.splitImageFramed }}">
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGapHalf }}"></div>
+
+  <!-- ============ COLLABORATE ============ -->
+  <div className="{{ s.collabOuter }}">
+    <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" className="{{ s.collabBg }}">
+    <canvas ref="{{ collabCanvasRef }}" className="{{ s.collabCanvas }}"></canvas>
+    <div className="{{ s.collabOverlay }}"></div>
+    <div className="{{ s.collabWrap }}">
+      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Ready to get started?</span>
+      <span className="{{ s.collabBody }}">Tell us about your product and we'll come back to you within one business day — no obligation, no sales pressure.</span>
+      <div className="{{ s.collabBtnRow }}">
+        <a href="contact.html" data-quote-modal data-quote-subject="CDMO services" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+          <span className="{{ s.collabGetQuoteText }}">Get a Quote</span>
+          <div className="{{ s.collabGetQuoteIcon }}"></div>
+        </a>
+        <a href="contact.html" data-quote-modal data-quote-subject="CDMO services" className="{{ s.pillContactUs.className }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+          <span className="{{ s.collabContactUsText }}">Contact us</span>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -540,7 +453,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, hoveredService: -1, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
 
   componentDidMount() {
     requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -561,6 +474,7 @@ class Component extends DCLogic {
     window.removeEventListener("resize", this._onResize);
     window.removeEventListener("scroll", this._onScroll);
     if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
+    this._teardownRipple();
   }
   _observeReveal(key, el) {
     if (!el) return;
@@ -592,13 +506,218 @@ class Component extends DCLogic {
     obs.observe(el);
     this._revealObservers[key] = obs;
   }
+  _maybeInitRipple() {
+    if (this._rippleInited || !this._collabCanvasEl || !this._collabImgEl) return;
+    this._rippleInited = true;
+    if (typeof IntersectionObserver !== "undefined") {
+      this._rippleVisible = false;
+      this._rippleVisibilityObserver = new IntersectionObserver((entries) => {
+        this._rippleVisible = entries[0].isIntersecting;
+        if (this._rippleVisible) this._startRippleLoop();
+      }, { threshold: 0.01 });
+      this._rippleVisibilityObserver.observe(this._collabCanvasEl);
+    } else {
+      this._rippleVisible = true;
+    }
+    this._initRipple();
+  }
+  _initRipple() {
+    const canvas = this._collabCanvasEl;
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!gl) return;
+    this._gl = gl;
+
+    const RIPPLE_AMPLITUDE = 0.075;
+    const RIPPLE_FREQUENCY = 28.0;
+    const CHROMATIC_ABERRATION = true;
+
+    const vertexSrc = "attribute vec2 a_position;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  v_uv = a_position * 0.5 + 0.5;\n" +
+      "  gl_Position = vec4(a_position, 0.0, 1.0);\n" +
+      "}";
+    const fragmentSrc = "precision mediump float;\n" +
+      "uniform sampler2D u_texture;\n" +
+      "uniform vec2 u_resolution;\n" +
+      "uniform vec2 u_imageResolution;\n" +
+      "uniform vec2 u_mouse;\n" +
+      "uniform float u_time;\n" +
+      "uniform float u_lastActive;\n" +
+      "uniform float u_velocity;\n" +
+      "uniform float u_amplitude;\n" +
+      "uniform float u_frequency;\n" +
+      "uniform float u_chromatic;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  vec2 uv = v_uv;\n" +
+      "  float sAspect = u_resolution.x / u_resolution.y;\n" +
+      "  float iAspect = u_imageResolution.x / u_imageResolution.y;\n" +
+      "  if (sAspect > iAspect) {\n" +
+      "    uv.y = (uv.y - 0.5) * (iAspect / sAspect) + 0.5;\n" +
+      "  } else {\n" +
+      "    uv.x = (uv.x - 0.5) * (sAspect / iAspect) + 0.5;\n" +
+      "  }\n" +
+      "  float dt = max(u_time - u_lastActive, 0.0);\n" +
+      "  float decay = clamp(1.0 - dt / 0.6, 0.0, 1.0);\n" +
+      "  decay = decay * decay;\n" +
+      "  float dist = distance(uv, u_mouse);\n" +
+      "  float strength = u_amplitude * decay * u_velocity;\n" +
+      "  float ripple = sin(dist * u_frequency - u_time * 6.0) * strength * exp(-dist * 6.0);\n" +
+      "  vec2 dir = (dist > 0.0001) ? normalize(uv - u_mouse) : vec2(0.0);\n" +
+      "  vec2 dUv = uv + dir * ripple;\n" +
+      "  vec3 color;\n" +
+      "  if (u_chromatic > 0.5) {\n" +
+      "    float aberration = abs(ripple) * 6.0;\n" +
+      "    float r = texture2D(u_texture, dUv + dir * aberration).r;\n" +
+      "    float g = texture2D(u_texture, dUv).g;\n" +
+      "    float b = texture2D(u_texture, dUv - dir * aberration).b;\n" +
+      "    color = vec3(r, g, b);\n" +
+      "  } else {\n" +
+      "    color = texture2D(u_texture, dUv).rgb;\n" +
+      "  }\n" +
+      "  gl_FragColor = vec4(color, 1.0);\n" +
+      "}";
+
+    const compile = (type, src) => {
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      return sh;
+    };
+    const program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, vertexSrc));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragmentSrc));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    gl.useProgram(program);
+    this._rippleProgram = program;
+
+    const posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const u = {};
+    ["u_resolution", "u_imageResolution", "u_mouse", "u_time", "u_lastActive", "u_velocity", "u_amplitude", "u_frequency", "u_chromatic", "u_texture"].forEach((name) => {
+      u[name] = gl.getUniformLocation(program, name);
+    });
+    this._rippleUniforms = u;
+
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([20, 20, 20, 255]));
+    this._rippleTexture = texture;
+    this._rippleImageRes = [1, 1];
+
+    const uploadImage = () => {
+      const img = this._collabImgEl;
+      if (!img || !img.naturalWidth) return;
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      try {
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        this._rippleImageRes = [img.naturalWidth, img.naturalHeight];
+        this._startRippleLoop();
+      } catch (e) {}
+    };
+    if (this._collabImgEl.complete && this._collabImgEl.naturalWidth) {
+      uploadImage();
+    } else {
+      this._collabImgEl.addEventListener("load", uploadImage, { once: true });
+    }
+
+    this._mouseTarget = [0.5, 0.5];
+    this._mouseSmooth = [0.5, 0.5];
+    this._velocitySmooth = 0;
+    this._rippleStart = performance.now();
+    this._lastActiveTime = -10;
+
+    this._onCollabMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      this._mouseTarget = [x, 1.0 - y];
+      this._lastActiveTime = (performance.now() - this._rippleStart) / 1000;
+      this._startRippleLoop();
+    };
+    const collabOuterEl = canvas.parentElement;
+    collabOuterEl.addEventListener("mousemove", this._onCollabMouseMove);
+    this._collabOuterEl = collabOuterEl;
+
+    this._resizeRippleCanvas = () => {
+      const rect = collabOuterEl.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    };
+    this._resizeRippleCanvas();
+    window.addEventListener("resize", this._resizeRippleCanvas);
+    if (typeof ResizeObserver !== "undefined") {
+      this._rippleResizeObserver = new ResizeObserver(() => this._resizeRippleCanvas());
+      this._rippleResizeObserver.observe(collabOuterEl);
+    }
+
+    this._renderRipple = () => {
+      this._rippleRAF = null;
+      const now = (performance.now() - this._rippleStart) / 1000;
+      const lerpFactor = 0.15;
+      const prevX = this._mouseSmooth[0], prevY = this._mouseSmooth[1];
+      this._mouseSmooth[0] += (this._mouseTarget[0] - this._mouseSmooth[0]) * lerpFactor;
+      this._mouseSmooth[1] += (this._mouseTarget[1] - this._mouseSmooth[1]) * lerpFactor;
+      const dx = this._mouseSmooth[0] - prevX;
+      const dy = this._mouseSmooth[1] - prevY;
+      const instVelocity = Math.min(Math.sqrt(dx * dx + dy * dy) * 60, 1.0);
+      this._velocitySmooth += (instVelocity - this._velocitySmooth) * 0.2;
+
+      gl.useProgram(this._rippleProgram);
+      gl.uniform2f(u.u_resolution, canvas.width, canvas.height);
+      gl.uniform2f(u.u_imageResolution, this._rippleImageRes[0], this._rippleImageRes[1]);
+      gl.uniform2f(u.u_mouse, this._mouseSmooth[0], this._mouseSmooth[1]);
+      gl.uniform1f(u.u_time, now);
+      gl.uniform1f(u.u_lastActive, this._lastActiveTime);
+      gl.uniform1f(u.u_velocity, this._velocitySmooth);
+      gl.uniform1f(u.u_amplitude, RIPPLE_AMPLITUDE);
+      gl.uniform1f(u.u_frequency, RIPPLE_FREQUENCY);
+      gl.uniform1f(u.u_chromatic, CHROMATIC_ABERRATION ? 1.0 : 0.0);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, this._rippleTexture);
+      gl.uniform1i(u.u_texture, 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      const stillDecaying = (now - this._lastActiveTime) < 0.6 || this._velocitySmooth > 0.001;
+      if (this._rippleVisible && stillDecaying) this._rippleRAF = requestAnimationFrame(this._renderRipple);
+    };
+    this._startRippleLoop();
+  }
+  _startRippleLoop() {
+    if (this._rippleRAF || !this._renderRipple || !this._rippleVisible) return;
+    this._rippleRAF = requestAnimationFrame(this._renderRipple);
+  }
+  _teardownRipple() {
+    if (this._rippleRAF) cancelAnimationFrame(this._rippleRAF);
+    this._rippleRAF = null;
+    if (this._collabOuterEl && this._onCollabMouseMove) this._collabOuterEl.removeEventListener("mousemove", this._onCollabMouseMove);
+    if (this._resizeRippleCanvas) window.removeEventListener("resize", this._resizeRippleCanvas);
+    if (this._rippleResizeObserver) this._rippleResizeObserver.disconnect();
+    if (this._rippleVisibilityObserver) this._rippleVisibilityObserver.disconnect();
+  }
   _updateBp() {
     const w = window.innerWidth;
     const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
     if (bp !== this.state.bp) this.setState({ bp });
-  }
-  _applyMarquee() {
-    if (this._marqueeEl) this._marqueeEl.style.animationPlayState = "running";
   }
 
   renderVals() {
@@ -657,11 +776,10 @@ class Component extends DCLogic {
     s.bodySmall = bodySmallBase + " text-[rgba(51,51,51,0.72)]";
     s.bodySmallOnDark = bodySmallBase + " text-[rgba(255,255,255,0.75)]";
     s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
-    s.red = red;
     s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
     s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
 
-    const cardHoverBase = "border border-solid border-[rgba(0,0,0,0.12)] rounded-none transition-[box-shadow,transform] duration-200 ease-in-out hover:shadow-gmp-hover hover:-translate-y-1";
+    s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
 
     const makeHeroCta = (key, baseClass) => {
       const hovered = this.state.hoveredKey === key;
@@ -745,7 +863,7 @@ class Component extends DCLogic {
     s.mobileNavMetaRow = "flex flex-col gap-[4px]";
     s.mobileNavMeta = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.7)] no-underline";
     s.mobileNavMetaDim = "font-normal text-[13px] leading-[20px] text-[rgba(255,255,255,0.45)]";
-    const CURRENT_PAGE = "services";
+    const CURRENT_PAGE = "cdmo";
     const MOBILE_NAV = [
       { label: "Home", href: "index.html", key: "home" },
       { label: "About Us", href: "about.html", key: "about" },
@@ -834,126 +952,105 @@ class Component extends DCLogic {
     s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
     s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
-    // ---------- PAGE BANNER (gradient overlay, guaranteed topbar clearance) ----------
-    s.bannerWrap = `relative w-full ${pick("min-h-[220px]", "min-h-[280px]", "min-h-[320px]")} flex flex-col justify-end box-border overflow-hidden`;
+    // ---------- PAGE BANNER (260-360px, full width) ----------
+    s.bannerWrap = `relative w-full ${pick("h-[260px]", "h-[300px]", "h-[360px]")} flex flex-col justify-end box-border overflow-hidden`;
     s.bannerBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.banner ? "scale-100" : "scale-[1.05]");
-    s.bannerOverlay = "absolute inset-0 bg-gmp-gradient opacity-75 pointer-events-none";
-    s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[88px] px-[20px] pb-[24px]", "pt-[104px] px-[40px] pb-[36px]", "pt-[116px] px-[64px] pb-[44px]");
+    s.bannerOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.5)] pointer-events-none";
+    s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[20px] px-[20px] pb-[24px]", "pt-[32px] px-[40px] pb-[36px]", "pt-[40px] px-[64px] pb-[44px]");
     s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
+    s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
 
-    // ---------- PANELS (alternating image/text, shared) ----------
-    s.panelWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelB");
-    s.panelWrapReverse = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelA");
-    s.panelImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border overflow-hidden";
-    s.panelImage = "relative w-full h-full object-cover box-border";
-    s.panelContent = "flex flex-col gap-[24px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
-    s.subheadingBlock = "flex flex-col gap-[6px] items-start max-w-[560px]";
-    s.subheadingTitle = `font-semibold text-[17px] leading-[24px] text-[${near}]`;
-    s.subheadingBody = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.75)]";
+    // ---------- INTRO ----------
+    // The brand mark sits in its own clipped layer so the section edge cuts off
+    // its top and only the lower part shows, the way it reads on Home and About.
+    // Clipping here rather than on the section keeps the reveal transform free to
+    // move without being cropped mid-animation.
+    // Taller than the section so the mark carries on down past the copy into the
+    // space above the cards, which is the area that reads as empty.
+    // Stops above the card row so it never sits behind card copy, and fades out
+    // at its foot rather than ending on a hard cut.
+    s.introDecor = "pointer-events-none absolute left-0 right-0 overflow-hidden z-0 " +
+      "[mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] " +
+      "[-webkit-mask-image:linear-gradient(to_bottom,#000_58%,transparent_100%)] " +
+      // Pulled up by exactly the section gap that sits between the banner and this
+      // section, so the layer's top edge meets the banner's bottom edge and the
+      // mark reads as carrying on out from under the image with no white band.
+      pick("top-0 h-0", "top-0 h-0", "top-[-96px] h-[416px]");
+    // The full icon rather than brand-watermark.svg, which is a crop of a larger
+    // swoosh and so carries a hard sliced edge. Painted through a mask so the
+    // brand colours in the source become one flat grey — the same #F5F8FA the
+    // old watermark was already shaded to.
+    // Desktop only. Below xl the intro copy runs the full content width, so
+    // there is no empty space for it to fill and it would just sit behind text.
+    s.introWatermark = (isDesktop ? "block " : "hidden ") +
+      "absolute bg-[#F5F8FA] [mask:url('assets2/logo-icon.svg')_center/contain_no-repeat] " +
+      "[-webkit-mask:url('assets2/logo-icon.svg')_center/contain_no-repeat] " +
+      // sits half above the banner edge, so only its lower half shows
+      "top-[-240px] right-[28px] w-[480px] h-[480px]";
+    s.introWrap = "relative z-[1] flex flex-col gap-[16px] max-w-[1600px] mx-auto " + reveal("intro");
+    s.introBody = `font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[${dark}] max-w-[820px]`;
 
-    // ---------- PANEL A (content-rich: eyebrow, body copy, icon points, inset metric) ----------
-    s.panelAEyebrowPill = `inline-flex items-center rounded-[999px] bg-[rgba(178,33,38,0.08)] text-[${red}] font-medium text-[12px] tracking-[0.6px] leading-[16px] py-[6px] px-[14px] box-border w-fit`;
-    s.panelABody = s.bodyText + " max-w-[560px]";
-    s.panelAPointsRow = "flex " + pick("flex-col", "flex-row flex-wrap", "flex-row flex-wrap") + " gap-[24px] md:gap-[28px] w-full";
-    s.panelAPoint = "flex flex-col gap-[10px] items-start " + (isMobile ? "w-full" : "w-[calc(50%-14px)]");
-    s.panelAPointIconBox = `flex items-center justify-center w-[40px] h-[40px] shrink-0 rounded-none bg-[rgba(178,33,38,0.08)] box-border`;
-    s.panelAMetricCard = `absolute bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col gap-[4px] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.35)] ` +
-      pick("top-[16px] right-[16px] w-[152px] py-[16px] px-[16px]", "top-[24px] right-[24px] w-[178px] py-[18px] px-[20px]", "top-[28px] right-[28px] w-[196px] py-[20px] px-[22px]");
-    s.panelAMetricTopRow = "flex flex-row items-center justify-between w-full";
-    s.panelAMetricNumber = `font-semibold ${pick("text-[26px]", "text-[30px]", "text-[34px]")} leading-[1.1] tracking-[-0.5px] text-[${near}]`;
-    s.panelAMetricIconBadge = `flex items-center justify-center w-[26px] h-[26px] rounded-full bg-[${red}] shrink-0`;
-    s.panelAMetricLabel = "font-normal text-[13px] leading-[18px] text-[rgba(51,51,51,0.7)]";
-    s.panelACtaRow = "flex flex-row flex-wrap gap-[16px] items-center pt-[8px]";
-    // Kept for its (key, filled) call sites; both branches now delegate to the
-    // canonical roles, so these match every other button on the site.
-    const makePanelACta = (key, filled) => {
-      const p = filled ? makePill(key) : makeSecondaryPill(key);
-      const type = " font-medium text-[15px]";
-      return filled
-        ? { ...p, className: p.className + type + " text-white" }
-        : { ...p, className: p.className + type + ` text-[${p.textColor}]` };
-    };
-    s.panelACtaPrimary = makePanelACta("panelACtaPrimary", true);
-    s.panelBCtaPrimary = makePanelACta("panelBCtaPrimary", true);
+    // ---------- SERVICE CARDS (reused pathway-card treatment) ----------
+    // ---------- SPLIT SECTION (text one side, media the other) ----------
+    // Same two-column grammar as the sector detail overview, generalised so the
+    // three prose sections on this page share one set of rules.
+    s.splitWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") +
+      " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-start max-w-[1600px] mx-auto ";
+    s.splitWrapReverse = s.splitWrap + (isDesktop ? "flex-row-reverse " : "");
+    // Used where the prose is short next to a full-height image, so the text
+    // sits against the middle of the photo instead of stranding white space.
+    s.splitWrapCentered = s.splitWrapReverse.replace("items-start", "items-center");
+    s.splitMediaCol = "relative " + (isDesktop ? "w-[42%]" : "w-full") + " max-w-none shrink-0 box-border overflow-hidden";
+    s.splitImage = "w-full h-full object-cover block";
+    s.splitImageFramed = "w-full h-auto object-contain block bg-white border border-solid border-[rgba(17,17,17,0.08)] box-border p-[18px] md:p-[24px]";
+    s.splitContent = "flex flex-col gap-[20px] items-start justify-start " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.splitBody = `font-normal text-[16px] xl:text-[17px] leading-[26px] text-[${dark}]`;
+    s.splitStatement = `font-medium text-[17px] xl:text-[19px] leading-[28px] text-[${near}]`;
+    s.splitPoint = "flex flex-col gap-[6px] items-start w-full";
+    s.splitPointTitle = `font-semibold text-[18px] xl:text-[20px] leading-[26px] tracking-[-0.4px] text-[${near}]`;
+    s.splitPointBody = `font-normal text-[15px] xl:text-[16px] leading-[24px] text-[rgba(51,51,51,0.85)]`;
+    s.splitPointsCol = "flex flex-col gap-[22px] w-full";
 
-    // ---------- GREY BAND WRAPPER (shared by Capabilities + How It Works) ----------
-    s.greyBandOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] box-border bg-[rgb(245,243,240)] px-[${gutter}px] ` + pick("py-[40px]", "py-[48px]", "py-[56px]");
-    // Left-aligned to match the cards and steps below it.
-    s.capHeadWrap = "flex flex-col items-start text-left max-w-[640px] gap-[8px]";
-    s.capSubtext = "font-normal text-[15px] leading-[22px] text-[rgba(51,51,51,0.75)]";
+    // ---------- SPEC LISTS ----------
+    // The source page prefixes each spec with a literal "> ". That is rendered
+    // here as a red marker instead of punctuation, so screen readers read a list
+    // rather than a run of greater-than signs.
+    s.specList = "flex flex-col gap-[10px] w-full list-none p-0 m-0";
+    s.specItem = `relative flex flex-row gap-[10px] items-baseline font-normal text-[15px] xl:text-[16px] leading-[24px] text-[${dark}]`;
+    s.specMarker = `shrink-0 font-semibold text-[${red}] leading-[24px]`;
+    s.specSubheading = `font-semibold text-[17px] xl:text-[18px] leading-[26px] text-[${red}] mt-[6px]`;
 
-    // ---------- CAPABILITIES COVERED (photo cards) ----------
-    s.capWrap = "flex flex-col gap-[24px] md:gap-[28px] max-w-[1600px] mx-auto " + reveal("capabilities");
-    // justify-start so a partial last row lines up with the rows above it
-    // rather than floating to the middle.
-    s.capGrid = "flex flex-row flex-wrap justify-start " + pick("gap-[20px]", "gap-[24px]", "gap-[28px]");
-    const capCols = pick(1, 2, 3);
-    const capGapPx = pick(20, 24, 28);
-    // The card sat on padding in the same colour as the band behind it, so that
-    // padding read as a dead frame once the card gained a shadow. The image and
-    // caption now fill the tile edge to edge.
-    s.capCard = `group flex flex-col items-stretch bg-white box-border overflow-hidden shadow-[0_2px_10px_-4px_rgba(17,17,17,0.12)] transition-[box-shadow,transform] duration-300 ease-out hover:shadow-[0_18px_34px_-16px_rgba(17,17,17,0.28)] hover:-translate-y-[3px] w-[calc((100%-${capGapPx * (capCols - 1)}px)/${capCols})]`;
-    s.capImgWrap = "w-full aspect-[5/2] overflow-hidden bg-[rgb(210,206,197)]";
-    s.capImg = "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105";
-    s.capTextBox = "bg-white box-border flex flex-col " + pick("gap-[6px] py-[16px] px-[16px]", "gap-[7px] py-[18px] px-[18px]", "gap-[8px] py-[20px] px-[20px]");
-    s.capCardTitle = `font-semibold ${pick("text-[16px]", "text-[17px]", "text-[18px]")} leading-[1.3] text-[${dark}]`;
-    s.capCardDesc = `font-normal ${pick("text-[13px]", "text-[14px]", "text-[14px]")} leading-[19px] text-[rgba(51,51,51,0.7)]`;
+    // ---------- EQUIPMENT TABLE ----------
+    // Equipment specs are genuinely tabular, so this stays a real <table> with a
+    // caption and header cells rather than a grid of divs. It scrolls inside its
+    // own container on narrow screens so the page itself never scrolls sideways.
+    s.tableScroll = "w-full overflow-x-auto box-border";
+    s.table = "w-full min-w-[440px] border-collapse text-left";
+    // bg-gmp-gradient is the named theme token rather than an inline literal, so
+    // the header uses the same one source of truth as the rest of the palette.
+    s.tableHeadCell = `bg-gmp-gradient text-white font-semibold text-[14px] xl:text-[15px] leading-[20px] py-[14px] px-[16px] box-border`;
+    s.tableCell = `font-normal text-[14px] xl:text-[15px] leading-[22px] text-[${dark}] py-[13px] px-[16px] border-b border-solid border-[rgba(17,17,17,0.08)] box-border align-top`;
+    s.tableCellAlt = s.tableCell + " bg-[rgba(37,117,187,0.035)]";
+    s.tableCaption = `caption-bottom text-left font-normal text-[13px] leading-[20px] text-[rgba(51,51,51,0.65)] pt-[12px]`;
 
-    // ---------- FULL-BLEED FACILITY INSERT (white caption box) ----------
-    s.fullBleedOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[380px]", "h-[460px]", "h-[560px]")}`;
-    s.fullBleedImg = "absolute inset-0 w-full h-full object-cover";
-    s.fullBleedCaptionWrap = (isMobile
-      ? "absolute left-0 right-0 bottom-0 w-full"
-      : `absolute bottom-0 right-[${gutter}px] w-[${pick(0, 420, 560)}px]`
-    ) + ` bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col ` + pick("gap-[10px] py-[24px] px-[20px]", "gap-[12px] py-[32px] px-[32px]", "gap-[12px] py-[40px] px-[40px]");
-    s.fullBleedCaptionTitle = `font-semibold ${pick("text-[26px]", "text-[32px]", "text-[36px]")} leading-[1.22] tracking-[-0.72px] text-[${near}]`;
-    s.fullBleedCaptionDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[24px] text-[${dark}]`;
+    s.serviceGrid = "max-w-[1600px] mx-auto w-full grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " " + pick("auto-rows-auto", "auto-rows-[minmax(240px,auto)]", "auto-rows-[minmax(260px,auto)]") + " gap-[20px] md:gap-[24px] xl:gap-[28px]";
 
-    // ---------- HOW IT WORKS (icon left, text right, no arrows) ----------
-    s.stepWrap = "flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] max-w-[1600px] mx-auto " + reveal("steps");
-    // Equal columns read as a sequence; a hairline rail joins the icons so the
-    // eye follows 01 -> 04. The rail only shows at desktop, where all four sit
-    // on one row — at narrower widths the stacked numbers carry the order.
-    s.stepStrip = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " " + pick("gap-[26px]", "gap-[30px] gap-y-[34px]", "gap-[24px]");
-    s.stepItem = "flex flex-col gap-[14px] items-start w-full min-w-0";
-    s.stepHeadRow = "flex flex-row items-center gap-[14px] w-full";
-    s.stepIconBox = `shrink-0 flex items-center justify-center ${pick("w-[38px] h-[38px]", "w-[44px] h-[44px]", "w-[48px] h-[48px]")}`;
-    s.stepIcon = "w-full h-full object-contain";
-    s.stepRail = (isDesktop ? "block " : "hidden ") + "grow h-px bg-[rgba(17,17,17,0.14)]";
-    s.stepRailEnd = "hidden";
-    s.stepTextCol = "flex flex-col gap-[7px] max-w-[260px]";
-    s.stepNumber = `font-semibold text-[12px] leading-[16px] tracking-[1.4px] text-[${red}]`;
-    s.stepTitle = s.h4;
-    s.stepDesc = s.bodySmall;
-
-    // ---------- WHERE THIS SERVICE APPLIES (4-photo grid, square, white caption) ----------
-    s.complianceWrap = "flex flex-col gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto " + reveal("applies");
-    s.complianceHeadWrap = "flex flex-col items-center text-center mx-auto max-w-[640px]";
-    s.appliesGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") + " gap-[16px] md:gap-[20px]";
-    s.appliesItem = "relative aspect-square overflow-hidden bg-[rgb(232,232,232)] block no-underline transition-[box-shadow,transform] duration-200 ease-in-out hover:-translate-y-1";
-    s.appliesImg = "absolute inset-0 w-full h-full object-cover";
-    s.appliesCaptionWrap = pick("absolute left-[12px] right-[12px] bottom-[12px]", "absolute left-[16px] bottom-[16px] w-[78%]", "absolute left-[20px] bottom-[20px] w-[78%]") + " bg-white box-border py-[14px] px-[16px]";
-    s.appliesCaption = `font-semibold text-[15px] leading-[20px] text-[${near}]`;
-
-    // ---------- GLOBAL REACH (full-bleed map band) ----------
-    s.mapOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border ${pick("h-[320px]", "h-[400px]", "h-[480px]")}`;
-    s.mapImg = "absolute inset-0 w-full h-full object-cover";
-    s.mapCaptionWrap = (isMobile
-      ? "absolute left-0 right-0 bottom-0 w-full"
-      : `absolute bottom-0 left-[${gutter}px] w-[${pick(0, 420, 560)}px]`
-    ) + ` bg-white box-border border-t-[4px] border-solid border-[${red}] flex flex-col ` + pick("py-[24px] px-[20px]", "py-[32px] px-[32px]", "py-[40px] px-[40px]");
-    s.mapCaption = `font-semibold ${pick("text-[22px]", "text-[26px]", "text-[30px]")} leading-[1.3] tracking-[-0.4px] text-[${near}]`;
-
-    // ---------- ACCREDITATIONS (reused marquee, full-bleed) ----------
-    s.marqueeOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden bg-[rgb(245,245,245)] flex items-center box-border ` +
-      pick("py-[28px]", "py-[36px]", "py-[48px]");
-    // The keyframe translates the track by -50%, so half of it must be exactly
-    // one whole cycle. A flex `gap` breaks that: N items carry only N-1 gaps, so
-    // half the width lands half a gap short and the loop visibly jumps. Carrying
-    // the spacing as a right margin on every item makes the pitch uniform.
-    s.marqueeInner = "flex flex-row items-center w-max [animation:gmp-marquee_100s_linear_infinite]";
-    s.marqueeItem = `flex items-center justify-center shrink-0 mr-[24px] ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
-    s.marqueeImg = "max-w-full max-h-full object-contain";
+    // ---------- COLLABORATE (inherited, content customized per page) ----------
+    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center ` +
+      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
+    s.collabBg = "absolute inset-0 w-full h-full object-cover";
+    s.collabCanvas = "absolute inset-0 w-full h-full pointer-events-none";
+    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.55)] pointer-events-none";
+    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
+    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
+    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
+    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
+    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
+    s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
+    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
+    s.collabContactUsText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactUs.textColor}]`;
+    s.collabGetQuoteIcon = `w-[14px] h-[14px] bg-[${s.pillGetQuote.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
     // ---------- FOOTER (inherited) ----------
     s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
@@ -995,22 +1092,93 @@ class Component extends DCLogic {
     s.footerBottomRow = "flex flex-row flex-wrap gap-[12px] items-center justify-between pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
     s.footerLegalLink = "font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] no-underline hover:text-white transition-colors duration-200";
 
-    // ---------- DATA ----------
-    const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
-    const MARQUEE_HALF = [names, names, names, names].flat();
+    // ---------- DATA: 7 SERVICES ----------
+    // Copy is reproduced verbatim from the live CDMO page, including its own
+    // punctuation and spacing. Nothing here is paraphrased or invented.
+    const serviceData = [
+      { n: "01", h: "Formulation \nDevelopment", d: "Our experienced scientists develop innovative and effective formulations, including liquids, creams, oils, ointments, gels, suspensions and serums tailored to your specific needs.", href: "service-detail.html" },
+      { n: "02", h: "Analytical \nTesting", d: "Our state-of-the-art laboratories ensure product quality and consistency through rigorous analytical testing, including stability studies, bioequivalence assessments, and method development.", href: "service-detail.html" },
+      { n: "03", h: "Manufacturing", d: "Our GMP-compliant facilities handle processes from small-scale batches to large-scale commercial production, 1kg – 6 tonnes, with an in-house regulatory and validation team and global supply chain support.", href: "service-detail.html" },
+      { n: "04", h: "Packaging", d: "Primary, secondary and tertiary packaging including tubes, jars and pouches, in plastic, glass and metal — with high-quality labelling, barcodes and coding.", href: "service-detail.html" },
+      { n: "05", h: "Stability Testing \n& Storage", d: "Walk-in chambers set to precise temperature and humidity control deliver consistent, reliable data on product quality and shelf life.", href: "service-detail.html" },
+      { n: "06", h: "Regulatory \nSupport", d: "Our regulatory experts guide you through development and commercialisation, ensuring compliance with global regulatory requirements.", href: "service-detail.html" },
+    ];
+    const serviceCols = isDesktop ? 3 : isTablet ? 2 : 1;
+    const serviceShown = !!revealed.services || true;
+    const serviceItems = serviceData.map((item, i) => {
+      const hovered = this.state.hoveredService === i;
+      const canExpand = !isMobile && (i + 1) % serviceCols !== 0;
+      const containerWidth = hovered && canExpand ? `w-[calc(100%+${pick(20, 24, 28)}px)]` : "w-full";
+      return {
+        n: item.n,
+        h: item.h,
+        d: item.d,
+        href: item.href,
+        containerStyle: "relative overflow-hidden flex flex-col gap-[12px] items-start justify-start text-left box-border cursor-pointer no-underline " +
+          (isMobile ? "border-t border-solid border-[rgba(0,0,0,0.2)]" : "border-l border-solid border-[rgba(0,0,0,0.2)]") + " " +
+          containerWidth + " " + (hovered ? "z-[2]" : "z-[1]") + " " +
+          pick("py-[24px] px-[8px]", "py-[28px] px-[24px]", "py-[32px] px-[32px]") + " " +
+          (hovered ? "shadow-[0_24px_48px_-16px_rgba(0,0,0,0.35)]" : noShadowTw) +
+          " [transition:box-shadow_0.25s_ease,width_0.35s_cubic-bezier(0.65,0,0.35,1)]",
+        sweepStyle: `absolute inset-0 bg-[${gradient}] [transform-origin:left_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none ` + (hovered ? "scale-x-100" : "scale-x-0"),
+        numStyle: "relative z-[1] font-semibold text-[17px] md:text-[18px] xl:text-[19px] leading-[1.3] tracking-[-0.723px] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${dark}]`),
+        headStyle: "relative z-[1] font-medium text-[20px] md:text-[22px] xl:text-[25px] leading-[1.3] tracking-[-0.723px] whitespace-pre-line transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${near}]`),
+        descStyle: "relative z-[1] font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[1.5] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${dark}]`),
+        arrowStyle: "absolute z-[1] top-[24px] right-[24px] pointer-events-none transition-[opacity,transform] duration-[250ms] ease-in-out " +
+          ((hovered || !isDesktop) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[8px]"),
+        arrowColor: hovered ? "rgb(255,255,255)" : dark,
+        onEnter: () => this.setState({ hoveredService: i }),
+        onLeave: () => this.setState({ hoveredService: -1 }),
+      };
+    });
+
+    // Figures below are transcribed verbatim from the live CDMO page. Several are
+    // internally inconsistent in the source (the 3 tonne range lists 2 tonne
+    // vessels; "50Kg, 1 tonne prima" is ambiguous). They are reproduced as
+    // written rather than corrected, because guessing at manufacturing capacity
+    // is not something a rebuild should do.
+    const capacitySpecs = [
+      "R&D Capacity is 20L, 50L, 100L",
+      "Commercial capability – 350Kg, 1 tonne x 2 suite",
+      "50Kg, 1 tonne prima",
+      "2 tonne range – 400 x 2 tonne equivalent 6 tonne",
+      "3 tonne range – 400 x 2 tonne",
+      "6 tonne range – 1 tonne x 6 tonne",
+    ];
+    const fillingSpecs = [
+      "Tubes plastic/metal 10gm – 200gm",
+      "Tubs – 50gm – 1kg",
+      "Plastic bottle – 50ml – 5L",
+      "EC – 1ml – 50ml",
+      "Glass bottles – 100ml – 2L",
+      "Face pack, shelf ready package, leaflet, cartoning",
+    ];
+    const equipmentRows = [
+      { e: "6000kg Cream and Liquids Manufacturing Vessel", c: "500 – 6000kg capacity" },
+      { e: "3000kg Suspension and Liquids Manufacturing Vessel", c: "500 – 3000kg capacity" },
+      { e: "1000kg Cream and Liquids Manufacturing Vessel", c: "200 – 1000kg capacity" },
+      { e: "8000L Liquids Manufacturing Vessel", c: "1000 – 8000L capacity" },
+      { e: "Becomix 1000L Liquid processing suite", c: "200 – 1000L capacity" },
+      { e: "Becomix 350L Liquid processing suite", c: "150 – 350L capacity" },
+      { e: "100L Liquid R&D and IMP Manufacturing suite", c: "30 – 100L capacity" },
+      { e: "MMU50 R&D Vessel", c: "30 – 50kg capacity" },
+      { e: "MMU20 R&D Vessel", c: "20kg capacity" },
+    ].map((r, i) => ({ ...r, rowStyle: i % 2 ? s.tableCellAlt : s.tableCell }));
 
     return {
       s,
-      panelARevealRef: revealRef("panelA"),
-      panelBRevealRef: revealRef("panelB"),
-      capRevealRef: revealRef("capabilities"),
-      stepRevealRef: revealRef("steps"),
-      appliesRevealRef: revealRef("applies"),
+      capacitySpecs,
+      fillingSpecs,
+      equipmentRows,
+      introRevealRef: revealRef("intro"),
+      splitARevealRef: revealRef("splitA"),
+      splitBRevealRef: revealRef("splitB"),
+      capabilityRevealRef: revealRef("capability"),
+      equipmentRevealRef: revealRef("equipment"),
+      collabRevealRef: revealRef("collab"),
+      collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
+      collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
       footerRevealRef: revealRef("footer"),
-      marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
-      // Four sets per half puts the half-track past 3000px at desktop, so the
-      // strip stays filled on wide screens. Both halves must be identical.
-      logos: [...MARQUEE_HALF, ...MARQUEE_HALF],
       mobileNavItems,
       toggleMobileMenu: () => this.setState((st) => {
         const open = !st.mobileMenuOpen;
@@ -1019,6 +1187,7 @@ class Component extends DCLogic {
         return { mobileMenuOpen: open };
       }),
       showHeroCtaIcon: !isMobile,
+      serviceItems,
     };
   }
 }
