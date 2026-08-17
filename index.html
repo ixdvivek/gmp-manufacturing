@@ -492,7 +492,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
       <div className="{{ s.liGrid }}">
         <sc-for list="{{linkedinItems}}" as="post" hint-placeholder-count="4">
           <a href="{{ post.url }}" target="_blank" rel="noopener noreferrer" className="{{ post.cardStyle }}" onMouseEnter="{{ post.onEnter }}" onMouseLeave="{{ post.onLeave }}">
-            <div className="{{ s.liMediaWrap }}">
+            <div className="{{ post.mediaStyle }}">
               <img src="{{ post.image }}" alt="{{ post.imageAlt }}" loading="lazy" className="{{ post.imgStyle }}">
               <div className="{{ s.liOverlay }}"></div>
               <div className="{{ s.liMark }}"></div>
@@ -1555,8 +1555,12 @@ class Component extends DCLogic {
       return {
         ...p,
         cardStyle: "group flex flex-col gap-[12px] no-underline box-border cursor-pointer " +
-          "transition-[transform,box-shadow] duration-200 ease-in-out " +
-          (hovered ? `-translate-y-[3px] ${hoverShadowTw.replace("178,33,38", "10,102,194")}` : `translate-y-0 ${noShadowTw}`),
+          "transition-transform duration-200 ease-in-out " +
+          (hovered ? "-translate-y-[3px]" : "translate-y-0"),
+        // The shadow sits on the image rather than the whole card, so it reads as
+        // the picture lifting off the page instead of a floating text block.
+        mediaStyle: s.liMediaWrap + " transition-shadow duration-200 ease-in-out " +
+          (hovered ? hoverShadowTw.replace("178,33,38", "10,102,194") : noShadowTw),
         imgStyle: "absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
           (hovered ? "scale-105" : "scale-100"),
         headStyle: "font-medium text-[16px] md:text-[17px] xl:text-[18px] leading-[24px] tracking-[-0.4px] transition-colors duration-200 ease-in-out " +
