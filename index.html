@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./linkedin-feed.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="tailwind.config.js"></script>
 </head>
@@ -474,6 +475,36 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
       </div>
     </div>
 
+    <div className="{{ s.sectionGap }}"></div>
+
+    <!-- ============ LATEST LINKEDIN POSTS ============ -->
+    <sc-if value="{{ showLinkedin }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="LinkedIn Posts" className="{{ s.liHeadRow }}" ref="{{ linkedinRevealRef }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Social</span>
+          <span className="{{ s.h2 }}">Our latest LinkedIn posts</span>
+        </div>
+        <a href="linkedin.html" className="{{ s.pillMoreLinkedin.className }}" onMouseEnter="{{ s.pillMoreLinkedin.enter }}" onMouseLeave="{{ s.pillMoreLinkedin.leave }}">
+          <span className="{{ s.pillDarkText }}">More from LinkedIn</span>
+        </a>
+      </div>
+
+      <div className="{{ s.liGrid }}">
+        <sc-for list="{{linkedinItems}}" as="post" hint-placeholder-count="4">
+          <a href="{{ post.url }}" target="_blank" rel="noopener noreferrer" className="{{ post.cardStyle }}" onMouseEnter="{{ post.onEnter }}" onMouseLeave="{{ post.onLeave }}">
+            <div className="{{ s.liMediaWrap }}">
+              <img src="{{ post.image }}" alt="{{ post.imageAlt }}" loading="lazy" className="{{ post.imgStyle }}">
+              <div className="{{ s.liOverlay }}"></div>
+              <div className="{{ s.liMark }}"></div>
+            </div>
+            <span className="{{ post.headStyle }}">{{ post.heading }}</span>
+            <span className="{{ s.liDate }}">{{ post.dateLabel }}</span>
+            <span className="{{ s.liDesc }}">{{ post.description }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+
     <div className="{{ s.sectionGapHalf }}"></div>
 
     <!-- ============ COLLABORATE ============ -->
@@ -554,6 +585,7 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
             <a href="index.html" className="{{ s.footerLink }}">Home</a>
             <a href="about.html" className="{{ s.footerLink }}">About Us</a>
             <a href="cdmo.html" className="{{ s.footerLink }}">CDMO</a>
+            <a href="linkedin.html" className="{{ s.footerLink }}">LinkedIn Posts</a>
             <a href="innovations.html" className="{{ s.footerLink }}">Innovations</a>
             <a href="news.html" className="{{ s.footerLink }}">News &amp; Blogs</a>
             <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
@@ -589,9 +621,17 @@ Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. A
 const CURTAIN_MS = 900;
 
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, industryActiveIndex: 0, industrySelectedIndex: 0, curtainIndex: null, curtainPhase: "idle", pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1, openNavMenu: null };
+  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, linkedinPosts: [], hoveredLinkedin: -1, industryActiveIndex: 0, industrySelectedIndex: 0, curtainIndex: null, curtainPhase: "idle", pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1, openNavMenu: null };
 
   componentDidMount() {
+    // Seeded with the module's fallback immediately, then replaced if the feed
+    // request succeeds — see linkedin-feed.js for how this points at the admin
+    // backend once it exists.
+    if (window.gmpLinkedInFeed) {
+      window.gmpLinkedInFeed.load((posts) => {
+        if (!this._unmounted) this.setState({ linkedinPosts: posts });
+      }, 4);
+    }
     requestAnimationFrame(() => requestAnimationFrame(() => {
       this.setState((st) => ({ revealed: { ...st.revealed, hero: true } }));
     }));
@@ -610,6 +650,7 @@ class Component extends DCLogic {
     this._onScroll();
   }
   componentWillUnmount() {
+    this._unmounted = true;
     window.removeEventListener("resize", this._onResize);
     window.removeEventListener("scroll", this._onScroll);
     if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
@@ -1295,6 +1336,25 @@ class Component extends DCLogic {
     s.newsCardTitle = "font-medium text-[18px] md:text-[19px] xl:text-[20px] leading-[1.35] tracking-[-0.4px] text-white";
     s.newsCardTag = "font-normal text-[16px] leading-[24px] text-white";
     s.pillMoreNews = makePill("moreNews");
+
+    // ---------- LATEST LINKEDIN POSTS ----------
+    // Same head row and grid rhythm as the News Room above it, so the two read
+    // as siblings rather than two different components stacked together.
+    s.liHeadRow = s.newsHeadRow.replace(reveal("news"), reveal("linkedin"));
+    s.liGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") +
+      " gap-[20px] md:gap-[24px] xl:gap-[28px] w-full " + pick("mt-[32px]", "mt-[40px]", "mt-[48px]");
+    s.liMediaWrap = `relative w-full ${pick("h-[200px]", "h-[190px]", "h-[210px]")} overflow-hidden shrink-0`;
+    // bg-gmp-linkedin is a theme token rather than an inline gradient literal, so
+    // the brand blue has one source of truth alongside the other gradients.
+    s.liOverlay = "absolute inset-0 bg-gmp-linkedin pointer-events-none";
+    s.liMark = "absolute left-[16px] bottom-[14px] w-[22px] h-[22px] bg-white pointer-events-none " +
+      "[mask:url('assets2/linkedin.svg')_center/contain_no-repeat] " +
+      "[-webkit-mask:url('assets2/linkedin.svg')_center/contain_no-repeat]";
+    s.liDate = "font-normal text-[13px] leading-[20px] text-[rgba(51,51,51,0.6)]";
+    // Two lines exactly, so every card in the row keeps the same height whatever
+    // the copy length.
+    s.liDesc = "font-normal text-[14px] md:text-[15px] xl:text-[16px] leading-[22px] text-[rgba(51,51,51,0.8)] line-clamp-2";
+    s.pillMoreLinkedin = makePill("moreLinkedin");
     s.pillMoreNews.className += " " + (isMobile ? "self-start" : "self-end");
     s.carouselArrowBase = "w-[48px] h-[48px] rounded-[100px] flex justify-center items-center cursor-pointer shrink-0";
     s.arrowPrev = makeArrow("arrowPrev");
@@ -1490,8 +1550,28 @@ class Component extends DCLogic {
       style: "gmp-curtain " + (curtainPhase === "open" ? "is-open" : "is-reset"),
     };
 
+    const linkedinItems = (this.state.linkedinPosts || []).map((p, i) => {
+      const hovered = this.state.hoveredLinkedin === i;
+      return {
+        ...p,
+        cardStyle: "group flex flex-col gap-[12px] no-underline box-border cursor-pointer " +
+          "transition-[transform,box-shadow] duration-200 ease-in-out " +
+          (hovered ? `-translate-y-[3px] ${hoverShadowTw.replace("178,33,38", "10,102,194")}` : `translate-y-0 ${noShadowTw}`),
+        imgStyle: "absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
+          (hovered ? "scale-105" : "scale-100"),
+        headStyle: "font-medium text-[16px] md:text-[17px] xl:text-[18px] leading-[24px] tracking-[-0.4px] transition-colors duration-200 ease-in-out " +
+          (hovered ? "text-[rgb(10,102,194)]" : `text-[${near}]`),
+        onEnter: () => this.setState({ hoveredLinkedin: i }),
+        onLeave: () => this.setState({ hoveredLinkedin: -1 }),
+      };
+    });
+    const showLinkedin = linkedinItems.length > 0;
+
     return {
       s,
+      linkedinItems,
+      showLinkedin,
+      linkedinRevealRef: revealRef("linkedin"),
       // Four sets per half puts the half-track past 3000px at desktop, so the
       // strip stays filled on wide screens. Both halves must be identical.
       logos: [...MARQUEE_HALF, ...MARQUEE_HALF],

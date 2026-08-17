@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./linkedin-feed.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="tailwind.config.js"></script>
 </head>
@@ -76,7 +77,7 @@
 <x-dc>
 <helmet>
   <meta charset="utf-8">
-  <title>GMP Manufacturing Ltd — News &amp; Media</title>
+  <title>GMP Manufacturing Ltd — LinkedIn</title>
   <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
   <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
@@ -95,7 +96,7 @@
   </style>
 </helmet>
 
-<div data-screen-label="GMP Mfd Blog Detail — Template" className="{{ s.root }}">
+<div data-screen-label="GMP Mfd LinkedIn — Responsive" className="{{ s.root }}">
 
   <!-- ============ TOPBAR ============ -->
   <div className="{{ s.heroTopbar }}">
@@ -189,101 +190,95 @@
   </div>
 
   <!-- ============ PAGE TITLE (no hero photo — type-led header) ============ -->
-  <!-- ============ ARTICLE HEAD ============ -->
-  <div data-screen-label="Article Head" className="{{ s.firstSectionPad }}">
-    <div className="{{ s.artHeadWrap }}" ref="{{ artRevealRef }}">
-      <a href="news.html" className="{{ s.artBack }}">&larr; Back to Blogs</a>
-      <span className="{{ s.artTag }}">{{ article.tag }}</span>
-      <span className="{{ s.artTitle }}">{{ article.title }}</span>
-      <div className="{{ s.artMetaRow }}">
-        <span className="{{ s.artAuthorInline }}">{{ author.name }}</span>
-        <span className="{{ s.artMetaDot }}"></span>
-        <span className="{{ s.artMeta }}">{{ article.date }}</span>
-        <span className="{{ s.artMetaDot }}"></span>
-        <span className="{{ s.artMeta }}">{{ readingTime }}</span>
-        <div className="{{ s.artShareBtn }}" onClick="{{ onShare }}">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><path d="M16 6l-4-4-4 4"></path><path d="M12 2v14"></path></svg>
-          <span>{{ shareLabel }}</span>
-        </div>
-      </div>
+  <div data-screen-label="Page Title" className="{{ s.firstSectionPad }}">
+    <div className="{{ s.pageTitleWrap }}">
+      <span className="{{ s.eyebrow }}">Social</span>
+      <span className="{{ s.h1 }}">Our latest LinkedIn posts</span>
+      <span className="{{ s.pageTitleIntro }}">What we have been sharing from the floor, the lab and the road. Every post opens on LinkedIn.</span>
     </div>
-  </div>
-
-  <div className="{{ s.sectionGapHalf }}"></div>
-
-  <!-- ============ HERO IMAGE ============ -->
-  <div className="{{ s.artHeroOuter }}">
-    <img src="{{ article.hero }}" alt="{{ article.title }}" className="{{ s.artHeroImg }}">
   </div>
 
   <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ ARTICLE BODY ============ -->
-  <div data-screen-label="Article Body" className="{{ s.sectionPad }}">
-    <div className="{{ s.artBodyWrap }}">
-      <sc-for list="{{blocks}}" as="b" hint-placeholder-count="6">
-        <div className="{{ b.wrapStyle }}">
-          <sc-if value="{{ b.isHeading }}" hint-placeholder-val="{{ false }}">
-            <span className="{{ s.artH3 }}">{{ b.text }}</span>
-          </sc-if>
-          <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ true }}">
-            <span className="{{ s.artPara }}">{{ b.text }}</span>
-          </sc-if>
-          <sc-if value="{{ b.isImage }}" hint-placeholder-val="{{ false }}">
-            <figure className="{{ s.artFigure }}">
-              <img src="{{ b.img }}" alt="{{ b.caption }}" loading="lazy" className="{{ s.artFigImg }}">
-              <figcaption className="{{ s.artFigCap }}">{{ b.caption }}<span className="{{ s.artFigSrc }}">{{ b.source }}</span></figcaption>
-            </figure>
-          </sc-if>
-          <sc-if value="{{ b.isVideo }}" hint-placeholder-val="{{ false }}">
-            <div className="{{ s.artVideoWrap }}">
-              <iframe src="{{ b.embed }}" title="{{ b.caption }}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="{{ s.artVideoFrame }}"></iframe>
-            </div>
-          </sc-if>
-        </div>
+  <!-- ============ LINKEDIN POST GRID ============ -->
+  <div data-screen-label="LinkedIn Grid" className="{{ s.sectionPad }}">
+    <div className="{{ s.liGrid }}" ref="{{ linkedinRevealRef }}">
+      <sc-for list="{{linkedinItems}}" as="post" hint-placeholder-count="8">
+        <a href="{{ post.url }}" target="_blank" rel="noopener noreferrer" className="{{ post.cardStyle }}" onMouseEnter="{{ post.onEnter }}" onMouseLeave="{{ post.onLeave }}">
+          <div className="{{ s.liMediaWrap }}">
+            <img src="{{ post.image }}" alt="{{ post.imageAlt }}" loading="lazy" className="{{ post.imgStyle }}">
+            <div className="{{ s.liOverlay }}"></div>
+            <div className="{{ s.liMark }}"></div>
+          </div>
+          <span className="{{ post.headStyle }}">{{ post.heading }}</span>
+          <span className="{{ s.liDate }}">{{ post.dateLabel }}</span>
+          <span className="{{ s.liDesc }}">{{ post.description }}</span>
+        </a>
       </sc-for>
     </div>
   </div>
 
-  <div className="{{ s.sectionGapHalf }}"></div>
+  <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ AUTHOR ============ -->
-  <div data-screen-label="Author" className="{{ s.sectionPad }}">
-    <div className="{{ s.authorCard }}">
-      <img src="{{ author.img }}" alt="{{ author.name }}" loading="lazy" className="{{ s.authorImg }}">
-      <div className="{{ s.authorTextCol }}">
-        <span className="{{ s.authorName }}">{{ author.name }}</span>
-        <span className="{{ s.authorRole }}">{{ author.role }}</span>
-        <span className="{{ s.authorBio }}">{{ author.bio }}</span>
-        <a href="{{ author.linkedin }}" target="_blank" rel="noopener noreferrer" className="{{ s.authorLink }}">
-          <span className="{{ s.authorLinkIcon }}"></span>Connect on LinkedIn
+  <div className="{{ s.sectionPad }}">
+    <div className="{{ s.liFollowWrap }}">
+      <span className="{{ s.liFollowText }}">Follow GMP Manufacturing on LinkedIn for these as they go out.</span>
+      <a href="https://www.linkedin.com/company/gmp-manufacturing-ltd/" target="_blank" rel="noopener noreferrer" className="{{ s.pillFollow.className }}" onMouseEnter="{{ s.pillFollow.enter }}" onMouseLeave="{{ s.pillFollow.leave }}">
+        <span className="{{ s.pillDarkText }}">Follow on LinkedIn</span>
+      </a>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ UNIVERSAL CTA BAND ============ -->
+  <div className="{{ s.collabOuter }}">
+    <div className="{{ s.collabOverlay }}"></div>
+    <div className="{{ s.collabWrap }}">
+      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Curious what's next for GMP?</span>
+      <span className="{{ s.collabBody }}">Get in touch to talk about where innovation meets your product.</span>
+      <div className="{{ s.collabBtnRow }}">
+        <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+          <span className="{{ s.collabGetQuoteText }}">Get a Quote</span>
+          <div className="{{ s.collabGetQuoteIcon }}"></div>
+        </a>
+        <a href="contact.html" className="{{ s.pillContactUs.className }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+          <span className="{{ s.collabContactUsText }}">Contact us</span>
         </a>
       </div>
     </div>
   </div>
 
-  <div className="{{ s.sectionGap }}"></div>
 
-  <!-- ============ RELATED ============ -->
-  <div data-screen-label="Related" className="{{ s.sectionPad }}">
-    <div className="{{ s.relWrap }}" ref="{{ relRevealRef }}">
-      <div className="{{ s.sectionHeadingGroup }}">
-        <span className="{{ s.eyebrow }}">{{ relatedEyebrow }}</span>
-        <span className="{{ s.h2 }}">{{ relatedHeading }}</span>
-      </div>
-      <div className="{{ s.relGrid }}">
-        <sc-for list="{{relatedItems}}" as="item" hint-placeholder-count="3">
-          <a href="{{ item.href }}" className="{{ s.newsCard }}">
-            <div className="{{ s.newsImgWrap }}"><img src="{{ item.img }}" alt="{{ item.title }}" loading="lazy" className="{{ s.newsImg }}"></div>
-            <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
-            <span className="{{ s.newsCardDate }}">{{ item.date }}</span>
-          </a>
-        </sc-for>
+  <!-- ============ MEDIA LIGHTBOX ============ -->
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div className="{{ s.lbOverlay }}" onClick="{{ closeLightbox }}">
+      <div className="{{ s.lbDialog }}" onClick="{{ stopPropagation }}">
+        <div className="{{ s.lbStage }}">
+          <sc-if value="{{ lbIsVideo }}" hint-placeholder-val="{{ false }}">
+            <iframe src="{{ lbVideoSrc }}" title="{{ lbCaption }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen className="{{ s.lbFrame }}"></iframe>
+          </sc-if>
+          <sc-if value="{{ lbIsImage }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ lbImage }}" alt="{{ lbCaption }}" className="{{ s.lbImage }}">
+          </sc-if>
+        </div>
+        <div className="{{ s.lbCaptionWrap }}">
+          <span className="{{ s.lbCaption }}">{{ lbCaption }}</span>
+          <span className="{{ s.lbDate }}">{{ lbDate }}</span>
+        </div>
+        <div className="{{ s.lbPrev }}" onClick="{{ prevLightbox }}" aria-label="Previous">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+        </div>
+        <div className="{{ s.lbNext }}" onClick="{{ nextLightbox }}" aria-label="Next">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg>
+        </div>
+        <div className="{{ s.lbClose }}" onClick="{{ closeLightbox }}" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgb(255,255,255)" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </div>
+        <span className="{{ s.lbCounter }}">{{ lbCounter }}</span>
       </div>
     </div>
-  </div>
-
-  <div className="{{ s.sectionGap }}"></div>
+  </sc-if>
 
   <!-- ============ FOOTER ============ -->
   <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
@@ -372,40 +367,34 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null, shareState: "idle" };
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, linkedinPosts: [], hoveredLinkedin: -1, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null, activeFilter: "News", lightboxIndex: null };
 
   componentDidMount() {
+    // No limit here: the listing page shows everything the feed returns.
+    if (window.gmpLinkedInFeed) {
+      window.gmpLinkedInFeed.load((posts) => {
+        if (!this._unmounted) this.setState({ linkedinPosts: posts });
+      });
+    }
+    this._onLightboxKey = (e) => {
+      if (this.state.lightboxIndex === null || this.state.lightboxIndex === undefined) return;
+      if (e.key === "Escape") this.setState({ lightboxIndex: null });
+      else if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        const d = e.key === "ArrowRight" ? 1 : -1;
+        this.setState((st) => ({ lightboxIndex: (st.lightboxIndex + d + 8) % 8 }));
+      }
+    };
+    window.addEventListener("keydown", this._onLightboxKey);
     this._onResize = () => { this._updateBp(); };
     window.addEventListener("resize", this._onResize);
     this._updateBp();
   }
   componentWillUnmount() {
+    this._unmounted = true;
     window.removeEventListener("resize", this._onResize);
     window.removeEventListener("scroll", this._onScroll);
     if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
   }
-  _shareArticle(title) {
-    const url = window.location.href;
-    // Native sheet where the browser offers one; otherwise copy the URL and say so.
-    if (navigator.share) {
-      navigator.share({ title, url }).catch(() => {});
-      return;
-    }
-    const done = () => {
-      this.setState({ shareState: "copied" });
-      clearTimeout(this._shareTimer);
-      this._shareTimer = setTimeout(() => this.setState({ shareState: "idle" }), 2000);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(done).catch(() => this.setState({ shareState: "failed" }));
-    } else {
-      const t = document.createElement("textarea");
-      t.value = url; document.body.appendChild(t); t.select();
-      try { document.execCommand("copy"); done(); } catch (e) { this.setState({ shareState: "failed" }); }
-      document.body.removeChild(t);
-    }
-  }
-
   _observeReveal(key, el) {
     if (!el) return;
     this._revealObservers = this._revealObservers || {};
@@ -583,7 +572,7 @@ class Component extends DCLogic {
     s.mobileNavMetaRow = "flex flex-col gap-[4px]";
     s.mobileNavMeta = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.7)] no-underline";
     s.mobileNavMetaDim = "font-normal text-[13px] leading-[20px] text-[rgba(255,255,255,0.45)]";
-    const CURRENT_PAGE = "news";
+    const CURRENT_PAGE = "";
     const MOBILE_NAV = [
       { label: "Home", href: "index.html", key: "home" },
       { label: "About Us", href: "about.html", key: "about" },
@@ -673,6 +662,23 @@ class Component extends DCLogic {
     s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
 
     // ---------- PAGE TITLE (no hero banner on this page — clear the fixed topbar, type-led header) ----------
+    // ---------- LINKEDIN POSTS ----------
+    // Identical card treatment to the homepage strip; only the column count
+    // differs, since this page is a listing rather than a single row.
+    s.liGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") +
+      " gap-[20px] md:gap-[24px] xl:gap-[28px] w-full max-w-[1600px] mx-auto " + reveal("linkedin");
+    s.liMediaWrap = `relative w-full ${pick("h-[200px]", "h-[190px]", "h-[210px]")} overflow-hidden shrink-0`;
+    s.liOverlay = "absolute inset-0 bg-gmp-linkedin pointer-events-none";
+    s.liMark = "absolute left-[16px] bottom-[14px] w-[22px] h-[22px] bg-white pointer-events-none " +
+      "[mask:url('assets2/linkedin.svg')_center/contain_no-repeat] " +
+      "[-webkit-mask:url('assets2/linkedin.svg')_center/contain_no-repeat]";
+    s.liDate = "font-normal text-[13px] leading-[20px] text-[rgba(51,51,51,0.6)]";
+    s.liDesc = "font-normal text-[14px] md:text-[15px] xl:text-[16px] leading-[22px] text-[rgba(51,51,51,0.8)] line-clamp-2";
+    s.liFollowWrap = "flex " + (isMobile ? "flex-col items-start" : "flex-row items-center justify-between") +
+      " gap-[20px] max-w-[1600px] mx-auto w-full box-border";
+    s.liFollowText = `font-normal text-[16px] md:text-[17px] leading-[26px] text-[rgba(51,51,51,0.8)] max-w-[620px]`;
+    s.pillFollow = makePill("followLinkedin");
+
     s.firstSectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px] pt-[132px] md:pt-[144px] xl:pt-[156px]";
     s.pageTitleWrap = "flex flex-col gap-[12px] max-w-[1600px] mx-auto";
     s.h1 = `font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-[${dark}]`;
@@ -700,39 +706,32 @@ class Component extends DCLogic {
     s.blogAuthor = `font-medium text-[14px] leading-[20px] text-[${near}]`;
     s.blogMetaDot = "w-[4px] h-[4px] rounded-full bg-[rgba(51,51,51,0.3)] shrink-0";
 
-    // ---------- ARTICLE ----------
-    s.artHeadWrap = "flex flex-col gap-[14px] items-start max-w-[860px] mx-auto w-full " + reveal("art");
-    s.artBack = `font-normal text-[14px] leading-[20px] text-[${red}] no-underline w-fit`;
-    s.artTag = `font-normal text-[13px] leading-[18px] text-[${red}] uppercase tracking-[0.6px]`;
-    s.artTitle = `font-medium ${pick("text-[30px]", "text-[40px]", "text-[50px]")} ${pick("leading-[38px]", "leading-[48px]", "leading-[58px]")} tracking-[-1.5px] text-[${dark}]`;
-    s.artMetaRow = "flex flex-row flex-wrap items-center gap-[12px] pt-[4px]";
-    s.artAuthorInline = `font-medium text-[14px] leading-[20px] text-[${near}]`;
-    s.artMeta = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.6)]";
-    s.artMetaDot = "w-[4px] h-[4px] rounded-full bg-[rgba(51,51,51,0.28)] shrink-0";
-    s.artShareBtn = `ml-auto inline-flex flex-row items-center gap-[8px] rounded-[999px] border border-solid border-[rgba(51,51,51,0.22)] text-[${near}] font-medium text-[14px] leading-[20px] py-[9px] px-[18px] cursor-pointer select-none transition-[background,border-color,color] duration-200 hover:bg-[${red}] hover:text-white hover:border-[${red}]`;
-    s.artHeroOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden ${pick("h-[240px]", "h-[380px]", "h-[520px]")}`;
-    s.artHeroImg = "w-full h-full object-cover";
-    s.artBodyWrap = "flex flex-col max-w-[860px] mx-auto w-full";
-    s.artBlock = "flex flex-col " + pick("mb-[18px]", "mb-[20px]", "mb-[22px]");
-    s.artBlockHeading = "flex flex-col " + pick("mt-[18px] mb-[10px]", "mt-[24px] mb-[12px]", "mt-[28px] mb-[12px]");
-    s.artH3 = s.h3;
-    s.artPara = s.bodyText;
-    s.artFigure = "flex flex-col gap-[8px] m-0 w-full";
-    s.artFigImg = "w-full h-auto object-cover";
-    s.artFigCap = "font-normal text-[13px] leading-[19px] text-[rgba(51,51,51,0.55)]";
-    s.artFigSrc = "italic";
-    s.artVideoWrap = "w-full aspect-video overflow-hidden bg-black";
-    s.artVideoFrame = "w-full h-full border-0";
-    s.relWrap = "flex flex-col gap-[20px] md:gap-[26px] max-w-[1600px] mx-auto " + reveal("rel");
-    s.relGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[24px] md:gap-[30px]";
-    s.authorCard = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[20px] md:gap-[26px] items-start max-w-[860px] mx-auto w-full box-border bg-[rgb(245,243,240)] " + pick("p-[22px]", "p-[26px]", "p-[30px]");
-    s.authorImg = `shrink-0 rounded-full object-cover ${pick("w-[72px] h-[72px]", "w-[88px] h-[88px]", "w-[96px] h-[96px]")}`;
-    s.authorTextCol = "flex flex-col gap-[6px] items-start";
-    s.authorName = `font-semibold ${pick("text-[18px]", "text-[19px]", "text-[20px]")} leading-[1.3] text-[${near}]`;
-    s.authorRole = `font-normal text-[14px] leading-[20px] text-[${red}]`;
-    s.authorBio = "font-normal text-[15px] leading-[23px] text-[rgba(51,51,51,0.75)] pt-[4px]";
-    s.authorLink = `inline-flex flex-row items-center gap-[8px] font-medium text-[14px] leading-[20px] text-[${near}] no-underline pt-[6px] hover:text-[${red}] transition-colors duration-200`;
-    s.authorLinkIcon = "w-[15px] h-[15px] bg-[rgb(10,102,194)] [mask:url('assets2/linkedin.svg')_center/contain_no-repeat] shrink-0";
+    // ---------- MEDIA GALLERY ----------
+    s.mediaGrid = "grid " + pick("grid-cols-2", "grid-cols-3", "grid-cols-4") + " gap-[12px] md:gap-[16px]";
+    s.mediaCell = "relative aspect-square overflow-hidden bg-[rgb(232,232,232)] cursor-pointer group";
+    s.mediaImg = "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105";
+    s.mediaPlayBadge = "absolute inset-0 m-auto w-[54px] h-[54px] rounded-full bg-[rgba(17,17,17,0.55)] backdrop-blur-[2px] flex items-center justify-center pointer-events-none transition-[background,transform] duration-200 group-hover:bg-[rgba(178,33,38,0.9)] group-hover:scale-110";
+
+    // ---------- LIGHTBOX ----------
+    s.lbOverlay = "fixed inset-0 z-[2147482000] bg-[rgba(12,12,16,0.92)] flex items-center justify-center box-border " + pick("p-[16px]", "p-[32px]", "p-[48px]");
+    s.lbDialog = "relative flex flex-col gap-[16px] w-full max-w-[1100px] max-h-full";
+    s.lbStage = "relative w-full aspect-video bg-black overflow-hidden flex items-center justify-center";
+    s.lbImage = "w-full h-full object-contain";
+    s.lbFrame = "w-full h-full border-0";
+    s.lbCaptionWrap = "flex flex-col gap-[4px] items-start";
+    s.lbCaption = `font-medium ${pick("text-[15px]", "text-[17px]", "text-[18px]")} leading-[1.4] text-white`;
+    s.lbDate = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.55)]";
+    const lbBtn = "absolute top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.24)] flex items-center justify-center cursor-pointer transition-colors duration-200 z-[2]";
+    s.lbPrev = lbBtn + " " + pick("left-[6px]", "-left-[8px]", "-left-[64px]");
+    s.lbNext = lbBtn + " " + pick("right-[6px]", "-right-[8px]", "-right-[64px]");
+    s.lbClose = "absolute -top-[12px] right-0 md:-top-[40px] md:right-0 w-[40px] h-[40px] rounded-full bg-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.24)] flex items-center justify-center cursor-pointer transition-colors duration-200 z-[2]";
+    s.lbCounter = "absolute -top-[6px] left-0 md:-top-[34px] font-normal text-[13px] leading-[18px] text-[rgba(255,255,255,0.55)]";
+
+    s.newsImgPlaceholder = "w-full aspect-[16/9] bg-[rgb(232,232,232)] overflow-hidden box-border";
+    s.newsImg = "w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105";
+    s.newsCardTag = `font-normal text-[13px] leading-[18px] text-[${red}] uppercase tracking-[0.5px]`;
+    s.newsCardTitle = `font-medium text-[18px] leading-[26px] text-[${dark}]`;
+    s.newsCardDate = "font-normal text-[14px] leading-[20px] text-[rgba(51,51,51,0.55)]";
 
     // ---------- NEWSLETTER SIGNUP (distinct, lighter-weight block — separate from the universal CTA band) ----------
     s.newsletterLightWrap = "flex " + (isDesktop ? "flex-row items-center justify-between" : "flex-col items-start") + " gap-[20px] md:gap-[24px] max-w-[1600px] mx-auto box-border border border-solid border-[rgba(0,0,0,0.12)] bg-white shadow-[0_2px_10px_-4px_rgba(17,17,17,0.12)] transition-[box-shadow,transform] duration-300 ease-out " +
@@ -802,61 +801,79 @@ class Component extends DCLogic {
     s.footerLegalLink = "font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] no-underline hover:text-white transition-colors duration-200";
 
     // ---------- DATA: NEWS / EVENTS / MEDIA GALLERY / BLOG ----------
-    // PLACEHOLDER EDITORIAL - invented article and author. Replace before launch.
-    const article = { tag: "Blog", title: "Why Technology Transfer Timelines Matter", date: "27 Jul 2026", hero: "assets/gmp-4.webp" };
-    const author = {
-      name: "Niamh Bradley",
-      role: "Head of Research & Development",
-      img: "assets/team-4.webp",
-      bio: "Niamh leads formulation and analytical development at GMP Manufacturing, working with partners from first trial batch through to validated commercial production.",
-      linkedin: "https://www.linkedin.com/company/gmp-manufacturing-ltd/",
-    };
-    const blocks = [
-      { type: "para", text: "Technology transfer is where most manufacturing projects quietly lose time. Not in the headline activities everyone plans for, but in the gaps between them — waiting on a method to be revalidated, chasing a specification that was never fully agreed, discovering late that an excipient is not available at the grade the original site used." },
-      { type: "para", text: "The transfer itself is rarely the hard part. What determines the timeline is how much ambiguity is carried into it." },
-      { type: "heading", text: "Where the time actually goes" },
-      { type: "para", text: "In our experience the largest single delay is analytical method transfer. A method that works reliably at one site is not automatically robust at another, and proving equivalence takes longer than most plans allow. Building that work into the schedule from the start, rather than treating it as a formality, usually saves weeks." },
-      { type: "image", img: "assets/gmp-2.webp", caption: "Method transfer work in our analytical laboratory", source: "GMP Manufacturing" },
-      { type: "heading", text: "What good preparation looks like" },
-      { type: "para", text: "The transfers that run to plan tend to share a few things: a complete and current batch record, agreed specifications with named acceptance criteria, a single technical contact on each side, and clarity about which changes require regulatory notification before they are made rather than after." },
-      { type: "video", youtubeId: "dQw4w9WgXcQ", caption: "A walkthrough of our transfer process" },
-      { type: "heading", text: "Building the schedule backwards" },
-      { type: "para", text: "We find it more reliable to work backwards from the date the first commercial batch is needed, allowing for validation batches, stability initiation and QP release, rather than forwards from the kick-off meeting. It usually surfaces an uncomfortable truth early, which is far better than discovering it two months out." },
-      { type: "para", text: "If you are planning a transfer and want a realistic view of the timeline before you commit to it, we are always happy to talk it through." },
+    // PLACEHOLDER EDITORIAL - invented headlines, dates and copy so the layouts can be
+    // reviewed. Replace with real content before launch.
+    const newsData = [
+      { title: "GMP Manufacturing Achieves ISO 13485 Recertification", date: "12 Jun 2026", img: "assets/gmp-3.webp" },
+      { title: "New Filling Line Now Live at Our Hull Facility", date: "03 Apr 2026", img: "assets/gmp-8.webp" },
+      { title: "Investment in Expanded Warehousing Capacity", date: "21 Feb 2026", img: "assets/gmp-10.webp" },
+      { title: "Analytical Lab Adds Extended Stability Testing", date: "09 Jan 2026", img: "assets/gmp-2.webp" },
     ];
-    const relatedItems = [
-      { title: "Choosing the Right CDMO Partner: A Buyer's Checklist", date: "14 Jan 2026", img: "assets/gmp-1.webp", href: "blog-detail.html" },
-      { title: "What Good Documentation Practice Really Costs", date: "02 Dec 2025", img: "assets/gmp-12.webp", href: "blog-detail.html" },
-      { title: "Why Technology Transfer Timelines Matter", date: "27 Jul 2026", img: "assets/gmp-4.webp", href: "blog-detail.html" },
+    const eventsData = [
+      { title: "Meet Us at CPhI Worldwide 2026", date: "18 Aug 2026", img: "assets/gmp-6.webp" },
+      { title: "Healthcare Exhibition — Stand 42B", date: "22 May 2026", img: "assets/gmp-11.webp" },
+      { title: "Open Day: Inside Our Hull Facility", date: "14 Mar 2026", img: "assets/gmp-5.webp" },
+    ];
+    const blogsData = [
+      { title: "Why Technology Transfer Timelines Matter", date: "27 Jul 2026", author: "Niamh Bradley", img: "assets/gmp-4.webp",
+        excerpt: "Transfer is where most delays hide. A look at what actually drives the timeline, and where partners can pull weeks back." },
+      { title: "Choosing the Right CDMO Partner: A Buyer's Checklist", date: "14 Jan 2026", author: "Elena Marsh", img: "assets/gmp-1.webp",
+        excerpt: "Capacity is the easy question. These are the ones worth asking before you commit a product to a manufacturing partner." },
+      { title: "What Good Documentation Practice Really Costs", date: "02 Dec 2025", author: "Marcus Adeyemi", img: "assets/gmp-12.webp",
+        excerpt: "Audit-ready paperwork is not overhead. Here is how it earns its keep when a regulator or a customer comes asking." },
+    ];
+    // type "video" carries a youtubeId; the tile shows a poster with a play badge.
+    const mediaData = [
+      { type: "image", img: "assets/gmp-5.webp",  caption: "Analytical testing in our Hull laboratory", date: "Jun 2026" },
+      { type: "video", img: "assets/gmp-8.webp",  youtubeId: "dQw4w9WgXcQ", caption: "Inside the new filling line", date: "Apr 2026" },
+      { type: "image", img: "assets/gmp-3.webp",  caption: "Batch inspection before QP release", date: "Jun 2026" },
+      { type: "image", img: "assets/gmp-10.webp", caption: "Finished goods warehousing", date: "Feb 2026" },
+      { type: "video", img: "assets/gmp-4.webp",  youtubeId: "dQw4w9WgXcQ", caption: "Automated packing line walkthrough", date: "Jan 2026" },
+      { type: "image", img: "assets/gmp-6.webp",  caption: "Solid dose production", date: "Nov 2025" },
+      { type: "image", img: "assets/gmp-2.webp",  caption: "Stability testing plates", date: "Oct 2025" },
+      { type: "image", img: "assets/gmp-12.webp", caption: "Formulation development", date: "Sep 2025" },
     ];
 
-    // Reading time is derived from the copy so it cannot drift as content changes.
-    const wordCount = blocks.reduce((n, blk) => n + String(blk.text || blk.caption || "").trim().split(/\s+/).filter(Boolean).length, 0);
-    const readingTime = Math.max(1, Math.round(wordCount / 200)) + " min read";
-    const shareState = this.state.shareState;
-    const shareLabel = shareState === "copied" ? "Link copied" : shareState === "failed" ? "Copy failed" : "Share";
-    const blockItems = blocks.map((blk) => ({
-      ...blk,
-      isHeading: blk.type === "heading", isPara: blk.type === "para",
-      isImage: blk.type === "image", isVideo: blk.type === "video",
-      embed: blk.youtubeId ? `https://www.youtube-nocookie.com/embed/${blk.youtubeId}?rel=0` : "",
-      source: blk.source ? ` — ${blk.source}` : "",
-      wrapStyle: blk.type === "heading" ? s.artBlockHeading : s.artBlock,
+    const isSimpleTab  = activeFilter === "News" || activeFilter === "Events";
+    const isBlogTab    = activeFilter === "Blogs";
+    const isGalleryTab = activeFilter === "Media Gallery";
+    const simpleSource = activeFilter === "Events" ? eventsData : newsData;
+    const simpleHref   = activeFilter === "Events" ? "event-detail.html" : "news-detail.html";
+    const simpleItems  = simpleSource.map((i) => ({ ...i, href: simpleHref }));
+    const blogItems    = blogsData.map((i) => ({ ...i, href: "blog-detail.html" }));
+    const mediaItems   = mediaData.map((m, i) => ({
+      thumb: m.img, caption: m.caption, isVideo: m.type === "video",
+      onOpen: () => this.setState({ lightboxIndex: i }),
     }));
+
+    const lbIndex = this.state.lightboxIndex;
+    const lightboxOpen = lbIndex !== null && lbIndex !== undefined;
+    const lbItem = lightboxOpen ? mediaData[lbIndex] : null;
+    const step = (d) => this.setState((st) => ({
+      lightboxIndex: (st.lightboxIndex + d + mediaData.length) % mediaData.length,
+    }));
+
+    const linkedinItems = (this.state.linkedinPosts || []).map((p, i) => {
+      const hovered = this.state.hoveredLinkedin === i;
+      return {
+        ...p,
+        cardStyle: "group flex flex-col gap-[12px] no-underline box-border cursor-pointer " +
+          "transition-[transform,box-shadow] duration-200 ease-in-out " +
+          (hovered ? `-translate-y-[3px] ${hoverShadowTw.replace("178,33,38", "10,102,194")}` : `translate-y-0 ${noShadowTw}`),
+        imgStyle: "absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
+          (hovered ? "scale-105" : "scale-100"),
+        headStyle: "font-medium text-[16px] md:text-[17px] xl:text-[18px] leading-[24px] tracking-[-0.4px] transition-colors duration-200 ease-in-out " +
+          (hovered ? "text-[rgb(10,102,194)]" : `text-[${near}]`),
+        onEnter: () => this.setState({ hoveredLinkedin: i }),
+        onLeave: () => this.setState({ hoveredLinkedin: -1 }),
+      };
+    });
 
     return {
       s,
-      article,
-      blocks: blockItems,
-      readingTime,
-      shareLabel,
-      onShare: () => this._shareArticle(article.title),
-      relatedItems,
-      relatedEyebrow: "More Reading",
-      relatedHeading: "Related articles",
-      artRevealRef: revealRef("art"),
-      relRevealRef: revealRef("rel"),
-      author,
+      linkedinItems,
+      linkedinRevealRef: revealRef("linkedin"),
+      newsRevealRef: revealRef("news"),
       newsletterRevealRef: revealRef("newsletter"),
       collabRevealRef: revealRef("collab"),
       footerRevealRef: revealRef("footer"),
@@ -868,6 +885,21 @@ class Component extends DCLogic {
         return { mobileMenuOpen: open };
       }),
       showHeroCtaIcon: !isMobile,
+      filterTabs,
+      isSimpleTab, isBlogTab, isGalleryTab,
+      simpleItems, blogItems, mediaItems,
+      lightboxOpen,
+      lbIsVideo: !!(lbItem && lbItem.type === "video"),
+      lbIsImage: !!(lbItem && lbItem.type !== "video"),
+      lbImage: lbItem ? lbItem.img : "",
+      lbVideoSrc: lbItem && lbItem.youtubeId ? `https://www.youtube-nocookie.com/embed/${lbItem.youtubeId}?rel=0&autoplay=1` : "",
+      lbCaption: lbItem ? lbItem.caption : "",
+      lbDate: lbItem ? lbItem.date : "",
+      lbCounter: lightboxOpen ? `${lbIndex + 1} / ${mediaData.length}` : "",
+      closeLightbox: () => this.setState({ lightboxIndex: null }),
+      prevLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); step(-1); },
+      nextLightbox: (e) => { if (e && e.stopPropagation) e.stopPropagation(); step(1); },
+      stopPropagation: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
     };
   }
 }

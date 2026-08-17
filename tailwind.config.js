@@ -32,6 +32,10 @@ tailwind.config = {
       backgroundImage: {
         "gmp-gradient": "linear-gradient(139.949deg, rgb(37,117,187) 3.69%, rgb(41,37,96) 58.52%, rgb(178,33,38) 137.9%)",
         "gmp-gradient-footer": "linear-gradient(111.131deg, rgb(37,117,187) -0.79%, rgb(41,37,96) 62.7%, rgb(178,33,38) 154.63%)",
+        // LinkedIn brand blue, transparent at the top and solid at the bottom
+        // edge, so a white mark sitting in the corner always has contrast
+        // regardless of the photograph underneath.
+        "gmp-linkedin": "linear-gradient(to bottom, rgba(10,102,194,0) 0%, rgba(10,102,194,0.55) 55%, rgb(10,102,194) 100%)",
       },
       fontFamily: {
         gmp: ["Geist", "-apple-system", "BlinkMacSystemFont", '"Segoe UI"', "Roboto", '"Helvetica Neue"', "Arial", "sans-serif"],
