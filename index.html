@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./linkedin-feed.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="tailwind.config.js"></script>
+</head>
+<body>
+<div id="gmp-loader" aria-hidden="true"><div class="gmp-loader-box"><img src="assets2/logo-icon.svg" alt=""><span class="gmp-loader-ring"></span></div></div>
+<style>
+  html{scrollbar-gutter:stable}
+  /* Inline, so it is guaranteed to apply at first paint. Tailwind builds its
+     sheet at runtime; without this the app can paint unstyled for a frame and
+     then snap into the reveal state as those rules arrive. */
+  #dc-root{opacity:0}
+  html.gmp-ready #dc-root{opacity:1;transition:opacity .35s ease}
+  #gmp-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
+    background:#fff;opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s linear .45s}
+  #gmp-loader.is-done{opacity:0;visibility:hidden}
+  .gmp-loader-box{position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center}
+  .gmp-loader-box img{width:52px;height:52px;object-fit:contain;animation:gmp-loader-pulse 1.5s ease-in-out infinite}
+  .gmp-loader-ring{position:absolute;inset:0;border-radius:50%;
+    border:2px solid rgba(41,37,96,.12);border-top-color:rgb(178,33,38);
+    animation:gmp-loader-spin .9s linear infinite}
+  @keyframes gmp-loader-spin{to{transform:rotate(360deg)}}
+  @keyframes gmp-loader-pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    .gmp-loader-box img,.gmp-loader-ring{animation:none}
+    #gmp-loader{transition:none}
+  }
+</style>
+<script>
+(function(){
+  var el=document.getElementById("gmp-loader");
+  if(!el)return;
+  var done=false;
+  function hide(){ if(done)return; done=true;
+    document.documentElement.classList.add("gmp-ready");
+    el.classList.add("is-done");
+    window.__gmpReady=true; window.dispatchEvent(new Event("gmp:ready")); }
+  function show(){ done=false; el.classList.remove("is-done"); }
+  // Reveal the page once the app has painted, with a hard cap so a slow or
+  // failed script can never leave the loader stuck over the content.
+  function whenReady(){
+    var t=setInterval(function(){
+      var root=document.getElementById("dc-root");
+      if(!root||!root.firstElementChild)return;
+      // Tailwind builds its stylesheet at runtime, so the first paint can land
+      // before the reveal rules exist. Lifting then makes sections flash in fully
+      // visible and snap back to animate. Wait until opacity-0 actually applies.
+      var probe=root.querySelector('[class*="opacity-0"]');
+      if(probe&&getComputedStyle(probe).opacity!=="0")return;
+      clearInterval(t);setTimeout(hide,140);
+    },50);
+    setTimeout(function(){clearInterval(t);hide();},4000);
+  }
+  if(document.readyState==="complete"||document.readyState==="interactive")whenReady();
+  else document.addEventListener("DOMContentLoaded",whenReady);
+  // Bring it back on internal navigation so page-to-page moves feel continuous.
+  document.addEventListener("click",function(e){
+    var a=e.target&&e.target.closest?e.target.closest("a[href]"):null;
+    if(!a)return;
+    var href=a.getAttribute("href")||"";
+    if(!href||href.charAt(0)==="#"||/^(mailto:|tel:|javascript:)/i.test(href))return;
+    if(a.target&&a.target!=="_self")return;
+    if(a.host&&a.host!==location.host)return;
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
+    show();
+  },true);
+  // Restoring from bfcache must not show a frozen loader.
+  window.addEventListener("pageshow",function(e){if(e.persisted)hide();});
+})();
+</script>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <title>GMP Manufacturing Ltd — Home</title>
+  <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets2/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; }
+    .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    @keyframes gmp-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* Sector image transition. Written out by hand rather than composed from
+       Tailwind arbitrary values on purpose: the previous nine-strip version
+       built a different class string per strip per phase, so every one of them
+       had to be generated at runtime by the Play CDN. Whenever a rule was not
+       ready in time that strip skipped its transition and the picture froze
+       part-old part-new. These are plain static classes in the page's own
+       stylesheet, so they exist before the first paint and nothing can race. */
+    .gmp-curtain {
+      position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none;
+      clip-path: inset(0 100% 0 0); -webkit-clip-path: inset(0 100% 0 0);
+      transition: clip-path 900ms cubic-bezier(0.76, 0, 0.24, 1),
+                  -webkit-clip-path 900ms cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .gmp-curtain.is-open { clip-path: inset(0 0 0 0); -webkit-clip-path: inset(0 0 0 0); }
+    /* Closed states must snap, never animate back out. */
+    .gmp-curtain.is-reset { transition: none; }
+    .gmp-curtain-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    ::selection { background: rgb(37,117,187); color: #fff; }
+    ::-moz-selection { background: rgb(37,117,187); color: #fff; }
+  </style>
+</helmet>
+
+<div data-screen-label="GMP Mfd Home — Responsive" className="{{ s.root }}">
+
+  <!-- ============ TOPBAR (fixed, outside hero's stacking context) ============ -->
+  <div className="{{ s.heroTopbar }}">
+    <a href="index.html" className="{{ s.logoLink }}">
+      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.heroLogo }}">
+    </a>
+    <div className="{{ s.heroNav }}">
+      <a href="index.html" className="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
+      <a href="about.html" className="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="services.html" className="{{ s.navServicesStyle }}">Services</a>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.servicesMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Research &amp; Development</a>
+          </div>
+        </div>
+      </div>
+      <a href="cdmo.html" className="{{ s.navCdmoStyle }}" onMouseEnter="{{ s.navEnterCdmo }}" onMouseLeave="{{ s.navLeave }}">CDMO</a>
+      <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.sectorsMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Biocide</a>
+          </div>
+        </div>
+      </div>
+      <a href="contact.html" className="{{ s.navContactStyle }}" onMouseEnter="{{ s.navEnterContact }}" onMouseLeave="{{ s.navLeave }}">Contact Us</a>
+    </div>
+    <div className="{{ s.heroTopbarRightGroup }}">
+      <a href="contact.html" className="{{ s.heroCtaTopbarCtl.className }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+        <span className="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+        <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
+          <div className="{{ s.heroCtaTopbarIconStyle }}"></div>
+        </sc-if>
+      </a>
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBar1 }}"></div>
+        <div className="{{ s.hamburgerBar2 }}"></div>
+        <div className="{{ s.hamburgerBar3 }}"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <div data-screen-label="Hero" className="{{ s.heroWrap }}">
+    <img src="assets2/hero-bg.webp" alt="Molecule under a laboratory microscope" className="{{ s.heroBg }}">
+    <div className="{{ s.heroOverlay }}"></div>
+    <div className="{{ s.mobileNavOverlay }}">
+      <div className="{{ s.mobileNavDecor }}">
+        <div className="{{ s.mobileNavGlowA }}"></div>
+        <div className="{{ s.mobileNavGlowB }}"></div>
+        <svg viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.07)" className="{{ s.mobileNavMark }}">
+          <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+        </svg>
+      </div>
+      <div className="{{ s.mobileNavCloseRow }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
+        <div className="{{ s.mobileNavCloseBtn }}" onClick="{{ toggleMobileMenu }}" role="button" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12"></path>
+          </svg>
+        </div>
+      </div>
+      <div className="{{ s.mobileNavLinks }}">
+        <sc-for list="{{mobileNavItems}}" as="m" hint-placeholder-count="8">
+          <a href="{{ m.href }}" className="{{ m.linkStyle }}">
+            <span className="{{ m.numStyle }}">{{ m.n }}</span>
+            <span className="{{ m.labelStyle }}">{{ m.label }}</span>
+          </a>
+        </sc-for>
+      </div>
+      <div className="{{ s.mobileNavFoot }}">
+        <a href="contact.html" className="{{ s.mobileNavCta }}">Get A Quote</a>
+        <div className="{{ s.mobileNavMetaRow }}">
+          <a href="mailto:info@gmpgroup.co.uk" className="{{ s.mobileNavMeta }}">info@gmpgroup.co.uk</a>
+          <a href="tel:+441482707138" className="{{ s.mobileNavMeta }}">+44 (0) 1482 707 138</a>
+          <span className="{{ s.mobileNavMetaDim }}">Marfleet House, Valletta Street, Hull, HU9 5NP</span>
+        </div>
+      </div>
+    </div>
+    <div className="{{ s.heroContent }}">
+      <div className="{{ s.heroHeadlineWrap }}">
+        <div className="{{ s.heroTextBlock }}" ref="{{ heroTextBlockRef }}">
+          <div className="{{ s.heroHeadingGroup }}">
+            <span className="{{ s.heroHeadline }}" ref="{{ heroHeadlineRef }}">From Molecule
+to Market</span>
+            <span className="{{ s.heroSubtext }}">End-to-end pharmaceutical development and manufacturing, delivered from our own UK facilities.</span>
+            <div className="{{ s.heroInlineCtaCtl.className }}" onMouseEnter="{{ s.heroInlineCtaCtl.enter }}" onMouseLeave="{{ s.heroInlineCtaCtl.leave }}">
+              <span className="{{ s.heroInlineCtaText }}">View our Services</span>
+
+            </div>
+          </div>
+          <div className="{{ s.heroDivider }}"></div>
+          <div className="{{ s.heroStats }}">
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">Making in</span>
+              <span className="{{ s.heroStatLabel }}">United Kingdom</span>
+            </div>
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">Facilities</span>
+              <span className="{{ s.heroStatLabel }}">04</span>
+            </div>
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">Marketing in</span>
+              <span className="{{ s.heroStatLabel }}">30+ countries</span>
+            </div>
+            <div className="flex flex-col justify-center gap-[2px]">
+              <span className="{{ s.heroStatLabel }}">since</span>
+              <span className="{{ s.heroStatLabel }}">2012</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ ABOUT US ============ -->
+  <div data-screen-label="About Us" className="{{ s.aboutSectionPad }}">
+    <img src="assets2/brand-watermark.svg" alt="" className="{{ s.aboutWatermark }}">
+    <div className="{{ s.aboutWrap }}" ref="{{ aboutRevealRef }}">
+      <div className="{{ s.aboutImageCol }}">
+        <img src="assets/gmp-11.webp" alt="GMP Manufacturing formulation specialist at work" loading="lazy" className="{{ s.aboutImage }}">
+      </div>
+      <div className="{{ s.aboutContent }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Who We Are</span>
+          <span className="{{ s.h2 }}">About Us</span>
+        </div>
+        <div className="{{ s.aboutTextCol }}">
+          <span className="{{ s.aboutBody }}">Precept designs and builds robotics in the U.S. for manufacturing and energy — complete systems engineered in-house, from the parts up to the finished machine.</span>
+          <span className="{{ s.aboutBody }}">From formulation through to UK in-house manufacturing, we own every stage of the process — giving partners one accountable team and full traceability from molecule to market.</span>
+        </div>
+        <div className="{{ s.aboutBtnRow }}">
+          <a href="about.html" className="{{ s.pillLearnMore.className }}" onMouseEnter="{{ s.pillLearnMore.enter }}" onMouseLeave="{{ s.pillLearnMore.leave }}">
+            <span className="{{ s.pillDarkText }}">Learn More</span>
+          </a>
+          <a href="contact.html" className="{{ s.pillContactAbout.className }}" onMouseEnter="{{ s.pillContactAbout.enter }}" onMouseLeave="{{ s.pillContactAbout.leave }}">
+            <span className="{{ s.pillContactAboutText }}">Contact Us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ WHY GMP ============ -->
+  <div className="{{ s.sectionPad }}">
+    <div className="{{ s.whyWrap }}" ref="{{ whyRevealRef }}">
+      <div className="{{ s.whyHeadingCol }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Why GMP</span>
+          <span className="{{ s.h2 }}">A complete pathway, under one roof</span>
+        </div>
+        <a href="services.html" className="{{ s.pillOurServices.className }}" onMouseEnter="{{ s.pillOurServices.enter }}" onMouseLeave="{{ s.pillOurServices.leave }}">
+          <span className="{{ s.pillDarkText }}">Our Services</span>
+        </a>
+      </div>
+      <div className="{{ s.pathwayGrid }}">
+        <sc-for list="{{pathwayItems}}" as="item" hint-placeholder-count="6">
+          <div className="{{ item.containerStyle }}" onMouseEnter="{{ item.onEnter }}" onMouseLeave="{{ item.onLeave }}">
+            <div className="{{ item.sweepStyle }}"></div>
+            <span className="{{ item.numStyle }}">{{ item.n }}</span>
+            <span className="{{ item.headStyle }}">{{ item.h }}</span>
+            <span className="{{ item.descStyle }}">{{ item.d }}</span>
+            <svg className="{{ item.arrowStyle }}" width="48" height="16" viewBox="0 0 48 16" fill="none" stroke="{{ item.arrowColor }}" stroke-width="1.5">
+              <path d="M0 8h44M36 2l8 6-8 6"></path>
+            </svg>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ ACCOUNTABLE TEAM (hover panel row) ============ -->
+  <div data-screen-label="One accountable team" className="{{ s.sectionPad }}">
+    <div className="{{ s.teamWrap }}" ref="{{ teamRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">Our Strength</span>
+        <span className="{{ s.h2 }}">One accountable team</span>
+      </div>
+      <div className="{{ s.teamPanelRow }}" onMouseLeave="{{ onTeamRowLeave }}" data-comment-anchor="f4ff2b9192-div">
+        <sc-for list="{{teamItems}}" as="item" hint-placeholder-count="4">
+          <div className="{{ item.panelStyle }}" onMouseEnter="{{ item.onEnter }}">
+            <div className="{{ item.colorLayerStyle }}"></div>
+            <img src="{{ item.bgSrc }}" alt="" loading="lazy" className="{{ item.imageLayerStyle }}">
+            <div className="{{ item.overlayStyle }}"></div>
+            <div className="{{ item.textColStyle }}">
+              <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
+                <span className="{{ s.teamNum }}">{{ item.n }}</span>
+              </sc-if>
+              <span className="{{ item.headStyle }}">{{ item.h }}</span>
+              <sc-if value="{{ item.isActive }}" hint-placeholder-val="{{ true }}">
+                <span className="{{ item.bodyStyle }}">{{ item.d }}</span>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ INDUSTRIES / SECTORS (static, click to switch) ============ -->
+  <div data-screen-label="Industries" className="{{ s.sectionPad }}">
+    <div className="{{ s.industriesWrap }}" ref="{{ industriesRevealRef }}">
+      <div className="{{ s.industriesLeft }}" ref="{{ industriesLeftRef }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Industries</span>
+          <span className="{{ s.h2 }}">Regulated&nbsp; sectors we manufacture for</span>
+        </div>
+        <div className="{{ s.industriesList }}">
+          <sc-for list="{{sectorListItems}}" as="li" hint-placeholder-count="6">
+            <span className="{{ li.style }}" onClick="{{ li.onClick }}">{{ li.name }}</span>
+          </sc-for>
+        </div>
+        <sc-if value="{{ showSectorsPill }}" hint-placeholder-val="{{ true }}">
+          <a href="sectors.html" className="{{ s.pillSectors.className }}" onMouseEnter="{{ s.pillSectors.enter }}" onMouseLeave="{{ s.pillSectors.leave }}">
+            <span className="{{ s.pillDarkText }}">Sectors We Serve</span>
+          </a>
+        </sc-if>
+      </div>
+      <div className="{{ s.industriesRight }}">
+        <div className="{{ s.industriesImgWrap }}">
+          <sc-for list="{{sectorImages}}" as="img" hint-placeholder-count="6">
+            <img src="{{ img.src }}" alt="{{ img.name }} manufacturing" loading="lazy" className="{{ img.style }}">
+          </sc-for>
+          <div className="{{ curtain.style }}">
+            <img src="{{ curtain.src }}" alt="{{ curtain.name }} manufacturing" className="gmp-curtain-img">
+          </div>
+        </div>
+        <div className="{{ s.industriesCaption }}" onMouseEnter="{{ onCaptionEnter }}" onMouseLeave="{{ onCaptionLeave }}" onClick="{{ onCaptionClick }}">
+          <div className="{{ s.industriesCaptionSweep }}"></div>
+          <span className="{{ s.industriesCaptionTitle }}">{{ activeSector.name }}</span>
+          <span className="{{ s.industriesCaptionBody }}">{{ activeSector.sub }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ SUPPORT / TESTIMONIAL ============ -->
+  <div className="{{ s.sectionPad }}">
+    <div className="{{ s.supportWrap }}" ref="{{ supportRevealRef }}">
+      <div className="{{ s.supportVideoCol }}">
+        <div className="{{ s.supportVideoBox }}">
+          <img src="assets2/support-real.webp" alt="" loading="lazy" className="{{ s.supportBg }}">
+          <div className="{{ s.supportVideoTint }}"></div>
+          <div className="{{ s.supportOverlayTop }}">
+            <span className="{{ s.supportOverlayTitle }}">Support</span>
+            <span className="{{ s.supportOverlaySub }}">Unmatched</span>
+          </div>
+          <div className="{{ s.playBtn }}">
+            <svg width="100%" height="100%" viewBox="0 0 66.667 66.667" fill="rgb(255,255,255)"><path d="M 33.333 66.667 C 14.924 66.667 0 51.743 0 33.333 C 0 14.924 14.924 0 33.333 0 C 51.743 0 66.667 14.924 66.667 33.333 C 66.667 51.743 51.743 66.667 33.333 66.667 Z M 28.74 21.382 C 28.521 21.236 28.263 21.158 28 21.158 C 27.264 21.158 26.667 21.755 26.667 22.491 L 26.667 44.175 C 26.667 44.439 26.745 44.696 26.891 44.915 C 27.299 45.528 28.127 45.693 28.74 45.285 L 45.003 34.443 C 45.149 34.345 45.275 34.219 45.372 34.073 C 45.781 33.46 45.615 32.632 45.003 32.224 L 28.74 21.382 Z"></path></svg>
+          </div>
+          <div className="{{ s.supportOverlayAuthorRow }}">
+            <img src="assets2/support-avatar-real.webp" alt="Ronald Richards" loading="lazy" className="w-[48px] h-[48px] shrink-0 rounded-full object-cover">
+            <div className="flex flex-col grow">
+              <span className="{{ s.authorName }}">Ronald Richards</span>
+              <span className="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="{{ s.testimonialCard }}">
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.testimonialStat }}">100%</span>
+          <span className="{{ s.testimonialSub }}">Reliable Services.</span>
+          <div className="w-[24px] h-[24px]">
+            <div className="w-[17px] h-[12px] bg-[rgb(255,255,255)] [mask:url('assets2/format_quote.svg')_center/contain_no-repeat]"></div>
+          </div>
+          <span className="{{ s.testimonialBody }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mollis, ante nec pellentesque consequat, metus odio cursus eros, ut vestibulum sapien diam at mi. Maecenas blandit mattis accumsan.
+
+Sed varius hendrerit elit, non ornare neque porta vel. Morbi sed porttitor mi. Aliquam aliquet</span>
+        </div>
+        <div className="{{ s.supportAuthorRow }}">
+          <img src="assets2/testimonial-avatar-real.webp" alt="Ronald Richards" loading="lazy" className="w-[48px] h-[48px] shrink-0 rounded-full object-cover">
+          <div className="flex flex-col grow">
+            <span className="{{ s.authorName }}">Ronald Richards</span>
+            <span className="{{ s.authorRole }}">Director of Marketing, Acme LLC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ LOGO MARQUEE ============ -->
+    <div className="{{ s.marqueeOuter }}">
+      <div ref="{{marqueeRef}}" className="{{ s.marqueeInner }}">
+        <sc-for list="{{logos}}" as="logo" hint-placeholder-count="12">
+          <div className="{{ s.marqueeItem }}">
+            <img src="{{ logo }}" alt="Accreditation logo" className="{{ s.marqueeImg }}">
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div className="{{ s.sectionGapHalf }}"></div>
+
+    <div className="{{ s.newsCollabOuter }}">
+    <img src="assets2/brand-watermark.svg" alt="" className="{{ s.newsCollabWatermark }}">
+    <!-- ============ NEWS ROOM ============ -->
+    <div className="{{ s.newsHeadRow }}" ref="{{ newsRevealRef }}">
+      <div className="{{ s.sectionHeadingGroup }}">
+        <span className="{{ s.eyebrow }}">News &amp; Insights</span>
+        <span className="{{ s.h2 }}">News Room</span>
+      </div>
+      <a href="news.html" className="{{ s.pillMoreNews.className }}" onMouseEnter="{{ s.pillMoreNews.enter }}" onMouseLeave="{{ s.pillMoreNews.leave }}">
+        <span className="{{ s.pillDarkText }}">More News</span>
+      </a>
+    </div>
+
+    <div className="{{ s.newsGrid }}">
+      <sc-for list="{{newsItems}}" as="item" hint-placeholder-count="3">
+        <div className="{{ item.cardStyle }}" onMouseEnter="{{ item.enter }}" onMouseLeave="{{ item.leave }}">
+          <img src="{{ item.src }}" alt="{{ item.title }}" loading="lazy" className="{{ item.imgStyle }}">
+          <div className="{{ item.overlayStyle }}"></div>
+          <div className="{{ s.newsCardInner }}">
+            <span className="{{ s.newsCardTitle }}">{{ item.title }}</span>
+            <span className="{{ s.newsCardTag }}">{{ item.tag }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div className="{{ s.newsCarouselRow }}">
+      <div className="{{ s.arrowPrev.className }}" onMouseEnter="{{ s.arrowPrev.enter }}" onMouseLeave="{{ s.arrowPrev.leave }}">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="{{ s.arrowPrev.strokeColor }}" stroke-width="1.5"><path d="M7 1L1 7l6 6"></path></svg>
+      </div>
+      <div className="{{ s.carouselDots }}">
+        <div className="w-[8px] h-[8px] rounded-full bg-[rgb(17,17,17)]"></div>
+        <div className="w-[8px] h-[8px] rounded-full bg-[rgba(17,17,17,0.25)]"></div>
+        <div className="w-[8px] h-[8px] rounded-full bg-[rgba(17,17,17,0.25)]"></div>
+      </div>
+      <div className="{{ s.arrowNext.className }}" onMouseEnter="{{ s.arrowNext.enter }}" onMouseLeave="{{ s.arrowNext.leave }}">
+        <svg width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="{{ s.arrowNext.strokeColor }}" stroke-width="1.5"><path d="M1 1l6 6-6 6"></path></svg>
+      </div>
+    </div>
+
+    <div className="{{ s.sectionGap }}"></div>
+
+    <!-- ============ LATEST LINKEDIN POSTS ============ -->
+    <sc-if value="{{ showLinkedin }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="LinkedIn Posts" className="{{ s.liHeadRow }}" ref="{{ linkedinRevealRef }}">
+        <div className="{{ s.sectionHeadingGroup }}">
+          <span className="{{ s.eyebrow }}">Social</span>
+          <span className="{{ s.h2 }}">Our latest LinkedIn posts</span>
+        </div>
+        <a href="linkedin.html" className="{{ s.pillMoreLinkedin.className }}" onMouseEnter="{{ s.pillMoreLinkedin.enter }}" onMouseLeave="{{ s.pillMoreLinkedin.leave }}">
+          <span className="{{ s.pillDarkText }}">More from LinkedIn</span>
+        </a>
+      </div>
+
+      <div className="{{ s.liGrid }}">
+        <sc-for list="{{linkedinItems}}" as="post" hint-placeholder-count="4">
+          <a href="{{ post.url }}" target="_blank" rel="noopener noreferrer" className="{{ post.cardStyle }}" onMouseEnter="{{ post.onEnter }}" onMouseLeave="{{ post.onLeave }}">
+            <div className="{{ post.mediaStyle }}">
+              <img src="{{ post.image }}" alt="{{ post.imageAlt }}" loading="lazy" className="{{ post.imgStyle }}">
+              <div className="{{ s.liOverlay }}"></div>
+              <div className="{{ s.liMark }}"></div>
+            </div>
+            <span className="{{ post.headStyle }}">{{ post.heading }}</span>
+            <span className="{{ s.liDate }}">{{ post.dateLabel }}</span>
+            <span className="{{ s.liDesc }}">{{ post.description }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <div className="{{ s.sectionGapHalf }}"></div>
+
+    <!-- ============ COLLABORATE ============ -->
+    <div className="{{ s.collabOuter }}">
+      <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" className="{{ s.collabBg }}">
+      <canvas ref="{{ collabCanvasRef }}" className="{{ s.collabCanvas }}"></canvas>
+      <div className="{{ s.collabOverlay }}"></div>
+      <div className="{{ s.collabWrap }}">
+        <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Collaborate.</span>
+        <span className="{{ s.collabBody }}">Get in touch with us to know about how GMP can be a catalyst to your pharmaceutical business. We're all ears.</span>
+        <div className="{{ s.collabBtnRow }}">
+          <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+            <span className="{{ s.collabGetQuoteText }}">Get a Quote</span>
+            <div className="{{ s.collabGetQuoteIcon }}"></div>
+          </a>
+          <a href="contact.html" className="{{ s.pillContactUs.className }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+            <span className="{{ s.collabContactUsText }}">Contact us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
+    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" className="absolute -right-[20px] top-0 pointer-events-none">
+      <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+    </svg>
+
+    <div className="{{ s.footerTopRow }}">
+      <div className="{{ s.footerBrandCol }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerLogoImg }}">
+        <span className="{{ s.footerTagline }}">A full-service UK CDMO supporting partners in 30+ countries — development, manufacturing, packing and regulatory support, all under one roof.</span>
+        <div className="{{ s.footerSocialRow }}">
+          <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
+            <div className="{{ s.socialAIcon }}"></div>
+          </div>
+          <div className="{{ s.socialD.className }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div className="{{ s.socialDIcon }}"></div>
+          </div>
+          <div className="{{ s.socialC.className }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
+            <div className="{{ s.socialCIcon }}"></div>
+          </div>
+          <div className="{{ s.socialB.className }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="{{ s.socialB.iconColor }}" className="transition-colors duration-200"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="{{ s.footerColsGrid }}">
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Services</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="service-detail.html" className="{{ s.footerLink }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Research &amp; Development</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Sectors</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Biocide</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Pages</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="index.html" className="{{ s.footerLink }}">Home</a>
+            <a href="about.html" className="{{ s.footerLink }}">About Us</a>
+            <a href="cdmo.html" className="{{ s.footerLink }}">CDMO</a>
+            <a href="linkedin.html" className="{{ s.footerLink }}">LinkedIn Posts</a>
+            <a href="innovations.html" className="{{ s.footerLink }}">Innovations</a>
+            <a href="news.html" className="{{ s.footerLink }}">News &amp; Blogs</a>
+            <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
+            <a href="contact.html" className="{{ s.footerLink }}">Contact Us</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Contact</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Email</span>
+            <span className="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Call us</span>
+            <span className="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Address</span>
+            <span className="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="{{ s.footerBottomRow }}">
+      <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+      <a href="terms.html" className="{{ s.footerLegalLink }}">Terms &amp; Conditions</a>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;marqueeScroll&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Logo strip&quot; }
+}">
+// Must match the 900ms in the .gmp-curtain rule in the helmet stylesheet.
+const CURTAIN_MS = 900;
+
+class Component extends DCLogic {
+  state = { bp: "desktop", hoveredPathway: -1, hoveredNav: -1, hoveredKey: null, hoveredNews: -1, hoveredTeam: -1, hoveredCaption: false, linkedinPosts: [], hoveredLinkedin: -1, industryActiveIndex: 0, industrySelectedIndex: 0, curtainIndex: null, curtainPhase: "idle", pathwayOrigin: {}, mobileMenuOpen: false, revealed: {}, navScrolled: false, heroFontScale: 1, openNavMenu: null };
+
+  componentDidMount() {
+    // Seeded with the module's fallback immediately, then replaced if the feed
+    // request succeeds — see linkedin-feed.js for how this points at the admin
+    // backend once it exists.
+    if (window.gmpLinkedInFeed) {
+      window.gmpLinkedInFeed.load((posts) => {
+        if (!this._unmounted) this.setState({ linkedinPosts: posts });
+      }, 4);
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      this.setState((st) => ({ revealed: { ...st.revealed, hero: true } }));
+    }));
+    this._applyMarquee();
+    this._onResize = () => { this._updateBp(); this._measureIndustriesLeft(); this._measureHeroFit(); };
+    window.addEventListener("resize", this._onResize);
+    this._updateBp();
+    requestAnimationFrame(() => this._measureIndustriesLeft());
+    requestAnimationFrame(() => this._measureHeroFit());
+    const NAV_SCROLL_THRESHOLD = 120;
+    this._onScroll = () => {
+      const scrolled = window.scrollY > NAV_SCROLL_THRESHOLD;
+      if (scrolled !== this.state.navScrolled) this.setState({ navScrolled: scrolled });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  componentWillUnmount() {
+    this._unmounted = true;
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+    if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
+    if (this._industriesLeftRO) this._industriesLeftRO.disconnect();
+    if (this._curtainTimer) clearTimeout(this._curtainTimer);
+    if (this._curtainRaf) cancelAnimationFrame(this._curtainRaf);
+    this._teardownRipple();
+  }
+  _observeReveal(key, el) {
+    if (!el) return;
+    this._revealObservers = this._revealObservers || {};
+    if (this._revealObservers[key]) return;
+    const markShown = () => this.setState((st) => ({ revealed: { ...st.revealed, [key]: true } }));
+    // Anything already inside the first viewport plays its entrance on load —
+    // otherwise above-the-fold sections sit hidden until the user happens to scroll.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < (window.innerHeight || 0) * 0.92) {
+      // Two frames so the hidden state paints first and the change animates.
+      const start = () => requestAnimationFrame(() => requestAnimationFrame(markShown));
+      // Wait for the loading curtain, else the entrance plays behind it and the
+      // section is simply already in place once it lifts.
+      if (window.__gmpReady) start();
+      else {
+        window.addEventListener("gmp:ready", start, { once: true });
+        setTimeout(start, 4500);
+      }
+      this._revealObservers[key] = true;
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        markShown();
+        obs.disconnect();
+      }
+    }, { threshold: 0.01, rootMargin: "0px 0px -60px 0px" });
+    obs.observe(el);
+    this._revealObservers[key] = obs;
+  }
+  _goToIndustry(i) {
+    // The list highlight and the caption used to be driven off the same index
+    // as the image, which only advanced once the blinds wipe had finished. A
+    // click therefore produced no feedback at all for the length of the wipe,
+    // and a second click during that window produced none either — the section
+    // read as frozen. Selection is now its own piece of state so it responds on
+    // the click, and only the image transition takes time.
+    if (i === this.state.industrySelectedIndex) return;
+    this.setState({ industrySelectedIndex: i });
+    this._runCurtain(i);
+  }
+  _runCurtain(i) {
+    // One overlay, one transition, three phases. "armed" puts the incoming
+    // picture in the curtain and holds it closed with no transition; a frame
+    // later "open" sweeps it across; on completion the picture is handed to the
+    // base layer and the curtain snaps closed again, ready for the next one.
+    if (this._curtainTimer) clearTimeout(this._curtainTimer);
+    if (this._curtainRaf) cancelAnimationFrame(this._curtainRaf);
+    if (this.state.curtainPhase === "open") {
+      // Interrupting a sweep: hand the picture it was revealing to the base
+      // layer first, so re-arming does not flick back to the previous one.
+      const inFlight = this.state.curtainIndex != null ? this.state.curtainIndex : this.state.industryActiveIndex;
+      this.setState({ industryActiveIndex: inFlight });
+    }
+    this.setState({ curtainIndex: i, curtainPhase: "armed" });
+    // Two frames, so the closed state is painted before the open class lands —
+    // one frame is not always enough for the browser to register a start value.
+    this._curtainRaf = requestAnimationFrame(() => {
+      this._curtainRaf = requestAnimationFrame(() => {
+        this.setState({ curtainPhase: "open" });
+        this._curtainTimer = setTimeout(() => {
+          this.setState({ industryActiveIndex: i, curtainPhase: "idle", curtainIndex: null });
+        }, CURTAIN_MS + 60);
+      });
+    });
+  }
+  _measureIndustriesLeft() {
+    if (!this._industriesLeftEl) return;
+    const h = Math.round(this._industriesLeftEl.getBoundingClientRect().height);
+    if (h > 0 && Math.abs(h - (this.state.industriesLeftH || 0)) > 1) this.setState({ industriesLeftH: h });
+  }
+  _industriesLeftRefCb(el) {
+    this._industriesLeftEl = el;
+    if (el && !this._industriesLeftRO && typeof ResizeObserver !== "undefined") {
+      this._industriesLeftRO = new ResizeObserver(() => this._measureIndustriesLeft());
+      this._industriesLeftRO.observe(el);
+    }
+    if (el) this._measureIndustriesLeft();
+  }
+  componentDidUpdate() {
+    this._applyMarquee();
+  }
+  _maybeInitRipple() {
+    if (this._rippleInited || !this._collabCanvasEl || !this._collabImgEl) return;
+    this._rippleInited = true;
+    if (typeof IntersectionObserver !== "undefined") {
+      this._rippleVisible = false;
+      this._rippleVisibilityObserver = new IntersectionObserver((entries) => {
+        this._rippleVisible = entries[0].isIntersecting;
+        if (this._rippleVisible) this._startRippleLoop();
+      }, { threshold: 0.01 });
+      this._rippleVisibilityObserver.observe(this._collabCanvasEl);
+    } else {
+      this._rippleVisible = true;
+    }
+    this._initRipple();
+  }
+  _initRipple() {
+    const canvas = this._collabCanvasEl;
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!gl) return;
+    this._gl = gl;
+
+    const RIPPLE_AMPLITUDE = 0.075;
+    const RIPPLE_FREQUENCY = 28.0;
+    const CHROMATIC_ABERRATION = true;
+
+    const vertexSrc = "attribute vec2 a_position;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  v_uv = a_position * 0.5 + 0.5;\n" +
+      "  gl_Position = vec4(a_position, 0.0, 1.0);\n" +
+      "}";
+    const fragmentSrc = "precision mediump float;\n" +
+      "uniform sampler2D u_texture;\n" +
+      "uniform vec2 u_resolution;\n" +
+      "uniform vec2 u_imageResolution;\n" +
+      "uniform vec2 u_mouse;\n" +
+      "uniform float u_time;\n" +
+      "uniform float u_lastActive;\n" +
+      "uniform float u_velocity;\n" +
+      "uniform float u_amplitude;\n" +
+      "uniform float u_frequency;\n" +
+      "uniform float u_chromatic;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  vec2 uv = v_uv;\n" +
+      "  float sAspect = u_resolution.x / u_resolution.y;\n" +
+      "  float iAspect = u_imageResolution.x / u_imageResolution.y;\n" +
+      "  if (sAspect > iAspect) {\n" +
+      "    uv.y = (uv.y - 0.5) * (iAspect / sAspect) + 0.5;\n" +
+      "  } else {\n" +
+      "    uv.x = (uv.x - 0.5) * (sAspect / iAspect) + 0.5;\n" +
+      "  }\n" +
+      "  float dt = max(u_time - u_lastActive, 0.0);\n" +
+      "  float decay = clamp(1.0 - dt / 0.6, 0.0, 1.0);\n" +
+      "  decay = decay * decay;\n" +
+      "  float dist = distance(uv, u_mouse);\n" +
+      "  float strength = u_amplitude * decay * u_velocity;\n" +
+      "  float ripple = sin(dist * u_frequency - u_time * 6.0) * strength * exp(-dist * 6.0);\n" +
+      "  vec2 dir = (dist > 0.0001) ? normalize(uv - u_mouse) : vec2(0.0);\n" +
+      "  vec2 dUv = uv + dir * ripple;\n" +
+      "  vec3 color;\n" +
+      "  if (u_chromatic > 0.5) {\n" +
+      "    float aberration = abs(ripple) * 6.0;\n" +
+      "    float r = texture2D(u_texture, dUv + dir * aberration).r;\n" +
+      "    float g = texture2D(u_texture, dUv).g;\n" +
+      "    float b = texture2D(u_texture, dUv - dir * aberration).b;\n" +
+      "    color = vec3(r, g, b);\n" +
+      "  } else {\n" +
+      "    color = texture2D(u_texture, dUv).rgb;\n" +
+      "  }\n" +
+      "  gl_FragColor = vec4(color, 1.0);\n" +
+      "}";
+
+    const compile = (type, src) => {
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      return sh;
+    };
+    const program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, vertexSrc));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragmentSrc));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    gl.useProgram(program);
+    this._rippleProgram = program;
+
+    const posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const u = {};
+    ["u_resolution", "u_imageResolution", "u_mouse", "u_time", "u_lastActive", "u_velocity", "u_amplitude", "u_frequency", "u_chromatic", "u_texture"].forEach((name) => {
+      u[name] = gl.getUniformLocation(program, name);
+    });
+    this._rippleUniforms = u;
+
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([20, 20, 20, 255]));
+    this._rippleTexture = texture;
+    this._rippleImageRes = [1, 1];
+
+    const uploadImage = () => {
+      const img = this._collabImgEl;
+      if (!img || !img.naturalWidth) return;
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      try {
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        this._rippleImageRes = [img.naturalWidth, img.naturalHeight];
+        this._startRippleLoop();
+      } catch (e) {}
+    };
+    if (this._collabImgEl.complete && this._collabImgEl.naturalWidth) {
+      uploadImage();
+    } else {
+      this._collabImgEl.addEventListener("load", uploadImage, { once: true });
+    }
+
+    this._mouseTarget = [0.5, 0.5];
+    this._mouseSmooth = [0.5, 0.5];
+    this._velocitySmooth = 0;
+    this._rippleStart = performance.now();
+    this._lastActiveTime = -10;
+
+    this._onCollabMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      this._mouseTarget = [x, 1.0 - y];
+      this._lastActiveTime = (performance.now() - this._rippleStart) / 1000;
+      this._startRippleLoop();
+    };
+    const collabOuterEl = canvas.parentElement;
+    collabOuterEl.addEventListener("mousemove", this._onCollabMouseMove);
+    this._collabOuterEl = collabOuterEl;
+
+    this._resizeRippleCanvas = () => {
+      const rect = collabOuterEl.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    };
+    this._resizeRippleCanvas();
+    window.addEventListener("resize", this._resizeRippleCanvas);
+    if (typeof ResizeObserver !== "undefined") {
+      this._rippleResizeObserver = new ResizeObserver(() => this._resizeRippleCanvas());
+      this._rippleResizeObserver.observe(collabOuterEl);
+    }
+
+    this._renderRipple = () => {
+      this._rippleRAF = null;
+      const now = (performance.now() - this._rippleStart) / 1000;
+      const lerpFactor = 0.15;
+      const prevX = this._mouseSmooth[0], prevY = this._mouseSmooth[1];
+      this._mouseSmooth[0] += (this._mouseTarget[0] - this._mouseSmooth[0]) * lerpFactor;
+      this._mouseSmooth[1] += (this._mouseTarget[1] - this._mouseSmooth[1]) * lerpFactor;
+      const dx = this._mouseSmooth[0] - prevX;
+      const dy = this._mouseSmooth[1] - prevY;
+      const instVelocity = Math.min(Math.sqrt(dx * dx + dy * dy) * 60, 1.0);
+      this._velocitySmooth += (instVelocity - this._velocitySmooth) * 0.2;
+
+      gl.useProgram(this._rippleProgram);
+      gl.uniform2f(u.u_resolution, canvas.width, canvas.height);
+      gl.uniform2f(u.u_imageResolution, this._rippleImageRes[0], this._rippleImageRes[1]);
+      gl.uniform2f(u.u_mouse, this._mouseSmooth[0], this._mouseSmooth[1]);
+      gl.uniform1f(u.u_time, now);
+      gl.uniform1f(u.u_lastActive, this._lastActiveTime);
+      gl.uniform1f(u.u_velocity, this._velocitySmooth);
+      gl.uniform1f(u.u_amplitude, RIPPLE_AMPLITUDE);
+      gl.uniform1f(u.u_frequency, RIPPLE_FREQUENCY);
+      gl.uniform1f(u.u_chromatic, CHROMATIC_ABERRATION ? 1.0 : 0.0);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, this._rippleTexture);
+      gl.uniform1i(u.u_texture, 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      const stillDecaying = (now - this._lastActiveTime) < 0.6 || this._velocitySmooth > 0.001;
+      if (this._rippleVisible && stillDecaying) this._rippleRAF = requestAnimationFrame(this._renderRipple);
+    };
+    this._startRippleLoop();
+  }
+  _startRippleLoop() {
+    if (this._rippleRAF || !this._renderRipple || !this._rippleVisible) return;
+    this._rippleRAF = requestAnimationFrame(this._renderRipple);
+  }
+  _teardownRipple() {
+    if (this._rippleRAF) cancelAnimationFrame(this._rippleRAF);
+    this._rippleRAF = null;
+    if (this._collabOuterEl && this._onCollabMouseMove) this._collabOuterEl.removeEventListener("mousemove", this._onCollabMouseMove);
+    if (this._resizeRippleCanvas) window.removeEventListener("resize", this._resizeRippleCanvas);
+    if (this._rippleResizeObserver) this._rippleResizeObserver.disconnect();
+    if (this._rippleVisibilityObserver) this._rippleVisibilityObserver.disconnect();
+  }
+  _updateBp() {
+    const w = window.innerWidth;
+    const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
+    if (bp !== this.state.bp) this.setState({ bp });
+  }
+  _measureHeroFit() {
+    if (this.state.bp === "mobile") return;
+    if (!this._heroTextBlockEl || !this._heroHeadlineEl) return;
+    const maxH = window.innerHeight * 0.7;
+    const scale = this.state.heroFontScale || 1;
+    const totalH = this._heroTextBlockEl.getBoundingClientRect().height;
+    const headlineH = this._heroHeadlineEl.getBoundingClientRect().height;
+    if (totalH <= 0 || headlineH <= 0) return;
+    const fixedH = totalH - headlineH;
+    const headlineBaseH = headlineH / scale;
+    let nextScale = (maxH - fixedH) / headlineBaseH;
+    nextScale = Math.min(1, Math.max(0.55, nextScale));
+    if (Math.abs(nextScale - scale) > 0.01) this.setState({ heroFontScale: nextScale });
+  }
+  _applyMarquee() {
+    if (this._marqueeEl) {
+      this._marqueeEl.style.animationPlayState = (this.props.marqueeScroll ?? true) ? "running" : "paused";
+    }
+  }
+
+  renderVals() {
+    const bp = this.state.bp;
+    const isMobile = bp === "mobile";
+    const isTablet = bp === "tablet";
+    const isDesktop = bp === "desktop";
+    const pick = (m, t, d) => (isMobile ? m : isTablet ? t : d);
+
+    const red = "rgb(178,33,38)";
+    const purple = "rgb(45,38,93)";
+    const dark = "rgb(51,51,51)";
+    const near = "rgb(17,17,17)";
+    const gradient = "linear-gradient(139.949deg,rgb(37,117,187)_3.69%,rgb(41,37,96)_58.52%,rgb(178,33,38)_137.9%)";
+    const footerGradient = "linear-gradient(111.131deg,rgb(37,117,187)_-0.79%,rgb(41,37,96)_62.7%,rgb(178,33,38)_154.63%)";
+    const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
+    const softShadowTw = "shadow-[0_16px_32px_-14px_rgba(0,0,0,0.3)]";
+    const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
+    // The outlined button is mostly white, so the primary's red glow would spread
+    // out from under it and read as a halo rather than a lift. Neutral and lighter.
+    const secondaryShadowTw = "shadow-[0_10px_20px_-10px_rgba(17,17,17,0.18)]";
+
+    const gutter = pick(20, 40, 64);
+    const s = {};
+
+    // ---------- LOAD-IN REVEAL ----------
+    const revealed = this.state.revealed || {};
+    const reveal = (key, opts = {}) => {
+      const { distance = 44, duration = 900 } = opts;
+      const shown = !!revealed[key];
+      return (shown ? "opacity-100 translate-y-0 scale-100 " : `opacity-0 translate-y-[${distance}px] scale-[0.97] `) +
+        `transition-[opacity,transform] duration-[${duration}ms] ease-[cubic-bezier(0.16,1,0.3,1)]`;
+    };
+    const revealRef = (key) => (el) => this._observeReveal(key, el);
+
+    s.root = "gmp-font relative w-full bg-white flex flex-col overflow-x-clip overflow-y-clip";
+
+    s.sectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px]";
+    s.aboutSectionPad = "relative z-[1] box-border pl-0 py-0 pr-[20px] md:pr-[40px] xl:pr-[64px]";
+    s.sectionGap = "w-full h-[38px] md:h-[66px] xl:h-[96px] shrink-0";
+    s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
+
+    s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
+    // ---------- TYPE SCALE (canonical) ----------
+    // s.h2 above is the section heading. These are the tiers below it. Every page
+    // draws from the same four so headings and body copy match across the site.
+    // The OnDark variants exist because arbitrary Tailwind colour classes cannot
+    // be reliably overridden by appending a second one.
+    const h3Base = `font-semibold ${pick("text-[22px]", "text-[26px]", "text-[30px]")} leading-[1.25] tracking-[-0.6px]`;
+    s.h3 = h3Base + ` text-[${near}]`;
+    s.h3OnDark = h3Base + " text-white";
+    const h4Base = `font-semibold ${pick("text-[18px]", "text-[19px]", "text-[20px]")} leading-[1.3]`;
+    s.h4 = h4Base + ` text-[${near}]`;
+    s.h4OnDark = h4Base + " text-white";
+    const bodyBase = `font-normal ${pick("text-[16px]", "text-[17px]", "text-[17px]")} leading-[28px]`;
+    s.bodyText = bodyBase + " text-[rgba(51,51,51,0.82)]";
+    s.bodyTextOnDark = bodyBase + " text-[rgba(255,255,255,0.8)]";
+    const bodySmallBase = "font-normal text-[15px] leading-[23px]";
+    s.bodySmall = bodySmallBase + " text-[rgba(51,51,51,0.72)]";
+    s.bodySmallOnDark = bodySmallBase + " text-[rgba(255,255,255,0.75)]";
+    s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
+    s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
+
+    s.pillDark = "rounded-[32px] inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline";
+    s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
+
+    // ---------- GENERIC HOVER HELPERS ----------
+    const makePill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: s.pillDark + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-[${purple}] ${noShadowTw} translate-y-0`),
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeHeroCta = (key, baseClass) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: baseClass + " no-underline transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-white ${noShadowTw} translate-y-0`),
+        textColor: hovered ? "#fff" : near,
+        iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeArrow = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: s.carouselArrowBase + " transition-[background,box-shadow] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw}` : `bg-[rgba(0,0,0,0.05)] ${noShadowTw}`),
+        strokeColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+
+    // ---------- HERO ----------
+    s.heroWrap = "relative w-full " + (isMobile ? "h-auto" : "h-screen") + " min-h-screen flex flex-col box-border overflow-hidden";
+    s.heroBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1800ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.hero ? "scale-100" : "scale-[1.05]");
+    s.heroOverlay = "absolute inset-0 bg-[rgba(0,0,0,0.4)] pointer-events-none";
+    s.heroContent = "relative z-[1] flex flex-col grow box-border pt-[20px] px-[20px] pb-[32px] md:pt-[32px] md:px-[40px] md:pb-[48px] xl:pt-[40px] xl:px-[64px] xl:pb-[64px] gap-[40px] md:gap-[56px] xl:gap-[72px]";
+    const navScrolled = this.state.navScrolled;
+    s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
+      (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
+    s.logoLink = "flex shrink-0";
+    s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
+    s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
+    s.heroNav = "hidden nav:flex flex-row gap-[26px] xl:gap-[32px] items-center";
+    s.heroTopbarRightGroup = "flex flex-row items-center gap-[10px] md:gap-[16px] shrink-0";
+    const menuOpen = this.state.mobileMenuOpen;
+    s.hamburgerBtn = "flex nav:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
+    const barBase = "w-[20px] h-[2px] rounded-[2px] [transition:transform_0.25s_ease,opacity_0.2s_ease,background_0.3s_ease] " + (navScrolled ? `bg-[${near}]` : "bg-white");
+    const barBaseOnDark = "w-[20px] h-[2px] rounded-[2px] bg-white [transition:transform_0.25s_ease,opacity_0.2s_ease]";
+    s.hamburgerBar1 = barBase;
+    s.hamburgerBar2 = barBase;
+    s.hamburgerBar3 = barBase;
+    // ---------- MOBILE NAV (full-screen brand panel) ----------
+    s.mobileNavOverlay = "fixed inset-0 bg-gmp-gradient flex flex-col box-border z-[100] overflow-y-auto overflow-x-hidden " +
+      "py-[20px] px-[20px] pb-[24px] md:py-[24px] md:px-[40px] md:pb-[40px] " +
+      "[transition:opacity_0.4s_cubic-bezier(0.16,1,0.3,1),transform_0.4s_cubic-bezier(0.16,1,0.3,1)] " +
+      // w-[100vw] only while open: html keeps a stable scrollbar gutter, and an
+      // inset-0 panel stops short of it, leaving a pale strip down the right edge.
+      // 100vw spans the gutter too; body scroll is locked so it cannot cause scroll.
+      (menuOpen ? "opacity-100 pointer-events-auto scale-100 w-[100vw]" : "opacity-0 pointer-events-none scale-[1.03]");
+    // Two soft brand glows plus the GMP mark as a watermark give the panel depth
+    // without needing artwork. They live in their own clipped layer: the panel is
+    // the scroll container, and decorations bleeding past its edges would otherwise
+    // add to its scroll height.
+    s.mobileNavDecor = "pointer-events-none absolute inset-0 overflow-hidden z-0";
+    s.mobileNavGlowA = "absolute -top-[90px] -right-[70px] w-[300px] h-[300px] rounded-full bg-[rgba(37,117,187,0.5)] blur-[90px]";
+    s.mobileNavGlowB = "absolute -bottom-[110px] -left-[90px] w-[340px] h-[340px] rounded-full bg-[rgba(178,33,38,0.45)] blur-[100px]";
+    s.mobileNavMark = "absolute -right-[48px] bottom-[96px] w-[250px] h-auto";
+    s.mobileNavCloseRow = "relative z-[2] flex flex-row items-center justify-between shrink-0";
+    s.mobileNavLogo = "w-[172px] md:w-[210px] h-auto";
+    // A plain X reads as "close" more immediately than two rotated bars.
+    s.mobileNavCloseBtn = "flex nav:hidden items-center justify-center w-[40px] h-[40px] -mr-[6px] shrink-0 cursor-pointer text-white z-20 transition-opacity duration-200 hover:opacity-70";
+    s.mobileNavLinks = "relative z-[2] flex flex-col grow mt-[22px] md:mt-[40px]";
+    s.mobileNavFoot = "relative z-[2] flex flex-col gap-[14px] items-start shrink-0 pt-[20px] mt-[16px] border-t border-solid border-[rgba(255,255,255,0.18)]";
+    s.mobileNavCta = `rounded-[32px] no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] bg-white text-[${near}] py-[13px] px-[26px] transition-[background,color] duration-200 ease-in-out hover:bg-[${red}] hover:text-white`;
+    s.mobileNavMetaRow = "flex flex-col gap-[4px]";
+    s.mobileNavMeta = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.7)] no-underline";
+    s.mobileNavMetaDim = "font-normal text-[13px] leading-[20px] text-[rgba(255,255,255,0.45)]";
+    const CURRENT_PAGE = "home";
+    const MOBILE_NAV = [
+      { label: "Home", href: "index.html", key: "home" },
+      { label: "About Us", href: "about.html", key: "about" },
+      { label: "Services", href: "services.html", key: "services" },
+      { label: "CDMO", href: "cdmo.html", key: "cdmo" },
+      { label: "Sectors", href: "sectors.html", key: "sectors" },
+      { label: "Innovations", href: "innovations.html", key: "innovations" },
+      { label: "News & Blogs", href: "news.html", key: "news" },
+      { label: "Careers", href: "careers.html", key: "careers" },
+      { label: "Contact Us", href: "contact.html", key: "contact" },
+    ];
+    const mobileNavItems = MOBILE_NAV.map((m, i) => {
+      const on = m.key === CURRENT_PAGE;
+      return {
+        label: m.label, href: m.href, n: String(i + 1).padStart(2, "0"),
+        // Rows slide in one after another once the panel opens, and reset on close
+        // so the stagger replays every time rather than only on first open.
+        linkStyle: "flex flex-row items-baseline gap-[14px] no-underline py-[10px] md:py-[14px] border-b border-solid " +
+          (on ? `border-[${red}]` : "border-[rgba(255,255,255,0.14)]") +
+          // Longhand, not the `transition` shorthand: the shorthand resets
+          // transition-delay and would flatten the stagger below.
+          " transition-[opacity,transform] duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
+          (menuOpen ? `opacity-100 translate-x-0 delay-[${90 + i * 55}ms]` : "opacity-0 translate-x-[26px] delay-0"),
+        numStyle: "font-medium text-[12px] leading-[16px] tabular-nums shrink-0 w-[24px] " +
+          (on ? "text-white" : "text-[rgba(255,255,255,0.35)]"),
+        labelStyle: `font-medium ${pick("text-[21px]", "text-[27px]", "text-[27px]")} leading-[1.25] tracking-[-0.6px] ` +
+          // Non-current items step back so the current page reads clearly,
+          // matching how the desktop nav dims its inactive links.
+          (on ? "text-white" : "text-[rgba(255,255,255,0.6)]"),
+      };
+    });
+    const navLinkStyle = (i, key) => {
+      const hovered = this.state.hoveredNav === i;
+      const active = key === CURRENT_PAGE;
+      // Active and hover must read differently. The current page keeps a persistent
+      // red rule under otherwise-normal text; hover tints the text itself and shows
+      // a lighter rule. Hovering the current page simply combines the two.
+      const color = navScrolled ? (hovered ? red : dark) : "#fff";
+      // Once a page is current, step the other links back so the active one
+      // stands out. CURRENT_PAGE is empty on pages with no matching nav item,
+      // and then nothing is dimmed.
+      const dim = CURRENT_PAGE && !active && !hovered;
+      const opacity = navScrolled ? (dim ? 0.55 : 1) : (hovered || active ? 1 : (dim ? 0.6 : 0.85));
+      const borderColor = navScrolled
+        ? (active ? red : hovered ? "rgba(178,33,38,0.4)" : "transparent")
+        : (active ? "rgba(255,255,255,0.9)" : hovered ? "rgba(255,255,255,0.45)" : "transparent");
+      return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
+    };
+    s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
+    s.navHomeStyle = navLinkStyle(0, "home");
+    s.navAboutStyle = navLinkStyle(1, "about");
+    s.navServicesStyle = navLinkStyle(2, "services");
+    s.navCdmoStyle = navLinkStyle(3, "cdmo");
+    s.navInnovationsStyle = navLinkStyle(4, "innovations");
+    s.navSectorsStyle = navLinkStyle(5, "sectors");
+    s.navContactStyle = navLinkStyle(6, "contact");
+    const navEnter = (i, menu) => () => this.setState({ hoveredNav: i, openNavMenu: menu || null });
+    s.navLeave = () => this.setState({ hoveredNav: -1, openNavMenu: null });
+    s.navEnterHome = navEnter(0);
+    s.navEnterAbout = navEnter(1);
+    s.navEnterServices = navEnter(2, "services");
+    s.navEnterCdmo = navEnter(3);
+    s.navEnterInnovations = navEnter(4);
+    s.navEnterSectors = navEnter(5, "sectors");
+    s.navEnterContact = navEnter(6);
+    const openNavMenu = this.state.openNavMenu;
+    const navMenuPanelBase = "absolute top-full left-0 pt-[12px] z-[60] [transition:opacity_0.2s_ease,transform_0.2s_ease]";
+    s.servicesMenuPanel = navMenuPanelBase + " " + (openNavMenu === "services" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.sectorsMenuPanel = navMenuPanelBase + " " + (openNavMenu === "sectors" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.navMenuInner = `bg-white shadow-[0_16px_44px_rgba(17,17,17,0.18)] py-[10px] min-w-[300px] flex flex-col gap-[2px] border-t-[3px] border-solid border-[${red}]`;
+    s.navMenuItem = `block py-[11px] px-[20px] text-[14px] font-medium text-[${near}] no-underline whitespace-nowrap hover:bg-[rgb(245,243,240)] hover:text-[${red}] transition-colors duration-150`;
+    const heroCtaBase = "rounded-[32px] flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
+    s.heroCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaCtl.textColor}]`;
+    const heroCtaTopbarBase = "rounded-[32px] flex flex-row gap-[6px] py-[8px] px-[14px] md:py-[9px] md:px-[16px] justify-center items-center box-border cursor-pointer shrink-0";
+    const topbarCtaHovered = this.state.hoveredKey === "heroCtaTopbar";
+    s.heroCtaTopbarCtl = {
+      className: heroCtaTopbarBase + " no-underline transition-[background,box-shadow,transform] duration-300 ease-in-out " +
+        (topbarCtaHovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : (navScrolled ? `bg-[${purple}] ${noShadowTw} translate-y-0` : `bg-white ${noShadowTw} translate-y-0`)),
+      textColor: topbarCtaHovered || navScrolled ? "#fff" : near,
+      iconColor: topbarCtaHovered || navScrolled ? "rgb(255,255,255)" : "rgb(17,17,17)",
+      enter: () => this.setState({ hoveredKey: "heroCtaTopbar" }),
+      leave: () => this.setState({ hoveredKey: null }),
+    };
+    s.heroCtaTopbarText = `font-semibold text-[${isMobile ? 13 : 14}px] leading-[${isMobile ? 16 : 18}px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaTopbarCtl.textColor}]`;
+    s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+
+    s.heroHeadlineWrap = "flex flex-col grow justify-end " + reveal("hero", { distance: 26, duration: 1000 });
+    s.heroTextBlock = "flex flex-col gap-[24px] md:gap-[32px] xl:gap-[40px]";
+    s.heroHeadingGroup = "flex flex-col items-start gap-[16px] md:gap-[20px] xl:gap-[24px]";
+    const heroScale = isMobile ? 1 : (this.state.heroFontScale || 1);
+    const heroFontSize = pick(
+      "48px",
+      "calc(clamp(44px,min(9vw,12vh),88px)*" + heroScale + ")",
+      "calc(clamp(56px,min(7.2vw,11vh),104px)*" + heroScale + ")"
+    );
+    s.heroHeadline = `font-medium text-left text-white whitespace-pre-line text-[${heroFontSize}] leading-[${pick("50px", "1.05", "1.05")}] tracking-[${pick("-1.5px", "-0.04em", "-0.048em")}]`;
+    s.heroSubtext = "font-normal text-[16px] md:text-[17px] xl:text-[18px] leading-[26px] text-[rgba(255,255,255,0.85)] text-left max-w-[480px]";
+    const heroInlineCtaBase = "rounded-[32px] inline-flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.heroInlineCtaCtl = makeHeroCta("heroInlineCta", heroInlineCtaBase);
+    s.heroInlineCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroInlineCtaCtl.textColor}]`;
+    s.heroInlineCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroInlineCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroDivider = "h-[1px] bg-white opacity-90";
+    s.heroStats = "grid " + pick("grid-cols-2", "grid-cols-4", "grid-cols-4") + " " + pick("gap-y-[16px]", "gap-y-0", "gap-y-0") + " gap-x-[16px] md:gap-x-[20px] xl:gap-x-[32px]";
+    s.heroStatLabel = "font-medium text-[15px] md:text-[16px] xl:text-[17px] leading-[22px] text-white";
+
+    // ---------- ABOUT ----------
+    s.aboutWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start " + (isDesktop ? "items-stretch" : "items-start") + " max-w-[1600px] ml-0 " + reveal("about");
+    s.aboutImageCol = "relative " + (isDesktop ? "w-[48%]" : `w-[calc(100%+${gutter}px)]`) + " max-w-none aspect-[4/3] shrink-0 overflow-hidden";
+    s.aboutImage = "absolute inset-0 w-full h-full object-cover";
+    s.aboutContent = "flex flex-col gap-[28px] items-start justify-center grow " + (isDesktop ? "w-auto" : "w-full") + " box-border " + (isDesktop ? "pl-0" : `pl-[${gutter}px]`);
+    s.aboutWatermark = `absolute top-[${pick(-40, -60, -90)}px] ${pick("right-[-28%]", "right-[-10%]", "right-[-4%]")} ${pick("h-[34vh]", "h-[52vh]", "h-[68vh]")} w-auto pointer-events-none z-0 opacity-100`;
+    s.aboutTextCol = "flex flex-col gap-[16px] items-start self-stretch";
+    s.aboutLabel = `font-semibold text-[18px] leading-[24px] tracking-[-0.7px] text-[${dark}]`;
+    s.aboutBody = `font-normal text-[16px] leading-[24px] text-[${dark}]`;
+    s.pillLearnMore = makePill("learnMore");
+    const makeSecondaryPill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `border-[${red}] ${secondaryShadowTw} -translate-y-[2px]` : `border-[${purple}] ${noShadowTw} translate-y-0`),
+        textColor: hovered ? red : purple,
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    s.aboutBtnRow = "flex flex-row gap-[12px] flex-wrap items-center";
+    s.pillContactAbout = makeSecondaryPill("contactAbout");
+    s.pillContactAboutText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactAbout.textColor}]`;
+
+    // ---------- WHY GMP / PATHWAY ----------
+    s.whyWrap = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] items-start max-w-[1600px] mx-auto " + reveal("why");
+    s.whyHeadingCol = "flex flex-col gap-[24px] items-start " + (isDesktop ? "w-[380px]" : "w-full") + " shrink-0";
+    s.pathwayGrid = "grow w-full grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " " + pick("auto-rows-auto", "auto-rows-[minmax(240px,auto)]", "auto-rows-[minmax(260px,auto)]") + " gap-[20px] md:gap-[24px] xl:gap-[28px]";
+    s.pillOurServices = makePill("ourServices");
+
+    // ---------- TEAM BAND (hover panel row) ----------
+    s.teamWrap = "flex flex-col gap-[28px] md:gap-[36px] xl:gap-[44px] max-w-[1600px] mx-auto w-full " + reveal("team");
+    s.teamPanelRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[12px] md:gap-[14px] xl:gap-[16px] w-full " + (isMobile ? "h-auto" : pick("h-[336px]", "h-[416px]", "h-[496px]"));
+    s.teamBg = "absolute inset-0 w-full h-full";
+    const teamColors = ["#2D265D", "#423362", "#842339", "#B22126"];
+    s.teamNum = "font-extralight text-[24px] md:text-[28px] xl:text-[32px] leading-none tracking-[-1px] text-[rgba(255,255,255,0.6)]";
+    s.teamBodyBase = "font-normal text-[15px] leading-[22px] text-[rgba(255,255,255,0.9)]";
+    // ---------- INDUSTRIES (single block, rotates on scroll) ----------
+    s.industriesWrap = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[16px] md:gap-[48px] xl:gap-[80px] max-w-[1600px] mx-auto items-start w-full " + (isMobile ? "h-full" : "h-auto") + " min-h-0 box-border " + reveal("industries");
+    s.industriesLeft = "flex flex-col gap-[10px] md:gap-[40px] items-start " + (isMobile ? "w-full" : pick("w-0", "w-[280px]", "w-[380px]")) + " shrink-0";
+    s.industriesList = "flex flex-col gap-[5px] md:gap-[25px] xl:gap-[31px] items-start";
+    // Three states have to stay legible at a glance: resting, hovered, and the
+    // sector currently on screen. Hover therefore comes up to full strength and
+    // steps sideways but stays dark — red is what marks the selection, and if
+    // hover took it too the two would be separated by weight alone. The sideways
+    // step also matches the caption arrow and the service cards rather than
+    // borrowing the buttons' vertical lift, which would break the list baseline.
+    // Font weight is kept out of the shared base: font-medium and font-bold have
+    // equal specificity, so having both on one element would leave the winner to
+    // stylesheet order rather than intent.
+    const industryItemBase = "text-[15px] md:text-[18px] leading-[20px] md:leading-[24px] tracking-[-0.7px] cursor-pointer transition-[opacity,color,transform] duration-300 ease-in-out";
+    s.industryItemDim = `${industryItemBase} font-medium opacity-30 text-[${dark}] translate-x-0 hover:opacity-100 hover:translate-x-[6px]`;
+    // No hover treatment on the active one — clicking it is a no-op, so it
+    // should not offer to be clicked.
+    s.industryItemActive = `${industryItemBase} font-bold text-[${red}] translate-x-0`;
+    s.industriesRight = "relative grow w-full " + (isMobile ? "h-full" : "h-auto") + " min-h-0 flex flex-col items-center";
+    const industriesFitHeight = this.state.industriesLeftH || pick(220, 300, 360);
+    s.industriesImgWrap = "relative z-0 [isolation:isolate] w-full overflow-hidden " +
+      (isMobile ? "aspect-[4/3] grow min-h-[150px]" : `h-[${industriesFitHeight}px]`);
+    s.industriesCaption = "bg-[rgb(245,245,245)] flex flex-col items-start box-border relative z-[1] shrink-0 overflow-hidden cursor-pointer " +
+      pick("py-[10px] px-[14px]", "p-[28px]", "p-[32px]") + " " + pick("gap-[2px]", "gap-[4px]", "gap-[4px]") + " " +
+      (isMobile ? "mt-0" : "-mt-[60px]") + " " + (isMobile ? "w-full" : "w-[92%]") + " max-w-[1300px]";
+    s.industriesCaptionSweep = `absolute inset-0 bg-[${gradient}] [transform-origin:left_center] transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] z-0 ` + (this.state.hoveredCaption ? "scale-x-100" : "scale-x-0");
+    s.industriesCaptionTitle = "relative z-[1] font-medium text-[16px] md:text-[28px] xl:text-[32px] leading-[20px] md:leading-[40px] transition-colors duration-300 ease-in-out " + (this.state.hoveredCaption ? "text-white" : `text-[${dark}]`);
+    s.industriesCaptionBody = "relative z-[1] font-normal text-[13px] md:text-[16px] leading-[18px] md:leading-[24px] transition-colors duration-300 ease-in-out " + (this.state.hoveredCaption ? "text-[rgba(255,255,255,0.9)]" : `text-[${dark}]`);
+    s.pillSectors = makePill("sectors");
+
+    // ---------- SUPPORT / TESTIMONIAL ----------
+    const supportBoxHeight = pick(360, 460, 580);
+    s.supportWrap = "flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] xl:gap-[32px] md:gap-[40px] max-w-[1600px] mx-auto items-stretch " + reveal("support");
+    s.supportVideoCol = "flex flex-col grow w-full";
+    s.supportVideoBox = `relative w-full h-[${supportBoxHeight}px] overflow-hidden`;
+    s.supportBg = "absolute inset-0 w-full h-full object-cover";
+    s.supportVideoTint = "absolute inset-0 bg-[rgba(0,0,0,0.4)] pointer-events-none";
+    s.playBtn = `absolute left-1/2 top-1/2 [transform:translate(-50%,-50%)] ${pick("w-[56px]", "w-[68px]", "w-[80px]")} ${pick("h-[56px]", "h-[68px]", "h-[80px]")} cursor-pointer z-[2]`;
+    s.supportOverlayTop = `absolute ${pick("left-[20px]", "left-[28px]", "left-[40px]")} ${pick("top-[20px]", "top-[28px]", "top-[40px]")} z-[2] flex flex-col gap-[4px]`;
+    s.supportOverlayTitle = "font-semibold text-[28px] md:text-[36px] xl:text-[44px] leading-[1.1] text-white";
+    s.supportOverlaySub = "font-semibold text-[16px] md:text-[18px] xl:text-[20px] leading-[1.3] text-white";
+    s.supportOverlayAuthorRow = `absolute ${pick("left-[20px]", "left-[28px]", "left-[40px]")} ${pick("bottom-[20px]", "bottom-[28px]", "bottom-[40px]")} z-[2] flex flex-row gap-[12px] items-center`;
+    s.supportAuthorRow = "flex flex-row gap-[16px] items-center";
+    s.authorName = "font-semibold text-[16px] md:text-[18px] xl:text-[20px] leading-[1.2] text-white";
+    s.authorRole = "font-normal text-[13px] md:text-[14px] xl:text-[15px] leading-[1.3] text-[rgba(255,255,255,0.85)]";
+
+    s.testimonialCard = `bg-[${gradient}] ` + (isDesktop ? `h-[${supportBoxHeight}px]` : "h-auto") + " flex flex-col " +
+      pick("p-[32px]", "p-[40px]", "p-[48px]") + " justify-between gap-[32px] items-start box-border " + (isDesktop ? "w-[480px]" : "w-full") + " shrink-0";
+    s.testimonialStat = "font-semibold text-[40px] leading-[44px] text-white";
+    s.testimonialSub = "font-semibold text-[22px] leading-[28px] text-white";
+    s.testimonialBody = "font-normal text-[16px] leading-[24px] text-white whitespace-pre-line";
+
+    // ---------- MARQUEE ----------
+    const supportGap = pick(32, 40, 32);
+    s.marqueeOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden rounded-none bg-[rgb(245,245,245)] flex items-center box-border my-[${supportGap}px] ` +
+      pick("py-[28px]", "py-[36px]", "py-[48px]");
+    // The keyframe translates the track by -50%, so half of it must be exactly
+    // one whole cycle. A flex `gap` breaks that: N items carry only N-1 gaps, so
+    // half the width lands half a gap short and the loop visibly jumps. Carrying
+    // the spacing as a right margin on every item makes the pitch uniform.
+    s.marqueeInner = "flex flex-row items-center w-max [animation:gmp-marquee_100s_linear_infinite]";
+    s.marqueeItem = `flex items-center justify-center shrink-0 mr-[24px] ${pick("w-[120px]", "w-[150px]", "w-[170px]")} ${pick("h-[44px]", "h-[56px]", "h-[64px]")}`;
+    s.marqueeImg = "max-w-full max-h-full object-contain";
+
+    // ---------- NEWS ----------
+    s.newsHeadRow = "flex " + (isMobile ? "flex-col" : "flex-row") + " gap-[24px] " + (isMobile ? "items-start" : "items-end") + " justify-between w-full " + reveal("news");
+    s.newsGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-3") + " gap-[20px] md:gap-[24px] xl:gap-[32px] w-full " + pick("mt-[32px]", "mt-[40px]", "mt-[48px]");
+    s.newsCarouselRow = "flex flex-row gap-[16px] items-center justify-center " + pick("mt-[28px]", "mt-[32px]", "mt-[40px]");
+    s.carouselArrow = "w-[48px] h-[48px] rounded-[100px] bg-[rgba(0,0,0,0.05)] flex justify-center items-center cursor-pointer shrink-0";
+    s.carouselDots = "flex flex-row gap-[8px] items-center px-[8px]";
+    s.newsCard = `relative w-full ${pick("min-h-[280px]", "min-h-[340px]", "min-h-[400px]")} overflow-hidden`;
+    s.newsCardInner = "absolute left-0 top-0 w-full h-full flex flex-col justify-between box-border pointer-events-none " + pick("p-[24px]", "p-[32px]", "p-[40px]");
+    s.newsCardTitle = "font-medium text-[18px] md:text-[19px] xl:text-[20px] leading-[1.35] tracking-[-0.4px] text-white";
+    s.newsCardTag = "font-normal text-[16px] leading-[24px] text-white";
+    s.pillMoreNews = makePill("moreNews");
+
+    // ---------- LATEST LINKEDIN POSTS ----------
+    // Same head row and grid rhythm as the News Room above it, so the two read
+    // as siblings rather than two different components stacked together.
+    s.liHeadRow = s.newsHeadRow.replace(reveal("news"), reveal("linkedin"));
+    s.liGrid = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-4") +
+      " gap-[20px] md:gap-[24px] xl:gap-[28px] w-full " + pick("mt-[32px]", "mt-[40px]", "mt-[48px]");
+    s.liMediaWrap = `relative w-full ${pick("h-[200px]", "h-[190px]", "h-[210px]")} overflow-hidden shrink-0`;
+    // bg-gmp-linkedin is a theme token rather than an inline gradient literal, so
+    // the brand blue has one source of truth alongside the other gradients.
+    s.liOverlay = "absolute inset-0 bg-gmp-linkedin pointer-events-none";
+    s.liMark = "absolute left-[16px] bottom-[14px] w-[22px] h-[22px] bg-white pointer-events-none " +
+      "[mask:url('assets2/linkedin.svg')_center/contain_no-repeat] " +
+      "[-webkit-mask:url('assets2/linkedin.svg')_center/contain_no-repeat]";
+    s.liDate = "font-normal text-[13px] leading-[20px] text-[rgba(51,51,51,0.6)]";
+    // Two lines exactly, so every card in the row keeps the same height whatever
+    // the copy length.
+    s.liDesc = "font-normal text-[14px] md:text-[15px] xl:text-[16px] leading-[22px] text-[rgba(51,51,51,0.8)] line-clamp-2";
+    s.pillMoreLinkedin = makePill("moreLinkedin");
+    s.pillMoreNews.className += " " + (isMobile ? "self-start" : "self-end");
+    s.carouselArrowBase = "w-[48px] h-[48px] rounded-[100px] flex justify-center items-center cursor-pointer shrink-0";
+    s.arrowPrev = makeArrow("arrowPrev");
+    s.arrowNext = makeArrow("arrowNext");
+    const newsShown = !!revealed.news;
+    const newsCardCtl = (i) => {
+      const hovered = this.state.hoveredNews === i;
+      return {
+        cardStyle: `relative w-full ${pick("min-h-[280px]", "min-h-[340px]", "min-h-[400px]")} overflow-hidden ` +
+          (newsShown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[16px]") + " " +
+          (hovered ? softShadowTw : noShadowTw) +
+          ` [transition:opacity_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 80}ms,transform_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 80}ms,box-shadow_0.3s_ease]`,
+        imgStyle: "absolute left-0 top-0 w-full h-full object-cover transition-transform duration-[400ms] ease-in-out " + (hovered ? "scale-[1.06]" : "scale-100"),
+        overlayStyle: "absolute left-0 top-0 w-full h-full pointer-events-none transition-[background] duration-300 ease-in-out " + (hovered ? "bg-[rgba(0,0,0,0.35)]" : "bg-[rgba(0,0,0,0.5)]"),
+        enter: () => this.setState({ hoveredNews: i }),
+        leave: () => this.setState({ hoveredNews: -1 }),
+      };
+    };
+
+    // ---------- NEWS/COLLABORATE OUTER (watermark) ----------
+    s.newsCollabOuter = "relative w-full overflow-visible";
+    s.newsCollabWatermark = `absolute top-0 ${pick("left-[-45%]", "left-[-18%]", "left-[-5.5%]")} ${pick("h-[42vh]", "h-[85vh]", "h-[119vh]")} w-auto pointer-events-none -z-10 opacity-100`;
+
+    // ---------- COLLABORATE ----------
+    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center ` +
+      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
+    s.collabBg = "absolute inset-0 w-full h-full object-cover";
+    s.collabCanvas = "absolute inset-0 w-full h-full pointer-events-none";
+    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.55)] pointer-events-none";
+    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
+    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
+    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
+    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
+    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
+    s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
+    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
+    s.collabContactUsText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactUs.textColor}]`;
+    s.collabGetQuoteIcon = `w-[14px] h-[14px] bg-[${s.pillGetQuote.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+
+    // ---------- FOOTER ----------
+    s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
+      pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
+    s.footerTopRow = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-5") + " gap-[32px] md:gap-[40px] xl:gap-[32px] items-start";
+    s.footerBrandCol = "flex flex-col gap-[16px] items-start w-full min-w-0";
+    s.footerLogoImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";  // matches s.heroLogo
+    s.footerTagline = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.62)] max-w-[280px]";
+    s.footerSocialRow = "flex flex-row gap-[12px] items-center";
+    // The four link columns are siblings of the brand column in footerTopRow at
+    // desktop, so every column gets the same gap. Below xl they stay grouped.
+    s.footerColsGrid = "contents " + (isDesktop ? "" : "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-[28px] md:gap-[32px] col-span-full");
+    s.footerColLabel = "font-medium text-[15px] leading-[22px] tracking-[0.4px] uppercase text-[rgba(255,255,255,0.5)] pb-[2px]";
+    s.footerLink = "font-normal text-[15px] leading-[26px] text-[rgba(255,255,255,0.88)] no-underline transition-colors duration-200 hover:text-white";
+    const makeBrandCircle = (key, baseClass, brandColor) => {
+      const hovered = this.state.hoveredKey === key;
+      const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
+      return {
+        // Hover inverts to a white chip with the icon itself picking up the
+        // brand colour, rather than a coloured circle with a white icon.
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-white ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
+        iconColor: hovered ? brandColor : "rgb(255,255,255)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const socialSmallBase = "w-[40px] h-[40px] rounded-[40px] flex justify-center items-center cursor-pointer shrink-0";
+    s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
+    s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
+    s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
+    s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
+    // Icon classes, built from the colour makeBrandCircle already resolved for
+    // each — kept as a full string per the rest of the codebase's convention
+    // rather than interpolating a partial Tailwind arbitrary value.
+    s.socialAIcon = `w-[13px] h-[13px] bg-[${s.socialA.iconColor}] transition-colors duration-200 [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]`;
+    s.socialDIcon = `w-[14px] h-[14px] bg-[${s.socialD.iconColor}] transition-colors duration-200 [mask:url('assets2/instagram.svg')_center/contain_no-repeat]`;
+    s.socialCIcon = `w-[11px] h-[13px] bg-[${s.socialC.iconColor}] transition-colors duration-200 [mask:url('assets2/facebook.svg')_center/contain_no-repeat]`;
+    s.footerBottomRow = "flex flex-row flex-wrap gap-[12px] items-center justify-between pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+    s.footerLegalLink = "font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] no-underline hover:text-white transition-colors duration-200";
+
+    // ---------- DATA ----------
+    const names = ["assets2/logo-mhra.png", "assets2/logo-iso.png", "assets2/logo-bcmpa.png", "assets2/logo-nsduk.png"];
+    const MARQUEE_HALF = [names, names, names, names].flat();
+
+    const pathwayData = [
+      { n: "01", h: "Development & \nFormulation", d: "Formulation, analytical development and remediation that ready your product for reliable scale-up." },
+      { n: "02", h: "UK In-house \nManufacturing", d: "Owned facilities in Hull — full control, no outsourcing surprises." },
+      { n: "03", h: "Tech Transfer & \nWarehousing", d: "Smooth, de-risked scale-up with integrated storage." },
+      { n: "04", h: "Global \nSupply Chain", d: "Reliable sourcing and distribution across markets." },
+      { n: "05", h: "Development & \nRemediation", d: "Fix, reformulate and rescue stalled products." },
+      { n: "06", h: "Cost \nOptimisation", d: "Efficient processes that protect your margins." },
+    ];
+    const whyShown = !!revealed.why;
+    const pathwayGap = pick(20, 24, 28);
+    const pathwayCols = isDesktop ? 3 : isTablet ? 2 : 1;
+    const pathwayItems = pathwayData.map((item, i) => {
+      const hovered = this.state.hoveredPathway === i;
+      const canExpand = !isMobile && (i + 1) % pathwayCols !== 0;
+      const containerWidth = hovered && canExpand ? `w-[calc(100%+${pathwayGap}px)]` : "w-full";
+      return {
+        n: item.n,
+        h: item.h,
+        d: item.d,
+        containerStyle: "relative overflow-hidden flex flex-col gap-[12px] items-start justify-start text-left box-border cursor-pointer " +
+          (isMobile ? "border-t border-solid border-[rgba(0,0,0,0.2)]" : "border-l border-solid border-[rgba(0,0,0,0.2)]") + " " +
+          containerWidth + " " + (hovered ? "z-[2]" : "z-[1]") + " " +
+          pick("py-[24px] px-[8px]", "py-[28px] px-[24px]", "py-[32px] px-[32px]") + " " +
+          (whyShown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[16px]") + " " +
+          (hovered ? "shadow-[0_24px_48px_-16px_rgba(0,0,0,0.35)]" : noShadowTw) +
+          ` [transition:opacity_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 70}ms,transform_700ms_cubic-bezier(0.16,1,0.3,1)_${i * 70}ms,box-shadow_0.25s_ease,width_0.35s_cubic-bezier(0.65,0,0.35,1)]`,
+        sweepStyle: `absolute inset-0 bg-[${gradient}] [transform-origin:${this.state.pathwayOrigin[i] || "left"}_center] transition-transform duration-[450ms] ease-[cubic-bezier(0.65,0,0.35,1)] z-0 pointer-events-none ` + (hovered ? "scale-x-100" : "scale-x-0"),
+        numStyle: "relative z-[1] font-semibold text-[17px] md:text-[18px] xl:text-[19px] leading-[1.3] tracking-[-0.723px] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${dark}]`),
+        headStyle: "relative z-[1] font-medium text-[20px] md:text-[22px] xl:text-[25px] leading-[1.3] tracking-[-0.723px] whitespace-pre-line transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${near}]`),
+        descStyle: "relative z-[1] font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[1.5] transition-colors duration-[250ms] ease-in-out " + (hovered ? "text-white" : `text-[${dark}]`),
+        arrowStyle: "absolute z-[1] top-[24px] right-[24px] pointer-events-none transition-[opacity,transform] duration-[250ms] ease-in-out " +
+          ((hovered || !isDesktop) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-[8px]"),
+        arrowColor: hovered ? "rgb(255,255,255)" : dark,
+        onEnter: () => this.setState((st) => ({ hoveredPathway: i, pathwayOrigin: { ...st.pathwayOrigin, [i]: "left" } })),
+        onLeave: () => this.setState((st) => ({ hoveredPathway: -1, pathwayOrigin: { ...st.pathwayOrigin, [i]: "right" } })),
+      };
+    });
+
+    const teamData = [
+      { n: "01", h: "One accountable team", d: "A single point of contact owns your product from intake to release — no hand-offs, no surprises." },
+      { n: "02", h: "In-house QP release", d: "Our own Qualified Persons certify every batch, keeping control and traceability under our roof." },
+      { n: "03", h: "UK-owned facilities", d: "Manufacturing, filling and packing suites we own and operate — never outsourced." },
+      { n: "04", h: "Multi-form flexibility", d: "Tablets, capsules, liquids, suspensions and semi-solids from a single accredited site." },
+    ];
+    const hoveredTeam = this.state.hoveredTeam;
+    const teamDesktopActive = hoveredTeam === -1 ? 0 : hoveredTeam;
+    const teamFlexEase = "flex 1.1s cubic-bezier(0.22, 1, 0.36, 1)";
+    const teamItems = teamData.map((item, i) => {
+      const isActive = isMobile ? true : i === teamDesktopActive;
+      return {
+        n: item.n,
+        h: item.h,
+        d: item.d,
+        isActive,
+        bgId: i === 0 ? "accountable-bg" : "accountable-bg-" + i,
+        bgSrc: i === 0 ? "assets2/team-1-real.webp" : i === 3 ? "assets2/team-4-real.webp" : "assets2/placeholder-team-" + (i + 1) + ".jpg",
+        colorLayerStyle: `absolute inset-0 bg-[${teamColors[i]}] z-0`,
+        imageLayerStyle: "absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] ease-in-out " + (isActive ? "opacity-55" : "opacity-0"),
+        panelStyle: "relative overflow-hidden rounded-none box-border shrink-0 [transition:flex_1.1s_cubic-bezier(0.22,1,0.36,1)] " +
+          (isMobile ? `flex-none w-full h-[${pick(320, 360, 400)}px] cursor-default` : `[flex:${isActive ? "3_1_0%" : "1_1_0%"}] w-auto h-full cursor-pointer`),
+        overlayStyle: "absolute inset-0 bg-[rgba(41,37,96,0.6)] transition-opacity duration-[900ms] ease-in-out pointer-events-none z-[1] " + (isActive ? "opacity-75" : "opacity-0"),
+        textColStyle: "absolute inset-0 z-[2] box-border flex flex-col gap-[12px] " +
+          (isActive ? pick("p-[24px]", "p-[32px]", "p-[40px]") : "p-[24px]") + " " +
+          (isActive ? "justify-between items-start text-left" : "justify-center items-center text-center"),
+        headStyle: "font-medium text-white leading-[1.25] transition-[font-size] duration-[900ms] ease-in-out " +
+          (isActive ? pick("text-[24px]", "text-[28px]", "text-[34px]") : pick("text-[17px]", "text-[18px]", "text-[19px]")),
+        bodyStyle: `font-normal text-[15px] leading-[22px] text-[rgba(255,255,255,0.9)] ${pick("w-full", "w-[240px]", "w-[300px]")}`,
+        onEnter: isMobile ? undefined : (() => this.setState({ hoveredTeam: i })),
+      };
+    });
+
+    const newsItemsData = [
+      { id: "news-1", src: "assets2/news-1-real.webp", title: "2025 Healthcare Exhibition is near. See the BTS of our preparations.", tag: "Event" },
+      { id: "news-2", src: "assets2/news-2-real.webp", title: "Various areas to enhance to meet the ideal packaging setup.", tag: "News" },
+      { id: "news-3", src: "assets2/news-3-real.webp", title: "Healthcare and Beauty care: Doctors perspectives in 2025", tag: "Article" },
+    ];
+    const newsItems = newsItemsData.map((item, i) => ({ ...item, ...newsCardCtl(i) }));
+
+    // ---------- INDUSTRIES / SECTORS ----------
+    const sectorData = [
+      { name: "Pharmaceutical", sub: "Tablets, capsules & oral solutions →", img: "assets2/placeholder-sector-pharma.jpg" },
+      { name: "Veterinary", sub: "Animal health tablets & pastes →", img: "assets2/placeholder-sector-vet.jpg" },
+      { name: "Medical Device", sub: "Diagnostic & surgical devices →", img: "assets2/placeholder-sector-meddevice.jpg" },
+      { name: "Cosmetic", sub: "Creams, gels & lotions →", img: "assets2/sector-cosmetic-real.webp" },
+      { name: "Supplements", sub: "Vitamins, gummies & powders →", img: "assets2/placeholder-sector-supplements.jpg" },
+      { name: "Biocide", sub: "Disinfectants & sanitising agents →", img: "assets2/placeholder-sector-biocide.jpg" },
+    ];
+    const industryActive = this.state.industryActiveIndex;
+    // The list and caption follow the click; only the picture waits for the wipe.
+    const industrySelected = this.state.industrySelectedIndex;
+    const sectorListItems = sectorData.map((sec, j) => ({
+      name: sec.name,
+      style: j === industrySelected ? s.industryItemActive : s.industryItemDim,
+      onClick: () => this._goToIndustry(j),
+    }));
+    const sectorImages = sectorData.map((sec, j) => ({
+      id: j === 3 ? "industries-img" : "industries-img-" + j,
+      src: sec.img,
+      name: sec.name,
+      style: "absolute inset-0 w-full h-full object-cover " + (j === industryActive ? "opacity-100" : "opacity-0"),
+    }));
+    const activeSector = sectorData[industrySelected];
+    // Only the sweep itself carries a transition; both closed states snap.
+    const curtainPhase = this.state.curtainPhase || "idle";
+    const curtainIndex = this.state.curtainIndex != null ? this.state.curtainIndex : industryActive;
+    const curtain = {
+      src: sectorData[curtainIndex].img,
+      name: sectorData[curtainIndex].name,
+      style: "gmp-curtain " + (curtainPhase === "open" ? "is-open" : "is-reset"),
+    };
+
+    const linkedinItems = (this.state.linkedinPosts || []).map((p, i) => {
+      const hovered = this.state.hoveredLinkedin === i;
+      return {
+        ...p,
+        cardStyle: "group flex flex-col gap-[12px] no-underline box-border cursor-pointer " +
+          "transition-transform duration-200 ease-in-out " +
+          (hovered ? "-translate-y-[3px]" : "translate-y-0"),
+        // The shadow sits on the image rather than the whole card, so it reads as
+        // the picture lifting off the page instead of a floating text block.
+        mediaStyle: s.liMediaWrap + " transition-shadow duration-200 ease-in-out " +
+          (hovered ? hoverShadowTw.replace("178,33,38", "10,102,194") : noShadowTw),
+        imgStyle: "absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
+          (hovered ? "scale-105" : "scale-100"),
+        headStyle: "font-medium text-[16px] md:text-[17px] xl:text-[18px] leading-[24px] tracking-[-0.4px] transition-colors duration-200 ease-in-out " +
+          (hovered ? "text-[rgb(10,102,194)]" : `text-[${near}]`),
+        onEnter: () => this.setState({ hoveredLinkedin: i }),
+        onLeave: () => this.setState({ hoveredLinkedin: -1 }),
+      };
+    });
+    const showLinkedin = linkedinItems.length > 0;
+
+    return {
+      s,
+      linkedinItems,
+      showLinkedin,
+      linkedinRevealRef: revealRef("linkedin"),
+      // Four sets per half puts the half-track past 3000px at desktop, so the
+      // strip stays filled on wide screens. Both halves must be identical.
+      logos: [...MARQUEE_HALF, ...MARQUEE_HALF],
+      marqueeRef: (el) => { this._marqueeEl = el; this._applyMarquee(); },
+      onTeamRowLeave: () => this.setState({ hoveredTeam: -1 }),
+      industriesRevealRef: revealRef("industries"),
+      industriesLeftRef: this._industriesLeftRefCbBound || (this._industriesLeftRefCbBound = this._industriesLeftRefCb.bind(this)),
+      onCaptionEnter: () => this.setState({ hoveredCaption: true }),
+      onCaptionLeave: () => this.setState({ hoveredCaption: false }),
+      onCaptionClick: () => { const c = sectorData.length; this._goToIndustry((this.state.industrySelectedIndex + 1) % c); },
+      aboutRevealRef: revealRef("about"),
+      teamRevealRef: revealRef("team"),
+      whyRevealRef: revealRef("why"),
+      supportRevealRef: revealRef("support"),
+      newsRevealRef: revealRef("news"),
+      collabRevealRef: revealRef("collab"),
+      collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
+      collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
+      heroTextBlockRef: (el) => { this._heroTextBlockEl = el; this._measureHeroFit(); },
+      heroHeadlineRef: (el) => { this._heroHeadlineEl = el; this._measureHeroFit(); },
+      footerRevealRef: revealRef("footer"),
+      mobileNavItems,
+      toggleMobileMenu: () => this.setState((st) => {
+        const open = !st.mobileMenuOpen;
+        // Stop the page behind the panel scrolling while it is open.
+        try { document.body.style.overflow = open ? "hidden" : ""; } catch (e) { /* no-op */ }
+        return { mobileMenuOpen: open };
+      }),
+      showSectorsPill: !isMobile,
+      showHeroCtaIcon: !isMobile,
+      pathwayItems,
+      teamItems,
+      sectorListItems,
+      sectorImages,
+      activeSector,
+      curtain,
+      newsItems,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

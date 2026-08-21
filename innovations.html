@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="tailwind.config.js"></script>
+</head>
+<body>
+<div id="gmp-loader" aria-hidden="true"><div class="gmp-loader-box"><img src="assets2/logo-icon.svg" alt=""><span class="gmp-loader-ring"></span></div></div>
+<style>
+  html{scrollbar-gutter:stable}
+  /* Inline, so it is guaranteed to apply at first paint. Tailwind builds its
+     sheet at runtime; without this the app can paint unstyled for a frame and
+     then snap into the reveal state as those rules arrive. */
+  #dc-root{opacity:0}
+  html.gmp-ready #dc-root{opacity:1;transition:opacity .35s ease}
+  #gmp-loader{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;
+    background:#fff;opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s linear .45s}
+  #gmp-loader.is-done{opacity:0;visibility:hidden}
+  .gmp-loader-box{position:relative;width:96px;height:96px;display:flex;align-items:center;justify-content:center}
+  .gmp-loader-box img{width:52px;height:52px;object-fit:contain;animation:gmp-loader-pulse 1.5s ease-in-out infinite}
+  .gmp-loader-ring{position:absolute;inset:0;border-radius:50%;
+    border:2px solid rgba(41,37,96,.12);border-top-color:rgb(178,33,38);
+    animation:gmp-loader-spin .9s linear infinite}
+  @keyframes gmp-loader-spin{to{transform:rotate(360deg)}}
+  @keyframes gmp-loader-pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    .gmp-loader-box img,.gmp-loader-ring{animation:none}
+    #gmp-loader{transition:none}
+  }
+</style>
+<script>
+(function(){
+  var el=document.getElementById("gmp-loader");
+  if(!el)return;
+  var done=false;
+  function hide(){ if(done)return; done=true;
+    document.documentElement.classList.add("gmp-ready");
+    el.classList.add("is-done");
+    window.__gmpReady=true; window.dispatchEvent(new Event("gmp:ready")); }
+  function show(){ done=false; el.classList.remove("is-done"); }
+  // Reveal the page once the app has painted, with a hard cap so a slow or
+  // failed script can never leave the loader stuck over the content.
+  function whenReady(){
+    var t=setInterval(function(){
+      var root=document.getElementById("dc-root");
+      if(!root||!root.firstElementChild)return;
+      // Tailwind builds its stylesheet at runtime, so the first paint can land
+      // before the reveal rules exist. Lifting then makes sections flash in fully
+      // visible and snap back to animate. Wait until opacity-0 actually applies.
+      var probe=root.querySelector('[class*="opacity-0"]');
+      if(probe&&getComputedStyle(probe).opacity!=="0")return;
+      clearInterval(t);setTimeout(hide,140);
+    },50);
+    setTimeout(function(){clearInterval(t);hide();},4000);
+  }
+  if(document.readyState==="complete"||document.readyState==="interactive")whenReady();
+  else document.addEventListener("DOMContentLoaded",whenReady);
+  // Bring it back on internal navigation so page-to-page moves feel continuous.
+  document.addEventListener("click",function(e){
+    var a=e.target&&e.target.closest?e.target.closest("a[href]"):null;
+    if(!a)return;
+    var href=a.getAttribute("href")||"";
+    if(!href||href.charAt(0)==="#"||/^(mailto:|tel:|javascript:)/i.test(href))return;
+    if(a.target&&a.target!=="_self")return;
+    if(a.host&&a.host!==location.host)return;
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0)return;
+    show();
+  },true);
+  // Restoring from bfcache must not show a frozen loader.
+  window.addEventListener("pageshow",function(e){if(e.persisted)hide();});
+})();
+</script>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <title>GMP Manufacturing Ltd — Innovation</title>
+  <link rel="icon" type="image/svg+xml" href="assets2/logo-icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets2/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets2/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets2/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@200..900&amp;display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #fff; }
+    .gmp-font { font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    ::selection { background: rgb(37,117,187); color: #fff; }
+    ::-moz-selection { background: rgb(37,117,187); color: #fff; }
+  </style>
+</helmet>
+
+<div data-screen-label="GMP Mfd Innovation — Responsive" className="{{ s.root }}">
+
+  <!-- ============ TOPBAR ============ -->
+  <div className="{{ s.heroTopbar }}">
+    <a href="index.html" className="{{ s.logoLink }}">
+      <img src="{{ s.heroLogoSrc }}" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.heroLogo }}">
+    </a>
+    <div className="{{ s.heroNav }}">
+      <a href="index.html" className="{{ s.navHomeStyle }}" onMouseEnter="{{ s.navEnterHome }}" onMouseLeave="{{ s.navLeave }}">Home</a>
+      <a href="about.html" className="{{ s.navAboutStyle }}" onMouseEnter="{{ s.navEnterAbout }}" onMouseLeave="{{ s.navLeave }}">About Us</a>
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterServices }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="services.html" className="{{ s.navServicesStyle }}">Services</a>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.servicesMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.navMenuItem }}">Research &amp; Development</a>
+          </div>
+        </div>
+      </div>
+      <a href="cdmo.html" className="{{ s.navCdmoStyle }}" onMouseEnter="{{ s.navEnterCdmo }}" onMouseLeave="{{ s.navLeave }}">CDMO</a>
+      <a href="innovations.html" className="{{ s.navInnovationsStyle }}" onMouseEnter="{{ s.navEnterInnovations }}" onMouseLeave="{{ s.navLeave }}">Innovations</a>
+      <div className="relative flex flex-row gap-[8px] items-center cursor-pointer" onMouseEnter="{{ s.navEnterSectors }}" onMouseLeave="{{ s.navLeave }}">
+        <a href="sectors.html" className="{{ s.navSectorsStyle }}">Sectors</a>
+        <svg width="11" height="6" viewBox="0 0 10.616 6.016" fill="{{ s.navCaretColor }}"><path d="M 5.308 6.016 L 0 0.708 L 0.708 0 L 5.308 4.6 L 9.908 0 L 10.616 0.708 L 5.308 6.016 Z"></path></svg>
+        <div className="{{ s.sectorsMenuPanel }}">
+          <div className="{{ s.navMenuInner }}">
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.navMenuItem }}">Biocide</a>
+          </div>
+        </div>
+      </div>
+      <a href="contact.html" className="{{ s.navContactStyle }}" onMouseEnter="{{ s.navEnterContact }}" onMouseLeave="{{ s.navLeave }}">Contact Us</a>
+    </div>
+    <div className="{{ s.heroTopbarRightGroup }}">
+      <a href="contact.html" className="{{ s.heroCtaTopbarCtl.className }}" onMouseEnter="{{ s.heroCtaTopbarCtl.enter }}" onMouseLeave="{{ s.heroCtaTopbarCtl.leave }}">
+        <span className="{{ s.heroCtaTopbarText }}">Get A Quote</span>
+        <sc-if value="{{ showHeroCtaIcon }}" hint-placeholder-val="{{ true }}">
+          <div className="{{ s.heroCtaTopbarIconStyle }}"></div>
+        </sc-if>
+      </a>
+      <div className="{{ s.hamburgerBtn }}" onClick="{{ toggleMobileMenu }}">
+        <div className="{{ s.hamburgerBar1 }}"></div>
+        <div className="{{ s.hamburgerBar2 }}"></div>
+        <div className="{{ s.hamburgerBar3 }}"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MOBILE NAV OVERLAY ============ -->
+  <div className="{{ s.mobileNavOverlay }}">
+    <div className="{{ s.mobileNavDecor }}">
+      <div className="{{ s.mobileNavGlowA }}"></div>
+      <div className="{{ s.mobileNavGlowB }}"></div>
+      <svg viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.07)" className="{{ s.mobileNavMark }}">
+        <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+      </svg>
+    </div>
+    <div className="{{ s.mobileNavCloseRow }}">
+      <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd" className="{{ s.mobileNavLogo }}">
+      <div className="{{ s.mobileNavCloseBtn }}" onClick="{{ toggleMobileMenu }}" role="button" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"></path>
+        </svg>
+      </div>
+    </div>
+    <div className="{{ s.mobileNavLinks }}">
+      <sc-for list="{{mobileNavItems}}" as="m" hint-placeholder-count="8">
+        <a href="{{ m.href }}" className="{{ m.linkStyle }}">
+          <span className="{{ m.numStyle }}">{{ m.n }}</span>
+          <span className="{{ m.labelStyle }}">{{ m.label }}</span>
+        </a>
+      </sc-for>
+    </div>
+    <div className="{{ s.mobileNavFoot }}">
+      <a href="contact.html" className="{{ s.mobileNavCta }}">Get A Quote</a>
+      <div className="{{ s.mobileNavMetaRow }}">
+        <a href="mailto:info@gmpgroup.co.uk" className="{{ s.mobileNavMeta }}">info@gmpgroup.co.uk</a>
+        <a href="tel:+441482707138" className="{{ s.mobileNavMeta }}">+44 (0) 1482 707 138</a>
+        <span className="{{ s.mobileNavMetaDim }}">Marfleet House, Valletta Street, Hull, HU9 5NP</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PAGE BANNER ============ -->
+  <div data-screen-label="Banner" className="{{ s.bannerWrap }}">
+    <img src="assets2/hero-bg.webp" alt="Advanced manufacturing equipment at GMP" className="{{ s.bannerBg }}">
+    <div className="{{ s.bannerOverlay }}"></div>
+    <div className="{{ s.bannerContent }}">
+      <span className="{{ s.bannerBreadcrumb }}">Home / Innovation</span>
+      <span className="{{ s.bannerHeadline }}">Innovation</span>
+      <span className="{{ s.bannerSubtext }}">Where pharmaceutical manufacturing meets next-generation production — built in-house, developed with purpose.</span>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ INNOVATION CARDS ============ -->
+  <div data-screen-label="Innovation Cards" className="{{ s.sectionPad }}">
+    <div className="{{ s.innoGrid }}" ref="{{ introRevealRef2 }}">
+      <sc-for list="{{panelItems}}" as="panel" hint-placeholder-count="2">
+        <a href="{{ panel.href }}" className="{{ panel.cardStyle }}">
+          <span className="{{ panel.subStyle }}">{{ panel.eyebrow }}</span>
+          <div className="{{ s.innoCardBottom }}">
+            <span className="{{ panel.titleStyle }}">{{ panel.title }}</span>
+            <div className="{{ panel.dividerStyle }}"></div>
+            <span className="{{ panel.descStyle }}">{{ panel.desc }}</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ INTRO STRAP ============ -->
+  <div data-screen-label="Intro" className="{{ s.sectionPad }}">
+    <div className="{{ s.introStrapWrap }}" ref="{{ introRevealRef }}">
+      <span className="{{ s.introStrapText }}">We're investing in two forward-looking capabilities that extend what a UK-based CDMO can offer — from rapid, precise prototyping today to a longer-term initiative still taking shape.</span>
+    </div>
+  </div>
+
+  <div className="{{ s.sectionGap }}"></div>
+
+  <!-- ============ COLLABORATE ============ -->
+  <div className="{{ s.collabOuter }}">
+    <img src="assets2/collab-gradient-bg.webp" alt="" loading="lazy" crossorigin="anonymous" ref="{{ collabImgRef }}" className="{{ s.collabBg }}">
+    <canvas ref="{{ collabCanvasRef }}" className="{{ s.collabCanvas }}"></canvas>
+    <div className="{{ s.collabOverlay }}"></div>
+    <div className="{{ s.collabWrap }}">
+      <span className="{{ s.collabHeading }}" ref="{{ collabRevealRef }}">Curious what's next for GMP?</span>
+      <span className="{{ s.collabBody }}">Get in touch to talk about where innovation meets your product.</span>
+      <div className="{{ s.collabBtnRow }}">
+        <a href="contact.html" className="{{ s.pillGetQuote.className }}" onMouseEnter="{{ s.pillGetQuote.enter }}" onMouseLeave="{{ s.pillGetQuote.leave }}">
+          <span className="{{ s.collabGetQuoteText }}">Get a Quote</span>
+          <div className="{{ s.collabGetQuoteIcon }}"></div>
+        </a>
+        <a href="contact.html" className="{{ s.pillContactUs.className }}" onMouseEnter="{{ s.pillContactUs.enter }}" onMouseLeave="{{ s.pillContactUs.leave }}">
+          <span className="{{ s.collabContactUsText }}">Contact us</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div className="{{ s.footerWrap }}" ref="{{ footerRevealRef }}">
+    <svg width="232" height="235" viewBox="0 0 231.638 235.420" fill="rgba(255,255,255,0.06)" className="absolute -right-[20px] top-0 pointer-events-none">
+      <path d="M 177.966 0 L 203.39 116.292 L 231.638 235.42 L 115.819 201.384 L 0 164.511 L 87.571 82.255 L 177.966 0 Z"></path>
+    </svg>
+
+    <div className="{{ s.footerTopRow }}">
+      <div className="{{ s.footerBrandCol }}">
+        <img src="assets2/logo-mark.svg" alt="GMP Manufacturing Ltd — Your Trusted CDMO Partner" className="{{ s.footerLogoImg }}">
+        <span className="{{ s.footerTagline }}">A full-service UK CDMO supporting partners in 30+ countries — development, manufacturing, packing and regulatory support, all under one roof.</span>
+        <div className="{{ s.footerSocialRow }}">
+          <div className="{{ s.socialA.className }}" onMouseEnter="{{ s.socialA.enter }}" onMouseLeave="{{ s.socialA.leave }}">
+            <div className="{{ s.socialAIcon }}"></div>
+          </div>
+          <div className="{{ s.socialD.className }}" onMouseEnter="{{ s.socialD.enter }}" onMouseLeave="{{ s.socialD.leave }}">
+            <div className="{{ s.socialDIcon }}"></div>
+          </div>
+          <div className="{{ s.socialC.className }}" onMouseEnter="{{ s.socialC.enter }}" onMouseLeave="{{ s.socialC.leave }}">
+            <div className="{{ s.socialCIcon }}"></div>
+          </div>
+          <div className="{{ s.socialB.className }}" onMouseEnter="{{ s.socialB.enter }}" onMouseLeave="{{ s.socialB.leave }}">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="{{ s.socialB.iconColor }}" className="transition-colors duration-200"><path d="M 17.55 1.821 C 17.325 1.071 16.763 0.536 15.975 0.321 C 14.625 0 8.887 0 8.887 0 C 8.887 0 3.263 0 1.8 0.321 C 1.013 0.536 0.45 1.071 0.225 1.821 C 0 3.214 0 6 0 6 C 0 6 0 8.786 0.338 10.179 C 0.563 10.929 1.125 11.464 1.912 11.679 C 3.262 12 9 12 9 12 C 9 12 14.625 12 16.087 11.679 C 16.875 11.464 17.438 10.929 17.663 10.179 C 18 8.786 18 6 18 6 C 18 6 18 3.214 17.55 1.821 Z M 7.2 8.571 L 7.2 3.429 L 11.925 6 L 7.2 8.571 Z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <div className="{{ s.footerColsGrid }}">
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Services</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="service-detail.html" className="{{ s.footerLink }}">Manufacturing, Filling &amp; Packing</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">QC, Micro &amp; Stability</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Technology Transfer</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Product Development &amp; Remediation</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">QP, RP, RP-I &amp; Regulatory Support</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Co-Packing &amp; Contract Manufacturing</a>
+            <a href="service-detail.html" className="{{ s.footerLink }}">Research &amp; Development</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Sectors</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Pharmaceutical</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Veterinary</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Medical Device</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Cosmetic</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Supplements</a>
+            <a href="sector-detail.html" className="{{ s.footerLink }}">Biocide</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Pages</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <a href="index.html" className="{{ s.footerLink }}">Home</a>
+            <a href="about.html" className="{{ s.footerLink }}">About Us</a>
+            <a href="cdmo.html" className="{{ s.footerLink }}">CDMO</a>
+            <a href="linkedin.html" className="{{ s.footerLink }}">LinkedIn Posts</a>
+            <a href="innovations.html" className="{{ s.footerLink }}">Innovations</a>
+            <a href="news.html" className="{{ s.footerLink }}">News &amp; Blogs</a>
+            <a href="careers.html" className="{{ s.footerLink }}">Careers</a>
+            <a href="contact.html" className="{{ s.footerLink }}">Contact Us</a>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[12px] items-start">
+          <span className="{{ s.footerColLabel }}">Contact</span>
+          <div className="flex flex-col gap-[8px] items-start">
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">Email</span>
+            <span className="{{ s.footerLink }}">info@gmpgroup.co.uk</span>
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Call us</span>
+            <span className="{{ s.footerLink }}">+44 (0) 1482 707 138</span>
+            <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] mt-[8px]">Address</span>
+            <span className="{{ s.footerLink }}">Marfleet House, Valletta Street, Hull, HU9 5NP, United Kingdom.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div className="{{ s.footerBottomRow }}">
+      <span className="font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)]">© GMP Manufacturing Ltd 2026. All rights reserved.</span>
+      <a href="terms.html" className="{{ s.footerLegalLink }}">Terms &amp; Conditions</a>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { bp: "desktop", hoveredNav: -1, hoveredKey: null, mobileMenuOpen: false, revealed: {}, navScrolled: false, openNavMenu: null };
+
+  componentDidMount() {
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      this.setState((st) => ({ revealed: { ...st.revealed, banner: true } }));
+    }));
+    this._onResize = () => { this._updateBp(); };
+    window.addEventListener("resize", this._onResize);
+    this._updateBp();
+    const NAV_SCROLL_THRESHOLD = 120;
+    this._onScroll = () => {
+      const scrolled = window.scrollY > NAV_SCROLL_THRESHOLD;
+      if (scrolled !== this.state.navScrolled) this.setState({ navScrolled: scrolled });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+    if (this._revealObservers) Object.values(this._revealObservers).forEach((o) => o.disconnect());
+    this._teardownRipple();
+  }
+  _observeReveal(key, el) {
+    if (!el) return;
+    this._revealObservers = this._revealObservers || {};
+    if (this._revealObservers[key]) return;
+    const markShown = () => this.setState((st) => ({ revealed: { ...st.revealed, [key]: true } }));
+    // Anything already inside the first viewport plays its entrance on load —
+    // otherwise above-the-fold sections sit hidden until the user happens to scroll.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < (window.innerHeight || 0) * 0.92) {
+      // Two frames so the hidden state paints first and the change animates.
+      const start = () => requestAnimationFrame(() => requestAnimationFrame(markShown));
+      // Wait for the loading curtain, else the entrance plays behind it and the
+      // section is simply already in place once it lifts.
+      if (window.__gmpReady) start();
+      else {
+        window.addEventListener("gmp:ready", start, { once: true });
+        setTimeout(start, 4500);
+      }
+      this._revealObservers[key] = true;
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        markShown();
+        obs.disconnect();
+      }
+    }, { threshold: 0.01, rootMargin: "0px 0px -60px 0px" });
+    obs.observe(el);
+    this._revealObservers[key] = obs;
+  }
+  _maybeInitRipple() {
+    if (this._rippleInited || !this._collabCanvasEl || !this._collabImgEl) return;
+    this._rippleInited = true;
+    if (typeof IntersectionObserver !== "undefined") {
+      this._rippleVisible = false;
+      this._rippleVisibilityObserver = new IntersectionObserver((entries) => {
+        this._rippleVisible = entries[0].isIntersecting;
+        if (this._rippleVisible) this._startRippleLoop();
+      }, { threshold: 0.01 });
+      this._rippleVisibilityObserver.observe(this._collabCanvasEl);
+    } else {
+      this._rippleVisible = true;
+    }
+    this._initRipple();
+  }
+  _initRipple() {
+    const canvas = this._collabCanvasEl;
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!gl) return;
+    this._gl = gl;
+
+    const RIPPLE_AMPLITUDE = 0.075;
+    const RIPPLE_FREQUENCY = 28.0;
+    const CHROMATIC_ABERRATION = true;
+
+    const vertexSrc = "attribute vec2 a_position;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  v_uv = a_position * 0.5 + 0.5;\n" +
+      "  gl_Position = vec4(a_position, 0.0, 1.0);\n" +
+      "}";
+    const fragmentSrc = "precision mediump float;\n" +
+      "uniform sampler2D u_texture;\n" +
+      "uniform vec2 u_resolution;\n" +
+      "uniform vec2 u_imageResolution;\n" +
+      "uniform vec2 u_mouse;\n" +
+      "uniform float u_time;\n" +
+      "uniform float u_lastActive;\n" +
+      "uniform float u_velocity;\n" +
+      "uniform float u_amplitude;\n" +
+      "uniform float u_frequency;\n" +
+      "uniform float u_chromatic;\n" +
+      "varying vec2 v_uv;\n" +
+      "void main() {\n" +
+      "  vec2 uv = v_uv;\n" +
+      "  float sAspect = u_resolution.x / u_resolution.y;\n" +
+      "  float iAspect = u_imageResolution.x / u_imageResolution.y;\n" +
+      "  if (sAspect > iAspect) {\n" +
+      "    uv.y = (uv.y - 0.5) * (iAspect / sAspect) + 0.5;\n" +
+      "  } else {\n" +
+      "    uv.x = (uv.x - 0.5) * (sAspect / iAspect) + 0.5;\n" +
+      "  }\n" +
+      "  float dt = max(u_time - u_lastActive, 0.0);\n" +
+      "  float decay = clamp(1.0 - dt / 0.6, 0.0, 1.0);\n" +
+      "  decay = decay * decay;\n" +
+      "  float dist = distance(uv, u_mouse);\n" +
+      "  float strength = u_amplitude * decay * u_velocity;\n" +
+      "  float ripple = sin(dist * u_frequency - u_time * 6.0) * strength * exp(-dist * 6.0);\n" +
+      "  vec2 dir = (dist > 0.0001) ? normalize(uv - u_mouse) : vec2(0.0);\n" +
+      "  vec2 dUv = uv + dir * ripple;\n" +
+      "  vec3 color;\n" +
+      "  if (u_chromatic > 0.5) {\n" +
+      "    float aberration = abs(ripple) * 6.0;\n" +
+      "    float r = texture2D(u_texture, dUv + dir * aberration).r;\n" +
+      "    float g = texture2D(u_texture, dUv).g;\n" +
+      "    float b = texture2D(u_texture, dUv - dir * aberration).b;\n" +
+      "    color = vec3(r, g, b);\n" +
+      "  } else {\n" +
+      "    color = texture2D(u_texture, dUv).rgb;\n" +
+      "  }\n" +
+      "  gl_FragColor = vec4(color, 1.0);\n" +
+      "}";
+
+    const compile = (type, src) => {
+      const sh = gl.createShader(type);
+      gl.shaderSource(sh, src);
+      gl.compileShader(sh);
+      return sh;
+    };
+    const program = gl.createProgram();
+    gl.attachShader(program, compile(gl.VERTEX_SHADER, vertexSrc));
+    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragmentSrc));
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+    gl.useProgram(program);
+    this._rippleProgram = program;
+
+    const posBuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const u = {};
+    ["u_resolution", "u_imageResolution", "u_mouse", "u_time", "u_lastActive", "u_velocity", "u_amplitude", "u_frequency", "u_chromatic", "u_texture"].forEach((name) => {
+      u[name] = gl.getUniformLocation(program, name);
+    });
+    this._rippleUniforms = u;
+
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([20, 20, 20, 255]));
+    this._rippleTexture = texture;
+    this._rippleImageRes = [1, 1];
+
+    const uploadImage = () => {
+      const img = this._collabImgEl;
+      if (!img || !img.naturalWidth) return;
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      try {
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        this._rippleImageRes = [img.naturalWidth, img.naturalHeight];
+        this._startRippleLoop();
+      } catch (e) {}
+    };
+    if (this._collabImgEl.complete && this._collabImgEl.naturalWidth) {
+      uploadImage();
+    } else {
+      this._collabImgEl.addEventListener("load", uploadImage, { once: true });
+    }
+
+    this._mouseTarget = [0.5, 0.5];
+    this._mouseSmooth = [0.5, 0.5];
+    this._velocitySmooth = 0;
+    this._rippleStart = performance.now();
+    this._lastActiveTime = -10;
+
+    this._onCollabMouseMove = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      this._mouseTarget = [x, 1.0 - y];
+      this._lastActiveTime = (performance.now() - this._rippleStart) / 1000;
+      this._startRippleLoop();
+    };
+    const collabOuterEl = canvas.parentElement;
+    collabOuterEl.addEventListener("mousemove", this._onCollabMouseMove);
+    this._collabOuterEl = collabOuterEl;
+
+    this._resizeRippleCanvas = () => {
+      const rect = collabOuterEl.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    };
+    this._resizeRippleCanvas();
+    window.addEventListener("resize", this._resizeRippleCanvas);
+    if (typeof ResizeObserver !== "undefined") {
+      this._rippleResizeObserver = new ResizeObserver(() => this._resizeRippleCanvas());
+      this._rippleResizeObserver.observe(collabOuterEl);
+    }
+
+    this._renderRipple = () => {
+      this._rippleRAF = null;
+      const now = (performance.now() - this._rippleStart) / 1000;
+      const lerpFactor = 0.15;
+      const prevX = this._mouseSmooth[0], prevY = this._mouseSmooth[1];
+      this._mouseSmooth[0] += (this._mouseTarget[0] - this._mouseSmooth[0]) * lerpFactor;
+      this._mouseSmooth[1] += (this._mouseTarget[1] - this._mouseSmooth[1]) * lerpFactor;
+      const dx = this._mouseSmooth[0] - prevX;
+      const dy = this._mouseSmooth[1] - prevY;
+      const instVelocity = Math.min(Math.sqrt(dx * dx + dy * dy) * 60, 1.0);
+      this._velocitySmooth += (instVelocity - this._velocitySmooth) * 0.2;
+
+      gl.useProgram(this._rippleProgram);
+      gl.uniform2f(u.u_resolution, canvas.width, canvas.height);
+      gl.uniform2f(u.u_imageResolution, this._rippleImageRes[0], this._rippleImageRes[1]);
+      gl.uniform2f(u.u_mouse, this._mouseSmooth[0], this._mouseSmooth[1]);
+      gl.uniform1f(u.u_time, now);
+      gl.uniform1f(u.u_lastActive, this._lastActiveTime);
+      gl.uniform1f(u.u_velocity, this._velocitySmooth);
+      gl.uniform1f(u.u_amplitude, RIPPLE_AMPLITUDE);
+      gl.uniform1f(u.u_frequency, RIPPLE_FREQUENCY);
+      gl.uniform1f(u.u_chromatic, CHROMATIC_ABERRATION ? 1.0 : 0.0);
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, this._rippleTexture);
+      gl.uniform1i(u.u_texture, 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+      const stillDecaying = (now - this._lastActiveTime) < 0.6 || this._velocitySmooth > 0.001;
+      if (this._rippleVisible && stillDecaying) this._rippleRAF = requestAnimationFrame(this._renderRipple);
+    };
+    this._startRippleLoop();
+  }
+  _startRippleLoop() {
+    if (this._rippleRAF || !this._renderRipple || !this._rippleVisible) return;
+    this._rippleRAF = requestAnimationFrame(this._renderRipple);
+  }
+  _teardownRipple() {
+    if (this._rippleRAF) cancelAnimationFrame(this._rippleRAF);
+    this._rippleRAF = null;
+    if (this._collabOuterEl && this._onCollabMouseMove) this._collabOuterEl.removeEventListener("mousemove", this._onCollabMouseMove);
+    if (this._resizeRippleCanvas) window.removeEventListener("resize", this._resizeRippleCanvas);
+    if (this._rippleResizeObserver) this._rippleResizeObserver.disconnect();
+    if (this._rippleVisibilityObserver) this._rippleVisibilityObserver.disconnect();
+  }
+  _updateBp() {
+    const w = window.innerWidth;
+    const bp = w < 768 ? "mobile" : w < 1280 ? "tablet" : "desktop";
+    if (bp !== this.state.bp) this.setState({ bp });
+  }
+
+  renderVals() {
+    const bp = this.state.bp;
+    const isMobile = bp === "mobile";
+    const isTablet = bp === "tablet";
+    const isDesktop = bp === "desktop";
+    const pick = (m, t, d) => (isMobile ? m : isTablet ? t : d);
+
+    const red = "rgb(178,33,38)";
+    const purple = "rgb(45,38,93)";
+    const dark = "rgb(51,51,51)";
+    const near = "rgb(17,17,17)";
+    const footerGradient = "linear-gradient(111.131deg,rgb(37,117,187)_-0.79%,rgb(41,37,96)_62.7%,rgb(178,33,38)_154.63%)";
+    const hoverShadowTw = "shadow-[0_16px_32px_-12px_rgba(178,33,38,0.45)]";
+    const noShadowTw = "shadow-[0_0_0_rgba(0,0,0,0)]";
+    // The outlined button is mostly white, so the primary's red glow would spread
+    // out from under it and read as a halo rather than a lift. Neutral and lighter.
+    const secondaryShadowTw = "shadow-[0_10px_20px_-10px_rgba(17,17,17,0.18)]";
+
+    const gutter = pick(20, 40, 64);
+    const s = {};
+
+    const revealed = this.state.revealed || {};
+    const reveal = (key, opts = {}) => {
+      const { distance = 44, duration = 900 } = opts;
+      const shown = !!revealed[key];
+      return (shown ? "opacity-100 translate-y-0 scale-100 " : `opacity-0 translate-y-[${distance}px] scale-[0.97] `) +
+        `transition-[opacity,transform] duration-[${duration}ms] ease-[cubic-bezier(0.16,1,0.3,1)]`;
+    };
+    const revealRef = (key) => (el) => this._observeReveal(key, el);
+
+    s.root = "gmp-font relative w-full bg-white flex flex-col overflow-x-clip overflow-y-clip";
+
+    s.sectionPad = "relative z-[1] box-border px-[20px] md:px-[40px] xl:px-[64px]";
+    s.sectionGap = "w-full h-[38px] md:h-[66px] xl:h-[96px] shrink-0";
+    s.sectionGapHalf = "w-full h-[19px] md:h-[33px] xl:h-[48px] shrink-0";
+
+    s.eyebrow = `font-normal text-[16px] leading-[24px] text-[${red}]`;
+    // ---------- TYPE SCALE (canonical) ----------
+    // s.h2 above is the section heading. These are the tiers below it. Every page
+    // draws from the same four so headings and body copy match across the site.
+    // The OnDark variants exist because arbitrary Tailwind colour classes cannot
+    // be reliably overridden by appending a second one.
+    const h3Base = `font-semibold ${pick("text-[22px]", "text-[26px]", "text-[30px]")} leading-[1.25] tracking-[-0.6px]`;
+    s.h3 = h3Base + ` text-[${near}]`;
+    s.h3OnDark = h3Base + " text-white";
+    const h4Base = `font-semibold ${pick("text-[18px]", "text-[19px]", "text-[20px]")} leading-[1.3]`;
+    s.h4 = h4Base + ` text-[${near}]`;
+    s.h4OnDark = h4Base + " text-white";
+    const bodyBase = `font-normal ${pick("text-[16px]", "text-[17px]", "text-[17px]")} leading-[28px]`;
+    s.bodyText = bodyBase + " text-[rgba(51,51,51,0.82)]";
+    s.bodyTextOnDark = bodyBase + " text-[rgba(255,255,255,0.8)]";
+    const bodySmallBase = "font-normal text-[15px] leading-[23px]";
+    s.bodySmall = bodySmallBase + " text-[rgba(51,51,51,0.72)]";
+    s.bodySmallOnDark = bodySmallBase + " text-[rgba(255,255,255,0.75)]";
+    s.eyebrowOnDark = "font-normal text-[16px] leading-[24px] text-white";
+    s.h2 = `font-medium text-[30px] md:text-[38px] xl:text-[48px] leading-[36px] md:leading-[44px] xl:leading-[56px] tracking-[-1.5px] text-[${dark}]`;
+    s.sectionHeadingGroup = "flex flex-col gap-[8px] items-start";
+
+    const makeHeroCta = (key, baseClass) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: baseClass + " no-underline transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-white ${noShadowTw} translate-y-0`),
+        textColor: hovered ? "#fff" : near,
+        iconColor: hovered ? "rgb(255,255,255)" : "rgb(17,17,17)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+
+    // ---------- BUTTON SYSTEM (canonical — matches the approved Home treatment) ----------
+    // Three roles, used sitewide. Do not introduce a fourth: if a button does not
+    // fit one of these, it is probably not a button.
+    //   makePill()          primary, on light   — purple, goes red on hover
+    //   makeSecondaryPill() secondary, on light — outlined purple, goes red on hover
+    //   makeHeroCta()       either role on dark — white, goes red on hover
+    s.pillDark = "rounded-[32px] inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline";
+    s.pillDarkText = "font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] text-white whitespace-nowrap";
+    const makePill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: s.pillDark + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : `bg-[${purple}] ${noShadowTw} translate-y-0`),
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const makeSecondaryPill = (key) => {
+      const hovered = this.state.hoveredKey === key;
+      return {
+        className: "rounded-[32px] bg-white inline-flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer self-start shrink-0 no-underline border border-solid transition-[border-color,color,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `border-[${red}] ${secondaryShadowTw} -translate-y-[2px]` : `border-[${purple}] ${noShadowTw} translate-y-0`),
+        textColor: hovered ? red : purple,
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+
+    // ---------- TOPBAR (same properties as homepage) ----------
+    s.logoLink = "flex shrink-0";
+    const navScrolled = this.state.navScrolled;
+    s.heroTopbar = "fixed top-0 left-0 right-0 z-40 box-border py-[10px] px-[20px] md:py-[12px] md:px-[40px] xl:px-[64px] flex flex-row items-center justify-between gap-[10px] md:gap-[16px] flex-nowrap transition-[background,box-shadow] duration-300 ease-in-out " +
+      (navScrolled ? "bg-white shadow-[0_1px_0_rgba(17,17,17,0.08)]" : `bg-transparent ${noShadowTw}`);
+    s.heroLogo = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";
+    s.heroLogoSrc = navScrolled ? "assets2/logo-color.svg" : "assets2/logo-mark.svg";
+    s.heroNav = "hidden nav:flex flex-row gap-[26px] xl:gap-[32px] items-center";
+    s.heroTopbarRightGroup = "flex flex-row items-center gap-[10px] md:gap-[16px] shrink-0";
+    const menuOpen = this.state.mobileMenuOpen;
+    s.hamburgerBtn = "flex nav:hidden flex-col gap-[5px] items-center justify-center w-[28px] h-[28px] cursor-pointer shrink-0 z-20";
+    const barBase = "w-[20px] h-[2px] rounded-[2px] [transition:transform_0.25s_ease,opacity_0.2s_ease,background_0.3s_ease] " + (navScrolled ? `bg-[${near}]` : "bg-white");
+    const barBaseOnDark = "w-[20px] h-[2px] rounded-[2px] bg-white [transition:transform_0.25s_ease,opacity_0.2s_ease]";
+    s.hamburgerBar1 = barBase;
+    s.hamburgerBar2 = barBase;
+    s.hamburgerBar3 = barBase;
+    // ---------- MOBILE NAV (full-screen brand panel) ----------
+    s.mobileNavOverlay = "fixed inset-0 bg-gmp-gradient flex flex-col box-border z-[100] overflow-y-auto overflow-x-hidden " +
+      "py-[20px] px-[20px] pb-[24px] md:py-[24px] md:px-[40px] md:pb-[40px] " +
+      "[transition:opacity_0.4s_cubic-bezier(0.16,1,0.3,1),transform_0.4s_cubic-bezier(0.16,1,0.3,1)] " +
+      // w-[100vw] only while open: html keeps a stable scrollbar gutter, and an
+      // inset-0 panel stops short of it, leaving a pale strip down the right edge.
+      // 100vw spans the gutter too; body scroll is locked so it cannot cause scroll.
+      (menuOpen ? "opacity-100 pointer-events-auto scale-100 w-[100vw]" : "opacity-0 pointer-events-none scale-[1.03]");
+    // Two soft brand glows plus the GMP mark as a watermark give the panel depth
+    // without needing artwork. They live in their own clipped layer: the panel is
+    // the scroll container, and decorations bleeding past its edges would otherwise
+    // add to its scroll height.
+    s.mobileNavDecor = "pointer-events-none absolute inset-0 overflow-hidden z-0";
+    s.mobileNavGlowA = "absolute -top-[90px] -right-[70px] w-[300px] h-[300px] rounded-full bg-[rgba(37,117,187,0.5)] blur-[90px]";
+    s.mobileNavGlowB = "absolute -bottom-[110px] -left-[90px] w-[340px] h-[340px] rounded-full bg-[rgba(178,33,38,0.45)] blur-[100px]";
+    s.mobileNavMark = "absolute -right-[48px] bottom-[96px] w-[250px] h-auto";
+    s.mobileNavCloseRow = "relative z-[2] flex flex-row items-center justify-between shrink-0";
+    s.mobileNavLogo = "w-[172px] md:w-[210px] h-auto";
+    // A plain X reads as "close" more immediately than two rotated bars.
+    s.mobileNavCloseBtn = "flex nav:hidden items-center justify-center w-[40px] h-[40px] -mr-[6px] shrink-0 cursor-pointer text-white z-20 transition-opacity duration-200 hover:opacity-70";
+    s.mobileNavLinks = "relative z-[2] flex flex-col grow mt-[22px] md:mt-[40px]";
+    s.mobileNavFoot = "relative z-[2] flex flex-col gap-[14px] items-start shrink-0 pt-[20px] mt-[16px] border-t border-solid border-[rgba(255,255,255,0.18)]";
+    s.mobileNavCta = `rounded-[32px] no-underline box-border w-full text-center font-medium text-[15px] leading-[22px] bg-white text-[${near}] py-[13px] px-[26px] transition-[background,color] duration-200 ease-in-out hover:bg-[${red}] hover:text-white`;
+    s.mobileNavMetaRow = "flex flex-col gap-[4px]";
+    s.mobileNavMeta = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.7)] no-underline";
+    s.mobileNavMetaDim = "font-normal text-[13px] leading-[20px] text-[rgba(255,255,255,0.45)]";
+    const CURRENT_PAGE = "innovations";
+    const MOBILE_NAV = [
+      { label: "Home", href: "index.html", key: "home" },
+      { label: "About Us", href: "about.html", key: "about" },
+      { label: "Services", href: "services.html", key: "services" },
+      { label: "CDMO", href: "cdmo.html", key: "cdmo" },
+      { label: "Sectors", href: "sectors.html", key: "sectors" },
+      { label: "Innovations", href: "innovations.html", key: "innovations" },
+      { label: "News & Blogs", href: "news.html", key: "news" },
+      { label: "Careers", href: "careers.html", key: "careers" },
+      { label: "Contact Us", href: "contact.html", key: "contact" },
+    ];
+    const mobileNavItems = MOBILE_NAV.map((m, i) => {
+      const on = m.key === CURRENT_PAGE;
+      return {
+        label: m.label, href: m.href, n: String(i + 1).padStart(2, "0"),
+        // Rows slide in one after another once the panel opens, and reset on close
+        // so the stagger replays every time rather than only on first open.
+        linkStyle: "flex flex-row items-baseline gap-[14px] no-underline py-[10px] md:py-[14px] border-b border-solid " +
+          (on ? `border-[${red}]` : "border-[rgba(255,255,255,0.14)]") +
+          // Longhand, not the `transition` shorthand: the shorthand resets
+          // transition-delay and would flatten the stagger below.
+          " transition-[opacity,transform] duration-[500ms] ease-[cubic-bezier(0.16,1,0.3,1)] " +
+          (menuOpen ? `opacity-100 translate-x-0 delay-[${90 + i * 55}ms]` : "opacity-0 translate-x-[26px] delay-0"),
+        numStyle: "font-medium text-[12px] leading-[16px] tabular-nums shrink-0 w-[24px] " +
+          (on ? "text-white" : "text-[rgba(255,255,255,0.35)]"),
+        labelStyle: `font-medium ${pick("text-[21px]", "text-[27px]", "text-[27px]")} leading-[1.25] tracking-[-0.6px] ` +
+          // Non-current items step back so the current page reads clearly,
+          // matching how the desktop nav dims its inactive links.
+          (on ? "text-white" : "text-[rgba(255,255,255,0.6)]"),
+      };
+    });
+    const navLinkStyle = (i, key) => {
+      const hovered = this.state.hoveredNav === i;
+      const active = key === CURRENT_PAGE;
+      // Active and hover must read differently. The current page keeps a persistent
+      // red rule under otherwise-normal text; hover tints the text itself and shows
+      // a lighter rule. Hovering the current page simply combines the two.
+      const color = navScrolled ? (hovered ? red : dark) : "#fff";
+      // Once a page is current, step the other links back so the active one
+      // stands out. CURRENT_PAGE is empty on pages with no matching nav item,
+      // and then nothing is dimmed.
+      const dim = CURRENT_PAGE && !active && !hovered;
+      const opacity = navScrolled ? (dim ? 0.55 : 1) : (hovered || active ? 1 : (dim ? 0.6 : 0.85));
+      const borderColor = navScrolled
+        ? (active ? red : hovered ? "rgba(178,33,38,0.4)" : "transparent")
+        : (active ? "rgba(255,255,255,0.9)" : hovered ? "rgba(255,255,255,0.45)" : "transparent");
+      return `font-medium text-[14px] leading-[20px] whitespace-nowrap cursor-pointer border-b border-solid pb-[2px] no-underline transition-[color,opacity,border-color] duration-200 ease-in-out text-[${color}] opacity-[${opacity}] border-[${borderColor}]`;
+    };
+    s.navCaretColor = navScrolled ? "rgb(51,51,51)" : "rgb(255,255,255)";
+    s.navHomeStyle = navLinkStyle(0, "home");
+    s.navAboutStyle = navLinkStyle(1, "about");
+    s.navServicesStyle = navLinkStyle(2, "services");
+    s.navCdmoStyle = navLinkStyle(3, "cdmo");
+    s.navInnovationsStyle = navLinkStyle(4, "innovations");
+    s.navSectorsStyle = navLinkStyle(5, "sectors");
+    s.navContactStyle = navLinkStyle(6, "contact");
+    const navEnter = (i, menu) => () => this.setState({ hoveredNav: i, openNavMenu: menu || null });
+    s.navLeave = () => this.setState({ hoveredNav: -1, openNavMenu: null });
+    s.navEnterHome = navEnter(0);
+    s.navEnterAbout = navEnter(1);
+    s.navEnterServices = navEnter(2, "services");
+    s.navEnterCdmo = navEnter(3);
+    s.navEnterInnovations = navEnter(4);
+    s.navEnterSectors = navEnter(5, "sectors");
+    s.navEnterContact = navEnter(6);
+    const openNavMenu = this.state.openNavMenu;
+    const navMenuPanelBase = "absolute top-full left-0 pt-[12px] z-[60] [transition:opacity_0.2s_ease,transform_0.2s_ease]";
+    s.servicesMenuPanel = navMenuPanelBase + " " + (openNavMenu === "services" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.sectorsMenuPanel = navMenuPanelBase + " " + (openNavMenu === "sectors" ? "opacity-100 visible translate-y-0 pointer-events-auto" : "opacity-0 invisible -translate-y-[8px] pointer-events-none");
+    s.navMenuInner = `bg-white shadow-[0_16px_44px_rgba(17,17,17,0.18)] py-[10px] min-w-[300px] flex flex-col gap-[2px] border-t-[3px] border-solid border-[${red}]`;
+    s.navMenuItem = `block py-[11px] px-[20px] text-[14px] font-medium text-[${near}] no-underline whitespace-nowrap hover:bg-[rgb(245,243,240)] hover:text-[${red}] transition-colors duration-150`;
+    const heroCtaBase = "rounded-[32px] flex flex-row gap-[8px] py-[14px] px-[22px] md:py-[16px] md:px-[26px] xl:py-[18px] xl:px-[30px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.heroCtaCtl = makeHeroCta("heroCta", heroCtaBase);
+    s.heroCtaText = `font-semibold text-[15px] md:text-[16px] xl:text-[17px] leading-[20px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaCtl.textColor}]`;
+    const heroCtaTopbarBase = "rounded-[32px] flex flex-row gap-[6px] py-[8px] px-[14px] md:py-[9px] md:px-[16px] justify-center items-center box-border cursor-pointer shrink-0";
+    const topbarCtaHovered = this.state.hoveredKey === "heroCtaTopbar";
+    s.heroCtaTopbarCtl = {
+      className: heroCtaTopbarBase + " no-underline transition-[background,box-shadow,transform] duration-300 ease-in-out " +
+        (topbarCtaHovered ? `bg-[${red}] ${hoverShadowTw} -translate-y-[2px]` : (navScrolled ? `bg-[${purple}] ${noShadowTw} translate-y-0` : `bg-white ${noShadowTw} translate-y-0`)),
+      textColor: topbarCtaHovered || navScrolled ? "#fff" : near,
+      iconColor: topbarCtaHovered || navScrolled ? "rgb(255,255,255)" : "rgb(17,17,17)",
+      enter: () => this.setState({ hoveredKey: "heroCtaTopbar" }),
+      leave: () => this.setState({ hoveredKey: null }),
+    };
+    s.heroCtaTopbarText = `font-semibold text-[${isMobile ? 13 : 14}px] leading-[${isMobile ? 16 : 18}px] whitespace-nowrap transition-colors duration-200 ease-in-out text-[${s.heroCtaTopbarCtl.textColor}]`;
+    s.heroCtaTopbarIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaTopbarCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+    s.heroCtaIconStyle = `w-[14px] h-[14px] bg-[${s.heroCtaCtl.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+
+    // ---------- PAGE BANNER (gradient overlay, guaranteed topbar clearance) ----------
+    s.bannerWrap = `relative w-full ${pick("min-h-[220px]", "min-h-[280px]", "min-h-[320px]")} flex flex-col justify-end box-border overflow-hidden`;
+    s.bannerBg = "absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] " + (revealed.banner ? "scale-100" : "scale-[1.05]");
+    s.bannerOverlay = "absolute inset-0 bg-gmp-gradient opacity-75 pointer-events-none";
+    s.bannerBreadcrumb = "font-normal text-[13px] leading-[18px] text-[rgba(255,255,255,0.75)]";
+    s.bannerContent = "relative z-[1] flex flex-col gap-[8px] box-border " + pick("pt-[88px] px-[20px] pb-[24px]", "pt-[104px] px-[40px] pb-[36px]", "pt-[116px] px-[64px] pb-[44px]");
+    s.bannerHeadline = "font-medium text-[34px] md:text-[44px] xl:text-[56px] leading-[40px] md:leading-[50px] xl:leading-[62px] tracking-[-1.5px] text-white";
+    s.bannerSubtext = "font-normal text-[15px] md:text-[16px] xl:text-[17px] leading-[24px] text-[rgba(255,255,255,0.85)] max-w-[620px] mt-[4px]";
+
+    // ---------- INTRO STRAP ----------
+    s.introStrapWrap = "max-w-[900px] mx-auto " + reveal("intro");
+    s.introStrapText = `font-normal text-[18px] md:text-[20px] leading-[1.6] text-[${dark}] text-center block`;
+
+    // ---------- INNOVATION PANELS (alternating image + content, no curved edges) ----------
+    // ---------- INNOVATION CARDS ----------
+    s.innoGrid = "grid " + (isMobile ? "grid-cols-1" : "grid-cols-2") + " gap-[16px] md:gap-[20px] xl:gap-[24px] max-w-[1600px] mx-auto " + reveal("introCards");
+    // justify-between pinned the eyebrow to the top and the title block to the
+    // bottom of a tall min-height card, leaving a dead gap between them — 212px
+    // at desktop. Content now sits together near the top with a fixed gap, and
+    // the card is only as tall as it needs to be.
+    const innoCardBase = "flex flex-col justify-start no-underline box-border transition-transform duration-300 ease-out hover:-translate-y-1 " +
+      pick("gap-[26px] p-[26px]", "gap-[30px] p-[34px]", "gap-[34px] p-[42px]");
+    s.innoCardBlue = innoCardBase + " bg-[rgb(37,117,187)]";
+    s.innoCardNavy = innoCardBase + " bg-[rgb(41,37,96)]";
+    s.innoCardBottom = "flex flex-col gap-[18px] md:gap-[22px] items-start";
+    s.innoSub = "font-normal text-[14px] leading-[20px] text-[rgba(255,255,255,0.6)]";
+    s.innoTitle = `font-semibold ${pick("text-[30px]", "text-[38px]", "text-[44px]")} leading-[1.12] tracking-[-1px] text-white`;
+    s.innoDivider = "h-[1px] w-full bg-[rgba(255,255,255,0.25)]";
+    s.innoDesc = `font-normal ${pick("text-[15px]", "text-[16px]", "text-[16px]")} leading-[25px] text-[rgba(255,255,255,0.75)]`;
+
+    s.panelWrap = "relative z-[1] flex " + (isDesktop ? "flex-row" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelA");
+    s.panelWrapReverse = "relative z-[1] flex " + (isDesktop ? "flex-row-reverse" : "flex-col") + " gap-[32px] md:gap-[48px] xl:gap-[64px] justify-start items-center max-w-[1600px] mx-auto " + reveal("panelB");
+    s.panelImageCol = "relative " + (isDesktop ? "w-[44%]" : "w-full") + " max-w-none aspect-[4/3] shrink-0 box-border " + pick("p-[12px]", "p-[16px]", "p-[20px]") + " bg-[rgb(245,243,240)]";
+    s.imgPlaceholder = "relative w-full h-full bg-[rgb(232,232,232)] flex items-center justify-center box-border";
+    s.contentPhoto = "relative w-full h-full object-cover box-border";
+    s.panelContent = "flex flex-col gap-[16px] items-start justify-center " + (isDesktop ? "w-auto" : "w-full") + " grow box-border";
+    s.panelTextCol = "flex flex-col gap-[16px] items-start";
+    s.panelBody = `font-normal text-[16px] md:text-[17px] leading-[26px] text-[${dark}] max-w-[560px]`;
+    s.panelLink = `font-medium text-[15px] leading-[20px] text-[${purple}] no-underline mt-[4px]`;
+
+    // ---------- COLLABORATE (inherited, content customized per page) ----------
+    s.collabOuter = `relative w-auto -ml-[${gutter}px] -mr-[${gutter}px] overflow-hidden box-border flex justify-center ` +
+      pick("py-[64px] px-[20px]", "py-[88px] px-[40px]", "py-[112px] px-[64px]");
+    s.collabBg = "absolute inset-0 w-full h-full object-cover";
+    s.collabCanvas = "absolute inset-0 w-full h-full pointer-events-none";
+    s.collabOverlay = "absolute inset-0 bg-[rgba(17,17,17,0.55)] pointer-events-none";
+    s.collabWrap = "relative z-[1] flex flex-col gap-[24px] items-center max-w-[640px] mx-auto text-center " + reveal("collab");
+    s.collabHeading = "font-medium text-[32px] md:text-[40px] xl:text-[48px] leading-[38px] md:leading-[46px] xl:leading-[56px] tracking-[-1.5px] text-white text-center";
+    s.collabBody = "font-normal text-[16px] leading-[24px] text-[rgba(255,255,255,0.85)] text-center";
+    s.collabBtnRow = "flex flex-row gap-[8px] flex-wrap justify-center";
+    const collabPillBase = "rounded-[32px] flex flex-row gap-[6px] py-[12px] px-[18px] md:py-[14px] md:px-[20px] xl:py-[16px] xl:px-[24px] justify-center items-center box-border cursor-pointer shrink-0";
+    s.pillGetQuote = makeHeroCta("collabGetQuote", collabPillBase);
+    s.pillContactUs = makeHeroCta("collabContactUs", collabPillBase);
+    s.collabGetQuoteText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillGetQuote.textColor}]`;
+    s.collabContactUsText = `font-medium text-[14px] md:text-[15px] xl:text-[16px] leading-[20px] whitespace-nowrap text-[${s.pillContactUs.textColor}]`;
+    s.collabGetQuoteIcon = `w-[14px] h-[14px] bg-[${s.pillGetQuote.iconColor}] [mask:url('assets2/article.svg')_center/contain_no-repeat] transition-colors duration-200 ease-in-out`;
+
+    // ---------- FOOTER (inherited) ----------
+    s.footerWrap = `relative z-[2] w-full bg-[${footerGradient}] overflow-hidden box-border flex flex-col gap-[40px] md:gap-[48px] xl:gap-[56px] ` +
+      pick("pt-[40px] px-[20px] pb-[32px]", "pt-[56px] px-[40px] pb-[40px]", "pt-[64px] px-[64px] pb-[48px]") + " " + reveal("footer", { distance: 14, duration: 900 });
+    s.footerTopRow = "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-5") + " gap-[32px] md:gap-[40px] xl:gap-[32px] items-start";
+    s.footerBrandCol = "flex flex-col gap-[16px] items-start w-full min-w-0";
+    s.footerLogoImg = "w-[180px] md:w-[220px] xl:w-[260px] h-auto";  // matches s.heroLogo
+    s.footerTagline = "font-normal text-[14px] leading-[22px] text-[rgba(255,255,255,0.62)] max-w-[280px]";
+    s.footerSocialRow = "flex flex-row gap-[12px] items-center";
+    // The four link columns are siblings of the brand column in footerTopRow at
+    // desktop, so every column gets the same gap. Below xl they stay grouped.
+    s.footerColsGrid = "contents " + (isDesktop ? "" : "grid " + pick("grid-cols-1", "grid-cols-2", "grid-cols-2") + " gap-[28px] md:gap-[32px] col-span-full");
+    s.footerColLabel = "font-medium text-[15px] leading-[22px] tracking-[0.4px] uppercase text-[rgba(255,255,255,0.5)] pb-[2px]";
+    s.footerLink = "font-normal text-[15px] leading-[26px] text-[rgba(255,255,255,0.88)] no-underline transition-colors duration-200 hover:text-white";
+    const makeBrandCircle = (key, baseClass, brandColor) => {
+      const hovered = this.state.hoveredKey === key;
+      const brandShadow = "shadow-[0_16px_32px_-12px_" + brandColor.replace("rgb", "rgba").replace(")", ",0.45)") + "]";
+      return {
+        // Hover inverts to a white chip with the icon itself picking up the
+        // brand colour, rather than a coloured circle with a white icon.
+        className: baseClass + " transition-[background,box-shadow,transform] duration-200 ease-in-out " +
+          (hovered ? `bg-white ${brandShadow} -translate-y-[2px]` : "bg-transparent shadow-[inset_0_0_0_1px_rgba(255,255,255,0.3)] translate-y-0"),
+        iconColor: hovered ? brandColor : "rgb(255,255,255)",
+        enter: () => this.setState({ hoveredKey: key }),
+        leave: () => this.setState({ hoveredKey: null }),
+      };
+    };
+    const socialSmallBase = "w-[40px] h-[40px] rounded-[40px] flex justify-center items-center cursor-pointer shrink-0";
+    s.socialA = makeBrandCircle("socialA", socialSmallBase, "rgb(10,102,194)");
+    s.socialC = makeBrandCircle("socialC", socialSmallBase, "rgb(24,119,242)");
+    s.socialB = makeBrandCircle("socialB", socialSmallBase, "rgb(255,0,0)");
+    s.socialD = makeBrandCircle("socialD", socialSmallBase, "rgb(193,53,132)");
+    // Icon classes, built from the colour makeBrandCircle already resolved for
+    // each — kept as a full string per the rest of the codebase's convention
+    // rather than interpolating a partial Tailwind arbitrary value.
+    s.socialAIcon = `w-[13px] h-[13px] bg-[${s.socialA.iconColor}] transition-colors duration-200 [mask:url('assets2/linkedin.svg')_center/contain_no-repeat]`;
+    s.socialDIcon = `w-[14px] h-[14px] bg-[${s.socialD.iconColor}] transition-colors duration-200 [mask:url('assets2/instagram.svg')_center/contain_no-repeat]`;
+    s.socialCIcon = `w-[11px] h-[13px] bg-[${s.socialC.iconColor}] transition-colors duration-200 [mask:url('assets2/facebook.svg')_center/contain_no-repeat]`;
+    s.footerBottomRow = "flex flex-row flex-wrap gap-[12px] items-center justify-between pt-[24px] border-t border-solid border-[rgba(255,255,255,0.15)]";
+    s.footerLegalLink = "font-normal text-[14px] leading-[24px] text-[rgba(255,255,255,0.4)] no-underline hover:text-white transition-colors duration-200";
+
+    // ---------- DATA: INNOVATION PANELS (shared partial — add a 3rd entry here for a future offering) ----------
+    const panelData = [
+      {
+        key: "3d-printing",
+        eyebrow: "Additive Manufacturing",
+        title: "3D Printing",
+        desc: "We're investing in 3D printing to prototype dosage forms and device components faster than traditional tooling allows.",
+        href: "innovation-detail.html?p=3d-printing",
+      },
+      {
+        key: "space-age",
+        eyebrow: "Coming Soon",
+        title: "Space Age",
+        desc: "A forward-looking initiative we're developing at GMP — full details to follow as the project takes shape.",
+        href: "innovation-detail.html?p=space-age",
+      },
+    ];
+    const panelItems = panelData.map((p, i) => ({
+      ...p,
+      cardStyle: i % 2 === 0 ? s.innoCardBlue : s.innoCardNavy,
+      subStyle: s.innoSub,
+      titleStyle: s.innoTitle,
+      dividerStyle: s.innoDivider,
+      descStyle: s.innoDesc,
+      revealRef: revealRef(i % 2 === 0 ? "panelA" : "panelB"),
+    }));
+
+    return {
+      s,
+      introRevealRef: revealRef("intro"),
+      introRevealRef2: revealRef("introCards"),
+      panelItems,
+      collabRevealRef: revealRef("collab"),
+      collabImgRef: (el) => { this._collabImgEl = el; this._maybeInitRipple(); },
+      collabCanvasRef: (el) => { this._collabCanvasEl = el; this._maybeInitRipple(); },
+      footerRevealRef: revealRef("footer"),
+      mobileNavItems,
+      toggleMobileMenu: () => this.setState((st) => {
+        const open = !st.mobileMenuOpen;
+        // Stop the page behind the panel scrolling while it is open.
+        try { document.body.style.overflow = open ? "hidden" : ""; } catch (e) { /* no-op */ }
+        return { mobileMenuOpen: open };
+      }),
+      showHeroCtaIcon: !isMobile,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

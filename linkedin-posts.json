@@ -1,0 +1,37 @@
+{
+  "_comment": "Placeholder LinkedIn posts. Replace this file, or point LINKEDIN_FEED_URL in linkedin-feed.js at the admin's endpoint, once the backend serves the same shape. Every url/heading/date below is invented and must be swapped for real posts before launch.",
+  "posts": [
+    {
+      "url": "https://www.linkedin.com/company/gmp-manufacturing-ltd/",
+      "image": "assets2/news-1-real.webp",
+      "imageAlt": "Preparations underway ahead of a healthcare exhibition",
+      "heading": "Behind the scenes of our exhibition build",
+      "date": "2026-08-11",
+      "description": "The team has been prepping the stand all week — a look at what goes into getting a GMP-compliant display ready to travel."
+    },
+    {
+      "url": "https://www.linkedin.com/company/gmp-manufacturing-ltd/",
+      "image": "assets2/news-2-real.webp",
+      "imageAlt": "Packaging line at the Hull facility",
+      "heading": "Five ways we tightened our packaging setup",
+      "date": "2026-08-04",
+      "description": "From tube line changeovers to labelling accuracy, small adjustments across the line added up to a measurable gain this quarter."
+    },
+    {
+      "url": "https://www.linkedin.com/company/gmp-manufacturing-ltd/",
+      "image": "assets2/news-3-real.webp",
+      "imageAlt": "Discussion between healthcare and formulation specialists",
+      "heading": "What clinicians want from formulation in 2026",
+      "date": "2026-07-28",
+      "description": "We sat down with practitioners to hear where product design still falls short, and what that means for the briefs we take on."
+    },
+    {
+      "url": "https://www.linkedin.com/company/gmp-manufacturing-ltd/",
+      "image": "assets2/placeholder-sector-pharma.jpg",
+      "imageAlt": "Capsules moving along a production line",
+      "heading": "Scaling from 20L to 6 tonnes under one roof",
+      "date": "2026-07-19",
+      "description": "Tech transfer without a third-party handoff changes the risk profile of a scale-up. Here is how we run it in practice."
+    }
+  ]
+}
