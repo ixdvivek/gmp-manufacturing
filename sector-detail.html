@@ -281,13 +281,15 @@
   <div className="{{ s.fullBleedOuter }}">
     <img src="assets2/about-real.jpg" alt="Inside GMP Manufacturing's UK facility" loading="lazy" className="{{ s.fullBleedImg }}">
     <div className="{{ s.bandBar }}">
-      <div className="{{ s.bandBarLeft }}">
-        <span className="{{ s.bandEyebrow }}">UK Manufacturing</span>
-        <span className="{{ s.bandHeading }}">Inside Our UK Manufacturing Facility</span>
-      </div>
-      <div className="{{ s.bandDivider }}"></div>
-      <div className="{{ s.bandBodyWrap }}">
-        <span className="{{ s.bandBody }}">From raw materials through to finished, market-ready products &mdash; all under one roof.</span>
+      <div className="{{ s.bandBarInner }}">
+        <div className="{{ s.bandBarLeft }}">
+          <span className="{{ s.bandEyebrow }}">UK Manufacturing</span>
+          <span className="{{ s.bandHeading }}">Inside Our UK Manufacturing Facility</span>
+        </div>
+        <div className="{{ s.bandDivider }}"></div>
+        <div className="{{ s.bandBodyWrap }}">
+          <span className="{{ s.bandBody }}">From raw materials through to finished, market-ready products &mdash; all under one roof.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -335,13 +337,15 @@
   <div className="{{ s.mapOuter }}">
     <img src="assets/world-map.png" alt="World map showing GMP Manufacturing's global supply network" loading="lazy" className="{{ s.mapImg }}">
     <div className="{{ s.bandBar }}">
-      <div className="{{ s.bandBarLeft }}">
-        <span className="{{ s.bandEyebrow }}">Global Reach</span>
-        <span className="{{ s.bandHeading }}">30+ Countries Worldwide</span>
-      </div>
-      <div className="{{ s.bandDivider }}"></div>
-      <div className="{{ s.bandBodyWrap }}">
-        <span className="{{ s.bandBody }}">Supplying partners across global markets from our UK facilities.</span>
+      <div className="{{ s.bandBarInner }}">
+        <div className="{{ s.bandBarLeft }}">
+          <span className="{{ s.bandEyebrow }}">Global Reach</span>
+          <span className="{{ s.bandHeading }}">30+ Countries Worldwide</span>
+        </div>
+        <div className="{{ s.bandDivider }}"></div>
+        <div className="{{ s.bandBodyWrap }}">
+          <span className="{{ s.bandBody }}">Supplying partners across global markets from our UK facilities.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -851,9 +855,19 @@ class Component extends DCLogic {
     // stacked near each other. This is a single scrim bar pinned to the foot of
     // the photo: label and headline on the left, hairline rule, supporting line
     // on the right.
-    s.bandBar = "absolute left-0 right-0 bottom-0 box-border flex bg-[rgba(10,24,51,0.92)] " +
-      (isMobile ? "flex-col gap-[12px] " : "flex-row items-stretch " + pick("", "gap-[28px] ", "gap-[40px] ")) +
-      pick("py-[20px] px-[20px]", "py-[24px] px-[40px]", "py-[28px] px-[64px]");
+    // The band is full-bleed: -ml/-mr pull it `gutter` px outside the page's
+    // padding on each side, so the bar's own box starts off the left of the
+    // viewport. Its padding therefore has to cover that overhang (one gutter)
+    // before it can produce any visible margin (a second gutter) — which is why
+    // this is double the page gutter rather than equal to it. Padding equal to
+    // the gutter lands the text at exactly x=0, hard against the screen edge.
+    s.bandBar = "absolute left-0 right-0 bottom-0 box-border bg-[rgba(10,24,51,0.92)] " +
+      pick("py-[20px] px-[40px]", "py-[24px] px-[80px]", "py-[28px] px-[128px]");
+    // With the overhang cancelled above, this repeats the page's own
+    // max-w-[1600px] mx-auto so the bar's text sits on the same column as every
+    // other section rather than drifting on wide screens.
+    s.bandBarInner = "w-full max-w-[1600px] mx-auto box-border flex " +
+      (isMobile ? "flex-col gap-[12px]" : "flex-row items-stretch " + pick("", "gap-[28px]", "gap-[40px]"));
     s.bandBarLeft = "flex flex-col justify-center gap-[6px] " + (isMobile ? "w-full" : "w-[46%] shrink-0");
     // The brand blue lifted for this background. rgb(37,117,187) on the scrim
     // measures about 3.4:1, short of AA for text at this size; this tint clears
